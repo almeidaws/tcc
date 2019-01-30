@@ -7,8 +7,8 @@ app.get('/register', (request, response) => {
     response.send('registered');
 });
 
-const database = require('./database.js');
-database.connect();
+// const database = require('./database.js');
+// database.connect();
 
 //add the router
 app.use('/', router);
