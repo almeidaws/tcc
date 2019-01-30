@@ -7,7 +7,7 @@
     "babel-cli": "^6.26.0",
     "babel-preset-react-app": "^3.1.2",
     "express": "^4.16.4",
-    "mysql": "^2.16.0"
+    "pg": "^7.8.0"
   },
   "engines": {
     "node": "8.11.1",
