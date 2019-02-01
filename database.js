@@ -1,11 +1,17 @@
-const { Client } = require('pg');
+const createUserTable = 
+`CREATE TABLE IF NOT EXISTS Users (
+    ID serial NOT NULL PRIMARY KEY, 
+    Name text NOT NULL, 
+    Email text NOT NULL, 
+    Password text NOT NULL 
+)`;
 
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: true,
-});
+const { Pool } = require('pg');
+const pool = new Pool();
 
-client.connect();
+pool.query(createUserTable)
+    .then(success => { console.log('SUCCESS'); })
+    .catch(error => { console.log('ERROR\n' + error); });
 
-const test = () => console.log(client);
+const test = () => {};
 module.exports.test = test;
