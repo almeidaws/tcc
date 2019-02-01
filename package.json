@@ -6,7 +6,9 @@
   "dependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-react-app": "^3.1.2",
+    "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "joi": "^14.3.1",
     "pg": "^7.8.0"
   },
   "engines": {
