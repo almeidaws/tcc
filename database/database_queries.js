@@ -20,6 +20,20 @@ const createUserTableSQL =
 )`;
 
 /**
+ * The SQL query to create the session's table. The table is created
+ * only if it not exists.
+ * @constant
+ * @type {string}
+ */
+const createSessionTableSQL = 
+`CREATE TABLE IF NOT EXISTS "session" (
+    "sid" varchar NOT NULL COLLATE "default",
+    "sess" json NOT NULL,
+    "expire" timestamp(6) NOT NULL
+)
+WITH (OIDS=FALSE);`;
+
+/**
  * The SQL query used to add a user to the table Users. It's not the final query because it has
  * three parameters: user's name, email and password. This parameters should be used with 
  * 'pg' node module.
@@ -32,4 +46,4 @@ const addUserSQL = 'INSERT INTO Users (Name, Email, Password) VALUES ($1, $2, $3
  * Exports several object that contains several SQL queries used on the project.
  * @module DatabaseQueries
  */
-module.exports = { createUserTableSQL, addUserSQL };
+module.exports = { createUserTableSQL, createSessionTableSQL, addUserSQL };

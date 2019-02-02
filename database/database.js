@@ -14,7 +14,7 @@ const { Pool } = require('pg');
 const configs = require('../configs.js');
 const Joi = require('joi');
 const pool = new Pool(configs.pool);
-const { createUserTableSQL, addUserSQL } = require('./database_queries.js');
+const { createUserTableSQL, createSessionTableSQL, addUserSQL } = require('./database_queries.js');
 
 /**
  * Entity used to hold user's data and do the validation of that data
@@ -102,7 +102,9 @@ const addUser = (user) => {
  * communicates with the database.
  */
 const connect = () => {
-    const promise = pool.query(createUserTableSQL).then(response => ({ addUser }) )
+    const promise = pool.query(createUserTableSQL)
+        .then(response => pool.query(createSessionTableSQL))
+        .then(response => ({ addUser }) )
     return promise
 };
 

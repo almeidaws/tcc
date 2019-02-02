@@ -11,14 +11,13 @@ const app = express();
 const path = require('path');
 const database = require('./database/database.js');
 const bodyparser = require('body-parser');
-const session = require('express-session');
 const bcrypt = require('bcrypt');
 const configs = require('./configs.js');
 
 // MIDDLEWARES
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
-app.use(session(configs.session));
+app.use(configs.sessionMiddleware);
 
 // USER'S ROUTES
 app.post('/user/register', handleUserRegister);

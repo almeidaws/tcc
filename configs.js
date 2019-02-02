@@ -8,13 +8,14 @@
 'use strict';
 
 const uuidv4 = require('uuid/v4');
+const session = require('express-session');
 
 /** 
  * Used to configurates session middleware when using ExpressJS 
  * @constant
  * @type {object}
  */
-const session = {
+const sessionConfig = {
     cookie: {
         path: '/',
         httpOnly: true,
@@ -24,10 +25,18 @@ const session = {
             now.setFullYear(now.getFullYear() + 1); 
             return now })(),
     },
+    store: new (require('connect-pg-simple')(session))(),
     secret: uuidv4(),
     resave: false,
     saveUninitialized: true,
 };
+
+/**
+ * Function used as middleware to create session's logic on application.
+ * @constant
+ * @type {Function}
+ */
+const sessionMiddleware = session(sessionConfig);
 
 /** 
  * The port where the server will run 
@@ -57,4 +66,4 @@ else
         port: 5432,
     };
 
-module.exports = { session, port, pool };
+module.exports = { sessionMiddleware, port, pool };
