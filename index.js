@@ -5,6 +5,7 @@ const database = require('./database.js');
 const bodyparser = require('body-parser');
 const session = require('express-session');
 const uuidv4 = require('uuid/v4');
+const bcrypt = require('bcrypt');
 
 const PORT = process.env.PORT || 5000;
 
@@ -31,7 +32,8 @@ app.post('/user/register', (request, response, next) => {
         try {
             const queries = await database.connect();
             const body = request.body;
-            const user = new database.User(body.name, body.email, body.password);
+            const encryptedPassword = await bcrypt.hash(body.password, 10);
+            const user = await new database.User(body.name, body.email, encryptedPassword);
             const result = await queries.addUser(user);
             const userID = result.rows[0];
 

@@ -16,7 +16,7 @@ class User {
         const scheme = {
             name: Joi.string().min(3).max(30).required(),
             email: Joi.string().email().required(),
-            password: Joi.string().alphanum().min(3).max(18).required()
+            password: Joi.string().required()
         };
         return Joi.validate(this, scheme);
     }
