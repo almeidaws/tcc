@@ -36,4 +36,25 @@ const session = {
  */
 const port = process.env.PORT || 5000;
 
-module.exports = { session, port };
+/**
+ * Contains configuration object used to access the database.
+ */
+let pool;
+if (process.env.NODE_ENV === 'production')
+    pool = {
+        user: 'jxpnqxrwoebosm',
+        host: 'ec2-54-225-121-235.compute-1.amazonaws.com',
+        database: 'd5sllgppjr1jo6',
+        password: '2dfcfff56aee97b0e065f3f2cd1874b9f1edca39d097d0d75283db09e53d2626',
+        port: 5432,
+    };
+else
+    pool = {
+        user: 'gustavo',
+        host: 'localhost',
+        database: 'gustavo',
+        password: null,
+        port: 5432,
+    };
+
+module.exports = { session, port, pool };

@@ -11,8 +11,9 @@
  */
 
 const { Pool } = require('pg');
+const configs = require('../configs.js');
 const Joi = require('joi');
-const pool = new Pool();
+const pool = new Pool(configs.pool);
 const { createUserTableSQL, addUserSQL } = require('./database_queries.js');
 
 /**
