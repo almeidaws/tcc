@@ -8,7 +8,7 @@ const createUserTable =
     Password text NOT NULL 
 )`;
 
-const addUser = 'INSERT INTO Users (Name, Email, Password) VALUES ($1, $2, $3)';
+const addUser = 'INSERT INTO Users (Name, Email, Password) VALUES ($1, $2, $3) RETURNING ID';
 const allUsers = 'SELECT ID, Name, Email, Password FROM Users';
 
 const queries = {

@@ -8,8 +8,10 @@
     "babel-preset-react-app": "^3.1.2",
     "body-parser": "^1.18.3",
     "express": "^4.16.4",
+    "express-session": "^1.15.6",
     "joi": "^14.3.1",
-    "pg": "^7.8.0"
+    "pg": "^7.8.0",
+    "uuid": "^3.3.2"
   },
   "engines": {
     "node": "8.11.1",
