@@ -40,5 +40,5 @@ To register a user you should use the route `miraculous.com/user/register`. And 
 
 You should use the `POST` method to do the request and pass the data on the request's body. The request should be of type `application/x-www-form-urlencoded`. Otherwise the requisiton will fail.
 
-If the requisiton is successfuly performed, it returns just an `200` status code. If there's an error, it returns an non `200` status code. Currently there's no a elegant way to handle error on this route.
+If the requisiton is successfuly performed, it returns just an `200` status code. If there's an error, it returns an non `200` status code. Currently there's no an elegant way to handle error on this route.
 
