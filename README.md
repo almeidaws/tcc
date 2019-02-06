@@ -8,12 +8,12 @@ The creators are:
 
 # Index
 
-[Documentation Guide](#documentation-guide)
+[Documentation Guide](#guide-documentation)
 1. [How to perform queries on the database](#how-to-perform-queries-on-the-database)
 	1. [Registering a user](#registering-a-user)
 
 
-# Documentation Guide
+# Guide Documentation
 
 This section contains a bunch of mini guides that you can use to do specific tasks. It isn't an exhaustive documentation. That
 documentation can be found on the documentation comment above each declaration on the source code.
