@@ -19,6 +19,13 @@ const createUserTableSQL =
     Password text NOT NULL 
 )`;
 
+/** The SQL query used to delete the table user. It was originally created
+ * to reset the database when performing unity tests.
+ * @constant
+ * @type {string}
+ */
+const deleteUserTableSQL = 'DROP TABLE Users';
+
 /**
  * The SQL query to create the session's table. The table is created
  * only if it not exists.
@@ -42,8 +49,16 @@ WITH (OIDS=FALSE);`;
  */
 const addUserSQL = 'INSERT INTO Users (Name, Email, Password) VALUES ($1, $2, $3) RETURNING ID';
 
+const getUserSQL = 'SELECT ID, Name, Email, Password FROM Users WHERE ID = $1';
+
 /**
  * Exports several object that contains several SQL queries used on the project.
  * @module DatabaseQueries
  */
-module.exports = { createUserTableSQL, createSessionTableSQL, addUserSQL };
+module.exports = { 
+    createUserTableSQL, 
+    deleteUserTableSQL, 
+    createSessionTableSQL,
+    addUserSQL,
+    getUserSQL,
+};

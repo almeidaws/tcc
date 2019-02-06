@@ -10,33 +10,45 @@
 const uuidv4 = require('uuid/v4');
 const session = require('express-session');
 
-/** 
- * Used to configurates session middleware when using ExpressJS 
- * @constant
- * @type {object}
- */
-const sessionConfig = {
-    cookie: {
-        path: '/',
-        httpOnly: true,
-        secure: false,
-        maxAge: null,
-        expires: (() => { const now = new Date(); 
-            now.setFullYear(now.getFullYear() + 1); 
-            return now })(),
-    },
-    store: new (require('connect-pg-simple')(session))(),
-    secret: uuidv4(),
-    resave: false,
-    saveUninitialized: true,
+const Session = {
+
+    /** 
+     * Used to configurates session middleware when using ExpressJS. Every 
+     * time you call this function, a new configuration object is generated.
+     *
+     * It's used internally by 'createMiddleware' to create a new middleware that
+     * can be used on ExpressJS.
+     *
+     * @returns {object}
+     */
+    createSessionConfig: () => ({
+            cookie: {
+                path: '/',
+                httpOnly: true,
+                secure: false,
+                maxAge: null,
+                expires: (() => { const now = new Date(); 
+                    now.setFullYear(now.getFullYear() + 1); 
+                    return now })(),
+            },
+            store: new (require('connect-pg-simple')(session))(),
+            secret: uuidv4(),
+            resave: false,
+            saveUninitialized: true,
+    }),
+
+    /**
+     * Function used as middleware to create session's logic on application. Every time
+     * you call this function, a new middleware is created and configurated.
+     *
+     * You can use the return of this function directly as a middleware on ExpressJS.
+     *
+     * @constant
+     * @type {Function}
+     */
+    createMiddleware: () => session(Session.createSessionConfig()),
 };
 
-/**
- * Function used as middleware to create session's logic on application.
- * @constant
- * @type {Function}
- */
-const sessionMiddleware = session(sessionConfig);
 
 /** 
  * The port where the server will run 
@@ -66,4 +78,4 @@ else
         port: 5432,
     };
 
-module.exports = { sessionMiddleware, port, pool };
+module.exports = { Session, port, pool };

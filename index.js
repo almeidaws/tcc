@@ -17,7 +17,7 @@ const configs = require('./configs.js');
 // MIDDLEWARES
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
-app.use(configs.sessionMiddleware);
+app.use(configs.Session.createMiddleware());
 
 // USER'S ROUTES
 app.post('/user/register', handleUserRegister);
@@ -40,8 +40,7 @@ async function handleUserRegister(request, response, next) {
         const body = request.body;
         const encryptedPassword = await bcrypt.hash(body.password, 10);
         const user = await new database.User(body.name, body.email, encryptedPassword);
-        const result = await queries.addUser(user);
-        const userID = result.rows[0];
+        const { id: userID } = await queries.addUser(user);
 
         request.session.userID = userID;
         response.status(200);
