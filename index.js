@@ -21,6 +21,7 @@ app.use(configs.Session.createMiddleware());
 
 // USER'S ROUTES
 app.post('/user/register', handleUserRegister);
+app.get('/users/:id', handleUserInformationGetting);
     
 //SERVER STARTING
 app.use(express.static(path.join(__dirname, 'public')))
@@ -49,3 +50,24 @@ async function handleUserRegister(request, response, next) {
         next(error);
     }
 };
+
+/** Middleware that retrieve user's information thorugh it's id. If the request user isn't
+ * the current user, it throws and error.
+ */
+async function handleUserInformationGetting(request, response, next) {
+    try {
+        const userID = request.params.id;
+        if (userID !== request.session.userID) {
+            response.status(401);
+            throw new Error('Please, login before accessing user\'s information');
+        }
+
+        const queries = await database.connect();
+        const user = await queries.getUser(userID);
+        const publicUser = { name: user.name, email: user.email };
+        response.status(200).json(publicUser);
+        response.end();
+    } catch (error) {
+        next(error);
+    }
+}
