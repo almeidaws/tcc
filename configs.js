@@ -71,9 +71,9 @@ if (process.env.NODE_ENV === 'production')
     };
 else
     pool = {
-        user: 'gustavo',
+        user: process.env.USER,
         host: 'localhost',
-        database: 'gustavo',
+        database: process.env.USER,
         password: null,
         port: 5432,
     };
