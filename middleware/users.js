@@ -1,6 +1,7 @@
 'use strict';
 
 const database = require('../database/database.js');
+const createError = require('http-errors');
 
 /** 
  * Registers a new user on the database based on a request from
@@ -64,8 +65,7 @@ async function userFields(request, response, next) {
         const userID = request.session.userID;
 
         if (!userID) {
-            response.status(401);
-            throw new Error('Please, login before accessing user\'s information');
+            throw createError(401, "Please, login before accessing user's information");
         }
 
         const queries = await database.connect();
