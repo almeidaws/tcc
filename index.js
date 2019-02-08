@@ -20,8 +20,9 @@ app.use(Session.createMiddleware());
 
 // USER'S ROUTES
 app.post('/user/register', handleUserRegister);
-app.get('/users/:id', handleUserInformationGetting);
+app.get('/users', handleUserInformationGetting);
 app.post('/users/login', handleUserLogin);
+app.post('/users/logout', handleUserLogout);
     
 //SERVER STARTING
 app.use(express.static(path.join(__dirname, 'public')))
@@ -71,13 +72,24 @@ async function handleUserLogin(request, response, next) {
     }
 }
 
-/** Middleware that retrieve user's information thorugh it's id. If the request user isn't
+/**
+ * Removes user's information from this session performing this
+ * way the logout. It just removes the user's id from the current session.
+ */
+async function handleUserLogout(request, response) {
+    delete request.session.userID;
+    response.status(204).end();
+}
+
+/** 
+ * Middleware that retrieve user's information thorugh it's id. If the request user isn't
  * the current user, it throws and error.
  */
 async function handleUserInformationGetting(request, response, next) {
     try {
-        const userID = parseInt(request.params.id);
-        if (userID !== request.session.userID) {
+        const userID = request.session.userID;
+
+        if (!userID) {
             response.status(401);
             throw new Error('Please, login before accessing user\'s information');
         }
@@ -91,4 +103,3 @@ async function handleUserInformationGetting(request, response, next) {
         next(error);
     }
 }
-
