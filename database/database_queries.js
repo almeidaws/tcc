@@ -15,7 +15,7 @@ const createUserTableSQL =
 `CREATE TABLE IF NOT EXISTS Users (
     ID serial NOT NULL PRIMARY KEY, 
     Name text NOT NULL, 
-    Email text NOT NULL, 
+    Email text NOT NULL UNIQUE, 
     Password text NOT NULL 
 )`;
 
