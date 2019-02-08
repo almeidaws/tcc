@@ -49,7 +49,26 @@ WITH (OIDS=FALSE);`;
  */
 const addUserSQL = 'INSERT INTO Users (Name, Email, Password) VALUES ($1, $2, $3) RETURNING ID';
 
+/**
+ * The SQL used to retreive a user from database by its ID. This SQL isn't intend to be
+ * used as is. It contains a unique variable that is the user ID, a positive integer. 
+ * It was created to be used with 'pg' module.
+ * @constant
+ * @type {string}
+ */
 const getUserSQL = 'SELECT ID, Name, Email, Password FROM Users WHERE ID = $1';
+
+/**
+ * The SQL used to retrieve all users from database with a given email. The email is supposed to
+ * be unique to perform login.
+ *
+ * It contains a variable of type string that is the user's email. This SQL was created to 
+ * be used with 'pg' module. Emails retrieved from database are lowercased, so when using
+ * it you should lowercase the email supplied by the variable too.
+ * @constant
+ * @type {string}
+ */
+const authUserSQL = 'SELECT ID, Name, Email, Password FROM Users WHERE lower(Email) = $1';
 
 /**
  * Exports several object that contains several SQL queries used on the project.
@@ -61,4 +80,5 @@ module.exports = {
     createSessionTableSQL,
     addUserSQL,
     getUserSQL,
+    authUserSQL,
 };
