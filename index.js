@@ -10,10 +10,10 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const bodyparser = require('body-parser');
-const { Database, Session, Server } = require('./configs.js');
+const { Database, Server } = require('./configs.js');
 const { 
     register: handleUserRegister,
-    userFields: handleUserFields,
+    view: handleViewUser,
     login: handleUserLogin,
     logout: handleUserLogout,
 } = require('./middleware/users.js');
@@ -22,14 +22,13 @@ const {
 // MIDDLEWARES
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
-app.use(Session.createMiddleware());
 
 // USER'S ROUTES
-app.post('/user/register', (request, response) => { response.status(301, 'users/register') });
-app.post('/users/register', handleUserRegister);
-app.get('/users/current', handleUserFields);
-app.post('/users/login', handleUserLogin);
-app.post('/users/logout', handleUserLogout);
+app.post('/user/register', (request, response) => { response.status(301, '/users') });
+app.post('/users', handleUserRegister);
+// app.get('/users/:id', handleViewUser);
+app.post('/users/tokens', handleUserLogin);
+// app.delete('/users/tokens/:token', handleUserLogout);
     
 //SERVER STARTING
 app.use(express.static(path.join(__dirname, 'public')))

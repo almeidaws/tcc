@@ -33,12 +33,20 @@ const deleteUserTableSQL = 'DROP TABLE Users';
  * @type {string}
  */
 const createSessionTableSQL = 
-`CREATE TABLE IF NOT EXISTS "session" (
-    "sid" varchar NOT NULL COLLATE "default",
-    "sess" json NOT NULL,
-    "expire" timestamp(6) NOT NULL
-)
-WITH (OIDS=FALSE);`;
+`CREATE TABLE IF NOT EXISTS Session (
+    UUID text NOT NULL,
+    UserID integer NOT NULL references Users(ID),
+    Expiration timestamp(6) NOT NULL
+)`;
+
+/**
+ * Adds a new session within the database. This query was created to be used with 'pg' module
+ * because it contains three variables in this order: session's uuidv4 token, user's id and
+ * expiratin date.
+ * @constant
+ * @type {string}
+ */
+const addSessionSQL = 'INSERT INTO Session (UUID, UserID, Expiration) VALUES ($1, $2, $3)';
 
 /**
  * The SQL query used to add a user to the table Users. It's not the final query because it has
@@ -78,6 +86,7 @@ module.exports = {
     createUserTableSQL, 
     deleteUserTableSQL, 
     createSessionTableSQL,
+    addSessionSQL,
     addUserSQL,
     getUserSQL,
     authUserSQL,

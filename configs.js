@@ -10,48 +10,12 @@
 'use strict';
 
 const uuidv4 = require('uuid/v4');
-const session = require('express-session');
 
 /** This namespace is used to wrapps configuratinos relatated to user's session, like
  * its instantiation and middlewares from ExpressJS.
  */
 const Session = {
 
-    /** 
-     * Used to configurates session middleware when using ExpressJS. Every 
-     * time you call this function, a new configuration object is generated.
-     *
-     * It's used internally by 'createMiddleware' to create a new middleware that
-     * can be used on ExpressJS.
-     *
-     * @returns {object}
-     */
-    createSessionConfig: () => ({
-            cookie: {
-                path: '/',
-                httpOnly: true,
-                secure: false,
-                maxAge: null,
-                expires: (() => { const now = new Date(); 
-                    now.setFullYear(now.getFullYear() + 1); 
-                    return now })(),
-            },
-            store: new (require('connect-pg-simple')(session))(),
-            secret: uuidv4(),
-            resave: false,
-            saveUninitialized: true,
-    }),
-
-    /**
-     * Function used as middleware to create session's logic on application. Every time
-     * you call this function, a new middleware is created and configurated.
-     *
-     * You can use the return of this function directly as a middleware on ExpressJS.
-     *
-     * @constant
-     * @type {Function}
-     */
-    createMiddleware: () => session(Session.createSessionConfig()),
 };
 
 /** 

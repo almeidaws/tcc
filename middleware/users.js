@@ -2,6 +2,7 @@
 
 const database = require('../database/database.js');
 const createError = require('http-errors');
+const uuidv4 = require('uuid/v4');
 
 /** 
  * Registers a new user on the database based on a request from
@@ -20,7 +21,6 @@ async function register(request, response, next) {
 
         const { id: userID } = await queries.addUser(user);
 
-        request.session.userID = userID;
         response.status(200);
         response.end();
     } catch (error) {
@@ -40,8 +40,17 @@ async function login(request, response, next) {
         const password = body.password;
         const queries = await database.connect();
         const { id } = await queries.authUser(email, password);
-        request.session.userID = id;
-        response.status(200).end();
+        
+        const oneYearAhead = (() => { 
+            const now = new Date(); 
+            now.setFullYear(now.getFullYear() + 1); 
+            return now;
+        })();
+
+        const token = uuidv4();
+        const session = new database.Session(token, id, oneYearAhead);
+        await queries.addSession(session);
+        response.status(200).json({ token }).end();
     } catch (error) {
         next(error);
     }
@@ -60,7 +69,7 @@ async function logout(request, response) {
  * Middleware that retrieve user's information thorugh it's id. If the request user isn't
  * the current user, it throws and error.
  */
-async function userFields(request, response, next) {
+async function view(request, response, next) {
     try {
         const userID = request.session.userID;
 
@@ -82,5 +91,5 @@ module.exports = {
     register,
     logout,
     login,
-    userFields,
+    view,
 }
