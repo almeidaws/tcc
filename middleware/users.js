@@ -60,9 +60,18 @@ async function login(request, response, next) {
  * Removes user's information from this session performing this
  * way the logout. It just removes the user's id from the current session.
  */
-async function logout(request, response) {
-    delete request.session.userID;
+async function logout(request, response, next) {
+    try {
+        const token = request.params.token;
+        if (!token)
+            throw createError(401, 'Access Token not provided, please provide one to logout');
+
+    const queries = await database.connect();
+    await queries.deleteSession(token);
     response.status(204).end();
+    } catch (error) {
+        next(error);
+    }
 }
 
 /** 
@@ -77,10 +86,9 @@ async function view(request, response, next) {
 
         const queries = await database.connect();
         const session = await queries.getSession(token);
-        console.log(request.params);
-        console.log(session);
         if (session.userID !== parseInt(request.params.id))
             throw createError(401, 'You aren\'t authorized to access this user');
+
         const user = await queries.getUser(session.userID);
         const publicUser = { name: user.name, email: user.email };
         response.status(200).json(publicUser);

@@ -24,6 +24,7 @@ const { createUserTableSQL,
         createSessionTableSQL, 
         addSessionSQL,
         getSessionSQL,
+        deleteSessionSQL,
         addUserSQL,
         getUserSQL,
         authUserSQL,
@@ -97,11 +98,26 @@ const getSession = async token => {
 
     const result = await pool.query(query);
     if (result.rows.length == 0) 
-        throw createError(401, 'Session\'s is invalid, please login again.');
+        throw createError(401, 'Session is invalid, please login again.');
 
     const { userid: userID, expiration } = result.rows[0];
     return new Session(token, userID, expiration);
 };
+
+/**
+ * Removes a session from the database. It's an async function.
+ * It's also a function that returns nothing besides the Promise
+ * from it's async nature.
+ * @param {string} session's UUID used as token.
+ */
+const deleteSession = async token => {
+    const query = {
+        text: deleteSessionSQL,
+        values: [token],
+    };
+
+    await pool.query(query);
+}
 
 /**
  * Entity used to hold user's data and do the validation of that data
@@ -313,6 +329,7 @@ const connect = async () => {
         authUser,
         addSession,
         getSession,
+        deleteSession,
     };
 
     await createUserTable();

@@ -49,6 +49,15 @@ const createSessionTableSQL =
 const addSessionSQL = 'INSERT INTO Session (UUID, UserID, Expiration) VALUES ($1, $2, $3)';
 
 /**
+ * Removes a session from the database using its UUID/Token.
+ * This query was created to be used with 'pg' module. So, it 
+ * requires one variable that is the session's UUID/Token.
+ * @constant
+ * @type {string}
+ */
+const deleteSessionSQL = 'DELETE FROM Session WHERE UUID = $1';
+
+/**
  * Retrieves a session from the database based on its UUID token.
  * It was created to be used with 'pg' module so it have a unique variable that corresponds
  * to the session's token.
@@ -96,6 +105,7 @@ module.exports = {
     createSessionTableSQL,
     addSessionSQL,
     getSessionSQL,
+    deleteSessionSQL,
     addUserSQL,
     getUserSQL,
     authUserSQL,

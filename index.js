@@ -28,7 +28,7 @@ app.post('/user/register', (request, response) => { response.status(301, '/users
 app.post('/users', handleUserRegister);
 app.get('/users/:id', handleViewUser);
 app.post('/users/tokens', handleUserLogin);
-// app.delete('/users/tokens/:token', handleUserLogout);
+app.delete('/users/tokens/:token', handleUserLogout);
     
 //SERVER STARTING
 app.use(express.static(path.join(__dirname, 'public')))
