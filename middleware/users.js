@@ -71,14 +71,17 @@ async function logout(request, response) {
  */
 async function view(request, response, next) {
     try {
-        const userID = request.session.userID;
-
-        if (!userID) {
-            throw createError(401, "Please, login before accessing user's information");
-        }
+        const token = request.get('Authorization');
+        if (!token) 
+            throw createError(401, 'Access Token not provided, please login to get one');
 
         const queries = await database.connect();
-        const user = await queries.getUser(userID);
+        const session = await queries.getSession(token);
+        console.log(request.params);
+        console.log(session);
+        if (session.userID !== parseInt(request.params.id))
+            throw createError(401, 'You aren\'t authorized to access this user');
+        const user = await queries.getUser(session.userID);
         const publicUser = { name: user.name, email: user.email };
         response.status(200).json(publicUser);
         response.end();

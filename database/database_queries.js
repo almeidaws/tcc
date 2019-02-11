@@ -42,12 +42,20 @@ const createSessionTableSQL =
 /**
  * Adds a new session within the database. This query was created to be used with 'pg' module
  * because it contains three variables in this order: session's uuidv4 token, user's id and
- * expiratin date.
+ * expiration date.
  * @constant
  * @type {string}
  */
 const addSessionSQL = 'INSERT INTO Session (UUID, UserID, Expiration) VALUES ($1, $2, $3)';
 
+/**
+ * Retrieves a session from the database based on its UUID token.
+ * It was created to be used with 'pg' module so it have a unique variable that corresponds
+ * to the session's token.
+ * @contant
+ * @type {string}
+ */
+const getSessionSQL = 'SELECT UUID, UserID, Expiration FROM Session WHERE UUID = $1';
 /**
  * The SQL query used to add a user to the table Users. It's not the final query because it has
  * three parameters: user's name, email and password. This parameters should be used with 
@@ -87,6 +95,7 @@ module.exports = {
     deleteUserTableSQL, 
     createSessionTableSQL,
     addSessionSQL,
+    getSessionSQL,
     addUserSQL,
     getUserSQL,
     authUserSQL,

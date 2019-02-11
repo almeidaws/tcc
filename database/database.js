@@ -23,6 +23,7 @@ const { createUserTableSQL,
         deleteUserTableSQL, 
         createSessionTableSQL, 
         addSessionSQL,
+        getSessionSQL,
         addUserSQL,
         getUserSQL,
         authUserSQL,
@@ -77,6 +78,29 @@ const addSession = async (session) => {
     };
 
     return await pool.query(addSessionConfig)
+};
+
+/**
+ * Retrieves a an existing token from the database based on its token. It's 
+ * an async function.
+ *
+ * If there's no session with the given token an HTTP 401 error is throw.
+ *
+ * @param {string} token session's token.
+ * @returns {Session} the session with that token.
+ */
+const getSession = async token => {
+    const query = {
+        text: getSessionSQL,
+        values: [token],
+    };
+
+    const result = await pool.query(query);
+    if (result.rows.length == 0) 
+        throw createError(401, 'Session\'s is invalid, please login again.');
+
+    const { userid: userID, expiration } = result.rows[0];
+    return new Session(token, userID, expiration);
 };
 
 /**
@@ -288,6 +312,7 @@ const connect = async () => {
         getUser,
         authUser,
         addSession,
+        getSession,
     };
 
     await createUserTable();
