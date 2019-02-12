@@ -1,5 +1,6 @@
 
 # Miraculous
+
 Miraculous is a website project created to study music recommendations algorithms. It's created using NodeJS technology on the server side and ReactJS on the client side. 
 
 The creators are:
@@ -16,7 +17,7 @@ The creators are:
 # Guide Documentation
 
 This section contains a bunch of mini guides that you can use to do specific tasks. It isn't an exhaustive documentation. That
-documentation can be found on the documentation comment above each declaration on the source code.
+documentation can be found on the documentation comments above each declaration on the source code.
 
 Currently there's no final domain used on this project, so when you see `miraculous.com` replace this by the current website's domain.
 
