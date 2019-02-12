@@ -1,8 +1,20 @@
 'use strict';
 
-const { User, connect, DDL: { createUserTable, deleteUserTable, deleteSessionTable } } = require('./database.js');
+const { 
+    User, 
+    Session, 
+    connect, 
+    DDL: { 
+        createUserTable, 
+        deleteUserTable, 
+        createSessionTable,
+        deleteSessionTable, 
+    }
+} = require('./database.js');
+const uuidv4 = require('uuid/v4');
 
-const createExampleUser = () => new User('Gustavo', 'gustavo@gmail.com', '12345');
+const createExampleUser = id => new User(id, 'Gustavo', 'gustavo@gmail.com', '12345');
+const createExampleSession = user => new Session(uuidv4(), user.id, new Date());
 
 describe('Testing User type', () => {
     it("Checks if pseudo overriding of User's constructor is working", () => {
@@ -134,4 +146,29 @@ describe('Testing Users table', async () => {
         await deleteUserTable();
     });
 
+});
+
+describe('Testing user\'s sessions', async () => {
+    beforeEach(async () => {
+        await createUserTable();
+        await createSessionTable();
+    });
+
+    it('Tests if a session is created when a user is registered', async () => {
+       expect.assertions(1);
+
+       const user = createExampleUser();
+       const queries = await connect();
+       const addedUser = await queries.addUser(user);
+       const session = createExampleSession(addedUser);
+       await queries.addSession(session);
+       const retrievedSession = await queries.getSession(session.uuid);
+
+       expect(retrievedSession).toEqual(session);
+    });
+
+    afterEach(async () => {
+        await deleteSessionTable();
+        await deleteUserTable();
+    });
 });
