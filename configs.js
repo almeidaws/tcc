@@ -32,7 +32,10 @@ const Database = {
         if (process.env.NODE_ENV === 'production')
             return new Pool({ connectionString: process.env.DATABASE_URL });
         else if (process.env.NODE_ENV === 'test')
-            return new Pool({ connectionString: `postgres://${process.env.USER}:@localhost:5432/miraculoustest` });
+            if (process.env.NOT_LOCAL === 'true')
+                return new Pool({ connectionString: process.env.DATABASE_URL });
+            else 
+                return new Pool({ connectionString: `postgres://${process.env.USER}:@localhost:5432/miraculoustest` });
         else if (process.env.NODE_ENV === 'development')
             return new Pool({ connectionString: `postgres://${process.env.USER}:@localhost:5432/miraculous` });
         else 
