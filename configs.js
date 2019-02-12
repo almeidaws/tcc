@@ -29,7 +29,6 @@ const Database = {
      * Pool from 'pg' module.
      */
     pool: () => {
-        console.log(process.env.NODE_ENV);
         if (process.env.NODE_ENV === 'production')
             return new Pool({ connectionString: process.env.DATABASE_URL });
         else if (process.env.NODE_ENV === 'test')

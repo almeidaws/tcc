@@ -16,8 +16,7 @@ async function register(request, response, next) {
     try {
         const queries = await database.connect();
         const body = request.body;
-        const encryptedPassword = await database.User.hashPassword(body.password);
-        const user = await new database.User(body.name, body.email, encryptedPassword);
+        const user = new database.User(body.name, body.email, body.password);
 
         const { id: userID } = await queries.addUser(user);
 

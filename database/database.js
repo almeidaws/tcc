@@ -221,15 +221,17 @@ const addUser = async (user) => {
         return Promise.reject(error);
     }
 
+    const encryptedPassword = await User.hashPassword(user.password);
     const addUserConfig = {
         text: addUserSQL,
-        values: [user.name, user.email, user.password],
+        values: [user.name, user.email, encryptedPassword],
     };
 
     const promise = pool.query(addUserConfig)
         .then(result => {
             const copy = _.clone(user);
             copy.id = result.rows[0].id;
+            copy.password = encryptedPassword;
             return copy;
         });
 
@@ -360,4 +362,3 @@ module.exports = {
         deleteSessionTable,
     },
 };
-

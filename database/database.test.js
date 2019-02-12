@@ -1,3 +1,5 @@
+'use strict';
+
 const { User, connect, DDL: { createUserTable, deleteUserTable, deleteSessionTable } } = require('./database.js');
 
 const createExampleUser = () => new User('Gustavo', 'gustavo@gmail.com', '12345');
@@ -34,53 +36,55 @@ describe('Testing Users table', async () => {
         await createUserTable();
     });
     
-    it('Checks if users with invalid password aren\'t added to the database', async () => {
-        const name = 'Paulo';
-        const email = 'paulo@gmail.com';
+    describe('Checks invalid users', async () => {
+        it('Checks if users with invalid password aren\'t added to the database', async () => {
+            const name = 'Paulo';
+            const email = 'paulo@gmail.com';
 
-        const withEmptyPassword = new User(name, email, '');
-        const withNullPassword = new User(name, email, null);
-        const withUndefinedPassword = new User(name, email, undefined);
+            const withEmptyPassword = new User(name, email, '');
+            const withNullPassword = new User(name, email, null);
+            const withUndefinedPassword = new User(name, email, undefined);
 
-        expect.assertions(3);
-        const queries = await connect();
-        await expect(queries.addUser(withEmptyPassword)).rejects.toThrow();
-        await expect(queries.addUser(withNullPassword)).rejects.toThrow();
-        await expect(queries.addUser(withUndefinedPassword)).rejects.toThrow();
+            expect.assertions(3);
+            const queries = await connect();
+            await expect(queries.addUser(withEmptyPassword)).rejects.toThrow();
+            await expect(queries.addUser(withNullPassword)).rejects.toThrow();
+            await expect(queries.addUser(withUndefinedPassword)).rejects.toThrow();
+        });
+
+        it('Checks if users with invalid email aren\'t added to the database', async () => {
+            const name = 'Paulo';
+            const password = '12345';
+
+            const withEmptyEmail= new User(name, '', password);
+            const withNullEmail = new User(name, null, password);
+            const withUndefinedEmail = new User(name, undefined, password);
+            const withInvalidEmail = new User(name, 'paulo@.com', password);
+
+            expect.assertions(4);
+            const queries = await connect();
+            await expect(queries.addUser(withEmptyEmail)).rejects.toThrow();
+            await expect(queries.addUser(withNullEmail)).rejects.toThrow();
+            await expect(queries.addUser(withUndefinedEmail)).rejects.toThrow();
+            await expect(queries.addUser(withInvalidEmail)).rejects.toThrow();
+        });
+
+        it('Checks if users with invalid name aren\'t added to the database', async () => {
+            const email = 'paulo@gmail.com';
+            const password = '1234';
+
+            const withEmptyName = new User('', email, password);
+            const withNullName = new User(null, email, password);
+            const withUndefinedName = new User(undefined, email, password);
+
+            expect.assertions(3);
+            const queries = await connect();
+            await expect(queries.addUser(withEmptyName)).rejects.toThrow();
+            await expect(queries.addUser(withNullName)).rejects.toThrow();
+            await expect(queries.addUser(withUndefinedName)).rejects.toThrow();
+        });
     });
-
-    it('Checks if users with invalid email aren\'t added to the database', async () => {
-        const name = 'Paulo';
-        const password = '12345';
-
-        const withEmptyEmail= new User(name, '', password);
-        const withNullEmail = new User(name, null, password);
-        const withUndefinedEmail = new User(name, undefined, password);
-        const withInvalidEmail = new User(name, 'paulo@.com', password);
-
-        expect.assertions(4);
-        const queries = await connect();
-        await expect(queries.addUser(withEmptyEmail)).rejects.toThrow();
-        await expect(queries.addUser(withNullEmail)).rejects.toThrow();
-        await expect(queries.addUser(withUndefinedEmail)).rejects.toThrow();
-        await expect(queries.addUser(withInvalidEmail)).rejects.toThrow();
-    });
-
-    it('Checks if users with invalid name aren\'t added to the database', async () => {
-        const email = 'paulo@gmail.com';
-        const password = '1234';
-
-        const withEmptyName = new User('', email, password);
-        const withNullName = new User(null, email, password);
-        const withUndefinedName = new User(undefined, email, password);
-
-        expect.assertions(3);
-        const queries = await connect();
-        await expect(queries.addUser(withEmptyName)).rejects.toThrow();
-        await expect(queries.addUser(withNullName)).rejects.toThrow();
-        await expect(queries.addUser(withUndefinedName)).rejects.toThrow();
-    });
-
+    
     it('Checks if users are added to the database', async () => {
         expect.assertions(1);
 
@@ -90,6 +94,28 @@ describe('Testing Users table', async () => {
         const queriedUser = await queries.getUser(addedUser.id);
         return expect(queriedUser).toEqual(addedUser);
     });        
+
+    it('Checks if a user can be authenticated', async () => {
+        expect.assertions(1);
+
+        const user = createExampleUser();
+        const queries = await connect();
+        const addedUser = await queries.addUser(user);
+        const authUser = await queries.authUser(user.email, user.password);
+        return expect(addedUser).toEqual(authUser);
+    });
+
+    it('Checks if a user with wrong password isn\'t authenticated', async () => {
+        expect.assertions(1);
+
+        const user = createExampleUser();
+
+        const queries = await connect();
+        const addedUser = await queries.addUser(user);
+        const authUser = await queries.authUser(user.email, user.password);
+        const pass = user.password;
+        await expect(queries.authUser(user.email, pass + pass)).rejects.toThrow();
+    });
 
     afterEach(async () => {
         await deleteSessionTable();
