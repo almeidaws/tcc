@@ -117,6 +117,18 @@ describe('Testing Users table', async () => {
         await expect(queries.authUser(user.email, pass + pass)).rejects.toThrow();
     });
 
+    it('Checks users with the same email', async () => {
+        expect.assertions(1);
+
+        const email = 'foo@gmail.com'
+        const user1 = new User('Paulo', email, '123');
+        const user2 = new User('Juliana', email, '546');
+
+        const queries = await connect();
+        await queries.addUser(user1);
+        return expect(queries.addUser(user2)).rejects.toThrow();
+    });
+
     afterEach(async () => {
         await deleteSessionTable();
         await deleteUserTable();
