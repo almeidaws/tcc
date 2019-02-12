@@ -10,6 +10,7 @@
 'use strict';
 
 const uuidv4 = require('uuid/v4');
+const { Pool } = require('pg');
 
 /** This namespace is used to wrapps configuratinos relatated to user's session, like
  * its instantiation and middlewares from ExpressJS.
@@ -28,22 +29,15 @@ const Database = {
      * Pool from 'pg' module.
      */
     pool: () => {
+        console.log(process.env.NODE_ENV);
         if (process.env.NODE_ENV === 'production')
-            pool = {
-                user: 'jxpnqxrwoebosm',
-                host: 'ec2-54-225-121-235.compute-1.amazonaws.com',
-                database: 'd5sllgppjr1jo6',
-                password: '2dfcfff56aee97b0e065f3f2cd1874b9f1edca39d097d0d75283db09e53d2626',
-                port: 5432,
-            };
-        else
-            pool = {
-                user: process.env.USER,
-                host: 'localhost',
-                database: process.env.USER,
-                password: null,
-                port: 5432,
-            };
+            return new Pool({ connectionString: process.env.DATABASE_URL });
+        else if (process.env.NODE_ENV === 'test')
+            return new Pool({ connectionString: `postgres://${process.env.USER}:@localhost:5432/miraculoustest` });
+        else if (process.env.NODE_ENV === 'development')
+            return new Pool({ connectionString: `postgres://${process.env.USER}:@localhost:5432/miraculous` });
+        else 
+            throw new Error('Unknown environment. Access the line of this error to see more.');
     },
 };
 

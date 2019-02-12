@@ -14,11 +14,10 @@ const createError = require('http-errors');
  * @requires NPM:./database_queries.js
  */
 
-const { Pool } = require('pg');
 const { Database } = require('../configs.js');
 const Joi = require('joi');
 const uuidv4 = require('uuid/v4');
-const pool = new Pool(Database.pool);
+const pool = Database.pool();
 const { createUserTableSQL, 
         deleteUserTableSQL, 
         createSessionTableSQL, 
