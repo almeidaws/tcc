@@ -39,6 +39,13 @@ const createSessionTableSQL =
     Expiration timestamp(6) NOT NULL
 )`;
 
+/** The SQL query used to delete the table session. It was originally created
+ * to reset the database when performing unity tests.
+ * @constant
+ * @type {string}
+ */
+const deleteSessionTableSQL = 'DROP TABLE Session';
+
 /**
  * Adds a new session within the database. This query was created to be used with 'pg' module
  * because it contains three variables in this order: session's uuidv4 token, user's id and
@@ -103,6 +110,7 @@ module.exports = {
     createUserTableSQL, 
     deleteUserTableSQL, 
     createSessionTableSQL,
+    deleteSessionTableSQL,
     addSessionSQL,
     getSessionSQL,
     deleteSessionSQL,

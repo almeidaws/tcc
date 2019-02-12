@@ -1,4 +1,4 @@
-const { User, connect, DDL: { createUserTable, deleteUserTable } } = require('./database.js');
+const { User, connect, DDL: { createUserTable, deleteUserTable, deleteSessionTable } } = require('./database.js');
 
 const createExampleUser = () => new User('Gustavo', 'gustavo@gmail.com', '12345');
 
@@ -92,6 +92,7 @@ describe('Testing Users table', async () => {
     });        
 
     afterEach(async () => {
+        await deleteSessionTable();
         await deleteUserTable();
     });
 

@@ -22,6 +22,7 @@ const pool = new Pool(Database.pool);
 const { createUserTableSQL, 
         deleteUserTableSQL, 
         createSessionTableSQL, 
+        deleteSessionTableSQL,
         addSessionSQL,
         getSessionSQL,
         deleteSessionSQL,
@@ -341,6 +342,7 @@ const connect = async () => {
 const createUserTable = async () => await pool.query(createUserTableSQL);
 const deleteUserTable = async () => await pool.query(deleteUserTableSQL);
 const createSessionTable = async () => await pool.query(createSessionTableSQL);
+const deleteSessionTable = async () => await pool.query(deleteSessionTableSQL);
 
 /**
  * Exports an object that currently can be used to constructs users and establishes
@@ -355,6 +357,8 @@ module.exports = {
     DDL: { 
         createUserTable, 
         deleteUserTable,
+        createSessionTable,
+        deleteSessionTable,
     },
 };
 
