@@ -167,8 +167,23 @@ describe('Testing user\'s sessions', async () => {
        expect(retrievedSession).toEqual(session);
     });
 
+    it('Tests if a session is deleted from the database', async () => {
+       expect.assertions(1);
+
+       const user = createExampleUser();
+       const queries = await connect();
+       const addedUser = await queries.addUser(user);
+       const session = createExampleSession(addedUser);
+       await queries.addSession(session);
+       await queries.deleteSession(session.uuid);
+       const promise = queries.getSession(session.uuid);
+
+       return expect(promise).rejects.toThrow();
+    });
+
     afterEach(async () => {
         await deleteSessionTable();
         await deleteUserTable();
     });
+
 });
