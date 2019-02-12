@@ -29,11 +29,14 @@ const Database = {
      * Pool from 'pg' module.
      */
     pool: () => {
+        console.log(process.env.NODE_ENV);
+        console.log(process.env.NOT_LOCAL);
+        console.log(process.env.DATABASE_URL_TEST);
         if (process.env.NODE_ENV === 'production')
             return new Pool({ connectionString: process.env.DATABASE_URL });
         else if (process.env.NODE_ENV === 'test')
             if (process.env.NOT_LOCAL === 'true')
-                return new Pool({ connectionString: process.env.DATABASE_URL });
+                return new Pool({ connectionString: process.env.DATABASE_URL_TEST });
             else 
                 return new Pool({ connectionString: `postgres://${process.env.USER}:@localhost:5432/miraculoustest` });
         else if (process.env.NODE_ENV === 'development')
