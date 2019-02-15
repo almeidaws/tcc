@@ -2,14 +2,12 @@
   "restartable": "rs",
   "ignore": [
     ".git",
-    "node_modules/**/node_modules"
+    "node_modules/**/node_modules",
+    "public/js/react/"
   ],
   "verbose": true,
-  "execMap": {
-    "hl": "heroku local"
-  },
   "env": {
     "NODE_ENV": "development"
   },
-  "ext": "js json html"
+  "ext": "js json html jsx"
 }
