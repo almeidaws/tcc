@@ -55,22 +55,7 @@ Purchase:
     <!----Main Wrapper Start---->
     <div class="ms_main_wrapper">
         <!---Header--->
-        <div class="ms_header">
-            <div class="ms_top_left">
-                <div class="ms_top_search">
-                    <input type="text" class="form-control" placeholder="Search Music Here..">
-                    <span class="search_icon">
-							<img src="images/svg/search.svg" alt="">
-						</span>
-                </div>
-            </div>
-            <div class="ms_top_right">
-                <div class="ms_top_btn">
-					<a href="javascript:;" class="ms_btn reg_btn" data-toggle="modal" data-target="#myModal"><span>register</span></a>
-					<a href="javascript:;" class="ms_btn login_btn" data-toggle="modal" data-target="#myModal1"><span>login</span></a>
-               </div>
-            </div>
-        </div>
+        <div id="header"></div>
         <!---Side Menu Start--->
         <div class="ms_sidemenu_wrapper">
             <div class="ms_nav_close">
@@ -1452,6 +1437,14 @@ Purchase:
     <script type="text/javascript" src="js/plugins/nice_select/jquery.nice-select.min.js"></script>
 	<script type="text/javascript" src="js/plugins/scroll/jquery.mCustomScrollbar.js"></script>
     <script type="text/javascript" src="js/custom.js"></script>
+
+    <!-- Load React. -->
+    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+    <script>console.log('Replace react from development to production mode');</script>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+
+    <script src="js/react/Header.js"></script>
 </body>
 
 </html>

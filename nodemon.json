@@ -5,6 +5,9 @@
     "node_modules/**/node_modules",
     "public/js/react/"
   ],
+  "events": {
+    "crash": "osascript -e 'display notification \"app crashed - waiting for file changes before starting...\" with title \"Nodemon\"'"
+  },
   "verbose": true,
   "env": {
     "NODE_ENV": "development"
