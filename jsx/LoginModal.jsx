@@ -1,35 +1,37 @@
-class Field extends React.Component {
-    render() {
-        return (
-            <div className="form-group">
-                <input 
-                    type={this.props.type} 
-                    placeholder={this.props.email} 
-                    className="form-control" 
-                    value={this.props.value} 
-                    onChange={this.props.onChange}/>
-                <span className="form_icon">
-                    <i className={"fa_icon form-" + this.props.icon} aria-hidden="true" />
-                </span>
-            </div>
-        );
-    }
-};
+const Field = props => (
+    <div className="form-group">
+        <input 
+            type={props.type} 
+            placeholder={props.email} 
+            className="form-control" 
+            value={props.value} 
+            onChange={props.onChange}
+            required={props.required}/>
+        <span className="form_icon">
+            <i className={"fa_icon form-" + props.icon} aria-hidden="true" />
+        </span>
+        <div className="invalid-feedback">{props.errorMessage}</div>
+    </div>
+);
 
 const EmailField = props => <Field 
-                                type="text" 
+                                type="email" 
                                 placeholder="Enter Your Email" 
                                 icon="envelope" 
+                                required={true}
+                                errorMessage={props.errorMessage}
                                 value={props.value} 
                                 onChange={props.onChange} />;
 const PasswordField = props => <Field 
                                     type="password" 
                                     placeholder="Enter Password" 
                                     icon="lock" 
+                                    required={true}
+                                    errorMessage={props.errorMessage}
                                     value={props.value} 
                                     onChange={props.onChange} />;
 const ForgotPasswordLink = props => <div className="popup_forgot"><a href="#">Forgot Password ?</a></div>;
-const LoginLink = props => <a href="profile.html" className="ms_btn" target="_blank">login now</a>;
+const LoginLink = props => <a onClick={props.onClick} href="javascript:{}" className="ms_btn" target="_blank">login now</a>;
 const RegisterLink = props => <p>Don't Have An Account? <a href="#myModal" data-toggle="modal" className="ms_modal1 hideCurrentModel">register here</a></p>
 
 class LoginForm extends React.Component {
@@ -38,6 +40,7 @@ class LoginForm extends React.Component {
         this.state = { email: '', password: '' };
         this.handleEmail = this.handleEmail.bind(this);
         this.handlePassword = this.handlePassword.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleEmail(event) { 
         this.setState({ email: event.target.value }); 
@@ -45,14 +48,21 @@ class LoginForm extends React.Component {
     handlePassword(event) { 
         this.setState({ password: event.target.value }); 
     }
+    handleSubmit(event) { 
+        this.validateForm(); 
+    }
+    validateForm() {
+        const form = document.getElementById('loginForm');
+        form.classList.add('was-validated');
+    }
     render() {
         return (
-            <form className="ms_register_form" >
+            <form className="ms_register_form" id="loginForm" noValidate>
                 <h2>login / Sign in</h2>
-                <EmailField value={this.state.email} onChange={this.handleEmail}/>
-                <PasswordField value={this.state.password} onChange={this.handlePassword}/>
+                <EmailField value={this.state.email} onChange={this.handleEmail} errorMessage="Invalid email. Valid example: john@gmail.com"/>
+                <PasswordField value={this.state.password} onChange={this.handlePassword} errorMessage="The password is required"/>
                 <ForgotPasswordLink />
-                <LoginLink />
+                <LoginLink onClick={this.handleSubmit}/>
             </form>
         );
     }
