@@ -1,19 +1,3 @@
-const Field = props => (
-    <div className="form-group">
-        <input 
-            type={props.type} 
-            placeholder={props.email} 
-            className="form-control" 
-            value={props.value} 
-            onChange={props.onChange}
-            required={props.required}/>
-        <span className="form_icon">
-            <i className={"fa_icon form-" + props.icon} aria-hidden="true" />
-        </span>
-        <div className="invalid-feedback">{props.errorMessage}</div>
-    </div>
-);
-
 const EmailField = props => <Field 
                                 type="email" 
                                 placeholder="Enter Your Email" 
@@ -49,11 +33,14 @@ class LoginForm extends React.Component {
         this.setState({ password: event.target.value }); 
     }
     handleSubmit(event) { 
-        this.validateForm(); 
+        if (this.validateForm()) {
+            R.login(this.state.email, this.state.password);
+        }
     }
     validateForm() {
         const form = document.getElementById('loginForm');
         form.classList.add('was-validated');
+        return form.checkValidity();
     }
     render() {
         return (

@@ -49,7 +49,7 @@ async function login(request, response, next) {
         const token = uuidv4();
         const session = new database.Session(token, id, oneYearAhead);
         await queries.addSession(session);
-        response.status(200).json({ token }).end();
+        response.status(200).json({ id, token }).end();
     } catch (error) {
         next(error);
     }

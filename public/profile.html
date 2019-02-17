@@ -100,30 +100,7 @@ Purchase:
         <!---Main Content Start--->
         <div class="padder_top80">
             <!---Header--->
-			<div class="ms_header">
-                <div class="ms_top_left">
-                    <div class="ms_top_search">
-                        <input type="text" class="form-control" placeholder="Search Music Here..">
-                        <span class="search_icon">
-							<img src="images/svg/search.svg" alt="">
-						</span>
-                    </div>
-                </div>
-                <div class="ms_top_right">
-                    <div class="ms_top_btn">
-                        <a href="upload.html" class="ms_btn">upload</a>
-                        <a href="javascript:;" class="ms_admin_name">Hello Bella <span class="ms_pro_name">ns</span>													
-						</a>
-						<ul class="pro_dropdown_menu">
-							<li><a href="profile.html">Profile</a></li>
-							<li><a href="manage_acc.html" target="_blank">Pricing Plan</a></li>
-							<li><a href="blog.html" target="_blank">Blog</a></li>
-							<li><a href="">Setting</a></li>
-							<li><a href="">Logout</a></li>
-						</ul>
-                    </div>
-                </div>
-            </div>
+            <div id="header"></div>
             <!----Edit Profile Wrapper Start---->
             <div class="ms_profile_wrapper">
                 <h1>Edit Profile</h1>
@@ -542,5 +519,16 @@ Purchase:
     <script type="text/javascript" src="js/plugins/nice_select/jquery.nice-select.min.js"></script>
 	<script type="text/javascript" src="js/plugins/scroll/jquery.mCustomScrollbar.js"></script>
     <script type="text/javascript" src="js/custom.js"></script>
+
+    <!-- Load React. -->
+    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+    <script>console.log('Replace react from development to production mode');</script>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+
+    <script src="js/Requisition.js"></script>
+    <script src="js/react/Header.js"></script>
+    <script src="js/react/Field.js"></script>
+    <script src="js/react/LoginModal.js"></script>
 </body>
 </html>
