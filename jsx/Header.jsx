@@ -8,7 +8,8 @@ const searchButton = (
         </span>
     </div>
 );
-const header = (
+
+const Header = props => (
     <div className="ms_header">
         <div className="ms_top_left">
             <div className="ms_top_search">
@@ -24,4 +25,4 @@ const header = (
     </div>
 );
 
-ReactDOM.render(header, document.getElementById('header'));
+ReactDOM.render(<Header />, document.getElementById('header'));
