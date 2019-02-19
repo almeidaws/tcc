@@ -11,7 +11,7 @@ const R = {
         $.ajax('users/tokens', {
             method: 'POST',
             success: logged,
-            error: (_, status) => { if (error) error(status) },
+            error: (res) => { if (error) error(res.status) },
             data: { email, password },
         });
     },
@@ -23,7 +23,7 @@ const R = {
         };
         $.ajax('users/' + id, {
             success: retrieved,
-            error: (_, status) => { if (error) error(status) },
+            error: (res) => { if (error) error(res.status) },
             headers: { Authorization: token },
         });
     },

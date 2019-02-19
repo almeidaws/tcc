@@ -10,6 +10,6 @@ const Field = props => (
         <span className="form_icon">
             <i className={"fa_icon form-" + props.icon} aria-hidden="true" />
         </span>
-        <div className="invalid-feedback">{props.errorMessage}</div>
+        <div className="invalid-feedback text-warning">{props.errorMessage}</div>
     </div>
 );
