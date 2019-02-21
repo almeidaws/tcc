@@ -1,3 +1,8 @@
+import React from 'react';
+import Field from './Field.jsx';
+import Requisition from './../js/Requisition.js';
+const R = Requisition;
+
 const EmailField = props => <Field 
                                 type="email" 
                                 placeholder="Enter Your Email" 
@@ -84,4 +89,4 @@ class LoginModal extends React.Component {
    }
 };
 
-ReactDOM.render(<LoginModal />, document.getElementById('loginModal'));
+export default LoginModal;

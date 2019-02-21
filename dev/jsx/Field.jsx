@@ -13,3 +13,5 @@ const Field = props => (
         <div className="invalid-feedback text-warning">{props.errorMessage}</div>
     </div>
 );
+
+export default Field;
