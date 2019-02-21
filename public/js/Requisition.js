@@ -27,6 +27,26 @@ const R = {
             headers: { Authorization: token },
         });
     },
+    register: (name, email, password, error, success) => {
+      const logged = (data, status) => {          
+          if (status === 201) {
+            // if(success) success();
+            console.log('sucesso')
+          }else if (status === 409) {
+              // if(error) error();
+              console.log('erro 409')
+          } else {
+              // if(error) error();
+              console.log(status)
+          }
+      }
+      $.ajax('users/', {
+          method: 'POST',
+          success: logged,
+          error: (_, status) => { if (error) error(status) },
+          data: { name, email, password },
+      });
+  },
 }
 
 function setCookie(cname, cvalue, exdays) {

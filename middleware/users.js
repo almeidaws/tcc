@@ -20,7 +20,7 @@ async function register(request, response, next) {
 
         const { id: userID } = await queries.addUser(user);
 
-        response.status(200);
+        response.status(201);
         response.end();
     } catch (error) {
         next(error);
