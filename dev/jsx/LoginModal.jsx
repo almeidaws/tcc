@@ -1,3 +1,8 @@
+import React from 'react';
+import Field from './Field.jsx';
+import Requisition from './../js/Requisition.js';
+const R = Requisition;
+
 const EmailField = props => <Field 
                                 type="email" 
                                 placeholder="Enter Your Email" 
@@ -17,6 +22,7 @@ const PasswordField = props => <Field
 const ForgotPasswordLink = props => <div className="popup_forgot"><a href="#">Forgot Password ?</a></div>;
 const LoginLink = props => <a onClick={props.onClick} href="javascript:{}" className="ms_btn" target="_blank">login now</a>;
 const RegisterLink = props => <p>Don't Have An Account? <a href="#myModal" data-toggle="modal" className="ms_modal1 hideCurrentModel">register here</a></p>
+const ErrorMessage = props => props.error ? <div className="text-warning" role="alert">{props.error}</div> : null;
 
 class LoginForm extends React.Component {
     constructor(props) {
@@ -27,14 +33,19 @@ class LoginForm extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleEmail(event) { 
-        this.setState({ email: event.target.value }); 
+        this.setState({ email: event.target.value, error: null }); 
     }
     handlePassword(event) { 
-        this.setState({ password: event.target.value }); 
+        this.setState({ password: event.target.value, error: null }); 
     }
     handleSubmit(event) { 
         if (this.validateForm()) {
-            R.login(this.state.email, this.state.password);
+            R.login(this.state.email, this.state.password, (errorCode, errorThrown) => {
+                if (errorCode == 401)
+                    this.setState({ error: "Invalid email or password" });
+                else
+                    this.setState({ error: "Unkown error of code " + errorCode + "." });
+            }, () => this.setState({ error: null }));
         }
     }
     validateForm() {
@@ -46,6 +57,7 @@ class LoginForm extends React.Component {
         return (
             <form className="ms_register_form" id="loginForm" noValidate>
                 <h2>login / Sign in</h2>
+                <ErrorMessage error={this.state.error} />
                 <EmailField value={this.state.email} onChange={this.handleEmail} errorMessage="Invalid email. Valid example: john@gmail.com"/>
                 <PasswordField value={this.state.password} onChange={this.handlePassword} errorMessage="The password is required"/>
                 <ForgotPasswordLink />
@@ -77,4 +89,4 @@ class LoginModal extends React.Component {
    }
 };
 
-ReactDOM.render(<LoginModal />, document.getElementById('loginModal'));
+export default LoginModal;

@@ -3,7 +3,7 @@
   "ignore": [
     ".git",
     "node_modules/**/node_modules",
-    "public/js/react/"
+    "prod/js/"
   ],
   "events": {
     "crash": "osascript -e 'display notification \"app crashed - waiting for file changes before starting...\" with title \"Nodemon\"'"

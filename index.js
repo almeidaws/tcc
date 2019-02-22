@@ -32,6 +32,6 @@ app.post('/users/tokens', handleUserLogin);
 app.delete('/users/tokens/:token', handleUserLogout);
     
 //SERVER STARTING
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'prod/')))
 app.listen(Server.port, () => console.log(`Listening on ${ Server.port }`))
 

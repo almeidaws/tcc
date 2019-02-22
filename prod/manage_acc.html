@@ -33,10 +33,11 @@ Purchase:
     <!-- Favicon Link -->
     <link rel="shortcut icon" type="image/png" href="images/favicon.png">
 </head>
+
 <body>
-    <!----Main Wrapper Start---->
-    <div class="ms_main_wrapper ms_profile">
-        <!---Side Menu Start--->
+	<!----Main Wrapper Start---->
+	<div class="ms_main_wrapper ms_profile">
+		<!---Side Menu Start--->
         <div class="ms_sidemenu_wrapper">
             <div class="ms_nav_close">
                 <i class="fa fa-angle-right" aria-hidden="true"></i>
@@ -52,21 +53,12 @@ Purchase:
                 </div>
                 <div class="ms_nav_wrapper">
                     <ul>
-                        <li><a href="index.html" title="Discover">
+                        <li><a href="index.html" class="active" title="Discover">
 						<span class="nav_icon">
 							<span class="icon icon_discover"></span>
 						</span>
 						<span class="nav_text">
 							discover
-						</span>
-						</a>
-                        </li>
-                        <li><a href="artist.html" title="Artists">
-						<span class="nav_icon">
-							<span class="icon icon_artists"></span>
-						</span>
-						<span class="nav_text">
-							artists
 						</span>
 						</a>
                         </li>
@@ -91,7 +83,7 @@ Purchase:
                         </li>
                     </ul>
                     <ul class="nav_downloads">
-                        <li><a href="download.html" class="active" title="Downloads">
+                        <li><a href="download.html" title="Downloads">
 						<span class="nav_icon">
 							<span class="icon icon_download"></span>
 						</span>
@@ -134,108 +126,145 @@ Purchase:
                 </div>
             </div>
         </div>
-        <!---Main Content Start--->
-        <div class="padder_top80">
-            <!---Header--->
-            <div id="header"></div>
-            <!----Upload and Share Wrapper Start---->
-            <div class="ms_upload_wrapper marger_top60">
-                <div class="ms_upload_box">
-                    <h2>Upload & Share Your Music With The World</h2>
-                    <img src="images/svg/upload.svg" alt="">
-                    <div class="ms_upload_btn">
-                        <a href="#" class="ms_btn">save files</a>
-                    </div>
-                    <span> or </span>
-                    <p>Drag And Drop Music Files</p>
-                </div>
-                <div class=" marger_top60">
-                    <div class="ms_upload_box">
-                        <div class="ms_heading">
-                            <h1>Track Information</h1>
-                        </div>
-                        <div class="ms_pro_form">
-                            <div class="form-group">
-                                <label>Track Name *</label>
-                                <input type="text" placeholder="Dream Your Moments" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label>Artist’s Name *</label>
-                                <input type="text" placeholder="Ava Cornish, Brian Hill" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label>Select Album</label>
-                                <select class="form-control">
-								<option>Cloud Nine</option>
-								<option value="1">Cyber Sonnet </option>
-								<option value="2">Cloud Nine</option>
-								<option value="3">Cyber Sonnet</option>
-								<option value="4">Cloud Nine</option>
-							</select>
-                            </div>
-                            <div class="form-group">
-                                <label>Select Privacy</label>
-                                <select class="form-control">
-								<option>Public</option>
-								<option value="1">Private</option>
-								<option value="2">Public</option>
-								<option value="3">Private</option>
-								<option value="4">Public</option>
-							</select>
-                            </div>
-                            <div class="pro-form-btn text-center marger_top15">
-                                <div class="ms_upload_btn">
-                                    <a href="#" class="ms_btn">Upload Now</a>
-                                    <a href="#" class="ms_btn">cancle</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!----Main div close---->
-        </div>
-        <!----Footer Start---->
-        <div class="ms_footer_wrapper">
-            <div class="ms_footer_logo">
-                <a href="index.html"><img src="images/open_logo.png" alt=""></a>
-            </div>
-            <div class="ms_footer_inner">
-                <div class="row">
-                    <div class="col-lg-3 col-md-6">
-                        <div class="footer_box">
-                            <h1 class="footer_title">music template</h1>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6">
-                        <div class="footer_box footer_contacts">
-                            <h1 class="footer_title">contact us</h1>
-                            <ul class="foo_con_info">
-                                <li>
-                                    <div class="foo_con_icon">
-                                        <img src="images/svg/message.svg" alt="">
-                                    </div>
-                                    <div class="foo_con_data">
-                                        <span class="con-title">email us :</span>
-                                        <span><a href="#">demo@mail.com </a>, <a href="#">dummy@mail.com</a></span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!----Copyright---->
-            <div class="col-lg-12">
-                <div class="ms_copyright">
-                    <div class="footer_border"></div>
-                    <p>Copyright &copy; 2018 <a href="#">The Miraculous Music Template</a>. All Rights Reserved.</p>
-                </div>
-            </div>
-        </div>
-        <!----Audio Player Section---->
-<div class="ms_player_wrapper">
+		<!---Main Content Start--->
+		<div class=" padder_top80">
+			<!---Header--->
+			<div id="header"></div>
+			<!----Edit Profile Wrapper Start---->
+			<div class="ms_account_wrapper">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-12">
+							<h2>Manage Account</h2>
+							<div class="ms_heading">
+								<h1>Subscription Plans</h1>
+							</div>
+						</div>
+						<div class="col-lg-4">
+						 <div class="ms_plan_box">
+							<div class="ms_plan_header">
+								<div class="ms_plan_img">
+									<img src="images/plan_icon1.png" alt="">
+								</div>
+							</div>
+							<h3 class="plan_heading">Basic</h3>
+							<div class="plan_price"><div class="plan_dolar"><sup>$</sup>15</div></div>
+							<ul>
+								<li>Monthly Downloads - 50 Songs</li>
+								<li>Monthly Upload - 50 Minutes</li>
+								<li>Plan Validity - 1 Month</li>
+								<li>Streaming - Unlimited</li>
+							</ul>
+							<div class="ms_plan_btn">
+							<a href="#" class="ms_btn">buy now</a>
+							</div>
+						</div>
+						</div>
+						<div class="col-lg-4">
+						 <div class="ms_plan_box paln_active">
+							<div class="ms_plan_header">
+								<div class="ms_plan_img">
+									<img src="images/plan_icon2.png" alt="">
+								</div>
+							</div>
+							<h3 class="plan_heading">Professional</h3>
+							<div class="plan_price"><div class="plan_dolar"><sup>$</sup>50</div></div>
+							<ul>
+								<li>Monthly Downloads - 50 Songs</li>
+								<li>Monthly Upload - 50 Minutes</li>
+								<li>Plan Validity - 1 Month</li>
+								<li>Streaming - Unlimited</li>
+							</ul>
+							<div class="ms_plan_btn">
+								<a href="#" class="ms_btn">buy now</a>
+							</div>
+						</div>
+						</div>
+						<div class="col-lg-4">
+						 <div class="ms_plan_box">
+							<div class="ms_plan_header">
+								<div class="ms_plan_img">
+									<img src="images/plan_icon3.png" alt="">
+								</div>
+							</div>
+							<h3 class="plan_heading">Standard</h3>
+							<div class="plan_price"><div class="plan_dolar"><sup>$</sup>80</div></div>
+							<ul>
+								<li>Monthly Downloads - 50 Songs</li>
+								<li>Monthly Upload - 50 Minutes</li>
+								<li>Plan Validity - 1 Month</li>
+								<li>Streaming - Unlimited</li>
+							</ul>
+							<div class="ms_plan_btn">
+							<a href="#" class="ms_btn">buy now</a>
+							</div>
+						</div>
+						</div>						
+					</div>
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="ms_acc_overview">
+								<div class="ms_heading">
+									<h1>Account Overview</h1>
+								</div>
+								<div class="ms_acc_ovrview_list">
+								<ul>
+									<li>Your Subscribed Plan  <span>- Standard</span></li>
+									<li>Amount Paid  		  <span>- $30</span></li>
+									<li>Validity Expires In   <span>- 15 Days</span></li>
+									<li>Downloads Remaining   <span>- 21 Tracks</span></li>
+									<li>Upload Remaining      <span>- 45 Minutes</span></li>
+								</ul>
+								<a href="#" class="ms_btn">renew now</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!----Footer Start---->
+		<div class="ms_footer_wrapper">
+			<div class="ms_footer_logo">
+				<a href="index.html"><img src="images/open_logo.png" alt=""></a>
+			</div>
+			<div class="ms_footer_inner">
+			<div class="row">
+				<div class="col-lg-3 col-md-6">
+					<div class="footer_box">
+						<h1 class="footer_title">music template</h1>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor.</p>
+					</div>
+				</div>
+				</div>
+				<div class="col-lg-3 col-md-6">
+					<div class="footer_box footer_contacts">
+						<h1 class="footer_title">contact us</h1>
+						<ul class="foo_con_info">
+							<li>
+								<div class="foo_con_icon">
+									<img src="images/svg/message.svg" alt="">
+								</div>
+								<div class="foo_con_data">
+									<span class="con-title">email us :</span>
+									<span><a href="#">demo@mail.com </a>, <a href="#">dummy@mail.com</a></span>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				</div>
+				</div>				
+				<!----Copyright---->
+				<div class="col-lg-12">
+					<div class="ms_copyright">
+						<div class="footer_border"></div>
+						<p>Copyright &copy; 2018 <a href="#">The Miraculous Music Template</a>. All Rights Reserved.</p>
+					</div>
+				</div>	
+		</div>
+		<!----Audio Player Section---->
+        <div class="ms_player_wrapper">
 			<div class="ms_player_close">
 				<i class="fa fa-angle-up" aria-hidden="true"></i>
 			</div>
@@ -309,8 +338,8 @@ Purchase:
                                 </div>
                                 <div class="jp-toggles flex-item">
                                     <button class="jp-shuffle" tabindex="0" title="Shuffle">
-									<i class="ms_play_control"></i></button>
-									<button class="jp-repeat" tabindex="0" title="Repeat"><i class="ms_play_control"></i></button>
+				<i class="ms_play_control"></i></button>
+				<button class="jp-repeat" tabindex="0" title="Repeat"><i class="ms_play_control"></i></button>
                                 </div>
                                 <div class="jp_quality_optn custom_select">
                                     <select>
@@ -328,7 +357,7 @@ Purchase:
             </div>
             <!--main div-->
         </div>
-    </div>
+	</div>
     <!----Register Modal Start---->
     <!-- Modal -->
     <div class="ms_register_popup">
@@ -377,47 +406,7 @@ Purchase:
             </div>
         </div>
         <!----Login Popup Start---->
-        <div id="myModal1" class="modal  centered-modal" role="dialog">
-            <div class="modal-dialog login_dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <button type="button" class="close" data-dismiss="modal">
-						<i class="fa_icon form_close"></i>
-					</button>
-                    <div class="modal-body">
-                        <div class="ms_register_img">
-                            <img src="images/register_img.png" alt="" class="img-fluid" />
-                        </div>
-                        <div class="ms_register_form">
-                            <h2>login / Sign in</h2>
-                            <div class="form-group">
-                                <input type="text" placeholder="Enter Your Email" class="form-control">
-                                <span class="form_icon">
-							<i class="fa_icon form-envelope" aria-hidden="true"></i>
-						</span>
-                            </div>
-                            <div class="form-group">
-                                <input type="password" placeholder="Enter Password" class="form-control">
-                                <span class="form_icon">
-						<i class="fa_icon form-lock" aria-hidden="true"></i>
-						</span>
-                            </div>
-                            <div class="remember_checkbox">
-                                <label>Keep me signed in
-							<input type="checkbox">
-							<span class="checkmark"></span>
-						</label>
-                            </div>
-                            <a href="#" class="ms_btn">login now</a>
-                            <div class="popup_forgot">
-                                <a href="#">Forgot Password ?</a>
-                            </div>
-                            <p>Don't Have An Account? <a href="#myModal" data-toggle="modal" class="ms_modal1 hideCurrentModel">register here</a></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <div id="loginModal"></div> 
     </div>
     <!----Language Selection Modal---->
     <div class="ms_lang_popup">
@@ -565,6 +554,8 @@ Purchase:
             </div>
         </div>
 	</div>
+
+
     <!--Main js file Style-->
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -572,20 +563,18 @@ Purchase:
     <script type="text/javascript" src="js/plugins/player/jplayer.playlist.min.js"></script>
     <script type="text/javascript" src="js/plugins/player/jquery.jplayer.min.js"></script>
     <script type="text/javascript" src="js/plugins/player/audio-player.js"></script>
-    <script type="text/javascript" src="js/plugins/player/volume.js"></script>
+	<script type="text/javascript" src="js/plugins/player/volume.js"></script>
     <script type="text/javascript" src="js/plugins/nice_select/jquery.nice-select.min.js"></script>
 	<script type="text/javascript" src="js/plugins/scroll/jquery.mCustomScrollbar.js"></script>
     <script type="text/javascript" src="js/custom.js"></script>
 
-    <!-- Load React. -->
+     <!-- Load React. -->
     <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
     <script>console.log('Replace react from development to production mode');</script>
     <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
 
-    <script src="js/Requisition.js"></script>
-    <script src="js/react/Header.js"></script>
-    <script src="js/react/Field.js"></script>
-    <script src="js/react/LoginModal.js"></script>
+    <script src="js/react.bundle.js"></script>
 </body>
+
 </html>

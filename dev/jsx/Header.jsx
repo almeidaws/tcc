@@ -1,3 +1,10 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Requisition from './../js/Requisition.js';
+const R = Requisition;
+import Utils from './../js/Utils.js';
+const U = Utils;
+
 const registerButton = <a href="javascript:;" className="ms_btn login_btn" data-toggle="modal" data-target="#myModal"><span>Register</span></a>;
 const loginButton = <a href="javascript:;" className="ms_btn login_btn" data-toggle="modal" data-target="#myModal1"><span>login</span></a>;
 const searchButton = (
@@ -28,7 +35,7 @@ const LoggedMenu = props => (
 class Header extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { name: getCookie('name') };
+        this.state = { name: U.getCookie('name') };
     }
     render() {
         return (
@@ -46,4 +53,4 @@ class Header extends React.Component {
    }
 };
 
-ReactDOM.render(<Header />, document.getElementById('header'));
+export default Header;
