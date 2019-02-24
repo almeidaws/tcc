@@ -21,7 +21,7 @@ const Field = props => (
     <div className="form-group">
         <input 
             type={props.type} 
-            placeholder={props.email} 
+            placeholder={props.placeholder} 
             className="form-control" 
             value={props.value} 
             onChange={props.onChange}

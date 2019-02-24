@@ -52,6 +52,7 @@ exports[`<LoginModal /> should render static content 1`] = `
             <input
               className="form-control"
               onChange={[Function]}
+              placeholder="Enter Your Email"
               required={true}
               type="email"
               value=""
@@ -76,6 +77,7 @@ exports[`<LoginModal /> should render static content 1`] = `
             <input
               className="form-control"
               onChange={[Function]}
+              placeholder="Enter Password"
               required={true}
               type="password"
               value=""
