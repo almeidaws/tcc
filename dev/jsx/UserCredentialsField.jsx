@@ -1,15 +1,6 @@
 import React from 'react';
-import Field from './Field.jsx';
 import EmailField from './EmailField.jsx';
-
-const PasswordField = props => <Field 
-                                    type="password" 
-                                    placeholder="Enter Password" 
-                                    icon="lock" 
-                                    required={true}
-                                    errorMessage={props.errorMessage}
-                                    value={props.value} 
-                                    onChange={props.onChange} />;
+import PasswordField from './PasswordField.jsx';
 
 const ErrorMessage = props => props.error ? <div className="text-warning" role="alert">{props.error}</div> : null;
 
