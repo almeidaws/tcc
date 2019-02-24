@@ -72,7 +72,11 @@ class RegisterForm extends React.Component {
                 <NameField value={this.state.name} onChange={this.handleName} errorMessage="Invalida name."/>
                 <EmailField value={this.state.email} onChange={this.handleEmail} errorMessage="Invalid email. Valid example: john@gmail.com"/>
                 <PasswordField value={this.state.password} onChange={this.handlePassword} errorMessage="The password is required"/>
-                <ConfirmPasswordField value={this.state.confirmPassword} onChange={this.handleConfirmPassword} errorMessage="Password is not equals up field."/>
+                <ConfirmPasswordField 
+                                        value= {this.state.confirmPassword}
+                                        onChange={this.handleConfirmPassword}
+                                        errorMessage="The password confirmation is required."/>
+                <ErrorMessage error={ this.state.password !== this.state.confirmPassword && this.state.confirmPassword ? "Both passwords must be equal":null }/>
                 <RegisterLink onClick={this.handleSubmit}/>
                 <LoginLink />
             </form>
