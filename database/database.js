@@ -1,5 +1,6 @@
-'user strict';
+'use strict';
 
+require("@babel/polyfill");
 const _ = require('underscore');
 const bcrypt = require('bcrypt');
 const createError = require('http-errors');
@@ -62,7 +63,7 @@ class Session {
         };
         return Joi.validate(session, scheme);
     }
-}
+};
 
 /** Adds a session of type {@link Session} to the database. The data are 
  * validated before adding to the database.
@@ -96,7 +97,7 @@ const getSession = async token => {
         values: [token],
     };
 
-    result = await pool.query(query);
+    const result = await pool.query(query);
     if (result.rows.length == 0) 
         throw createError(401, 'Session is invalid, please login again.');
 
