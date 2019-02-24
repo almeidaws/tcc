@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LoginModal /> should render static content 1`] = `
+<div
+  className="modal centered-modal"
+  id="myModal1"
+  role="dialog"
+>
+  <div
+    className="modal-dialog login_dialog"
+  >
+    // Modal content
+    <div
+      className="modal-content"
+    >
+      <button
+        className="close"
+        data-dismiss="modal"
+        type="button"
+      >
+         
+        <i
+          className="fa_icon form_close"
+        />
+         
+      </button>
+      <div
+        className="modal-body"
+      >
+        <div
+          className="ms_register_img"
+        >
+           
+          <img
+            alt=""
+            className="img-fluid"
+            src="images/register_img.png"
+          />
+           
+        </div>
+        <form
+          className="ms_register_form"
+          id="loginForm"
+          noValidate={true}
+        >
+          <h2>
+            login / Sign in
+          </h2>
+          <div
+            className="form-group"
+          >
+            <input
+              className="form-control"
+              onChange={[Function]}
+              placeholder="Enter Your Email"
+              required={true}
+              type="email"
+              value=""
+            />
+            <span
+              className="form_icon"
+            >
+              <i
+                aria-hidden="true"
+                className="fa_icon form-envelope"
+              />
+            </span>
+            <div
+              className="invalid-feedback text-warning"
+            >
+              Invalid email. Valid example: john@gmail.com
+            </div>
+          </div>
+          <div
+            className="form-group"
+          >
+            <input
+              className="form-control"
+              onChange={[Function]}
+              placeholder="Enter Password"
+              required={true}
+              type="password"
+              value=""
+            />
+            <span
+              className="form_icon"
+            >
+              <i
+                aria-hidden="true"
+                className="fa_icon form-lock"
+              />
+            </span>
+            <div
+              className="invalid-feedback text-warning"
+            >
+              The password is required
+            </div>
+          </div>
+          <div
+            className="popup_forgot"
+          >
+            <a
+              href="#"
+            >
+              Forgot Password ?
+            </a>
+          </div>
+          <a
+            className="ms_btn"
+            href="javascript:{}"
+            onClick={[Function]}
+            target="_blank"
+          >
+            login now
+          </a>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+`;

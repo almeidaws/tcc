@@ -18,6 +18,12 @@ const searchButton = (
 
 const unloggedMenu = <div className="ms_top_btn">{registerButton}{loginButton}</div>;
 
+/**
+ * Menu presented on website's header when the user is currently logged. It currently only
+ * presents the user's name provided through props.
+ *
+ * Property name: users'name. Example: 'Carlos'.
+ */
 const LoggedMenu = props => (
     <div className="ms_top_btn">
         <a href="javascript:;" className="ms_admin_name">Hello {props.name} <span className="ms_pro_name">{props.name.charAt(0)}</span>													
@@ -32,6 +38,14 @@ const LoggedMenu = props => (
     </div>
 );
 
+/**
+ * Renders the website's header presented on top of each page.
+ * This component conditionally present buttons for registering/logging
+ * or user's information if the user is logged or not.
+ *
+ * To know if the user is logged this components checks the if there's 
+ * a cookie named 'name' that contains user's name.
+ */
 class Header extends React.Component {
     constructor(props) {
         super(props);
