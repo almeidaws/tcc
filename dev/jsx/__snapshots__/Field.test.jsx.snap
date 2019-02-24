@@ -49,3 +49,27 @@ exports[`<Field /> should render email 1`] = `
   />
 </div>
 `;
+
+exports[`<Field /> should render user name 1`] = `
+<div
+  className="form-group"
+>
+  <input
+    className="form-control"
+    placeholder="Enter you name"
+    type="user"
+    value="Renan"
+  />
+  <span
+    className="form_icon"
+  >
+    <i
+      aria-hidden="true"
+      className="fa_icon form-undefined"
+    />
+  </span>
+  <div
+    className="invalid-feedback text-warning"
+  />
+</div>
+`;

@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EmailField /> should present an error 1`] = `
+<div
+  className="form-group"
+>
+  <input
+    className="form-control"
+    placeholder="Enter Your Email"
+    required={true}
+    type="email"
+    value="asds/"
+  />
+  <span
+    className="form_icon"
+  >
+    <i
+      aria-hidden="true"
+      className="fa_icon form-envelope"
+    />
+  </span>
+  <div
+    className="invalid-feedback text-warning"
+  />
+</div>
+`;
+
+exports[`<EmailField /> should render email 1`] = `
+<div
+  className="form-group"
+>
+  <input
+    className="form-control"
+    placeholder="Enter Your Email"
+    required={true}
+    type="email"
+    value="email.teste@gmail.com"
+  />
+  <span
+    className="form_icon"
+  >
+    <i
+      aria-hidden="true"
+      className="fa_icon form-envelope"
+    />
+  </span>
+  <div
+    className="invalid-feedback text-warning"
+  />
+</div>
+`;
