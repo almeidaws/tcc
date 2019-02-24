@@ -54,7 +54,7 @@ class RegisterForm extends React.Component {
         if (this.validateForm()) {
             R.register(this.state.name,this.state.email,this.state.password,error => {
                 if(error === 409) {
-                    this.setState({ error: "Error 409 requisition."})
+                    this.setState({ error: "This email already exist."})
                 }
             })
         }
