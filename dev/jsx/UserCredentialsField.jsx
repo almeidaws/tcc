@@ -1,14 +1,7 @@
 import React from 'react';
 import Field from './Field.jsx';
+import EmailField from './EmailField.jsx';
 
-const EmailField = props => <Field 
-                                type="email" 
-                                placeholder="Enter Your Email" 
-                                icon="envelope" 
-                                required={true}
-                                errorMessage={props.errorMessage}
-                                value={props.value} 
-                                onChange={props.onChange} />;
 const PasswordField = props => <Field 
                                     type="password" 
                                     placeholder="Enter Password" 
