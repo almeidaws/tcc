@@ -1,0 +1,171 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RegisterModal /> should render static content 1`] = `
+<div
+  className="modal  centered-modal"
+  id="myModal"
+  role="dialog"
+>
+  <div
+    className="modal-dialog register_dialog"
+  >
+    //Modal Content
+    <div
+      className="modal-content"
+    >
+      <button
+        className="close"
+        data-dismiss="modal"
+        type="button"
+      >
+         
+        <i
+          className="fa_icon form_close"
+        />
+         
+      </button>
+      <div
+        className="modal-body"
+      >
+        <div
+          className="ms_register_img"
+        >
+           
+          <img
+            alt=""
+            className="img-fluid"
+            src="images/register_img.png"
+          />
+           
+        </div>
+        <form
+          className="ms_register_form"
+          id="registerForm"
+          noValidate={true}
+        >
+          <h2>
+            Register
+          </h2>
+          <div
+            className="form-group"
+          >
+            <input
+              className="form-control"
+              onChange={[Function]}
+              placeholder="Enter Your Name"
+              required={true}
+              type="name"
+              value=""
+            />
+            <span
+              className="form_icon"
+            >
+              <i
+                aria-hidden="true"
+                className="fa_icon form-user"
+              />
+            </span>
+            <div
+              className="invalid-feedback text-warning"
+            >
+              Invalida name.
+            </div>
+          </div>
+          <div
+            className="form-group"
+          >
+            <input
+              className="form-control"
+              onChange={[Function]}
+              placeholder="Enter Your Email"
+              required={true}
+              type="email"
+              value=""
+            />
+            <span
+              className="form_icon"
+            >
+              <i
+                aria-hidden="true"
+                className="fa_icon form-envelope"
+              />
+            </span>
+            <div
+              className="invalid-feedback text-warning"
+            >
+              Invalid email. Valid example: john@gmail.com
+            </div>
+          </div>
+          <div
+            className="form-group"
+          >
+            <input
+              className="form-control"
+              onChange={[Function]}
+              placeholder="Enter Password"
+              required={true}
+              type="password"
+              value=""
+            />
+            <span
+              className="form_icon"
+            >
+              <i
+                aria-hidden="true"
+                className="fa_icon form-lock"
+              />
+            </span>
+            <div
+              className="invalid-feedback text-warning"
+            >
+              The password is required
+            </div>
+          </div>
+          <div
+            className="form-group"
+          >
+            <input
+              className="form-control"
+              onChange={[Function]}
+              placeholder="Please, Repeat Your Password"
+              required={true}
+              type="password"
+              value=""
+            />
+            <span
+              className="form_icon"
+            >
+              <i
+                aria-hidden="true"
+                className="fa_icon form-lock"
+              />
+            </span>
+            <div
+              className="invalid-feedback text-warning"
+            >
+              The password confirmation is required.
+            </div>
+          </div>
+          <a
+            className="ms_btn"
+            href="javascript:{}"
+            onClick={[Function]}
+          >
+            register now
+          </a>
+          <p>
+            Already Have An Account? 
+            <a
+              className="ms_modal hideCurrentModel"
+              data-toggle="modal"
+              href="#myModal1"
+            >
+              login here
+            </a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+`;

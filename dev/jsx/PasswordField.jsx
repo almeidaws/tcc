@@ -1,4 +1,5 @@
 import Field from './Field.jsx';
+import React from 'react';
 
 const PasswordField = props => <Field 
                                     type="password" 
