@@ -1,24 +1,9 @@
 import React from 'react';
-import Field from './Field.jsx';
+import EmailField from './EmailField.jsx';
+import PasswordField from './PasswordField.jsx';
 import Requisition from './../js/Requisition.js';
 const R = Requisition;
 
-const EmailField = props => <Field 
-                                type="email" 
-                                placeholder="Enter Your Email" 
-                                icon="envelope" 
-                                required={true}
-                                errorMessage={props.errorMessage}
-                                value={props.value} 
-                                onChange={props.onChange} />;
-const PasswordField = props => <Field 
-                                    type="password" 
-                                    placeholder="Enter Password" 
-                                    icon="lock" 
-                                    required={true}
-                                    errorMessage={props.errorMessage}
-                                    value={props.value} 
-                                    onChange={props.onChange} />;
 const ForgotPasswordLink = props => <div className="popup_forgot"><a href="#">Forgot Password ?</a></div>;
 const LoginLink = props => <a onClick={props.onClick} href="javascript:{}" className="ms_btn" target="_blank">login now</a>;
 const RegisterLink = props => <p>Don't Have An Account? <a href="#myModal" data-toggle="modal" className="ms_modal1 hideCurrentModel">register here</a></p>
