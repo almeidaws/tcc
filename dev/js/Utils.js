@@ -1,5 +1,15 @@
+/** 
+ * This class is used as namespace to contains generic method used every
+ * where in the application.
+ */
 class Utils {
 
+    /**
+     * Adds a cookie to the browser.
+     * @param {string} cname cookie's name/key.
+     * @param {string} cvalue cookie's value.
+     * @param {number} exdays cookie's duration.
+     */
     static setCookie(cname, cvalue, exdays) {
       var d = new Date();
       d.setTime(d.getTime() + (exdays*24*60*60*1000));
@@ -7,6 +17,10 @@ class Utils {
       document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
     }
 
+    /**
+     * Deletes a cookie from user's browser.
+     * @param {string} cookie's name.
+     */
     static getCookie(cname) {
       var name = cname + "=";
       var decodedCookie = decodeURIComponent(document.cookie);
@@ -23,6 +37,10 @@ class Utils {
       return "";
     }
     
+    /**
+     * Deletes all cookies from user's broswer. It was
+     * created to be used on automatic tests.
+     */
     static deleteAllCookies() {
         var cookies = document.cookie.split(";");
 
