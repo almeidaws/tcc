@@ -32,6 +32,20 @@ class Requisition {
             headers: { Authorization: token },
         });
     }
+
+    static register(name,email, password, error) {
+        const register = (name,email,password, status) => {
+            Requisition.register(name,email,password, erro => {
+                if(error) status;
+            })
+        }
+        $.ajax('users/', {
+            method: 'POST',
+            success: register,
+            error: (res) => { if (error) error(res.status) },
+            data: { name, email, password },
+        });
+    }
 }
 
 export default Requisition;
