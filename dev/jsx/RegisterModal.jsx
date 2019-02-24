@@ -15,7 +15,7 @@ const NameField = props => <Field
                                 onChange={props.onChange}
                                 />
 const ConfirmPasswordField = props => <Field 
-                                type="confirmPassword"
+                                type="password"
                                 placeholder="Please, Repeat Your Password"
                                 icon="lock"
                                 required={true}
