@@ -1,7 +1,6 @@
-var should = require("should");
-var request = require("request");
-var chai = require("chai");
-var expect = chai.expect;
+const request = require("request");
+const chai = require("chai");
+const expect = chai.expect;
 
 // Criamos nosso primeiro caso de teste e fornecemos uma descricao utilizando describe
 describe("Teste novo usuario na base",function(){
@@ -14,9 +13,7 @@ describe("Teste novo usuario na base",function(){
                 password: "sadad"
               }
       }, function(error, response, body){
-          if (!error) {
-              expect(response.statusCode).to.equal(200);
-          }
+          expect(response.statusCode).to.equal(200);
       });
     });
   });
