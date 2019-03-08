@@ -772,6 +772,14 @@ Purchase:
             </div>
         </div>
 	</div>
+     <!-- Load React. -->
+    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+    <script>console.log('Replace react from development to production mode');</script>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+
+    <script src="js/react.bundle.js"></script>
+
     <!--Main js file Style-->
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -784,12 +792,5 @@ Purchase:
 	<script type="text/javascript" src="js/plugins/scroll/jquery.mCustomScrollbar.js"></script>
     <script type="text/javascript" src="js/custom.js"></script>
 
-     <!-- Load React. -->
-    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
-    <script>console.log('Replace react from development to production mode');</script>
-    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
-
-    <script src="js/react.bundle.js"></script>
 </body>
 </html>
