@@ -37,7 +37,8 @@
   },
   "scripts": {
     "test": "jest",
-    "start": "nodemon --exec 'npx webpack && heroku local'"
+    "start": "nodemon --exec 'npx webpack && heroku local'",
+    "build": "npx webpack"
   },
   "repository": {
     "type": "git",
