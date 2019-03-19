@@ -6,6 +6,9 @@
  */
 
 // MODULES
+const { upload: s3Upload } = require('./s3/s3.js');
+const fs = require('fs');
+
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -17,6 +20,14 @@ const {
     login: handleUserLogin,
     logout: handleUserLogout,
 } = require('./middleware/users.js');
+
+const sampleStream = fs.createReadStream('./sample.png');
+(async () => {
+    const location = await s3Upload('sample.png', sampleStream, (loaded, total) => {
+        console.log(`${parseInt(loaded / total * 100)}% uploaded`);
+    });
+    console.log(`File with key ${location}`);
+})();
 
 
 // MIDDLEWARES

@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "@babel/polyfill": "^7.2.5",
+    "aws-sdk": "^2.422.0",
     "bcrypt": "^3.0.3",
     "body-parser": "^1.18.3",
     "connect-pg-simple": "^5.0.0",
