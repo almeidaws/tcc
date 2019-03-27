@@ -1,7 +1,7 @@
 import React from 'react';
 
 const TextField = props => <input 
-                                type="name"
+                                type="text"
                                 placeholder={props.placeholder}
                                 required={true}
                                 value={props.value}
@@ -36,33 +36,21 @@ class FormUpload extends React.Component {
                 <div className="ms_pro_form">
                     <div className="form-group">
                         <label>Track Name *</label>
-                        <div>
-                            <TextField value={this.state.trackName} placeholder="Dream Your Moments" onChange={this.handleTrackName}/>
-                        </div>
+                        <TextField value={this.state.trackName} placeholder="Dream Your Moments" onChange={this.handleTrackName}/>
+                    </div>
+                    <div className="form-group">
                         <label>Artist’s Name *</label>
-                        <div>
-                            <TextField value={this.state.artistName} placeholder="Ava Cornish, Brian Hill" onChange={this.handleArtistName}/>
-                        </div>
-                        <div className="form-group">
-                            <label>Select Genre</label>
-                            <select className="form-control">
-                                <option>Cloud Nine</option>
-                                <option value="1">Cyber Sonnet </option>
-                                <option value="2">Cloud Nine</option>
-                                <option value="3">Cyber Sonnet</option>
-                                <option value="4">Cloud Nine</option>
-                            </select>
-                        </div>
-                        <div className="form-group">
-                                <label>Select Privacy</label>
-                                <select className="form-control">
-                                <option>Public</option>
-                                <option value="1">Private</option>
-                                <option value="2">Public</option>
-                                <option value="3">Private</option>
-                                <option value="4">Public</option>
-                            </select>
-                        </div>
+                        <TextField value={this.state.artistName} placeholder="Ava Cornish, Brian Hill" onChange={this.handleArtistName}/>
+                    </div>
+                    <div className="form-group">
+                        <label>Select Genre</label>
+                        <select className="form-control">
+                            <option>Cloud Nine</option>
+                            <option value="1">Cyber Sonnet </option>
+                            <option value="2">Cloud Nine</option>
+                            <option value="3">Cyber Sonnet</option>
+                            <option value="4">Cloud Nine</option>
+                        </select>
                     </div>
                     <div className="pro-form-btn text-center marger_top15">
                         <div className="ms_upload_btn">
