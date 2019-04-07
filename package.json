@@ -37,7 +37,7 @@
     "webpack-cli": "^3.2.3"
   },
   "scripts": {
-    "test": "jest",
+    "test": "jest --runInBand",
     "start": "nodemon --exec 'npx webpack && heroku local'"
   },
   "repository": {

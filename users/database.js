@@ -21,104 +21,10 @@ const uuidv4 = require('uuid/v4');
 const pool = Database.pool();
 const { createUserTableSQL, 
         deleteUserTableSQL, 
-        createSessionTableSQL, 
-        deleteSessionTableSQL,
-        addSessionSQL,
-        getSessionSQL,
-        deleteSessionSQL,
         addUserSQL,
         getUserSQL,
         authUserSQL,
       } = require('./database_queries.js');
-
-/**
- * Entity used to query sessions from Session table on the database.
- * It's also a namespace that contains static functions directly related
- * the sessions handling.
- *
- * @class
- * @constructor
- * @param {uuid} uuid uuidv4 code used as token, visible to the client, to
- * identify a session.
- * @param {number} userID user's id already registed on the users table.
- * @param {Date} expiratoin when the token will expired.
- */
-class Session {
-    constructor(uuid, userID, expiration) {
-        this.uuid = uuid;
-        this.userID = userID;
-        this.expiration = expiration;
-    }
-
-    /**
-     * Returns a plain object with the properties 'error' and 'value' mutually
-     * defined. The value contains the same session from the parameter when it's
-     * properties are all valid.
-     */
-    static validate(session) {
-        const scheme = {
-            uuid: Joi.string().guid('uuidv4').required(),
-            userID: Joi.number().integer().min(1).required(),
-            expiration: Joi.date().required(),
-        };
-        return Joi.validate(session, scheme);
-    }
-};
-
-/** Adds a session of type {@link Session} to the database. The data are 
- * validated before adding to the database.
- *
- * @param {Session} session the session to be added to the database persistently.
- */
-const addSession = async (session) => {
-    const { error, value: validatedSession } = Session.validate(session);
-    if (error) return Promise.reject(error);
-    
-    const addSessionConfig = {
-        text: addSessionSQL,
-        values: [validatedSession.uuid, validatedSession.userID, validatedSession.expiration],
-    };
-
-    return await pool.query(addSessionConfig)
-};
-
-/**
- * Retrieves a an existing token from the database based on its token. It's 
- * an async function.
- *
- * If there's no session with the given token an HTTP 401 error is throw.
- *
- * @param {string} token session's token.
- * @returns {Session} the session with that token.
- */
-const getSession = async token => {
-    const query = {
-        text: getSessionSQL,
-        values: [token],
-    };
-
-    const result = await pool.query(query);
-    if (result.rows.length == 0) 
-        throw createError(401, 'Session is invalid, please login again.');
-
-    const { userid: userID, expiration } = result.rows[0];
-    return new Session(token, userID, expiration);
-};
-
-/**
- * Removes a session from the database. It's an async function.
- * It's also a function that returns nothing besides the Promise
- * from it's async nature.
- * @param {string} session's UUID used as token.
- */
-const deleteSession = async token => {
-    const query = {
-        text: deleteSessionSQL,
-        values: [token],
-    };
-
-    await pool.query(query);
-}
 
 /**
  * Entity used to hold user's data and do the validation of that data
@@ -330,21 +236,15 @@ const connect = async () => {
         addUser,
         getUser,
         authUser,
-        addSession,
-        getSession,
-        deleteSession,
     };
 
     await createUserTable();
-    await createSessionTable();
 
     return queries;
 };
 
 const createUserTable = async () => await pool.query(createUserTableSQL);
 const deleteUserTable = async () => await pool.query(deleteUserTableSQL);
-const createSessionTable = async () => await pool.query(createSessionTableSQL);
-const deleteSessionTable = async () => await pool.query(deleteSessionTableSQL);
 
 /**
  * Exports an object that currently can be used to constructs users and establishes
@@ -354,12 +254,9 @@ const deleteSessionTable = async () => await pool.query(deleteSessionTableSQL);
  */
 module.exports = { 
     User, 
-    Session,
     connect, 
     DDL: { 
         createUserTable, 
         deleteUserTable,
-        createSessionTable,
-        deleteSessionTable,
     },
 };
