@@ -81,20 +81,17 @@ class Requisition {
      *
      * @param {string} name Name user to register.
      * @param {string} email Email user to register.
-     *  @param {string} password Password user to register.
+     * @param {string} password Password user to register.
      * @param {Function} error fallback called when there's a problem.
      * The HTTP status code is passed as argument. The possible values
      * are documented on the RESTful API page.
      */
-    static register(name,email, password, error) {
-        const register = (name,email,password, status) => {
-            Requisition.register(name,email,password, erro => {
-                if(error) status;
-            })
-        }
+    static register(name, email, password, error) {
+        const registered = (data, status) => { Requisition.login(email, password, error); }
+
         $.ajax('users/', {
             method: 'POST',
-            success: register,
+            success: registered,
             error: (res) => { if (error) error(res.status) },
             data: { name, email, password },
         });
