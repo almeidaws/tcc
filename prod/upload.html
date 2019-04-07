@@ -91,30 +91,12 @@ Purchase:
                         </li>
                     </ul>
                     <ul class="nav_downloads">
-                        <li><a href="download.html" class="active" title="Downloads">
+                        <li><a href="upload.html" class="active" title="Upload">
 						<span class="nav_icon">
 							<span class="icon icon_download"></span>
 						</span>
 						<span class="nav_text">
-							downloads
-						</span>
-						</a>
-                        </li>
-                        <li><a href="purchase.html" title="Purchased">
-						<span class="nav_icon">
-							<span class="icon icon_purchased"></span>
-						</span>
-						<span class="nav_text">
-							purchased
-						</span>
-						</a>
-                        </li>
-                        <li><a href="favourite.html" title="Favourites">
-						<span class="nav_icon">
-							<span class="icon icon_favourite"></span>
-						</span>
-						<span class="nav_text">
-							favourites
+							imput
 						</span>
 						</a>
                         </li>
@@ -140,58 +122,10 @@ Purchase:
             <div id="header"></div>
             <!----Upload and Share Wrapper Start---->
             <div class="ms_upload_wrapper marger_top60">
-                <div class="ms_upload_box">
-                    <h2>Upload & Share Your Music With The World</h2>
-                    <img src="images/svg/upload.svg" alt="">
-                    <div class="ms_upload_btn">
-                        <a href="#" class="ms_btn">save files</a>
-                    </div>
-                    <span> or </span>
-                    <p>Drag And Drop Music Files</p>
-                </div>
-                <div class=" marger_top60">
-                    <div class="ms_upload_box">
-                        <div class="ms_heading">
-                            <h1>Track Information</h1>
-                        </div>
-                        <div class="ms_pro_form">
-                            <div class="form-group">
-                                <label>Track Name *</label>
-                                <input type="text" placeholder="Dream Your Moments" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label>Artist’s Name *</label>
-                                <input type="text" placeholder="Ava Cornish, Brian Hill" class="form-control">
-                            </div>
-                            <div class="form-group">
-                                <label>Select Album</label>
-                                <select class="form-control">
-								<option>Cloud Nine</option>
-								<option value="1">Cyber Sonnet </option>
-								<option value="2">Cloud Nine</option>
-								<option value="3">Cyber Sonnet</option>
-								<option value="4">Cloud Nine</option>
-							</select>
-                            </div>
-                            <div class="form-group">
-                                <label>Select Privacy</label>
-                                <select class="form-control">
-								<option>Public</option>
-								<option value="1">Private</option>
-								<option value="2">Public</option>
-								<option value="3">Private</option>
-								<option value="4">Public</option>
-							</select>
-                            </div>
-                            <div class="pro-form-btn text-center marger_top15">
-                                <div class="ms_upload_btn">
-                                    <a href="#" class="ms_btn">Upload Now</a>
-                                    <a href="#" class="ms_btn">cancle</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                 <!----upload Music Box---->
+                <div id="uploadMusicBox"></div>
+                <!----Form upload music---->
+                <div id="formUploadBox"></div>
             </div>
             <!----Main div close---->
         </div>
@@ -235,99 +169,7 @@ Purchase:
             </div>
         </div>
         <!----Audio Player Section---->
-<div class="ms_player_wrapper">
-			<div class="ms_player_close">
-				<i class="fa fa-angle-up" aria-hidden="true"></i>
-			</div>
-            <div class="player_mid">
-                <div class="audio-player">
-                    <div id="jquery_jplayer_1" class="jp-jplayer"></div>
-                    <div id="jp_container_1" class="jp-audio" role="application" aria-label="media player">
-                        <div class="player_left">
-                            <div class="ms_play_song">
-                                <div class="play_song_name">
-                                    <a href="javascript:void(0);" id="playlist-text">
-                                        <div class="jp-now-playing flex-item">
-                                            <div class="jp-track-name"></div>
-                                            <div class="jp-artist-name"></div>
-                                        </div>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="play_song_options">
-                                <ul>
-                                    <li><a href="#"><span class="song_optn_icon"><i class="ms_icon icon_fav"></i></span>Add To Favourites</a></li>
-                                    <li><a href="#"><span class="song_optn_icon"><i class="ms_icon icon_playlist"></i></span>Add To Playlist</a></li>
-                                </ul>
-                            </div>
-                            <span class="play-left-arrow"><i class="fa fa-angle-right" aria-hidden="true"></i></span>
-                        </div>
-                        <!----Right Queue---->
-                        </div>
-                        <div class="jp-type-playlist">
-                            <div class="jp-gui jp-interface flex-wrap">
-                                <div class="jp-controls flex-item">
-                                    <button class="jp-previous" tabindex="0">
-					<i class="ms_play_control"></i>
-				</button>
-                                    <button class="jp-play" tabindex="0">
-					<i class="ms_play_control"></i>
-				</button>
-                                    <button class="jp-next" tabindex="0">
-					<i class="ms_play_control"></i>
-				</button>
-                                </div>
-                                <div class="jp-progress-container flex-item">
-                                    <div class="jp-time-holder">
-                                        <span class="jp-current-time" role="timer" aria-label="time">&nbsp;</span>
-                                        <span class="jp-duration" role="timer" aria-label="duration">&nbsp;</span>
-                                    </div>
-                                    <div class="jp-progress">
-                                        <div class="jp-seek-bar">
-                                            <div class="jp-play-bar">
-                                                <div class="bullet">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="jp-volume-controls flex-item">
-                                    <div class="widget knob-container">
-                                        <div class="knob-wrapper-outer">
-                                            <div class="knob-wrapper">
-                                                <div class="knob-mask">
-                                                    <div class="knob d3"><span></span></div>
-                                                    <div class="handle"></div>
-                                                    <div class="round">
-                                                        <img src="images/svg/volume.svg" alt="">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- <input></input> -->
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="jp-toggles flex-item">
-                                    <button class="jp-shuffle" tabindex="0" title="Shuffle">
-									<i class="ms_play_control"></i></button>
-									<button class="jp-repeat" tabindex="0" title="Repeat"><i class="ms_play_control"></i></button>
-                                </div>
-                                <div class="jp_quality_optn custom_select">
-                                    <select>
-						<option>quality</option>
-						<option value="1">HD</option>
-						<option value="2">High</option>
-						<option value="3">medium</option>
-						<option value="4">low</option>
-					</select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--main div-->
-        </div>
+        <div id="audioPlayerBar"></div>
     </div>
     <!----Register Modal Start---->
     <!-- Modal -->
@@ -481,6 +323,14 @@ Purchase:
             </div>
         </div>
 	</div>
+     <!-- Load React. -->
+    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+    <script>console.log('Replace react from development to production mode');</script>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+
+    <script src="js/react.bundle.js"></script>
+
     <!--Main js file Style-->
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -493,12 +343,5 @@ Purchase:
 	<script type="text/javascript" src="js/plugins/scroll/jquery.mCustomScrollbar.js"></script>
     <script type="text/javascript" src="js/custom.js"></script>
 
-     <!-- Load React. -->
-    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
-    <script>console.log('Replace react from development to production mode');</script>
-    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
-
-    <script src="js/react.bundle.js"></script>
 </body>
 </html>
