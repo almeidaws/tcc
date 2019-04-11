@@ -96,6 +96,17 @@ class Requisition {
             data: { name, email, password },
         });
     }
+
+    static logout(token,error) {
+        const logout = (data,error) => { Requisition.logout(token,error); U.deleteAllCookies();}
+
+        $.ajax('users/tokens/'+token, {
+            method: 'DELETE',
+            success: logout,
+            error: (res) => {if (error) error(res.status) },
+            data: {token}
+        }) 
+    }
 }
 
 export default Requisition;
