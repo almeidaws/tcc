@@ -22,6 +22,7 @@ const {
 } = require('./users/middleware.js');
 
 const { add: handleAddMusic } = require('./musics/middleware.js');
+const { add: handleAddAuthor, getAll: handleGetAllAuthors } = require('./authors/middleware.js');
 
 // Run pending migrations
 runMigrations();
@@ -40,6 +41,10 @@ app.delete('/users/tokens/:token', handleUserLogout);
 
 // MUSICS'S ROUTES 
 app.post('/musics', handleAddMusic);
+
+// AUHTOR'S ROUTES
+app.post('/authors', handleAddAuthor);
+app.get('/authors', handleGetAllAuthors);
 
 //SERVER STARTING
 app.use(express.static(path.join(__dirname, 'prod/')))
