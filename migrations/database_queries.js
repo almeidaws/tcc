@@ -14,21 +14,10 @@ CREATE TABLE Genre (
     Name text NOT NULL
 );
 
-INSERT INTO Genre (ID, Name) VALUES (0, 'Classical');
-INSERT INTO Genre (ID, Name) VALUES (1, 'Pop');
-INSERT INTO Genre (ID, Name) VALUES (2, 'Romantic');
-INSERT INTO Genre (ID, Name) VALUES (3, 'Hip Hop');
-INSERT INTO Genre (ID, Name) VALUES (4, 'Dancing');
-INSERT INTO Genre (ID, Name) VALUES (5, 'Rock');
-INSERT INTO Genre (ID, Name) VALUES (6, 'Jazz'); 
-INSERT INTO Genre (ID, Name) VALUES (7, 'Blues'); 
-
 CREATE TABLE Author (
     ID serial NOT NULL PRIMARY KEY,
     Name text NOT NULL
 );
-
-INSERT INTO Author (ID, Name) VALUES (2, 'Zé Ramalho'); 
 
 CREATE TABLE Music (
     ID serial NOT NULL PRIMARY KEY,
@@ -67,4 +56,17 @@ CREATE TABLE Session (
 INSERT INTO Migration (Version, Description) VALUES (1, 'Initial migration');
 `;
 
-module.exports = { createMigrationTableSQL, allMigrationsSQL, migrations: [migration1] };
+const migration2 = `
+INSERT INTO Genre (ID, Name) VALUES (0, 'Classical');
+INSERT INTO Genre (ID, Name) VALUES (1, 'Pop');
+INSERT INTO Genre (ID, Name) VALUES (2, 'Romantic');
+INSERT INTO Genre (ID, Name) VALUES (3, 'Hip Hop');
+INSERT INTO Genre (ID, Name) VALUES (4, 'Dancing');
+INSERT INTO Genre (ID, Name) VALUES (5, 'Rock');
+INSERT INTO Genre (ID, Name) VALUES (6, 'Jazz'); 
+INSERT INTO Genre (ID, Name) VALUES (7, 'Blues'); 
+
+INSERT INTO Migration (Version, Description) VALUES (2, 'Add genres');
+`;
+
+module.exports = { createMigrationTableSQL, allMigrationsSQL, migrations: [migration1, migration2] };

@@ -16,7 +16,7 @@ const runMigrations = async () => {
     
     // Check pending migrations
     let pendingMigrationsSQLs = migrationsSQLs;
-    ranMigrations.forEach(migration => pendingMigrationsSQLs = pendingMigrationsSQLs.splice(0, 1));
+    ranMigrations.forEach(migration => pendingMigrationsSQLs.splice(0, 1));
     if (migrationsSQLs.length === 0)
         console.log(`No migrations pending`);
     else if (migrationsSQLs.length === 1)
@@ -32,7 +32,7 @@ const runMigrations = async () => {
     const justRanMigrations  = await allMigrationsFromDatabase();
     const contains = (migrations, migration) => _.findWhere(migrations, migration) !== undefined;
     const justExecutedMigrations = justRanMigrations.filter(migration => !contains(ranMigrations, migration));
-    justExecutedMigrations.forEach(migration => console.log(`'${migration.description}' v${migration.version} executed'`));
+    justExecutedMigrations.forEach(migration => console.log(`'${migration.description}' v${migration.version} executed`));
 };
 
 const run = async () => { await createMigrationTable(); await runMigrations(); };

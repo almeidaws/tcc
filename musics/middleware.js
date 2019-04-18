@@ -11,24 +11,23 @@ const { Readable } = require('stream');
  */
 async function add(request, response, next) {
     try {
-        // Get's music's file
-        const musicFileStream = createMusicFileStream(request);
-        const body = request.body;
-        
         // Get's music metadata
+        const body = request.body;
         const genres = toArrayOfNumbers(body.genre);
         const authors = toArrayOfNumbers(body.author);
+        const extension = getExtension(request.files.music.name);
         const music = new musicsDatabase.Music(body.name, 
                                                genres,
                                                authors,
-                                               musicFileStream);
+                                               request.files.music.data,
+                                               extension);
 
         const queries = await musicsDatabase.connect();
         await queries.addMusic(music, progress => {
-            console.log(`${progress} uploaded`);
+            console.log(`${progress}% uploaded`);
         });
 
-        response.status(200);
+        response.status(201);
         response.end();
     } catch (error) {
         next(error);
@@ -36,29 +35,47 @@ async function add(request, response, next) {
 }
 
 /**
- * Gets the music stream from a request and return a readable stream
- * from it. If there's an error a HTTP error is thrown.
- *
- * @param {Pool.request} request received from the requisition.
+ * Retrieve a music from the database by its ID. This entity contains a link with the
+ * music's file that you can you to play it somewhere.
  */
-const createMusicFileStream = request => {
-    if (!request.files.music)
-        throw createError(401, "There's no music file");
+async function getByID(request, response, next) {
+    try {
 
-    const buffer = request.files.music.data;
-    return createFileStream(buffer);
+        if (!request.params.id) createError(401, `The music's id is missing`);
+        const queries = await musicsDatabase.connect();
+        const music = await queries.getMusicByID(request.params.id);
+
+        const { id, name } = music;
+        const url = music.calculateFileURL();
+        response.status(200).json({ id, name, url }).end();
+    } catch (error) {
+        next(error);
+    }
 };
 
 /**
- * Transform a buffer to a Readable stream and return it.
- * @returns {Readable} Readable stream created from agument buffer.
+ * Retrieves all musics from the database as an array of Music.
  */
-const createFileStream = buffer => {
-    const readable = new Readable();
-    readable.push(buffer);
-    readable.push(null);
-    return readable;
+async function getAll(request, response, next) {
+    try {
+
+        const queries = await musicsDatabase.connect();
+        const musics = await queries.getAllMusics();
+        if (musics === null)
+            return response.status(204).json([]).end();
+
+        const withFileURLs = musics.map(music => ({ id: music.id, name: music.name, url: music.calculateFileURL() }));
+        response.status(200).json(withFileURLs).end();
+    } catch (error) {
+        next(error);
+    }
 };
+
+const getExtension = fileName => {
+    const groups = fileName.match(/.*(\..+)/);
+    if (groups.length >= 1) return groups[groups.length - 1];
+    return ""
+}
 
 /**
  * Transform an array of strings of a singleton string to an array of numbers.
@@ -80,4 +97,4 @@ const toArrayIfNeeded = value => Array.isArray(value) ? value : [value];
  */
 const elementsToIntegers = array => array.map(element => parseInt(element));
 
-module.exports = { add }
+module.exports = { add, getByID, getAll }

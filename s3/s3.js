@@ -11,18 +11,18 @@ const bucket = process.env.S3_BUCKET;
  *
  * @param {string} fileName unique file on S3 Storage Service. This name must be unique.
  * If a file with this file name already exists, it will be overrided.
- * @param {ReadableStream} a stream from where to read the file.
+ * @param {Buffer} a buffer with the file.
  * @param {Function} a callback called to report uploading progress. The arguments of this
  * callback are two. The first 'loaded' of type Number tells how much
  * of the file was uploaded in bytes. The second 'total' of type Number tells the total 
  * file size also in bytes. You can divide the first by the second and multiply by 100 to
  * get the value as percentage.
  */
-const upload = async (fileName, stream, progressCallback) => {
+const upload = async (fileName, buffer, progressCallback) => {
     const params = {
         Bucket: process.env.S3_BUCKET,
         Key: fileName,
-        Body: stream,
+        Body: buffer,
     };
 
     const request = s3.putObject(params);
@@ -31,7 +31,7 @@ const upload = async (fileName, stream, progressCallback) => {
 
     const promise = new Promise((resolve, reject) => {
         request.on('success', response => { resolve(response.request.params.Key) });
-        request.on('error', response => reject(response.error));
+        request.on('error', response => { reject(response) });
         request.send();
     });
     
@@ -44,7 +44,6 @@ const upload = async (fileName, stream, progressCallback) => {
  * This method is asynchronous, so you can used the async/await of Promise notation
  * to call this. This calls a callback to report downloading progress.
  *
- * @param {string} fileName unique file on S3 Storage Service. This name must be unique.
  * @param {Function} a callback called to report downloading progress. The arguments of this
  * callback are two. The first 'loaded' of type Number tells how much
  * of the file was uploaded in bytes. The second 'total' of type Number tells the total 
@@ -77,4 +76,12 @@ const getStream = (fileName, progressCallback) => {
     return promise;
 };
 
-module.exports = { upload, getStream };
+/**
+ * Given some file key, this method returns the public URL
+ * as string that can be used to downlaod it.
+ */
+const fileURLForKey = key => {
+    return s3.endpoint.href + bucket + "/" + key;
+};
+
+module.exports = { upload, getStream, fileURLForKey };

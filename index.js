@@ -21,7 +21,7 @@ const {
     logout: handleUserLogout,
 } = require('./users/middleware.js');
 
-const { add: handleAddMusic } = require('./musics/middleware.js');
+const { add: handleAddMusic, getByID: handleGetMusic, getAll: handleGetAllMusics } = require('./musics/middleware.js');
 const { add: handleAddAuthor, getAll: handleGetAllAuthors } = require('./authors/middleware.js');
 
 // Run pending migrations
@@ -41,6 +41,8 @@ app.delete('/users/tokens/:token', handleUserLogout);
 
 // MUSICS'S ROUTES 
 app.post('/musics', handleAddMusic);
+app.get('/musics', handleGetAllMusics);
+app.get('/musics/:id', handleGetMusic);
 
 // AUHTOR'S ROUTES
 app.post('/authors', handleAddAuthor);
