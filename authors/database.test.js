@@ -53,9 +53,7 @@ describe('Testing Author table', async () => {
         const author = new Author("Gustavo");
         const queries = await connect();
         const addedAuthor = await queries.addAuthor(author);
-        console.log(addedAuthor);
         const queriedAuthor = await queries.getAuthorByID(addedAuthor.id);
-        console.log(queriedAuthor);
         return expect(queriedAuthor).toEqual(addedAuthor);
     });        
 
