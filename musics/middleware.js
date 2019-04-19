@@ -41,7 +41,7 @@ async function add(request, response, next) {
 async function getByID(request, response, next) {
     try {
 
-        if (!request.params.id) createError(401, `The music's id is missing`);
+        if (!request.params.id) throw createError(401, `The music's id is missing`);
         const queries = await musicsDatabase.connect();
         const music = await queries.getMusicByID(request.params.id);
 
@@ -71,6 +71,27 @@ async function getAll(request, response, next) {
     }
 };
 
+/**
+ * Retrieves all musics from the database as an array of Music.
+ */
+async function deleteMusic(request, response, next) {
+    try {
+        if (!request.params.id) { throw createError(400, "The music's ID is missing") }
+        const id = parseInt(request.params.id);
+        if (Number.isNaN(id)) { throw createError(400, `The ID '${request.params.id}' isn't a number`) }
+
+
+        const queries = await musicsDatabase.connect();
+        const deleted = await queries.deleteMusic(id);
+        if (deleted)
+            return response.status(200).end();
+        return response.status(404).end();
+    } catch (error) {
+        next(error);
+    }
+};
+
+
 const getExtension = fileName => {
     const groups = fileName.match(/.*(\..+)/);
     if (groups.length >= 1) return groups[groups.length - 1];
@@ -97,4 +118,4 @@ const toArrayIfNeeded = value => Array.isArray(value) ? value : [value];
  */
 const elementsToIntegers = array => array.map(element => parseInt(element));
 
-module.exports = { add, getByID, getAll }
+module.exports = { add, getByID, getAll, deleteMusic }

@@ -69,11 +69,36 @@ const getStream = (fileName, progressCallback) => {
             resolve(readable);
         });
 
-        request.on('error', response => reject(response.error));
+        request.on('error', response => reject(response));
         request.send();
     });
 
     return promise;
+};
+
+/**
+ * Remove an object from Amazon S3 Storage. If key refers to a inexistent object, nothing occurs.
+ *
+ * This method is asynchronous, so you can used the async/await of Promise notation
+ * to call this. 
+ *
+ * @param {string} object's key. This normally is the S3 Key property is Music type.
+ */
+const deleteObject = key => {
+     const params = {
+         Bucket: process.env.S3_BUCKET,
+         Key: key,
+     };
+ 
+     const request = s3.deleteObject(params);
+ 
+     const promise = new Promise((resolve, reject) => {
+         request.on('success', response => resolve());
+         request.on('error', response => reject(response));
+         request.send();
+     });
+ 
+     return promise;
 };
 
 /**
@@ -84,4 +109,4 @@ const fileURLForKey = key => {
     return s3.endpoint.href + bucket + "/" + key;
 };
 
-module.exports = { upload, getStream, fileURLForKey };
+module.exports = { upload, getStream, deleteObject, fileURLForKey };

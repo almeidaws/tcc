@@ -3,7 +3,7 @@
 require("@babel/polyfill");
 const _ = require('underscore');
 const createError = require('http-errors');
-const { upload: uploadToS3, fileURLForKey } = require('../s3/s3.js');
+const { upload: uploadToS3, deleteObject: deleteFromS3, fileURLForKey } = require('../s3/s3.js');
 const normalizeForSearch = require('normalize-for-search');
 
 /**
@@ -27,6 +27,9 @@ const { addMusicSQL,
         createMusicAuthorTableSQL, 
         findMusicByNormalizedFileKeySQL, 
         getAllMusicsSQL,
+        deleteMusicAuthorSQL,
+        deleteMusicGenreSQL,
+        deleteMusicSQL,
       } = require('./database_queries.js');
 
 /**
@@ -177,6 +180,28 @@ const getAllMusics = async () => {
     return musics;
  }
 
+/** 
+ * Removes a music metadata from the database and its file from Amazon S3.
+ * This methods also removes from the associative table MusicAuthor and MusicGenre.
+ *
+ * The data is validated before adding to the database.
+ *
+ * @param {number} music's id.
+ * @returns {boolean} true if the music has been deleted or false otherwise.
+ */
+const deleteMusic = async (id) => {
+    
+    const music = await getMusicByID(id);
+    if (!music) return false;
+
+    await deleteFromS3(music.fileS3Key);
+    await pool.query({ text: deleteMusicGenreSQL, values: [music.id] });
+    await pool.query({ text: deleteMusicAuthorSQL, values: [music.id] });
+    await pool.query({ text: deleteMusicSQL, values: [music.id] });
+    
+    return true;
+};
+
 /**
  * Returns the music from database given its name and authors.
  * 
@@ -233,7 +258,8 @@ const connect = async () => {
     const queries = { 
         addMusic, 
         getMusicByID,
-        getAllMusics };
+        getAllMusics,
+        deleteMusic };
     return queries;
 };
 

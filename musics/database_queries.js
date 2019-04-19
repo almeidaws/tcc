@@ -43,6 +43,10 @@ const addMusicSQL = 'INSERT INTO Music (Name, fileS3Key) VALUES ($1, $2) RETURNI
 const addMusicAuthorSQL = 'INSERT INTO MusicAuthor (Music, Author) VALUES ($1, $2)';
 const addMusicGenreSQL = 'INSERT INTO MusicGenre (Music, Genre) VALUES ($1, $2)';
 
+const deleteMusicGenreSQL = "DELETE FROM MusicGenre WHERE Music = $1";
+const deleteMusicAuthorSQL = "DELETE FROM MusicAuthor WHERE Music = $1";
+const deleteMusicSQL = "DELETE FROM Music WHERE ID = $1";
+
 /**
  * Exports several object that contains several SQL queries used on the project.
  * @module DatabaseQueries
@@ -57,4 +61,7 @@ module.exports = {
     addMusicSQL,
     addMusicAuthorSQL,
     addMusicGenreSQL,
+    deleteMusicSQL,
+    deleteMusicGenreSQL,
+    deleteMusicAuthorSQL,
 };
