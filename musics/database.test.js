@@ -3,6 +3,7 @@
 const { 
     Music, 
     connect, 
+    disconnect,
     DDL: { 
         createMusicTable, 
         deleteMusicTable, 
@@ -11,6 +12,7 @@ const {
 const {
     Author,
     connect: connectAuthor,
+    disconnect: disconnectAuthor,
     DDL: {
         createAuthorTable,
         deleteAuthorTable,
@@ -114,5 +116,7 @@ afterAll(async () => {
     await createAuthorTable();
     await createMusicTable();
     await rollbackMigrations();
+    await disconnectAuthor();
+    await disconnect();
 });
 

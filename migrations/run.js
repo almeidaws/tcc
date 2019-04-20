@@ -1,6 +1,5 @@
 const _ = require('underscore');
 const { Database } = require('../configs.js');
-const pool = Database.pool();
 const { 
     createMigrationTableSQL,
     deleteMigrationTableSQL,
@@ -9,20 +8,24 @@ const {
     rollback: migrationsRollbackSQLs
 } = require('./database_queries');
 
-const createMigrationTable = async () => {
+const createMigrationTable = async (pool) => {
     await pool.query(createMigrationTableSQL);
 };
 
 const rollbackMigrations = async () => {
+    const pool = Database.pool();
+
     for (let i = 0; i < migrationsRollbackSQLs.length; i++) {
         await pool.query(migrationsRollbackSQLs[i]);
     }
     await pool.query(deleteMigrationTableSQL);
+    await pool.end();
     console.log('Rollback done');
 };
 
 const runMigrations = async () => {
-    await createMigrationTable();
+    const pool = Database.pool();
+    await createMigrationTable(pool);
 
     const allMigrationsFromDatabase = async () => (await pool.query(allMigrationsSQL)).rows.map(tuple => ({ version: tuple.version, description: tuple.description }));
 
@@ -49,6 +52,8 @@ const runMigrations = async () => {
     const contains = (migrations, migration) => _.findWhere(migrations, migration) !== undefined;
     const justExecutedMigrations = justRanMigrations.filter(migration => !contains(ranMigrations, migration));
     justExecutedMigrations.forEach(migration => console.log(`'${migration.description}' v${migration.version} executed`));
+
+    await pool.end();
 };
 
 module.exports = { runMigrations, rollbackMigrations };

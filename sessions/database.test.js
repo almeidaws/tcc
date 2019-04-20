@@ -3,6 +3,7 @@
 const { 
     Session, 
     connect: connectSessions, 
+    disconnect: disconnectSessions,
     DDL: { 
         createSessionTable,
         deleteSessionTable, 
@@ -12,6 +13,7 @@ const {
 const { 
     User, 
     connect: connectUsers, 
+    disconnect: disconnectUsers,
     DDL: { 
         createUserTable, 
         deleteUserTable, 
@@ -63,4 +65,9 @@ describe('Testing user\'s sessions', async () => {
         await deleteUserTable();
     });
 
+});
+
+afterAll(async () => {
+    await disconnectSessions();
+    await disconnectUsers();
 });

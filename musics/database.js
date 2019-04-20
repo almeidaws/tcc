@@ -271,6 +271,10 @@ const connect = async () => {
     return queries;
 };
 
+const disconnect = async () => {
+    await pool.end();
+};
+
 const createMusicTable = async () => {
     await pool.query(createMusicTableSQL);
     await pool.query(createMusicAuthorTableSQL);
@@ -292,6 +296,7 @@ const deleteMusicTable = async () => {
 module.exports = { 
     Music, 
     connect, 
+    disconnect,
     DDL: { 
         createMusicTable, 
         deleteMusicTable,

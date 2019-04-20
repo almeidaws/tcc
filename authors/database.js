@@ -121,6 +121,10 @@ const connect = async () => {
     return queries;
 };
 
+const disconnect = async () => {
+    await pool.end();
+};
+
 /**
  * Exports an object that currently can be used to constructs users and establishes
  * a connection with the database.
@@ -130,6 +134,7 @@ const connect = async () => {
 module.exports = { 
     Author, 
     connect, 
+    disconnect,
     DDL: {
         createAuthorTable,
         deleteAuthorTable,

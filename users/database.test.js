@@ -3,6 +3,7 @@
 const { 
     User, 
     connect, 
+    disconnect,
     DDL: { 
         createUserTable, 
         deleteUserTable, 
@@ -141,4 +142,8 @@ describe('Testing Users table', async () => {
         await deleteUserTable();
     });
 
+});
+
+afterAll(async () => {
+    await disconnect();
 });

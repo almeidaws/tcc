@@ -243,6 +243,10 @@ const connect = async () => {
     return queries;
 };
 
+const disconnect = async () => {
+    await pool.end();
+}
+
 const createUserTable = async () => await pool.query(createUserTableSQL);
 const deleteUserTable = async () => await pool.query(deleteUserTableSQL);
 
@@ -255,6 +259,7 @@ const deleteUserTable = async () => await pool.query(deleteUserTableSQL);
 module.exports = { 
     User, 
     connect, 
+    disconnect,
     DDL: { 
         createUserTable, 
         deleteUserTable,

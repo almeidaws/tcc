@@ -3,6 +3,7 @@
 const { 
     Author, 
     connect, 
+    disconnect,
     DDL: { 
         createAuthorTable, 
         deleteAuthorTable, 
@@ -61,4 +62,8 @@ describe('Testing Author table', async () => {
         await deleteAuthorTable();
     });
 
+});
+
+afterAll(async () => {
+    await disconnect();
 });
