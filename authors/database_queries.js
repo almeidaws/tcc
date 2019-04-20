@@ -27,7 +27,7 @@ const getAllAuthorsSQL = 'SELECT ID, Name FROM Author;';
  * @type {string}
  */
 const createAuthorTableSQL = `
-CREATE TABLE Author (
+CREATE TABLE IF NOT EXISTS Author (
     ID serial NOT NULL PRIMARY KEY,
     Name text NOT NULL
 );

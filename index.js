@@ -7,7 +7,7 @@
 
 // MODULES
 const { upload: s3Upload, getStream: s3GetStream } = require('./s3/s3.js');
-const runMigrations = require('./migrations/run.js');
+const { runMigrations } = require('./migrations/run.js');
 const express = require('express');
 const app = express();
 const fileUpload = require('express-fileupload');

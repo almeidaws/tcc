@@ -1,7 +1,7 @@
 const aws = require('aws-sdk');
 const { Readable } = require('stream');
 const s3 = new aws.S3({ accessKeyId: process.env.AWS_ACCESS_KEY, secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY });
-const bucket = process.env.S3_BUCKET;
+const bucket = process.env.S3_BUCKET_PROD;
 
 /**
  * Stores a file on Amazon S3 and returns the key that can be used to retrieve it.

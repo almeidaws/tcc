@@ -1,13 +1,29 @@
 const _ = require('underscore');
 const { Database } = require('../configs.js');
 const pool = Database.pool();
-const { createMigrationTableSQL, allMigrationsSQL, migrations: migrationsSQLs } = require('./database_queries');
+const { 
+    createMigrationTableSQL,
+    deleteMigrationTableSQL,
+    allMigrationsSQL,
+    migrations: migrationsSQLs,
+    rollback: migrationsRollbackSQLs
+} = require('./database_queries');
 
 const createMigrationTable = async () => {
     await pool.query(createMigrationTableSQL);
 };
 
+const rollbackMigrations = async () => {
+    for (let i = 0; i < migrationsRollbackSQLs.length; i++) {
+        await pool.query(migrationsRollbackSQLs[i]);
+    }
+    await pool.query(deleteMigrationTableSQL);
+    console.log('Rollback done');
+};
+
 const runMigrations = async () => {
+    await createMigrationTable();
+
     const allMigrationsFromDatabase = async () => (await pool.query(allMigrationsSQL)).rows.map(tuple => ({ version: tuple.version, description: tuple.description }));
 
     // Retrieve migrations from database
@@ -35,7 +51,5 @@ const runMigrations = async () => {
     justExecutedMigrations.forEach(migration => console.log(`'${migration.description}' v${migration.version} executed`));
 };
 
-const run = async () => { await createMigrationTable(); await runMigrations(); };
-
-module.exports = run;
+module.exports = { runMigrations, rollbackMigrations };
 

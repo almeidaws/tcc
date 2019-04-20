@@ -3,7 +3,12 @@
 require("@babel/polyfill");
 const _ = require('underscore');
 const createError = require('http-errors');
-const { upload: uploadToS3, deleteObject: deleteFromS3, fileURLForKey } = require('../s3/s3.js');
+const testing = process.env.NODE_ENV === 'test';
+const { 
+    upload: uploadToS3, 
+    deleteObject: deleteFromS3, 
+    fileURLForKey 
+} = require(testing ? '../s3/s3_mock.js' : '../s3/s3.js');
 const normalizeForSearch = require('normalize-for-search');
 
 /**
@@ -27,9 +32,9 @@ const { addMusicSQL,
         createMusicAuthorTableSQL, 
         findMusicByNormalizedFileKeySQL, 
         getAllMusicsSQL,
-        deleteMusicAuthorSQL,
-        deleteMusicGenreSQL,
-        deleteMusicSQL,
+        deleteMusicAuthorTableSQL,
+        deleteMusicGenreTableSQL,
+        deleteMusicTableSQL,
       } = require('./database_queries.js');
 
 /**
@@ -59,12 +64,12 @@ class Music {
             this.fileS3Key = authors;
         } else {
             this.id = null;
-            this.name = name.trim();
+            this.name = name ? name.trim() : name;
             this.genres = genres;
             this.authors = authors;
             this.fileBuffer = fileBuffer;
             this.extension = extension.trim();
-            this.fileS3Key = calculateMusicFileS3Key(name, authors, extension);
+            this.fileS3Key = name ? calculateMusicFileS3Key(name, authors, extension) : null;
         }
     }
 
@@ -101,10 +106,11 @@ class Music {
  * @param {Music} music the music to be added to the database persistently.
  * @param {Function} a callback colled to track music's file uploading progress. This
  * is a value between 0 and 100.
+ * @returns {Music} copy of added music with the id property setted.
  */
 const addMusic = async (music, progressCallback) => {
     // Validate the music
-    const { error, validatedUser } = music.validate();
+    const { error, validatedMusic } = music.validate();
     if (error) return Promise.reject(error);
     
     // Checks if the music is repeated
@@ -145,6 +151,8 @@ const addMusic = async (music, progressCallback) => {
         };
         await pool.query(addMusicGenreConfig);
     });
+
+    return new Music(musicID, music.name, music.fileS3Key);
 };
 
 /**
@@ -195,9 +203,9 @@ const deleteMusic = async (id) => {
     if (!music) return false;
 
     await deleteFromS3(music.fileS3Key);
-    await pool.query({ text: deleteMusicGenreSQL, values: [music.id] });
-    await pool.query({ text: deleteMusicAuthorSQL, values: [music.id] });
-    await pool.query({ text: deleteMusicSQL, values: [music.id] });
+    await pool.query({ text: deleteMusicGenreTableSQL, values: [music.id] });
+    await pool.query({ text: deleteMusicAuthorTableSQL, values: [music.id] });
+    await pool.query({ text: deleteMusicTableSQL, values: [music.id] });
     
     return true;
 };
@@ -263,8 +271,17 @@ const connect = async () => {
     return queries;
 };
 
-const createMusicTable = async () => await pool.query(createMusicTableSQL);
-const deleteMusicTable = async () => await pool.query(deleteUserTableSQL);
+const createMusicTable = async () => {
+    await pool.query(createMusicTableSQL);
+    await pool.query(createMusicAuthorTableSQL);
+    await pool.query(createMusicGenreTableSQL);
+};
+
+const deleteMusicTable = async () => {
+    await pool.query(deleteMusicGenreTableSQL);
+    await pool.query(deleteMusicAuthorTableSQL);
+    await pool.query(deleteMusicTableSQL);
+}
 
 /**
  * Exports an object that currently can be used to constructs users and establishes
