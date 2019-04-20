@@ -86,21 +86,57 @@ describe('Testing Music table', async () => {
         });
     });
     
-    it('Checks if a music are added to the database', async () => {
-        expect.assertions(1);
+    it('Checks if all musics are returned from database', async () => {
+        const numberOfExamples = 10;
 
+        const musics = [];
+        for (let i = 0; i < numberOfExamples; i++) {
+            const music = createExampleMusic();
+            music.name += i;
+            music.calculateFileS3Key();
+            musics.push(music);
+        }
+
+        const queries = await connect();
+        for (let i = 0; i < numberOfExamples; i++)
+            await queries.addMusic(musics[i]);
+            
+        const retrievedMusics = await queries.getAllMusics();
+
+        retrievedMusics.forEach((music, i) => {
+            expect(music.name).toBe(musics[i].name);
+            expect(music.fileS3Key).toBe(musics[i].fileS3Key);
+        });
+    });        
+
+    it(`Checks if a music is deleted from the database.`, async () => {
         const music = createExampleMusic();
         const queries = await connect();
         const addedMusic = await queries.addMusic(music);
-        const queriedMusic = await queries.getMusicByID(addedMusic.id);
-        return expect(queriedMusic).toEqual(addedMusic);
-    });        
+
+        const deleted = await queries.deleteMusic(addedMusic.id);
+        expect(deleted).toBe(true);
+
+        const notDeleted = !(await queries.deleteMusic(addedMusic.id));
+        expect(notDeleted).toBe(true);
+    });
 
     it(`Checks equal musics aren't added to the database`, async () => {
         expect.assertions(1);
 
         const music = createExampleMusic();
         const music2 = createExampleMusic();
+        const queries = await connect();
+        await queries.addMusic(music);
+        await expect(queries.addMusic(music2)).rejects.toThrow();
+    });
+
+    it(`Checks if a music are added to the database`, async () => {
+        expect.assertions(1);
+
+        const music = createExampleMusic();
+        const music2 = createExampleMusic();
+
         const queries = await connect();
         await queries.addMusic(music);
         await expect(queries.addMusic(music2)).rejects.toThrow();

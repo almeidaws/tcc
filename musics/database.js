@@ -26,6 +26,9 @@ const pool = Database.pool();
 const { addMusicSQL,
         addMusicAuthorSQL,
         addMusicGenreSQL,
+        deleteMusicAuthorSQL,
+        deleteMusicGenreSQL,
+        deleteMusicSQL,
         getMusicByIDSQL,
         createMusicTableSQL,
         createMusicGenreTableSQL,
@@ -69,8 +72,16 @@ class Music {
             this.authors = authors;
             this.fileBuffer = fileBuffer;
             this.extension = extension.trim();
-            this.fileS3Key = name ? calculateMusicFileS3Key(name, authors, extension) : null;
+            this.calculateFileS3Key();
         }
+    }
+
+    /**
+     * Generates a key that will be used when persisting this music into Amazon S3.
+     * This value is stored in a property called 'fileS3Key'.
+     */
+    calculateFileS3Key() {
+        this.fileS3Key = this.name ? calculateMusicFileS3Key(this.name, this.authors, this.extension) : null;
     }
 
     /**
@@ -199,13 +210,17 @@ const getAllMusics = async () => {
  */
 const deleteMusic = async (id) => {
     
-    const music = await getMusicByID(id);
-    if (!music) return false;
+    let music;
+    try {
+        music = await getMusicByID(id);
+    } catch (error) {
+        return false;
+    }
 
     await deleteFromS3(music.fileS3Key);
-    await pool.query({ text: deleteMusicGenreTableSQL, values: [music.id] });
-    await pool.query({ text: deleteMusicAuthorTableSQL, values: [music.id] });
-    await pool.query({ text: deleteMusicTableSQL, values: [music.id] });
+    await pool.query({ text: deleteMusicGenreSQL, values: [music.id] });
+    await pool.query({ text: deleteMusicAuthorSQL, values: [music.id] });
+    await pool.query({ text: deleteMusicSQL, values: [music.id] });
     
     return true;
 };

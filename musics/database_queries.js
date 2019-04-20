@@ -47,6 +47,10 @@ const deleteMusicGenreTableSQL = "DROP TABLE MusicGenre";
 const deleteMusicAuthorTableSQL = "DROP TABLE MusicAuthor";
 const deleteMusicTableSQL = "DROP TABLE Music";
 
+const deleteMusicGenreSQL = "DELETE FROM MusicGenre WHERE Music = $1";
+const deleteMusicAuthorSQL = "DELETE FROM MusicAuthor WHERE Music = $1";
+const deleteMusicSQL = "DELETE FROM Music WHERE ID = $1";
+
 /**
  * Exports several object that contains several SQL queries used on the project.
  * @module DatabaseQueries
@@ -61,6 +65,9 @@ module.exports = {
     addMusicSQL,
     addMusicAuthorSQL,
     addMusicGenreSQL,
+    deleteMusicSQL,
+    deleteMusicGenreSQL,
+    deleteMusicAuthorSQL,
     deleteMusicTableSQL,
     deleteMusicGenreTableSQL,
     deleteMusicAuthorTableSQL,
