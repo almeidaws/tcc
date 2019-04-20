@@ -4,7 +4,9 @@
   "description": "TCC from UCB by Renan e Gustavo",
   "main": "index.js",
   "dependencies": {
-    "@babel/polyfill": "^7.2.5",
+    "@babel/plugin-transform-runtime": "^7.4.3",
+    "@babel/polyfill": "^7.4.3",
+    "@babel/runtime": "^7.4.3",
     "acorn": "^6.1.1",
     "aws-sdk": "^2.422.0",
     "bcrypt": "^3.0.3",
@@ -40,7 +42,7 @@
     "webpack-cli": "^3.2.3"
   },
   "scripts": {
-    "test": "NODE_ENV=test; jest --runInBand",
+    "test": "export $(cat .env | xargs); NODE_ENV=test; jest --runInBand",
     "start": "nodemon --exec 'npx webpack && heroku local'"
   },
   "repository": {

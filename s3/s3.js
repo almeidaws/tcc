@@ -1,12 +1,14 @@
 const aws = require('aws-sdk');
 const { Readable } = require('stream');
 const s3 = new aws.S3({ accessKeyId: process.env.AWS_ACCESS_KEY, secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY });
-const bucket = process.env.S3_BUCKET_PROD;
+const testing = process.env.NODE_ENV === 'test';
+const production = process.env.NODE_ENV === 'production';
+const bucket = production ? process.env.S3_BUCKET_PROD : (testing ? process.env.S3_BUCKET_TEST : process.env.S3_BUCKET_DEV);
 
 /**
  * Stores a file on Amazon S3 and returns the key that can be used to retrieve it.
  *
- * This method is asynchronous, so you can used the async/await of Promise notation
+ * This method returns a promise, so you can used the async/await of Promise notation
  * to call this. This calls a callback to report uploading progress.
  *
  * @param {string} fileName unique file on S3 Storage Service. This name must be unique.
@@ -18,9 +20,9 @@ const bucket = process.env.S3_BUCKET_PROD;
  * file size also in bytes. You can divide the first by the second and multiply by 100 to
  * get the value as percentage.
  */
-const upload = async (fileName, buffer, progressCallback) => {
+const upload = (fileName, buffer, progressCallback) => {
     const params = {
-        Bucket: process.env.S3_BUCKET,
+        Bucket: bucket,
         Key: fileName,
         Body: buffer,
     };
@@ -41,7 +43,7 @@ const upload = async (fileName, buffer, progressCallback) => {
 /**
  * Retrieve a file from S3 Storage Service using it's key.
  *
- * This method is asynchronous, so you can used the async/await of Promise notation
+ * This method returns a promise, so you can used the async/await of Promise notation
  * to call this. This calls a callback to report downloading progress.
  *
  * @param {Function} a callback called to report downloading progress. The arguments of this
@@ -50,9 +52,9 @@ const upload = async (fileName, buffer, progressCallback) => {
  * file size also in bytes. You can divide the first by the second and multiply by 100 to
  * get the value as percentage.
  */
-const getStream = (fileName, progressCallback) => {
+const getBuffer = (fileName, progressCallback) => {
     const params = {
-        Bucket: process.env.S3_BUCKET,
+        Bucket: bucket,
         Key: fileName,
     };
 
@@ -62,11 +64,8 @@ const getStream = (fileName, progressCallback) => {
 
     const promise = new Promise((resolve, reject) => {
         request.on('success', response => { 
-            const buffer = response.Body;
-            const readable = new Readable();
-            readable.push(buffer);
-            readable.push(null);
-            resolve(readable);
+            const buffer = response.data.Body;
+            resolve(buffer);
         });
 
         request.on('error', response => reject(response));
@@ -79,14 +78,14 @@ const getStream = (fileName, progressCallback) => {
 /**
  * Remove an object from Amazon S3 Storage. If key refers to a inexistent object, nothing occurs.
  *
- * This method is asynchronous, so you can used the async/await of Promise notation
+ * This method returns a promise, so you can used the async/await of Promise notation
  * to call this. 
  *
  * @param {string} object's key. This normally is the S3 Key property is Music type.
  */
 const deleteObject = key => {
      const params = {
-         Bucket: process.env.S3_BUCKET,
+         Bucket: bucket,
          Key: key,
      };
  
@@ -109,4 +108,4 @@ const fileURLForKey = key => {
     return s3.endpoint.href + bucket + "/" + key;
 };
 
-module.exports = { upload, getStream, deleteObject, fileURLForKey };
+module.exports = { upload, getBuffer, deleteObject, fileURLForKey };
