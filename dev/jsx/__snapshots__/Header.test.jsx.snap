@@ -1,0 +1,152 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Header /> should render register/login buttons 1`] = `
+<div
+  className="ms_header"
+>
+  <div
+    className="ms_top_left"
+  >
+    <div
+      className="ms_top_search"
+    >
+      <div>
+        <input
+          className="form-control"
+          placeholder="Search Music Here.."
+          type="text"
+        />
+        <span
+          className="search_icon"
+        >
+          <img
+            alt=""
+            src="images/svg/search.svg"
+          />
+        </span>
+      </div>
+    </div>
+  </div>
+  <div
+    className="ms_top_right"
+  >
+    <div
+      className="ms_top_btn"
+    >
+      <a
+        className="ms_btn login_btn"
+        data-target="#myModal"
+        data-toggle="modal"
+        href="javascript:;"
+      >
+        <span>
+          Register
+        </span>
+      </a>
+      <a
+        className="ms_btn login_btn"
+        data-target="#myModal1"
+        data-toggle="modal"
+        href="javascript:;"
+      >
+        <span>
+          login
+        </span>
+      </a>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Header /> should render user's profile menus and name 1`] = `
+<div
+  className="ms_header"
+>
+  <div
+    className="ms_top_left"
+  >
+    <div
+      className="ms_top_search"
+    >
+      <div>
+        <input
+          className="form-control"
+          placeholder="Search Music Here.."
+          type="text"
+        />
+        <span
+          className="search_icon"
+        >
+          <img
+            alt=""
+            src="images/svg/search.svg"
+          />
+        </span>
+      </div>
+    </div>
+  </div>
+  <div
+    className="ms_top_right"
+  >
+    <div
+      className="ms_top_btn"
+    >
+      <a
+        className="ms_admin_name"
+        href="javascript:;"
+      >
+        Hello 
+        Carlos
+         
+        <span
+          className="ms_pro_name"
+        >
+          C
+        </span>
+      </a>
+      <ul
+        className="pro_dropdown_menu"
+      >
+        <li>
+          <a
+            href="profile.html"
+          >
+            Profile
+          </a>
+        </li>
+        <li>
+          <a
+            href="manage_acc.html"
+            target="_blank"
+          >
+            Pricing Plan
+          </a>
+        </li>
+        <li>
+          <a
+            href="blog.html"
+            target="_blank"
+          >
+            Blog
+          </a>
+        </li>
+        <li>
+          <a
+            href=""
+          >
+            Setting
+          </a>
+        </li>
+        <li>
+          <a
+            href="index.html"
+            onClick={[Function]}
+          >
+            Logout
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+`;
