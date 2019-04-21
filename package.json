@@ -42,6 +42,7 @@
     "webpack-cli": "^3.2.3"
   },
   "scripts": {
+    "build": "npx webpack",
     "test": "export $(cat .env | xargs); NODE_ENV=test; jest --runInBand",
     "start": "nodemon --exec 'npx webpack && heroku local'"
   },
