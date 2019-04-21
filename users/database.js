@@ -237,9 +237,6 @@ const connect = async () => {
         getUser,
         authUser,
     };
-
-    await createUserTable();
-
     return queries;
 };
 

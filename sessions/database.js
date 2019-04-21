@@ -140,9 +140,6 @@ const connect = async () => {
         getSession,
         deleteSession,
     };
-
-    await createSessionTable();
-
     return queries;
 };
 
