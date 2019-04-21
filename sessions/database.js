@@ -140,10 +140,11 @@ const connect = async () => {
         getSession,
         deleteSession,
     };
-
-    await createSessionTable();
-
     return queries;
+};
+
+const disconnect = async () => {
+    await pool.end();
 };
 
 const createSessionTable = async () => await pool.query(createSessionTableSQL);
@@ -158,6 +159,7 @@ const deleteSessionTable = async () => await pool.query(deleteSessionTableSQL);
 module.exports = { 
     Session,
     connect, 
+    disconnect,
     DDL: { 
         createSessionTable,
         deleteSessionTable,

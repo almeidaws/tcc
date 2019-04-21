@@ -4,14 +4,19 @@
   "description": "TCC from UCB by Renan e Gustavo",
   "main": "index.js",
   "dependencies": {
-    "@babel/polyfill": "^7.2.5",
+    "@babel/plugin-transform-runtime": "^7.4.3",
+    "@babel/polyfill": "^7.4.3",
+    "@babel/runtime": "^7.4.3",
+    "acorn": "^6.1.1",
     "aws-sdk": "^2.422.0",
     "bcrypt": "^3.0.3",
     "body-parser": "^1.18.3",
     "connect-pg-simple": "^5.0.0",
     "express": "^4.16.4",
+    "express-fileupload": "^1.1.4",
     "http-errors": "^1.7.1",
     "joi": "^14.3.1",
+    "normalize-for-search": "^2.1.0",
     "pg": "^7.8.0",
     "request": "^2.88.0",
     "underscore": "^1.9.1",
@@ -37,7 +42,8 @@
     "webpack-cli": "^3.2.3"
   },
   "scripts": {
-    "test": "jest --runInBand",
+    "build": "npx webpack",
+    "test": "export $(cat .env | xargs); NODE_ENV=test; jest --runInBand",
     "start": "nodemon --exec 'npx webpack && heroku local'"
   },
   "repository": {
