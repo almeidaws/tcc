@@ -12,6 +12,10 @@ const createMigrationTable = async (pool) => {
     await pool.query(createMigrationTableSQL);
 };
 
+/**
+ * Undo all migrations from the database from the last to the first.
+ * It was created mainly to be used in automatic tests.
+ */
 const rollbackMigrations = async () => {
     const pool = Database.pool();
 
@@ -23,6 +27,10 @@ const rollbackMigrations = async () => {
     console.log('Rollback done');
 };
 
+/**
+ * Calculates not executed migrations in a given database and execute them
+ * to update the database accordingly.
+ */
 const runMigrations = async () => {
     const pool = Database.pool();
     await createMigrationTable(pool);
