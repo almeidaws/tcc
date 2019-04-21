@@ -164,6 +164,55 @@ On error:
 
 When logging out you are actually deleting your the Access Token. This Access Token must be supplied on the endpoint.
 
+
+## Authors
+
+This section contains an explanation of each endpoint used to handle users. 
+
+### Adding
+
+```
+Route: /authors
+Method: POST
+Headers: 
+    Content-Type: application/x-www-form-urlencoded
+
+Body:
+    name: <string> // Author's name
+
+On success:
+    Status: 200
+```
+
+### Getting all
+
+```
+Route: /authors
+Method: GET
+Headers: 
+    Content-Type: application/x-www-form-urlencoded
+
+Body:
+    
+
+On success:
+    Status: 200
+```
+
+The return is something like this:
+```json
+[
+    {
+        "id": 2,
+        "name": "Zé Ramalho"
+    },
+    {
+        "id": 1,
+        "name": "Gustavo"
+    }
+]
+```
+
 # Database Modeling
 
 [Database modeling v1][3]\
