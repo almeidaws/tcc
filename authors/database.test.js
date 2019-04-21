@@ -58,6 +58,22 @@ describe('Testing Author table', async () => {
         return expect(queriedAuthor).toEqual(addedAuthor);
     });        
 
+    it('Checks if authors are retrieved from database', async () => {
+
+        const author = new Author("Gustavo");
+        const author2 = new Author("Renan");
+        const author3 = new Author("Braga");
+        const queries = await connect();
+        await queries.addAuthor(author);
+        await queries.addAuthor(author2);
+        await queries.addAuthor(author3);
+        const authors = await queries.getAllAuthors();
+        author.id = 1;
+        author2.id = 2;
+        author3.id = 3;
+        expect(authors).toEqual([author, author2, author3]);
+    });        
+
     afterEach(async () => {
         await deleteAuthorTable();
     });
