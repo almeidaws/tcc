@@ -324,7 +324,6 @@ On error:
 ```
 
 **:id**: you must replace this by music's id.
-```
 
 # Database Modeling
 
