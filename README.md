@@ -213,6 +213,119 @@ The return is something like this:
 ]
 ```
 
+## Musics
+
+This section contains an explanation of each endpoint used to handle users. 
+
+### Adding
+
+```
+Route: /musics
+Method: POST
+Headers: 
+    Content-Type: application/form-data
+
+Body:
+    name: <string> // Music's name
+    author: <number> // First author ID
+    author: <number> // Second author ID
+    author: <number> // Nth author ID
+    genre: <number> // First genre ID
+    genre: <number> // Second genre ID
+    genre: <number> // Nth genre ID
+    music: <file> // Music's file
+
+On success:
+    Status: 201
+    
+On error:
+    Status: 409 // If already there's a music with this name, authors and file extension.
+```
+### Getting all musics
+
+```
+Route: /musics
+Method: GET
+Headers: 
+    Content-Type: application/x-www-form-urlencoded
+
+Body:
+
+On success:
+    Status: 200
+    
+On error:
+
+```
+
+**:id**: you must replace this by music's id.
+
+The return from a successful request is something like this:
+```json
+[
+    {
+        "id": 3,
+        "name": "Do Seu Lado",
+        "url": "https://s3.amazonaws.com/miraculouswebsite/awsomefile.ogg"
+    }, 
+    {
+        "id": 4,
+        "name": "Earth",
+        "url": "https://s3.amazonaws.com/miraculouswebsite/avangers.mp3"
+    }
+]
+```
+
+### Getting by ID
+
+```
+Route: /musics/:id
+Method: GET
+Headers: 
+    Content-Type: application/x-www-form-urlencoded
+
+Body:
+
+On success:
+    Status: 201
+    
+On error:
+    Status: 401 // If you forgot to supply music's ID.
+    Status: 404 // If there's no music with that ID.
+```
+
+**:id**: you must replace this by music's id.
+
+The return from a successful request is something like this:
+```json
+{
+    "id": 3,
+    "name": "Do Seu Lado",
+    "url": "https://s3.amazonaws.com/miraculouswebsite/awsomefile.ogg"
+}
+```
+
+### Deleting by ID
+
+```
+Route: /musics/:id
+Method: DELETE
+Headers: 
+    Content-Type: application/x-www-form-urlencoded
+
+Body:
+
+On success:
+    Status: 200
+    
+On error:
+    Status: 400 // If you forgot to supply music's ID or if the ID isn't a number.
+    Status: 404 // If there's no music with that ID to be deleted.
+```
+
+**:id**: you must replace this by music's id.
+```
+
 # Database Modeling
 
 [Database modeling v1][3]\
