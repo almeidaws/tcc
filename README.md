@@ -166,13 +166,13 @@ When logging out you are actually deleting your the Access Token. This Access To
 
 # Database Modeling
 
-[Database modeling v1][3]
-[Database modeling v2][4]
-[Database modeling v3][5]
-[Database modeling v4][6]
-[Database modeling v5][7]
-[Database modeling v6][8]
-[Database modeling v7][1]
+[Database modeling v1][3]\
+[Database modeling v2][4]\
+[Database modeling v3][5]\
+[Database modeling v4][6]\
+[Database modeling v5][7]\
+[Database modeling v6][8]\
+[Database modeling v7][1]\
 [Database modeling v8][2]
 
 [8]: https://bit.ly/2GjlpBL
