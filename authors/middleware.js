@@ -37,4 +37,16 @@ async function getAll(request, response, next) {
     }
 }
 
-module.exports = { add, getAll }
+async function getByID(request, response, next) {
+    try {
+        if (!request.params.id) throw createError(401, `The author's id is missing`);
+        const queries = await authorsDatabase.connect();
+        const author = await queries.getAuthorByID(request.params.id);
+
+        response.status(200).json(author).end();
+    } catch (error) {
+        next(error);
+    }
+}
+
+module.exports = { add, getAll, getByID }
