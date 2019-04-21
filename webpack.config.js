@@ -1,3 +1,5 @@
+if (!process.env.NODE_ENV) throw new Error('You must set the NODE_ENV environment variable');
+
 const path = require('path');
 
 const DEV_DIR = "./dev";

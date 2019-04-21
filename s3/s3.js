@@ -1,3 +1,10 @@
+if (!process.env.NODE_ENV) throw new Error('You must set the NODE_ENV environment variable');
+if (!process.env.AWS_ACCESS_KEY) throw new Error('You must set the AWS_ACCESS_KEY environment variable');
+if (!process.env.AWS_ACCESS_KEY) throw new Error('You must set the AWS_ACCESS_KEY environment variable');
+if (!process.env.AWS_SECRET_ACCESS_KEY) throw new Error('You must set the AWS_SECRET_ACCESS_KEY environment variable');
+if (!process.env.S3_BUCKET_PROD && !process.env.S3_BUCKET_TEST && !process.env.S3_BUCKET_DEV) 
+    throw new Error('You must set the S3_BUCKET_PROD, S3_BUCKET_TEST or S3_BUCKET_DEV environment variable');
+
 const aws = require('aws-sdk');
 const { Readable } = require('stream');
 const s3 = new aws.S3({ accessKeyId: process.env.AWS_ACCESS_KEY, secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY });

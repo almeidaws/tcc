@@ -1,3 +1,5 @@
+if (!process.env.NODE_ENV) throw new Error('You must set the NODE_ENV environment variable');
+
 /**
  * @fileOverview contains configurations about all the project. It's useful because you can
  * change project's behavior on a central point without accessig a differente file for

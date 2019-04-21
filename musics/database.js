@@ -1,5 +1,7 @@
 'use strict';
 
+if (!process.env.NODE_ENV) throw new Error('You must set the NODE_ENV environment variable');
+
 require("@babel/polyfill");
 const _ = require('underscore');
 const createError = require('http-errors');
