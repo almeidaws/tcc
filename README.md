@@ -213,6 +213,42 @@ The return is something like this:
 ]
 ```
 
+
+### Getting by ID
+
+```
+Route: /authors/:id
+Method: GET
+Headers: 
+    Content-Type: application/x-www-form-urlencoded
+
+Body:
+    
+
+On success:
+    Status: 200
+    
+On failure:
+    Status: 401 // if ID is missing
+    Status: 404 // If there's no author with that ID
+```
+
+**:id**: you must replace this by author's id.
+
+The return is something like this:
+```json
+[
+    {
+        "id": 2,
+        "name": "Zé Ramalho"
+    },
+    {
+        "id": 1,
+        "name": "Gustavo"
+    }
+]
+```
+
 ## Musics
 
 This section contains an explanation of each endpoint used to handle users. 
