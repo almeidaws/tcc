@@ -39,13 +39,20 @@ CREATE TABLE IF NOT EXISTS Author (
 );
 `;
 
-/** 
- * The SQL query used to delete the Author table. It was created to be used
+/** The SQL query used to delete the Author table. It was created to be used
  * in automatic tests.
  * @constant
  * @type {string}
  */
 const deleteAuthorTableSQL = "DROP TABLE Author";
+
+/** 
+ * The SQL query used to delete all rows from Author table. It was
+ * created to be used in automatic tests.
+ * @constant
+ * @type {string}
+ */
+const cleanAuthorTableSQL = "DELETE FROM Author";
 
 /** 
  * The SQL query used to get an author by ID. It was created to be used
@@ -66,4 +73,5 @@ module.exports = {
     getAuthorByIDSQL,
     createAuthorTableSQL,
     deleteAuthorTableSQL,
+    cleanAuthorTableSQL,
 };

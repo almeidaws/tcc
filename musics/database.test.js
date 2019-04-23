@@ -142,6 +142,29 @@ describe('Testing Music table', async () => {
         await expect(queries.addMusic(music2)).rejects.toThrow();
     });
 
+    it(`Checks it's possible to get all musics by author ID`, async () => {
+
+        // Create samples
+        const music = new Music('Do Seu Lado', [3, 4], [1], Buffer.from('FOO'), ".mp3")
+        const music2 = new Music('Do Seu Lado2', [3, 4], [1], Buffer.from('FOO'), ".mp3")
+
+        // Add samples to the database
+        const authorQueries = await connectAuthor();
+        const queries = await connect();
+        await queries.addMusic(music);
+        await queries.addMusic(music2);
+
+        // Retrieve them back and check if they are equal to the sent samples
+        const originalMusics = [music, music2];
+        const queriedMusics = await queries.getMusicsByAuthor(1);
+        for (let i = 0; i < 2; i++) {
+            const music = queriedMusics[i];
+            const original = originalMusics[i];
+            expect(music.name).toBe(original.name);
+            expect(music.fileS3Key).toBe(original.fileS3Key);
+        }
+    });
+
     afterEach(async () => {
         await deleteMusicTable();
         await deleteAuthorTable();

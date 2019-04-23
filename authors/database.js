@@ -9,6 +9,7 @@ const Joi = require('joi');
 const pool = Database.pool();
 const { addAuthorSQL, 
         deleteAuthorSQL,
+        cleanAuthorTableSQL,
         getAllAuthorsSQL,
         getAuthorByIDSQL,
         createAuthorTableSQL,
@@ -138,6 +139,7 @@ const deleteAuthor = async (id) => {
 
 const createAuthorTable = async () => pool.query(createAuthorTableSQL);
 const deleteAuthorTable = async () => pool.query(deleteAuthorTableSQL);
+const cleanAuthorTable = async () => pool.query(cleanAuthorTableSQL);
 
 const connect = async () => {
     const queries = { 
@@ -166,5 +168,6 @@ module.exports = {
     DDL: {
         createAuthorTable,
         deleteAuthorTable,
+        cleanAuthorTable,
     },
 };

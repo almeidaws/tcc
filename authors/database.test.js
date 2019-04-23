@@ -4,12 +4,23 @@ const {
     Author, 
     connect, 
     disconnect,
-    DDL: { 
-        createAuthorTable, 
-        deleteAuthorTable, 
-    }
+    DDL: { cleanAuthorTable }
 } = require('./database.js');
+const { 
+    Music, 
+    connect: connectMusics, 
+    disconnect: disconnectMusics,
+    DDL: { 
+        createMusicTable, 
+        deleteMusicTable, 
+    }
+} = require('../musics/database.js');
+const { runMigrations, rollbackMigrations } = require('../migrations/run.js');
 const uuidv4 = require('uuid/v4');
+
+beforeAll(async () => {
+  await runMigrations();
+});
 
 describe('Testing Author type', () => {
     it("Checks if pseudo overriding of Author's constructor is working", () => {
@@ -28,7 +39,8 @@ describe('Testing Author type', () => {
 
 describe('Testing Author table', async () => {
     beforeEach(async () => {
-        await createAuthorTable();
+        await cleanAuthorTable();
+        // await createMusicTable();
     });
     
     describe('Checks invalid authors', async () => {
@@ -68,18 +80,46 @@ describe('Testing Author table', async () => {
         await queries.addAuthor(author2);
         await queries.addAuthor(author3);
         const authors = await queries.getAllAuthors();
-        author.id = 1;
-        author2.id = 2;
-        author3.id = 3;
-        expect(authors).toEqual([author, author2, author3]);
+        const originals = [author, author2, author3];
+        authors.forEach((author, index) => expect(author.name).toBe(originals[index].name));
     });        
 
+    // it("Checks if an author isn't delete if there's music associated with it", async () => {
+
+    //     // Create samples
+    //     const author = new Author("Gustavo");
+    //     const music = new Music('Do Seu Lado', [3, 4], [1], Buffer.from('FOO'), ".mp3")
+
+    //     // Add data to the database
+    //     const queries = await connect();
+    //     queries.addAuthor(author);
+    //     const musicQueries = await connectMusics();
+    //     await musicQueries.addMusic(music);
+
+    //     // This deletion must fail because there's a music associated
+    //     // with that author
+    //     const obstacles =  await queries.deleteAuthor(1);
+    //     const obstacle = obstacles[0];
+    //     expect(obstacle.name).toBe(music.name);
+    //     expect(obstacle.fileS3Key).toBe(music.fileS3Key);
+
+    //     // this delete of author must succeed because there's no
+    //     // more music associated with that author.
+    //     await musicQueries.deleteMusic(1);
+    //     const emptyArray = await queries.deleteAuthor(1);
+    //     expect(emptyArray.length).toBe(0);
+    // });
+
     afterEach(async () => {
-        await deleteAuthorTable();
+        // await deleteMusicTable();
     });
 
 });
 
 afterAll(async () => {
+    await cleanAuthorTable();
+    // await createMusicTable();
+    await rollbackMigrations();
     await disconnect();
+    await disconnectMusics();
 });
