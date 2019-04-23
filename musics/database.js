@@ -32,6 +32,7 @@ const { addMusicSQL,
         deleteMusicGenreSQL,
         deleteMusicSQL,
         getMusicByIDSQL,
+        getMusicsByAuthorSQL,
         createMusicTableSQL,
         createMusicGenreTableSQL,
         createMusicAuthorTableSQL, 
@@ -187,6 +188,22 @@ const getMusicByID = async (id) => {
 };
 
 /**
+ * Retrieves all musics from the database with a given author ID.
+ * 
+ * This method is asyncronous, so you can use the Promise/async await syntax.
+ * @returns {Array<Music>} musics with that author ID or an empty array if there's no one.
+ */
+const getMusicsByAuthor = async (authorID) => {
+    const getMusicsByAuthorConfig = {
+        text: getMusicsByAuthorSQL,
+        values: [authorID],
+    };
+
+    const result = await pool.query(getMusicsByAuthorConfig);
+    return result.rows.map(row => new Music(row.id, row.name, row.files3key));
+};
+
+/**
  * Retrieves all musics from database as an array of Music type.
  *
  * This method is async, so you should use the async/await or Promise
@@ -284,7 +301,9 @@ const connect = async () => {
         addMusic, 
         getMusicByID,
         getAllMusics,
-        deleteMusic };
+        getMusicsByAuthor,
+        deleteMusic,
+    };
     return queries;
 };
 

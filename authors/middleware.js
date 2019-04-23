@@ -49,4 +49,20 @@ async function getByID(request, response, next) {
     }
 }
 
-module.exports = { add, getAll, getByID }
+async function deleteAuthor(request, response, next) {
+    try {
+        if (!request.params.id) throw createError(401, `The author's id is missing`);
+        const queries = await authorsDatabase.connect();
+        const relatedMusics = await queries.deleteAuthor(request.params.id);
+
+        if (relatedMusics.length > 0) {
+            const obstacles = relatedMusics.map(music => ({ id: music.id, name: music.name, url: music.calculateFileURL() }));
+            response.status(403).json(obstacles).end();
+        }
+        response.status(200).end();
+    } catch (error) {
+        next(error);
+    }
+}
+
+module.exports = { add, getAll, getByID, deleteAuthor }

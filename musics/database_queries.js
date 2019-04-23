@@ -38,6 +38,11 @@ const findMusicByNormalizedFileKeySQL =
 `SELECT (ID, Name, fileS3Key) FROM Music WHERE fileS3Key = $1;`;
 
 const getMusicByIDSQL = "SELECT ID, Name, fileS3Key FROM Music WHERE ID = $1;"
+const getMusicsByAuthorSQL = `
+SELECT ID, Name, fileS3Key 
+FROM Music as M INNER JOIN MusicAuthor AS MA ON M.ID = MA.Music 
+WHERE MA.Author = $1;
+`;
 
 const addMusicSQL = 'INSERT INTO Music (Name, fileS3Key) VALUES ($1, $2) RETURNING ID';
 const addMusicAuthorSQL = 'INSERT INTO MusicAuthor (Music, Author) VALUES ($1, $2)';
@@ -57,6 +62,7 @@ const deleteMusicSQL = "DELETE FROM Music WHERE ID = $1";
  */
 module.exports = { 
     getMusicByIDSQL,
+    getMusicsByAuthorSQL,
     createMusicTableSQL,
     createMusicGenreTableSQL,
     createMusicAuthorTableSQL,

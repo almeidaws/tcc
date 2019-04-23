@@ -31,7 +31,8 @@ const {
 const { 
     add: handleAddAuthor,
     getAll: handleGetAllAuthors,
-    getByID: handleGetAuthor
+    getByID: handleGetAuthor,
+    deleteAuthor: handleDeleteAuthor,
 } = require('./authors/middleware.js');
 
 // Run pending migrations
@@ -59,6 +60,7 @@ app.delete('/musics/:id', handleDeleteMusic);
 app.post('/authors', handleAddAuthor);
 app.get('/authors', handleGetAllAuthors);
 app.get('/authors/:id', handleGetAuthor);
+app.delete('/authors/:id', handleDeleteAuthor);
 
 //SERVER STARTING
 app.use(express.static(path.join(__dirname, 'prod/')))
