@@ -48,7 +48,7 @@ class Author {
     validate() {
         const scheme = {
             id: Joi.number().integer().min(1).allow(null).required(),
-            name: Joi.string().min(3).max(30).required(),
+            name: Joi.string().min(3).max(40).required(),
         };
         return Joi.validate(this, scheme);
     }

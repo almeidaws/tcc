@@ -7,6 +7,7 @@ const {
     DDL: { 
         createMusicTable, 
         deleteMusicTable, 
+        cleanUpMusicTable,
     }
 } = require('./database.js');
 const {
@@ -19,33 +20,36 @@ const {
     }
 } = require('../authors/database.js');
 const { runMigrations, rollbackMigrations } = require('../migrations/run.js');
+const uuidv4 = require('uuid/v4');
 
-const createExampleMusic = () => new Music('Do Seu Lado', [3, 4], [1, 2], Buffer.from('FOO'), ".mp3");
-const populateAuthorTable = async () => {
-    const author1 = new Author("Sandy e Junior");
-    const author2 = new Author("Zezé Di Camargo e Luciano");
+const createAuthor = async () => {
+    const author1 = new Author(uuidv4());
+    const queriesAuthor = await connectAuthor();
+    const addedAuthor = await queriesAuthor.addAuthor(author1);
+    return addedAuthor;
+}
 
-    const queries = await connectAuthor();
-    await queries.addAuthor(author1);
-    await queries.addAuthor(author2);
-};
+const createBuffer = () => Buffer.from(uuidv4()); 
+
+const createMusic = async () => {
+    const author1 = await createAuthor();
+    const author2 = await createAuthor();
+    return new Music(uuidv4(), [1, 2], [author1.id, author2.id], createBuffer(), '.mp3');
+}
 
 beforeAll(async () => {
   await runMigrations();
 });
 
 describe('Testing Music table', async () => {
-    beforeEach(async () => {
-        await createAuthorTable();
-        await populateAuthorTable();
-        await createMusicTable();
-    });
     
     describe('Checks invalid musics', async () => {
         it('Checks if musics with invalid name aren\'t added to the database', async () => {
             const genres = [1, 3];
-            const authors = [1, 2];
-            const fileBuffer = Buffer.from('My Awsome Buffer');
+            const author1 = await createAuthor();
+            const author2 = await createAuthor();
+            const authors = [author1.id, author2.id];
+            const fileBuffer = createBuffer();
             const extension = ".mp3";
 
             const emptyName = new Music("", genres, authors, fileBuffer, extension);
@@ -62,8 +66,11 @@ describe('Testing Music table', async () => {
         });
 
         it('Checks if musics with invalid genres aren\'t added to the database', async () => {
-            const authors = [1, 2];
-            const fileBuffer = Buffer.from('My Awsome Buffer');
+
+            const author1 = await createAuthor();
+            const author2 = await createAuthor();
+            const authors = [author1.id, author2.id];
+            const fileBuffer = createBuffer();
             const extension = ".mp3";
 
             const emptyGenres = new Music("Do Seu Lado", [], authors, fileBuffer, extension);
@@ -75,7 +82,7 @@ describe('Testing Music table', async () => {
 
         it('Checks if musics with invalid authors aren\'t added to the database', async () => {
             const genres = [1, 3];
-            const fileBuffer = Buffer.from('My Awsome Buffer');
+            const fileBuffer = createBuffer();
             const extension = ".mp3";
 
             const emptyAuthors = new Music("Do Seu Lado", genres, [], fileBuffer, extension);
@@ -87,11 +94,12 @@ describe('Testing Music table', async () => {
     });
     
     it('Checks if all musics are returned from database', async () => {
-        const numberOfExamples = 10;
+        expect.assertions(1);
 
         const musics = [];
+        const numberOfExamples = 10;
         for (let i = 0; i < numberOfExamples; i++) {
-            const music = createExampleMusic();
+            const music = await createMusic();
             music.name += i;
             music.calculateFileS3Key();
             musics.push(music);
@@ -102,15 +110,16 @@ describe('Testing Music table', async () => {
             await queries.addMusic(musics[i]);
             
         const retrievedMusics = await queries.getAllMusics();
-
-        retrievedMusics.forEach((music, i) => {
-            expect(music.name).toBe(musics[i].name);
-            expect(music.fileS3Key).toBe(musics[i].fileS3Key);
-        });
+        // The number can't be exactly equal to 'numberOfExamples' because the database could have
+        // other musics added to it.
+        expect(retrievedMusics.length).toBeGreaterThanOrEqual(numberOfExamples);
     });        
 
     it(`Checks if a music is deleted from the database.`, async () => {
-        const music = createExampleMusic();
+        expect.assertions(2);
+
+        // Create example music
+        const music = await createMusic();
         const queries = await connect();
         const addedMusic = await queries.addMusic(music);
 
@@ -123,58 +132,56 @@ describe('Testing Music table', async () => {
 
     it(`Checks equal musics aren't added to the database`, async () => {
         expect.assertions(1);
+        const music = await createMusic();
 
-        const music = createExampleMusic();
-        const music2 = createExampleMusic();
         const queries = await connect();
         await queries.addMusic(music);
-        await expect(queries.addMusic(music2)).rejects.toThrow();
+        await expect(queries.addMusic(music)).rejects.toThrow();
     });
 
     it(`Checks if a music are added to the database`, async () => {
         expect.assertions(1);
 
-        const music = createExampleMusic();
-        const music2 = createExampleMusic();
-
+        const music = await createMusic();
         const queries = await connect();
-        await queries.addMusic(music);
-        await expect(queries.addMusic(music2)).rejects.toThrow();
+        const queried = await queries.addMusic(music);
+        expect(queried.name).toBe(music.name);
     });
 
     it(`Checks it's possible to get all musics by author ID`, async () => {
+        expect.assertions(4);
 
-        // Create samples
-        const music = new Music('Do Seu Lado', [3, 4], [1], Buffer.from('FOO'), ".mp3")
-        const music2 = new Music('Do Seu Lado2', [3, 4], [1], Buffer.from('FOO'), ".mp3")
-
-        // Add samples to the database
-        const authorQueries = await connectAuthor();
+        const author = await createAuthor();
+        const fileBuffer = createBuffer();
+        const extension = ".mp3";
+        const music1 = new Music(uuidv4(), [1, 2], [author.id], fileBuffer, extension);
+        const music2 = new Music(uuidv4(), [1, 2], [author.id], fileBuffer, extension);
         const queries = await connect();
-        await queries.addMusic(music);
+        await queries.addMusic(music1);
         await queries.addMusic(music2);
 
-        // Retrieve them back and check if they are equal to the sent samples
-        const originalMusics = [music, music2];
-        const queriedMusics = await queries.getMusicsByAuthor(1);
+        const originalMusics = [music1, music2];
+        const queriedMusics = await queries.getMusicsByAuthor(author.id);
+
         for (let i = 0; i < 2; i++) {
-            const music = queriedMusics[i];
+            var queried = queriedMusics[i];
             const original = originalMusics[i];
-            expect(music.name).toBe(original.name);
-            expect(music.fileS3Key).toBe(original.fileS3Key);
+            expect(queried.name).toBe(original.name);
+            expect(queried.fileS3Key).toBe(original.fileS3Key);
         }
     });
 
-    afterEach(async () => {
-        await deleteMusicTable();
-        await deleteAuthorTable();
-    });
 });
 
 afterAll(async () => {
-    await createAuthorTable();
-    await createMusicTable();
-    await rollbackMigrations();
+    try {
+        await cleanUpMusicTable();
+        await rollbackMigrations();
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+
     await disconnectAuthor();
     await disconnect();
 });

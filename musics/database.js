@@ -31,6 +31,9 @@ const { addMusicSQL,
         deleteMusicAuthorSQL,
         deleteMusicGenreSQL,
         deleteMusicSQL,
+        cleanUpMusicAuthorTableSQL,
+        cleanUpMusicGenreTableSQL,
+        cleanUpMusicTableSQL,
         getMusicByIDSQL,
         getMusicsByAuthorSQL,
         createMusicTableSQL,
@@ -101,9 +104,9 @@ class Music {
     validate() {
         const scheme = {
             id: Joi.number().integer().min(1).allow(null).required(),
-            name: Joi.string().min(3).max(30).required(),
-            genres: Joi.array().items(Joi.number().min(0).max(15)).min(1).max(4).required(),
-            authors: Joi.array().items(Joi.number().min(1).max(25)).min(1).max(4).required(),
+            name: Joi.string().min(3).max(40).required(),
+            genres: Joi.array().items(Joi.number().min(0)).min(1).max(4).required(),
+            authors: Joi.array().items(Joi.number().min(1)).min(1).max(4).required(),
             extension: Joi.string().min(1).max(4).required(),
             fileBuffer: Joi.object().optional(),
             fileS3Key: Joi.string().min(1).max(100).required(),
@@ -323,6 +326,12 @@ const deleteMusicTable = async () => {
     await pool.query(deleteMusicTableSQL);
 }
 
+const cleanUpMusicTable = async () => {
+    await pool.query(cleanUpMusicGenreTableSQL);
+    await pool.query(cleanUpMusicAuthorTableSQL);
+    await pool.query(cleanUpMusicTableSQL);
+}
+
 /**
  * Exports an object that currently can be used to constructs users and establishes
  * a connection with the database.
@@ -336,5 +345,6 @@ module.exports = {
     DDL: { 
         createMusicTable, 
         deleteMusicTable,
+        cleanUpMusicTable,
     },
 };
