@@ -4,7 +4,7 @@ const {
     Author, 
     connect, 
     disconnect,
-    DDL: { cleanAuthorTable }
+    DDL: { cleanUpAuthorTable }
 } = require('./database.js');
 const { 
     Music, 
@@ -13,10 +13,18 @@ const {
     DDL: { 
         createMusicTable, 
         deleteMusicTable, 
+        cleanUpMusicTable,
     }
 } = require('../musics/database.js');
 const { runMigrations, rollbackMigrations } = require('../migrations/run.js');
 const uuidv4 = require('uuid/v4');
+
+const createAuthor = () => new Author(uuidv4());
+const createBuffer = () => Buffer.from(uuidv4()); 
+const createMusic = (authors) => {
+    return new Music(uuidv4(), [1, 2], authors.map(author => author.id), createBuffer(), '.mp3');
+}
+
 
 beforeAll(async () => {
   await runMigrations();
@@ -38,11 +46,6 @@ describe('Testing Author type', () => {
 });
 
 describe('Testing Author table', async () => {
-    beforeEach(async () => {
-        await cleanAuthorTable();
-        // await createMusicTable();
-    });
-    
     describe('Checks invalid authors', async () => {
         it('Checks if authors with invalid name aren\'t added to the database', async () => {
 
@@ -63,7 +66,7 @@ describe('Testing Author table', async () => {
     it('Checks if authors are added to the database', async () => {
         expect.assertions(1);
 
-        const author = new Author("Gustavo");
+        const author = createAuthor();
         const queries = await connect();
         const addedAuthor = await queries.addAuthor(author);
         const queriedAuthor = await queries.getAuthorByID(addedAuthor.id);
@@ -72,43 +75,46 @@ describe('Testing Author table', async () => {
 
     it('Checks if authors are retrieved from database', async () => {
 
-        const author = new Author("Gustavo");
-        const author2 = new Author("Renan");
-        const author3 = new Author("Braga");
+        const author = createAuthor();
+        const author2 = createAuthor();
+        const author3 = createAuthor();
         const queries = await connect();
         await queries.addAuthor(author);
         await queries.addAuthor(author2);
         await queries.addAuthor(author3);
         const authors = await queries.getAllAuthors();
         const originals = [author, author2, author3];
-        authors.forEach((author, index) => expect(author.name).toBe(originals[index].name));
+        const names = authors.map(author => author.name);
+        expect(names.includes(author.name)).toBe(true);
+        expect(names.includes(author2.name)).toBe(true);
+        expect(names.includes(author3.name)).toBe(true);
     });        
 
-    // it("Checks if an author isn't delete if there's music associated with it", async () => {
+    it("Checks if an author isn't delete if there's music associated with it", async () => {
 
-    //     // Create samples
-    //     const author = new Author("Gustavo");
-    //     const music = new Music('Do Seu Lado', [3, 4], [1], Buffer.from('FOO'), ".mp3")
+        // Create samples
+        const author = createAuthor();
+        const queries = await connect();
+        const addedAuthor = await queries.addAuthor(author);
+        const music = createMusic([addedAuthor]);
+        const musicQueries = await connectMusics();
+        const addedMusic = await musicQueries.addMusic(music);
 
-    //     // Add data to the database
-    //     const queries = await connect();
-    //     queries.addAuthor(author);
-    //     const musicQueries = await connectMusics();
-    //     await musicQueries.addMusic(music);
+        // This deletion must fail because there's a music associated
+        // with that author
+        const obstacles =  await queries.deleteAuthor(addedAuthor.id);
+        // The obstacle to deletion is the music...
+        const obstacle = obstacles[0];
+        expect(obstacle.name).toBe(addedMusic.name);
+        expect(obstacle.fileS3Key).toBe(addedMusic.fileS3Key);
 
-    //     // This deletion must fail because there's a music associated
-    //     // with that author
-    //     const obstacles =  await queries.deleteAuthor(1);
-    //     const obstacle = obstacles[0];
-    //     expect(obstacle.name).toBe(music.name);
-    //     expect(obstacle.fileS3Key).toBe(music.fileS3Key);
-
-    //     // this delete of author must succeed because there's no
-    //     // more music associated with that author.
-    //     await musicQueries.deleteMusic(1);
-    //     const emptyArray = await queries.deleteAuthor(1);
-    //     expect(emptyArray.length).toBe(0);
-    // });
+        // This delete of author must succeed because there's no
+        // more music associated with that author.
+        await musicQueries.deleteMusic(addedMusic.id);
+        // This is the array of musics related with this author, which must be zero
+        const emptyArray = await queries.deleteAuthor(addedAuthor.id);
+        expect(emptyArray.length).toBe(0);
+    });
 
     afterEach(async () => {
         // await deleteMusicTable();
@@ -117,8 +123,8 @@ describe('Testing Author table', async () => {
 });
 
 afterAll(async () => {
-    await cleanAuthorTable();
-    // await createMusicTable();
+    await cleanUpAuthorTable();
+    await cleanUpMusicTable();
     await rollbackMigrations();
     await disconnect();
     await disconnectMusics();

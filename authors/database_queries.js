@@ -52,7 +52,7 @@ const deleteAuthorTableSQL = "DROP TABLE Author";
  * @constant
  * @type {string}
  */
-const cleanAuthorTableSQL = "DELETE FROM Author";
+const cleanUpAuthorTableSQL = "DELETE FROM Author";
 
 /** 
  * The SQL query used to get an author by ID. It was created to be used
@@ -73,5 +73,5 @@ module.exports = {
     getAuthorByIDSQL,
     createAuthorTableSQL,
     deleteAuthorTableSQL,
-    cleanAuthorTableSQL,
+    cleanUpAuthorTableSQL,
 };
