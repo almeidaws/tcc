@@ -1,4 +1,5 @@
 import Utils from './Utils.js';
+import $ from 'jquery';
 
 const U = Utils;
 
