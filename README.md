@@ -184,6 +184,13 @@ On success:
     Status: 200
 ```
 
+The return is something like this:
+```json
+{ "id": 3, "name": "Paula Fernandes" }
+```
+
+**Note**: if you add the same author twice, the first is returned.
+
 ### Getting all
 
 ```
@@ -309,6 +316,7 @@ On success:
     
 On error:
     Status: 409 // If already there's a music with this name, authors and file extension.
+    Status: 400 // If some field is missing. The error message contains the missing field.
 ```
 ### Getting all musics
 
