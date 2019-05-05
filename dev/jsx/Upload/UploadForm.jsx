@@ -19,6 +19,7 @@ const InputText = props => {
             <input id={props.id}
                    type="text" 
                    list={"datalist-" + randomNumber}
+                   name={props.name}
                    placeholder={props.placeHolder} 
                    onChange={props.onChange} 
                    value={props.value} 
@@ -46,8 +47,6 @@ const TrackInformation = props => {
                        onChange={props.onArtistNameChange}
                        value={props.artistName} />
             <Select title="Primary Genre *" 
-                    allowNoSelection={true} 
-                    noSelectionValue="No genre"
                     options={props.genres} 
                     onChange={props.onPrimaryGenreChange} />
             <Select title="Secondary Genre" 
@@ -57,7 +56,7 @@ const TrackInformation = props => {
                     onChange={props.onSecondaryGenreChange} />
             <div className="pro-form-btn text-center marger_top15">
                 <div className="ms_upload_btn">
-                    <a href="#" className="ms_btn">Upload Now</a>
+                    <a href="javascript:;" className="ms_btn" onClick={props.onUpload} >Upload Now</a>
                 </div>
             </div>
         </div>
@@ -78,11 +77,12 @@ const Upload = props => (
         <div className="ms_heading">
             <h2>Upload & Share Your Music With The World</h2>
         </div>
+        <ErrorMessages messages={props.errorMessages} />
         <div className="file-upload w-75">
           <div className="file-select">
             <div className="file-select-button" id="fileName">Choose File</div>
-            <div className="file-select-name" id="noFile">No file chosen...</div> 
-            <input type="file" name="chooseFile" id="chooseFile" />
+            <div className="file-select-name" id="noFile">{props.fileName ? props.fileName : "No file chosen..."}</div> 
+            <input onChange={props.onMusicFileChange} type="file" name="music" accept="audio/*" id="chooseFile" />
           </div>
         </div>
     </div>
@@ -100,17 +100,85 @@ class UploadForm extends React.Component {
                        artistName: "",
                        primaryGenre: null, 
                        secondaryGenre: null,
+                       musicFile: null,
                        authors: null,
                        genres: null,
                        errorMessages: [],
+                       fileErrorMessages: [],
+                       fileName: null,
                      };
 
         this.handleTrackName = this.handleTrackName.bind(this);
         this.handleArtistName = this.handleArtistName.bind(this);
         this.handlePrimaryGenre = this.handlePrimaryGenre.bind(this);
         this.handleSecondaryGenre = this.handleSecondaryGenre.bind(this);
+        this.handleUpload = this.handleUpload.bind(this);
+        this.handleMusicFile = this.handleMusicFile.bind(this);
 
         this.fetchAuthorsAndGenres();
+    }
+    handleUpload() {
+        // This test is done this way to avoid short-circuit.
+        // Each test also shows an error message to the user.
+        this.setState({ errorMessages: [], fileErrorMessages: [] });
+        const trackNameValid = this.isTrackNameValid();
+        const artistNameValid = this.isArtistNameValid();
+        const musicFileValid = this.isMusicFileSelected();
+        if (!trackNameValid || !artistNameValid || !musicFileValid) return;
+
+    }
+    isMusicFileSelected() {
+        if (this.state.musicFile === null) {
+            this.setState(prevState => {
+                const errorMessages = prevState.fileErrorMessages;
+                errorMessages.push(`You must add a music file`);
+                return { fileErrorMessages: errorMessages }
+            });
+            return false;
+         }
+         return true;
+    }
+    selectedArtist() {
+        const artists = this.state.authors.filter(author => author.name === this.state.artistName);
+        if (artists.length === 1) return artists[0].id;
+
+        const artist = this.state.artistName.trim();
+        if (artist.length === 0) return null;
+
+        return artist
+    }    
+    isArtistNameValid() {
+        const artist = this.selectedArtist();
+        if (artist === null) {
+            this.setState(prevState => {
+                const errorMessages = prevState.errorMessages;
+                errorMessages.push(`You must add an artist name`);
+                return { errorMessages }
+            });
+            return false;
+         }
+
+         if (typeof artist === 'string' && artist.length < 3) {
+            this.setState(prevState => {
+                const errorMessages = prevState.errorMessages;
+                errorMessages.push(`Artist name too short`);
+                return { errorMessages }
+            });
+            return false;
+         }
+         return true;
+    }
+    isTrackNameValid() {
+        const track = this.state.trackName.trim();
+        if (track.length < 3) {
+            this.setState(prevState => {
+                const errorMessages = prevState.errorMessages;
+                errorMessages.push(`Track name must have at least 3 characters`);
+                return { errorMessages }
+            });
+            return false;
+         }
+         return true;
     }
     fetchAuthorsAndGenres() {
         this.fetchAuthors();
@@ -140,6 +208,10 @@ class UploadForm extends React.Component {
             });
         });
     }
+    handleMusicFile(event) {
+        const file = event.target.files[0];
+        this.setState({ fileName: file.name, musicFile: file });
+    }
     handleTrackName(event) {
         this.setState({ trackName: event.target.value });
     }
@@ -158,7 +230,9 @@ class UploadForm extends React.Component {
         return (
             <form>
                 <div className="ms_upload_wrapper marger_top60">
-                    <Upload />
+                    <Upload errorMessages={this.state.fileErrorMessages} 
+                            fileName={this.state.fileName}
+                            onMusicFileChange={this.handleMusicFile} />
                     <div className="marger_top60">
                         <div className="ms_upload_box">
                             <div className="ms_heading">
@@ -176,7 +250,8 @@ class UploadForm extends React.Component {
                                               onArtistNameChange={this.handleArtistName}
                                               genres={this.state.genres}
                                               onPrimaryGenreChange={this.handlePrimaryGenre} 
-                                              onSecondaryGenreChange={this.handleSecondaryGenre} />
+                                              onSecondaryGenreChange={this.handleSecondaryGenre}
+                                              onUpload={this.handleUpload} />
                         </div>
                     </div>
                 </div>
