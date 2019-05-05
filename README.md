@@ -249,6 +249,39 @@ The return is something like this:
 ]
 ```
 
+## Genres
+
+This section contains an explanation of each endpoint used to handle genres. 
+
+### Getting all
+
+```
+Route: /genres
+Method: GET
+Headers: 
+    Content-Type: application/x-www-form-urlencoded
+
+Body:
+    
+
+On success:
+    Status: 200
+```
+
+The return is something like this:
+```json
+[
+    {
+        "id": 2,
+        "name": "Rock"
+    },
+    {
+        "id": 1,
+        "name": "Pop"
+    }
+]
+```
+
 ## Musics
 
 This section contains an explanation of each endpoint used to handle users. 
