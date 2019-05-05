@@ -131,6 +131,41 @@ class Requisition {
             error: (res) => {if (error) error(res.status) },
         }) 
     }
+
+    static addAuthor(name, success, error) {
+        const fetched = (author) => {
+            success(author);
+        }
+
+        $.ajax('authors/', {
+            method: 'POST',
+            success: fetched,
+            error: (res) => { if (error) error(res.status) },
+            data: { name },
+        }) 
+    }
+
+    static addMusic(name, author, genres, file, success, error) {
+        const fetched = () => { success(); }
+
+        Requisition.addAuthor(author, author => {
+            // Prepare data to be sent
+            const formData = new FormData();
+            formData.append('name', name);
+            formData.append('author', author.id);
+            genres.forEach(genre => formData.append('genre', genre));
+            formData.append('music', file);
+            
+            $.ajax('musics/', {
+                method: 'POST',
+                success: fetched,
+                processData: false,
+                contentType: false,
+                error: (res) => { if (error) error(res.status) },
+                data: formData
+            }) 
+        }, error);
+    }
 }
 
 export default Requisition;

@@ -16,10 +16,9 @@ async function add(request, response, next) {
         const author = new authorsDatabase.Author(body.name);
 
         const queries = await authorsDatabase.connect();
-        await queries.addAuthor(author);
+        const addedAuthor = await queries.addAuthor(author);
 
-        response.status(200);
-        response.end();
+        response.status(200).json({ id: addedAuthor.id, name: addedAuthor.name }).end();
     } catch (error) {
         next(error);
     }

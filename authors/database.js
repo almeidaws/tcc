@@ -68,6 +68,10 @@ const addAuthor = async (author) => {
     const { error, validatedUser } = author.validate();
     if (error) return Promise.reject(error);
     
+    const allAuthors = await getAllAuthors();
+    const matches = allAuthors.filter(a => a.name.toLowerCase() === author.name.toLowerCase());
+    if (matches.length > 0) return matches[0];
+
     // Add author in database
     const addAuthorConfig = {
         text: addAuthorSQL,

@@ -11,6 +11,11 @@ const { Readable } = require('stream');
  */
 async function add(request, response, next) {
     try {
+        if (!request.body.genre) throw createError(400, `Genres is missing`);
+        if (!request.body.author) throw createError(400, `Authors is missing`);
+        if (!request.files) throw createError(400, `There's no file`);
+        if (!request.files.music) throw createError(400, `There's no music file`);
+
         // Get's music metadata
         const body = request.body;
         const genres = toArrayOfNumbers(body.genre);
