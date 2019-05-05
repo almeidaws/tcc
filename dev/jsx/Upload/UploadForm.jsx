@@ -33,38 +33,31 @@ const InputText = props => {
 const TrackInformation = props => {
     if (props.rendered === false) return null;
     return (
-        <div className="marger_top60">
-            <div className="ms_upload_box">
-                <div className="ms_heading">
-                    <h1>Track Information</h1>
-                </div>
-                <div className="ms_pro_form">
-                    <InputText title="Track Name *" 
-                               placeHolder="Dream Your Moments" 
-                               onChange={props.onTrackNameChange} 
-                               value={props.trackName} />
-                    <InputText title="Artist’s Name *" 
-                               datalist={props.authors}
-                               id="authors"
-                               classes="awesomplete"
-                               placeHolder="Ava Cornish, Brian Hill"
-                               onChange={props.onArtistNameChange}
-                               value={props.artistName} />
-                    <Select title="Primary Genre *" 
-                            allowNoSelection={true} 
-                            noSelectionValue="No genre"
-                            options={props.genres} 
-                            onChange={props.onPrimaryGenreChange} />
-                    <Select title="Secondary Genre" 
-                            allowNoSelection={true} 
-                            noSelectionValue="No genre"
-                            options={props.genres} 
-                            onChange={props.onSecondaryGenreChange} />
-                    <div className="pro-form-btn text-center marger_top15">
-                        <div className="ms_upload_btn">
-                            <a href="#" className="ms_btn">Upload Now</a>
-                        </div>
-                    </div>
+        <div className="ms_pro_form">
+            <InputText title="Track Name *" 
+                       placeHolder="Dream Your Moments" 
+                       onChange={props.onTrackNameChange} 
+                       value={props.trackName} />
+            <InputText title="Artist’s Name *" 
+                       datalist={props.authors}
+                       id="authors"
+                       classes="awesomplete"
+                       placeHolder="Ava Cornish, Brian Hill"
+                       onChange={props.onArtistNameChange}
+                       value={props.artistName} />
+            <Select title="Primary Genre *" 
+                    allowNoSelection={true} 
+                    noSelectionValue="No genre"
+                    options={props.genres} 
+                    onChange={props.onPrimaryGenreChange} />
+            <Select title="Secondary Genre" 
+                    allowNoSelection={true} 
+                    noSelectionValue="No genre"
+                    options={props.genres} 
+                    onChange={props.onSecondaryGenreChange} />
+            <div className="pro-form-btn text-center marger_top15">
+                <div className="ms_upload_btn">
+                    <a href="#" className="ms_btn">Upload Now</a>
                 </div>
             </div>
         </div>
@@ -73,18 +66,11 @@ const TrackInformation = props => {
 
 const ErrorMessages = props => {
     if (!props.messages || props.messages.length === 0) return null;
-    return (
-        <div className="marger_top60">
-            <div className="ms_upload_box">
-                <div className="ms_heading">
-                    <h1>Track Information</h1>
-                </div>
-                { props.messages.map((message, index) => <div key={index} 
-                                                              className="my-5 alert alert-danger w-75 centered border-radius" 
-                                                              role="alert">{message}</div>) }
-            </div>
-        </div>
-    );
+    return props.messages.map((message, index) => {
+            return (<div key={index} 
+                        className="my-5 alert alert-danger w-75 centered border-radius" 
+                        role="alert">{message}</div>);
+        });
 };
 
 const Upload = props => (
@@ -104,16 +90,7 @@ const Upload = props => (
 
 const Loader = props => {
     if (props.rendered === false) return null;
-    return (
-        <div className="marger_top60">
-            <div className="ms_upload_box">
-                <div className="ms_heading">
-                    <h1>Track Information</h1>
-                </div>
-                <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>
-            </div>
-        </div>
-    );
+    return <div className="lds-ellipsis"><div></div><div></div><div></div><div></div></div>;
 };
 
 class UploadForm extends React.Component {
@@ -182,19 +159,26 @@ class UploadForm extends React.Component {
             <form>
                 <div className="ms_upload_wrapper marger_top60">
                     <Upload />
-                    <Loader rendered={(this.state.authors === null || 
-                                      this.state.genres === null) && 
-                                      this.state.errorMessages.length === 0} />
-                    <ErrorMessages messages={this.state.errorMessages} />
-                    <TrackInformation rendered={this.state.authors !== null && this.state.genres !== null}
-                                      trackName={this.state.trackName} 
-                                      onTrackNameChange={this.handleTrackName}
-                                      authors={this.state.authors}
-                                      artistName={this.state.artistName}
-                                      onArtistNameChange={this.handleArtistName}
-                                      genres={this.state.genres}
-                                      onPrimaryGenreChange={this.handlePrimaryGenre} 
-                                      onSecondaryGenreChange={this.handleSecondaryGenre} />
+                    <div className="marger_top60">
+                        <div className="ms_upload_box">
+                            <div className="ms_heading">
+                                <h1>Track Information</h1>
+                            </div>
+                            <Loader rendered={(this.state.authors === null || 
+                                              this.state.genres === null) && 
+                                              this.state.errorMessages.length === 0} />
+                            <ErrorMessages messages={this.state.errorMessages} />
+                            <TrackInformation rendered={this.state.authors !== null && this.state.genres !== null}
+                                              trackName={this.state.trackName} 
+                                              onTrackNameChange={this.handleTrackName}
+                                              authors={this.state.authors}
+                                              artistName={this.state.artistName}
+                                              onArtistNameChange={this.handleArtistName}
+                                              genres={this.state.genres}
+                                              onPrimaryGenreChange={this.handlePrimaryGenre} 
+                                              onSecondaryGenreChange={this.handleSecondaryGenre} />
+                        </div>
+                    </div>
                 </div>
             </form>
         );
