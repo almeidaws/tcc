@@ -27,7 +27,6 @@ async function add(request, response, next) {
 
 async function getAll(request, response, next) {
     try {
-        
         const queries = await authorsDatabase.connect();
         const authors = await queries.getAllAuthors();
 

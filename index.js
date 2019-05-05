@@ -34,6 +34,7 @@ const {
     getByID: handleGetAuthor,
     deleteAuthor: handleDeleteAuthor,
 } = require('./authors/middleware.js');
+const { getAll: handleGetAllGenres } = require('./genres/middleware.js');
 
 // Run pending migrations
 runMigrations();
@@ -43,24 +44,27 @@ app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: true }));
 app.use(fileUpload());
 
-// USER'S ROUTES
+// USERS' ROUTES
 app.post('/user/register', (request, response) => { response.status(301, '/users') });
 app.post('/users', handleUserRegister);
 app.get('/users/:id', handleViewUser);
 app.post('/users/tokens', handleUserLogin);
 app.delete('/users/tokens/:token', handleUserLogout);
 
-// MUSICS'S ROUTES 
+// MUSICS' ROUTES 
 app.post('/musics', handleAddMusic);
 app.get('/musics', handleGetAllMusics);
 app.get('/musics/:id', handleGetMusic);
 app.delete('/musics/:id', handleDeleteMusic);
 
-// AUHTOR'S ROUTES
+// AUTHORS' ROUTES
 app.post('/authors', handleAddAuthor);
 app.get('/authors', handleGetAllAuthors);
 app.get('/authors/:id', handleGetAuthor);
 app.delete('/authors/:id', handleDeleteAuthor);
+
+// GENRES' ROUTES
+app.get('/genres', handleGetAllGenres);
 
 //SERVER STARTING
 app.use(express.static(path.join(__dirname, 'prod/')))

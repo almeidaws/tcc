@@ -100,11 +100,35 @@ class Requisition {
     static logout(token,error) {
         const logout = (data,error) => { Requisition.logout(token,error); U.deleteAllCookies();}
 
-        $.ajax('users/tokens/'+token, {
+        $.ajax('users/tokens/' + token, {
             method: 'DELETE',
             success: logout,
             error: (res) => {if (error) error(res.status) },
-            data: {token}
+            data: { token }
+        }) 
+    }
+
+    static allAuthors(success, error) {
+        const fetched = (data) => {
+            success(data);
+        }
+
+        $.ajax('authors/', {
+            method: 'GET',
+            success: fetched,
+            error: (res) => {if (error) error(res.status) },
+        }) 
+    }
+
+    static allGenres(success, error) {
+        const fetched = (data) => {
+            success(data);
+        }
+
+        $.ajax('genres/', {
+            method: 'GET',
+            success: fetched,
+            error: (res) => {if (error) error(res.status) },
         }) 
     }
 }
