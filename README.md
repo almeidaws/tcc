@@ -256,6 +256,40 @@ The return is something like this:
 ]
 ```
 
+### Getting from music
+
+```
+Route: musics/:musicID/authors
+Method: GET
+Headers: 
+    Content-Type: application/x-www-form-urlencoded
+
+Body:
+    
+
+On success:
+    Status: 200
+    
+On failure:
+    Status: 401 // if music's ID is missing
+```
+
+**:musicID**: you must replace this by musics's id.
+
+The return is something like this:
+```json
+[
+    {
+        "id": 2,
+        "name": "Zé Ramalho"
+    },
+    {
+        "id": 1,
+        "name": "Gustavo"
+    }
+]
+```
+
 ## Genres
 
 This section contains an explanation of each endpoint used to handle genres. 
@@ -274,6 +308,40 @@ Body:
 On success:
     Status: 200
 ```
+
+The return is something like this:
+```json
+[
+    {
+        "id": 2,
+        "name": "Rock"
+    },
+    {
+        "id": 1,
+        "name": "Pop"
+    }
+]
+```
+
+### Getting from music
+
+```
+Route: musics/:musicID/genres
+Method: GET
+Headers: 
+    Content-Type: application/x-www-form-urlencoded
+
+Body:
+    
+
+On success:
+    Status: 200
+    
+On failure:
+    Status: 401 // if music's ID is missing
+```
+
+**:musicID**: you must replace this by musics's id.
 
 The return is something like this:
 ```json
