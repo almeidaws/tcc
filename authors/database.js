@@ -11,6 +11,7 @@ const { addAuthorSQL,
         deleteAuthorSQL,
         cleanUpAuthorTableSQL,
         getAllAuthorsSQL,
+        getAllAuthorsFromMusicSQL,
         getAuthorByIDSQL,
         createAuthorTableSQL,
         deleteAuthorTableSQL,
@@ -116,6 +117,23 @@ const getAuthorByID = async (id) => {
     return new Author(tuple.id, tuple.name);
 };
 
+/**
+ * Gets all authors from form a music from the database.
+ *
+ * @returns {Author} the return is an array of objects with 'id' and 'name' properties
+ */
+const getAuthorsByMusic = async (musicID) => {
+    const getAuthorsByMusicConfig = {
+        text: getAllAuthorsFromMusicSQL,
+        values: [musicID],
+    };
+
+    const result = await pool.query(getAuthorsByMusicConfig);
+
+    const authors = result.rows.map(row => new Author(row.id, row.name));
+    return authors;
+};
+
 /** 
  * Removes a author from the database by ID. This function checks if 
  * the author hasn't a music associated with it. If that is the case,
@@ -150,6 +168,7 @@ const connect = async () => {
         addAuthor, 
         getAllAuthors,
         getAuthorByID,
+        getAuthorsByMusic,
         deleteAuthor,
     };
     return queries;
