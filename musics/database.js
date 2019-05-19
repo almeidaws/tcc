@@ -31,7 +31,11 @@ const { addMusicSQL,
         deleteMusicAuthorSQL,
         deleteMusicGenreSQL,
         deleteMusicSQL,
+        cleanUpMusicAuthorTableSQL,
+        cleanUpMusicGenreTableSQL,
+        cleanUpMusicTableSQL,
         getMusicByIDSQL,
+        getMusicsByAuthorSQL,
         createMusicTableSQL,
         createMusicGenreTableSQL,
         createMusicAuthorTableSQL, 
@@ -100,9 +104,9 @@ class Music {
     validate() {
         const scheme = {
             id: Joi.number().integer().min(1).allow(null).required(),
-            name: Joi.string().min(3).max(30).required(),
-            genres: Joi.array().items(Joi.number().min(0).max(15)).min(1).max(4).required(),
-            authors: Joi.array().items(Joi.number().min(1).max(25)).min(1).max(4).required(),
+            name: Joi.string().min(3).max(40).required(),
+            genres: Joi.array().items(Joi.number().min(0)).min(1).max(4).required(),
+            authors: Joi.array().items(Joi.number().min(1)).min(1).max(4).required(),
             extension: Joi.string().min(1).max(4).required(),
             fileBuffer: Joi.object().optional(),
             fileS3Key: Joi.string().min(1).max(100).required(),
@@ -184,6 +188,22 @@ const getMusicByID = async (id) => {
 
     const { id: musicID, name, files3key: fileS3Key } = result.rows[0];
     return new Music(musicID, name, fileS3Key);
+};
+
+/**
+ * Retrieves all musics from the database with a given author ID.
+ * 
+ * This method is asyncronous, so you can use the Promise/async await syntax.
+ * @returns {Array<Music>} musics with that author ID or an empty array if there's no one.
+ */
+const getMusicsByAuthor = async (authorID) => {
+    const getMusicsByAuthorConfig = {
+        text: getMusicsByAuthorSQL,
+        values: [authorID],
+    };
+
+    const result = await pool.query(getMusicsByAuthorConfig);
+    return result.rows.map(row => new Music(row.id, row.name, row.files3key));
 };
 
 /**
@@ -284,7 +304,9 @@ const connect = async () => {
         addMusic, 
         getMusicByID,
         getAllMusics,
-        deleteMusic };
+        getMusicsByAuthor,
+        deleteMusic,
+    };
     return queries;
 };
 
@@ -304,6 +326,12 @@ const deleteMusicTable = async () => {
     await pool.query(deleteMusicTableSQL);
 }
 
+const cleanUpMusicTable = async () => {
+    await pool.query(cleanUpMusicGenreTableSQL);
+    await pool.query(cleanUpMusicAuthorTableSQL);
+    await pool.query(cleanUpMusicTableSQL);
+}
+
 /**
  * Exports an object that currently can be used to constructs users and establishes
  * a connection with the database.
@@ -317,5 +345,6 @@ module.exports = {
     DDL: { 
         createMusicTable, 
         deleteMusicTable,
+        cleanUpMusicTable,
     },
 };

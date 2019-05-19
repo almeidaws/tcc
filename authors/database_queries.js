@@ -19,6 +19,12 @@ const addAuthorSQL = 'INSERT INTO Author (Name) VALUES ($1) RETURNING ID, Name;'
  */
 const getAllAuthorsSQL = 'SELECT ID, Name FROM Author;';
 
+/** 
+ * The SQL query used to delete an author from the database.
+ * @constant
+ * @type {string}
+ */
+const deleteAuthorSQL = "DELETE FROM Author WHERE ID = $1";
 
 /** 
  * The SQL query used to create the Author table. It was created to be used
@@ -33,13 +39,20 @@ CREATE TABLE IF NOT EXISTS Author (
 );
 `;
 
-/** 
- * The SQL query used to delete the Author table. It was created to be used
+/** The SQL query used to delete the Author table. It was created to be used
  * in automatic tests.
  * @constant
  * @type {string}
  */
 const deleteAuthorTableSQL = "DROP TABLE Author";
+
+/** 
+ * The SQL query used to delete all rows from Author table. It was
+ * created to be used in automatic tests.
+ * @constant
+ * @type {string}
+ */
+const cleanUpAuthorTableSQL = "DELETE FROM Author";
 
 /** 
  * The SQL query used to get an author by ID. It was created to be used
@@ -55,8 +68,10 @@ const getAuthorByIDSQL = "SELECT ID, Name FROM Author WHERE ID = $1;";
  */
 module.exports = { 
     addAuthorSQL,
+    deleteAuthorSQL,
     getAllAuthorsSQL,
     getAuthorByIDSQL,
     createAuthorTableSQL,
     deleteAuthorTableSQL,
+    cleanUpAuthorTableSQL,
 };

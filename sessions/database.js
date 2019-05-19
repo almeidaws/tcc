@@ -17,7 +17,6 @@ const createError = require('http-errors');
 
 const { Database } = require('../configs.js');
 const Joi = require('joi');
-const uuidv4 = require('uuid/v4');
 const pool = Database.pool();
 const { createSessionTableSQL, 
         deleteSessionTableSQL,

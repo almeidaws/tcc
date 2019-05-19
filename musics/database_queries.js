@@ -38,6 +38,11 @@ const findMusicByNormalizedFileKeySQL =
 `SELECT (ID, Name, fileS3Key) FROM Music WHERE fileS3Key = $1;`;
 
 const getMusicByIDSQL = "SELECT ID, Name, fileS3Key FROM Music WHERE ID = $1;"
+const getMusicsByAuthorSQL = `
+SELECT ID, Name, fileS3Key 
+FROM Music as M INNER JOIN MusicAuthor AS MA ON M.ID = MA.Music 
+WHERE MA.Author = $1;
+`;
 
 const addMusicSQL = 'INSERT INTO Music (Name, fileS3Key) VALUES ($1, $2) RETURNING ID';
 const addMusicAuthorSQL = 'INSERT INTO MusicAuthor (Music, Author) VALUES ($1, $2)';
@@ -51,12 +56,17 @@ const deleteMusicGenreSQL = "DELETE FROM MusicGenre WHERE Music = $1";
 const deleteMusicAuthorSQL = "DELETE FROM MusicAuthor WHERE Music = $1";
 const deleteMusicSQL = "DELETE FROM Music WHERE ID = $1";
 
+const cleanUpMusicGenreTableSQL = "DELETE FROM MusicGenre";
+const cleanUpMusicAuthorTableSQL = "DELETE FROM MusicAuthor";
+const cleanUpMusicTableSQL = "DELETE FROM Music";
+
 /**
  * Exports several object that contains several SQL queries used on the project.
  * @module DatabaseQueries
  */
 module.exports = { 
     getMusicByIDSQL,
+    getMusicsByAuthorSQL,
     createMusicTableSQL,
     createMusicGenreTableSQL,
     createMusicAuthorTableSQL,
@@ -68,6 +78,9 @@ module.exports = {
     deleteMusicSQL,
     deleteMusicGenreSQL,
     deleteMusicAuthorSQL,
+    cleanUpMusicTableSQL,
+    cleanUpMusicGenreTableSQL,
+    cleanUpMusicAuthorTableSQL,
     deleteMusicTableSQL,
     deleteMusicGenreTableSQL,
     deleteMusicAuthorTableSQL,

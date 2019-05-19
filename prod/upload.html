@@ -30,6 +30,7 @@ Purchase:
     <link rel="stylesheet" type="text/css" href="js/plugins/player/volume.css">
 	<link rel="stylesheet" type="text/css" href="js/plugins/scroll/jquery.mCustomScrollbar.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/awesomplete.css">
     <!-- Favicon Link -->
     <link rel="shortcut icon" type="image/png" href="images/favicon.png">
 </head>
@@ -52,21 +53,12 @@ Purchase:
                 </div>
                 <div class="ms_nav_wrapper">
                     <ul>
-                        <li><a href="index.html" title="Discover">
+                        <li><a href="index.html" class="active" title="Discover">
 						<span class="nav_icon">
 							<span class="icon icon_discover"></span>
 						</span>
 						<span class="nav_text">
 							discover
-						</span>
-						</a>
-                        </li>
-                        <li><a href="artist.html" title="Artists">
-						<span class="nav_icon">
-							<span class="icon icon_artists"></span>
-						</span>
-						<span class="nav_text">
-							artists
 						</span>
 						</a>
                         </li>
@@ -79,24 +71,12 @@ Purchase:
 						</span>
 						</a>
                         </li>
-                        </li>
-                        <li><a href="stations.html" title="Stations">
+                        <li><a href="favourite.html" title="Favourites">
 						<span class="nav_icon">
-							<span class="icon icon_station"></span>
+							<span class="icon icon_favourite"></span>
 						</span>
 						<span class="nav_text">
-							stations
-						</span>
-						</a>
-                        </li>
-                    </ul>
-                    <ul class="nav_downloads">
-                        <li><a href="upload.html" class="active" title="Upload">
-						<span class="nav_icon">
-							<span class="icon icon_download"></span>
-						</span>
-						<span class="nav_text">
-							imput
+							favourites
 						</span>
 						</a>
                         </li>
@@ -121,12 +101,7 @@ Purchase:
             <!---Header--->
             <div id="header"></div>
             <!----Upload and Share Wrapper Start---->
-            <div class="ms_upload_wrapper marger_top60">
-                 <!----upload Music Box---->
-                <div id="uploadMusicBox"></div>
-                <!----Form upload music---->
-                <div id="formUploadBox"></div>
-            </div>
+            <div id="uploadForm"></div>
             <!----Main div close---->
         </div>
         <!----Footer Start---->
@@ -323,14 +298,6 @@ Purchase:
             </div>
         </div>
 	</div>
-     <!-- Load React. -->
-    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
-    <script>console.log('Replace react from development to production mode');</script>
-    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
-
-    <script src="js/react.bundle.js"></script>
-
     <!--Main js file Style-->
     <script type="text/javascript" src="js/jquery.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -341,7 +308,17 @@ Purchase:
     <script type="text/javascript" src="js/plugins/player/volume.js"></script>
     <script type="text/javascript" src="js/plugins/nice_select/jquery.nice-select.min.js"></script>
 	<script type="text/javascript" src="js/plugins/scroll/jquery.mCustomScrollbar.js"></script>
+    <script type="text/javascript" src="js/awesomplete.min.js"></script>
     <script type="text/javascript" src="js/custom.js"></script>
+
+    <!-- Load React. -->
+    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+    <script>console.log('Replace react from development to production mode');</script>
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+
+    <script src="js/react.bundle.js"></script>
+
 
 </body>
 </html>

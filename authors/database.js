@@ -8,11 +8,14 @@ const { Database } = require('../configs.js');
 const Joi = require('joi');
 const pool = Database.pool();
 const { addAuthorSQL, 
+        deleteAuthorSQL,
+        cleanUpAuthorTableSQL,
         getAllAuthorsSQL,
         getAuthorByIDSQL,
         createAuthorTableSQL,
         deleteAuthorTableSQL,
       } = require('./database_queries.js');
+const { connect: connectMusics } = require('../musics/database.js');
 
 /**
  * Entity used to hold author's data and do the validation of that data
@@ -45,7 +48,7 @@ class Author {
     validate() {
         const scheme = {
             id: Joi.number().integer().min(1).allow(null).required(),
-            name: Joi.string().min(3).max(30).required(),
+            name: Joi.string().min(3).max(40).required(),
         };
         return Joi.validate(this, scheme);
     }
@@ -65,6 +68,10 @@ const addAuthor = async (author) => {
     const { error, validatedUser } = author.validate();
     if (error) return Promise.reject(error);
     
+    const allAuthors = await getAllAuthors();
+    const matches = allAuthors.filter(a => a.name.toLowerCase() === author.name.toLowerCase());
+    if (matches.length > 0) return matches[0];
+
     // Add author in database
     const addAuthorConfig = {
         text: addAuthorSQL,
@@ -109,14 +116,41 @@ const getAuthorByID = async (id) => {
     return new Author(tuple.id, tuple.name);
 };
 
+/** 
+ * Removes a author from the database by ID. This function checks if 
+ * the author hasn't a music associated with it. If that is the case,
+ * the author isn't removed.
+ *
+ * @param {number} author's id.
+ * @returns {Array} musics that has relation with this author in the database.
+ */
+const deleteAuthor = async (id) => {
+    
+    const { getMusicsByAuthor } = await connectMusics();
+    const obstacles = await getMusicsByAuthor(id);
+
+    if (obstacles.length > 0)
+        return obstacles;
+
+    const deleteAuthorConfig = {
+        text: deleteAuthorSQL,
+        values: [id],
+    };
+
+    await pool.query(deleteAuthorConfig);
+    return [];
+};
+
 const createAuthorTable = async () => pool.query(createAuthorTableSQL);
 const deleteAuthorTable = async () => pool.query(deleteAuthorTableSQL);
+const cleanUpAuthorTable = async () => pool.query(cleanUpAuthorTableSQL);
 
 const connect = async () => {
     const queries = { 
         addAuthor, 
         getAllAuthors,
         getAuthorByID,
+        deleteAuthor,
     };
     return queries;
 };
@@ -138,5 +172,6 @@ module.exports = {
     DDL: {
         createAuthorTable,
         deleteAuthorTable,
+        cleanUpAuthorTable,
     },
 };

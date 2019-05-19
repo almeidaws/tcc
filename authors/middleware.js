@@ -16,10 +16,9 @@ async function add(request, response, next) {
         const author = new authorsDatabase.Author(body.name);
 
         const queries = await authorsDatabase.connect();
-        await queries.addAuthor(author);
+        const addedAuthor = await queries.addAuthor(author);
 
-        response.status(200);
-        response.end();
+        response.status(200).json({ id: addedAuthor.id, name: addedAuthor.name }).end();
     } catch (error) {
         next(error);
     }
@@ -27,7 +26,6 @@ async function add(request, response, next) {
 
 async function getAll(request, response, next) {
     try {
-        
         const queries = await authorsDatabase.connect();
         const authors = await queries.getAllAuthors();
 
@@ -37,4 +35,32 @@ async function getAll(request, response, next) {
     }
 }
 
-module.exports = { add, getAll }
+async function getByID(request, response, next) {
+    try {
+        if (!request.params.id) throw createError(401, `The author's id is missing`);
+        const queries = await authorsDatabase.connect();
+        const author = await queries.getAuthorByID(request.params.id);
+
+        response.status(200).json(author).end();
+    } catch (error) {
+        next(error);
+    }
+}
+
+async function deleteAuthor(request, response, next) {
+    try {
+        if (!request.params.id) throw createError(401, `The author's id is missing`);
+        const queries = await authorsDatabase.connect();
+        const relatedMusics = await queries.deleteAuthor(request.params.id);
+
+        if (relatedMusics.length > 0) {
+            const obstacles = relatedMusics.map(music => ({ id: music.id, name: music.name, url: music.calculateFileURL() }));
+            response.status(403).json(obstacles).end();
+        }
+        response.status(200).end();
+    } catch (error) {
+        next(error);
+    }
+}
+
+module.exports = { add, getAll, getByID, deleteAuthor }
