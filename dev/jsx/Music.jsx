@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 
 export default class Music extends Component {
 
+
+
     render() {
         return (
             <div className="swiper-slide">
@@ -22,7 +24,9 @@ export default class Music extends Component {
                                 <li><a href="#"><span className="opt_icon"><span
                                     className="icon icon_playlst"/></span>Add To Playlist</a></li>
                             </ul>
-                            <div className="ms_play_icon">
+                            <div className="ms_play_icon" onClick={() => {
+                                <audio src={this.props.url}/>
+                            }}>
                                 <img src={"./images/svg/play.svg"} alt=""/>
                             </div>
                         </div>

@@ -16,7 +16,7 @@ export default class RecentlyPlayedMusic extends Component {
     render() {
         const musics = [];
         this.state.musics.map((music,index) => {
-            musics.push(<Music key={index} musicName={music.name} musicArtist={'Renan Alves'}/>);
+            musics.push(<Music key={index} id={music.id} url={music.url} musicName={music.name} musicArtist={'Renan Alves'}/>);
         });
 
         return(
@@ -24,7 +24,7 @@ export default class RecentlyPlayedMusic extends Component {
                 <div className="ms_rcnt_slider">
                     <div className="ms_heading">
                         <h1>Recently Played</h1>
-                        <span className="veiw_all"><a href="#">view more</a></span>
+                        <span className="view_all"><a href="#">view more</a></span>
                     </div>
                     <div className="swiper-container">
                         <div className="swiper-wrapper">
