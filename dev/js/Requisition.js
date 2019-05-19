@@ -37,7 +37,7 @@ class Requisition {
                 if (success) success();
                 location.reload();
             });
-        }
+        };
         $.ajax('users/tokens', {
             method: 'POST',
             success: logged,
@@ -87,7 +87,7 @@ class Requisition {
      * are documented on the RESTful API page.
      */
     static register(name, email, password, error) {
-        const registered = (data, status) => { Requisition.login(email, password, error); }
+        const registered = () => { Requisition.login(email, password, error); };
 
         $.ajax('users/', {
             method: 'POST',
@@ -97,6 +97,16 @@ class Requisition {
         });
     }
 
+    /**
+     * Logout user on the broswer.
+     *
+     * When the requsition succeed not message is presenter.
+     *
+     * @param {string} token token used by user.
+     * @param {Function} error fallback called when there's a problem.
+     * The HTTP status code is passed as argument. The possible values
+     * are documented on the RESTful API page.
+     */
     static logout(token,error) {
         const logout = (data,error) => { Requisition.logout(token,error); U.deleteAllCookies();}
 
@@ -106,6 +116,30 @@ class Requisition {
             error: (res) => {if (error) error(res.status) },
             data: {token}
         }) 
+    }
+
+    /**
+     * Register users on the broswer.
+     *
+     * When the requsition succeed not message is presenter.
+     *
+     * @param {string} name Name user to register.
+     * @param {string} email Email user to register.
+     * @param {string} password Password user to register.
+     * @param {Function} error fallback called when there's a problem.
+     * The HTTP status code is passed as argument. The possible values
+     * are documented on the RESTful API page.
+     */
+    static getAllMusics() {
+        const music = (data) => {
+            return data;
+        };
+
+        $.ajax('/musics', {
+            method: 'GET',
+            success: music,
+            error: (res) => { res.status() },
+        })
     }
 }
 

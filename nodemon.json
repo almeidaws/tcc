@@ -10,7 +10,10 @@
   },
   "verbose": true,
   "env": {
-    "NODE_ENV": "development"
+    "NODE_ENV": "development",
+    "AWS_ACCESS_KEY": "AKIA4VSPIY6ZQIVA7QEV",
+    "AWS_SECRET_ACCESS_KEY": "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",
+    "S3_BUCKET_DEV": "miraculouswebsite"
   },
   "ext": "js json html jsx babelrc"
 }
