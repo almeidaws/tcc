@@ -2,35 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ffc4286f-65a7-4073-a6fb-959177ec08e5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/dev/jsx/Upload/UploadForm.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/jsx/Upload/UploadForm.test.jsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dev/jsx/Upload/__snapshots__/UploadForm.test.jsx.snap" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/genres/database.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/genres/database.test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/genres/database_queries.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/genres/middleware.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prod/css/awesomplete.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/prod/js/awesomplete.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authors/database.js" beforeDir="false" afterPath="$PROJECT_DIR$/authors/database.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authors/database.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/authors/database.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authors/database_queries.js" beforeDir="false" afterPath="$PROJECT_DIR$/authors/database_queries.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authors/middleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/authors/middleware.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dev/jsx/Music.jsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/dev/jsx/RecentlyPlayed/RecentlyPlayedMusic.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/js/Requisition.js" beforeDir="false" afterPath="$PROJECT_DIR$/dev/js/Requisition.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/jsx/Load/Loader.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/jsx/Music/Music.jsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/jsx/Music/RecentlyPlayedMusic.jsx" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/jsx/index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/dev/jsx/index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/musics/database.js" beforeDir="false" afterPath="$PROJECT_DIR$/musics/database.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/musics/database.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/musics/database.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/musics/database_queries.js" beforeDir="false" afterPath="$PROJECT_DIR$/musics/database_queries.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/musics/middleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/musics/middleware.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prod/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/prod/css/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prod/js/custom.js" beforeDir="false" afterPath="$PROJECT_DIR$/prod/js/custom.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prod/js/jquery.js" beforeDir="false" afterPath="$PROJECT_DIR$/prod/js/jquery.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prod/upload.html" beforeDir="false" afterPath="$PROJECT_DIR$/prod/upload.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sessions/database.js" beforeDir="false" afterPath="$PROJECT_DIR$/sessions/database.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/prod/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/prod/index.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/prod/js/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -44,8 +21,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dev/jsx/index.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" selection-start-line="7" selection-end-line="7" />
+            <state relative-caret-position="240">
+              <caret line="16" column="63" selection-start-line="16" selection-start-column="63" selection-end-line="16" selection-end-column="63" />
               <folding>
                 <element signature="e#0#33#0" expanded="true" />
               </folding>
@@ -53,11 +30,32 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/dev/js/Requisition.js">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dev/jsx/RecentlyPlayed/RecentlyPlayedMusic.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-111">
-              <caret line="136" column="10" selection-start-line="136" selection-start-column="10" selection-end-line="136" selection-end-column="10" />
+            <state relative-caret-position="390">
+              <caret line="26" column="46" selection-start-line="26" selection-start-column="46" selection-end-line="26" selection-end-column="46" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/prod/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="9669">
+              <caret line="745" column="4" selection-start-line="745" selection-start-column="4" selection-end-line="745" selection-end-column="84" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dev/jsx/Music.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="10" column="36" lean-forward="true" selection-start-line="10" selection-start-column="36" selection-end-line="10" selection-end-column="36" />
             </state>
           </provider>
         </entry>
@@ -86,10 +84,13 @@
         <option value="$PROJECT_DIR$/dev/jsx/Load/Loader.jsx" />
         <option value="$PROJECT_DIR$/dev/jsx/Music/Music.js" />
         <option value="$PROJECT_DIR$/dev/jsx/Music/Music.jsx" />
-        <option value="$PROJECT_DIR$/prod/index.html" />
         <option value="$PROJECT_DIR$/dev/jsx/Music/RecentlyPlayedMusic.jsx" />
+        <option value="$PROJECT_DIR$/dev/jsx/Load/Load.jsx" />
         <option value="$PROJECT_DIR$/dev/jsx/index.jsx" />
         <option value="$PROJECT_DIR$/dev/js/Requisition.js" />
+        <option value="$PROJECT_DIR$/dev/jsx/RecentlyPlayed/RecentlyPlayedMusic.jsx" />
+        <option value="$PROJECT_DIR$/dev/jsx/Music.jsx" />
+        <option value="$PROJECT_DIR$/prod/index.html" />
       </list>
     </option>
   </component>
@@ -122,13 +123,14 @@
               <item name="tcc" type="b2602c69:ProjectViewProjectNode" />
               <item name="tcc" type="462c0819:PsiDirectoryNode" />
               <item name="dev" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
+              <item name="jsx" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="tcc" type="b2602c69:ProjectViewProjectNode" />
               <item name="tcc" type="462c0819:PsiDirectoryNode" />
               <item name="dev" type="462c0819:PsiDirectoryNode" />
               <item name="jsx" type="462c0819:PsiDirectoryNode" />
+              <item name="RecentlyPlayed" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="tcc" type="b2602c69:ProjectViewProjectNode" />
@@ -192,13 +194,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6419000" />
+    <option name="totallyTimeSpent" value="12499000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2494043" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2494043" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -215,7 +217,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.27260274" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.27260274" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="11" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -271,9 +273,6 @@
     <entry file="file://$PROJECT_DIR$/package-lock.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/node_modules/joi/lib/errors.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
@@ -285,13 +284,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="1" column="31" selection-start-line="1" selection-start-column="17" selection-end-line="1" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/nodemon.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" selection-start-line="19" selection-end-line="19" />
         </state>
       </provider>
     </entry>
@@ -329,13 +321,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/prod/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="36" column="6" selection-start-line="36" selection-start-column="6" selection-end-line="40" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dev/jsx/Music/RecentlyPlayedMusic.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
@@ -353,10 +338,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/nodemon.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/jsx/Load/Load.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/dev/jsx/index.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        <state relative-caret-position="240">
+          <caret line="16" column="63" selection-start-line="16" selection-start-column="63" selection-end-line="16" selection-end-column="63" />
           <folding>
             <element signature="e#0#33#0" expanded="true" />
           </folding>
@@ -365,8 +367,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dev/js/Requisition.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-111">
-          <caret line="136" column="10" selection-start-line="136" selection-start-column="10" selection-end-line="136" selection-end-column="10" />
+        <state relative-caret-position="943">
+          <caret line="148" column="24" selection-start-line="148" selection-start-column="24" selection-end-line="148" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/jsx/Music.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="10" column="36" lean-forward="true" selection-start-line="10" selection-start-column="36" selection-end-line="10" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/jsx/RecentlyPlayed/RecentlyPlayedMusic.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="26" column="46" selection-start-line="26" selection-start-column="46" selection-end-line="26" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/prod/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9669">
+          <caret line="745" column="4" selection-start-line="745" selection-start-column="4" selection-end-line="745" selection-end-column="84" />
         </state>
       </provider>
     </entry>

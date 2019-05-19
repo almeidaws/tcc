@@ -143,17 +143,16 @@ class Requisition {
         }) 
     }
 
-    static getAllMusics() {
+    static getAllMusics(success, error) {
+
         const music = (data) => {
-            return data;
+            success(data);
         };
 
-        $.ajax('/musics', {
+        $.ajax('musics/', {
             method: 'GET',
             success: music,
-            error: (res) => {
-                res.status()
-            },
+            error: (res) => { if (error) error(res.status) },
         });
     }
 
