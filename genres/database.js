@@ -7,7 +7,10 @@ const createError = require('http-errors');
 const { Database } = require('../configs.js');
 const Joi = require('joi');
 const pool = Database.pool();
-const { getAllGenresSQL } = require('./database_queries.js');
+const { 
+    getAllGenresSQL,
+    getAllGenresFromMusicSQL
+} = require('./database_queries.js');
 
 /**
  * This entity is used to only to store values retrieved from the database.
@@ -35,8 +38,28 @@ const getAllGenres = async () => {
     return genres;
 };
 
+/**
+ * Retrieves all genres from a particular music.
+ *
+ * @param {number} musics's id.
+ * @returns {Array<Genre>} the return is an array of objects with 'id' and 'name' properties.
+ */
+const getAllGenresFromMusic = async (musicID) => {
+    const getAllGenresFromMusicConfig = {
+        text: getAllGenresFromMusicSQL,
+        values: [musicID]
+    };
+
+    const result = await pool.query(getAllGenresFromMusicConfig);
+    const genres = result.rows.map(result => new Genre(result.id, result.name));
+    return genres;
+};
+
 const connect = async () => {
-    const queries = { getAllGenres };
+    const queries = { 
+        getAllGenres,
+        getAllGenresFromMusic
+    };
     return queries;
 };
 
