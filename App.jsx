@@ -4,10 +4,33 @@ import RecentlyPlayedMusic from './dev/jsx/RecentlyPlayed/RecentlyPlayedMusic.js
 import AudioPlayerBar from "./dev/jsx/BarMusic/AudioPlayerBar.jsx";
 import RegisterModal from "./dev/jsx/RegisterModal.jsx";
 import LoginModal from "./dev/jsx/LoginModal.jsx";
+import R from "./dev/js/Requisition";
 
 export default class App extends Component {
 
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            musics: [],
+            selectedTreck: '',
+            player: '',
+        };
+
+        R.getAllMusics((musics) => {
+            this.setState({musics: musics  === undefined ? [] : musics});
+        });
+    }
+
     render() {
+
+        const playMusic = (url) => {
+            this.setState({ ...this.state, selectedTreck: url });
+
+            const audio = new Audio(url);
+            audio.play();
+        };
+
         return (
             <div>
                 <div className="ms_main_wrapper">
@@ -76,7 +99,7 @@ export default class App extends Component {
                     </div>
                     <div className="ms_content_wrapper padder_top80">
                         <Header/>
-                        <RecentlyPlayedMusic/>
+                        <RecentlyPlayedMusic musics={this.state.musics} play={playMusic}/>
                         <div className="ms_weekly_wrapper">
                             <div className="ms_weekly_inner">
                                 <div className="row">
@@ -492,7 +515,7 @@ export default class App extends Component {
                                 </p>
                             </div>
                         </div>
-                        <AudioPlayerBar/>
+                        <AudioPlayerBar music={this.state.selectedTreck}/>
                     </div>
                     <RegisterModal/>
                     <LoginModal/>

@@ -1,22 +1,12 @@
 import React, { Component } from 'react';
 import Music from '../Music.jsx';
-import R from '../../js/Requisition';
 
 export default class RecentlyPlayedMusic extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state =  { musics: [] };
-        R.getAllMusics((musics) => {
-            this.setState({musics: musics  === undefined ? [] : musics});
-        });
-    }
-
-
     render() {
         const musics = [];
-        this.state.musics.map((music,index) => {
-            musics.push(<Music key={index} id={music.id} url={music.url} musicName={music.name} musicArtist={'Renan Alves'}/>);
+        this.props.musics.map((music,index) => {
+            musics.push(<Music play={this.props.play} key={index} id={music.id} url={music.url} musicName={music.name} musicArtist={'Renan Alves'}/>);
         });
 
         return(

@@ -7,5 +7,5 @@ const MusicControls = props => (
      <Button className="jp-play"/>
      <Button className="jp-next"/>
     </div>
-)
+);
 export default MusicControls;

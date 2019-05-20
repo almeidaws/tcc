@@ -3,8 +3,6 @@ import React, { Component } from 'react';
 
 export default class Music extends Component {
 
-
-
     render() {
         return (
             <div className="swiper-slide">
@@ -12,7 +10,7 @@ export default class Music extends Component {
                     <div className="ms_rcnt_box_img">
                         <img src={"./images/music/r_music1.jpg"} alt=""/>
                         <div className="ms_main_overlay">
-                            <div className="ms_box_overlay"></div>
+                            <div className="ms_box_overlay"/>
                             <div className="ms_more_icon">
                                 <img src={"./images/svg/more.svg"} alt=""/>
                             </div>
@@ -25,7 +23,7 @@ export default class Music extends Component {
                                     className="icon icon_playlst"/></span>Add To Playlist</a></li>
                             </ul>
                             <div className="ms_play_icon" onClick={() => {
-                                <audio src={this.props.url}/>
+                                this.props.play(this.props.url);
                             }}>
                                 <img src={"./images/svg/play.svg"} alt=""/>
                             </div>
