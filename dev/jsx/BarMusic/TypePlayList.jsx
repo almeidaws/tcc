@@ -8,7 +8,7 @@ export default class TypePlayList extends Component {
 
         return (
             <div className={this.props.className}>
-                <div className="jp-gui jp-interface flex-wrap">
+                <div className="jp-gui jp-interface flex-wrap d-flex justify-content-center">
                     <MusicControls
                         className="jp-controls flex-item"
                         onPlayPause={this.props.onPlayPause}
