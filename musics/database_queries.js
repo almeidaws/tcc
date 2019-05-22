@@ -12,6 +12,7 @@ const createMusicTableSQL =
     ID serial NOT NULL PRIMARY KEY,
     Name text NOT NULL,
     fileS3Key text NOT NULL,
+    posterUID text,
     UNIQUE (fileS3Key)
 )`;
 
@@ -32,19 +33,19 @@ const createMusicAuthorTableSQL =
 )`;
 
 const getAllMusicsSQL = 
-`SELECT ID, Name, fileS3Key FROM Music;`;
+`SELECT ID, Name, fileS3Key, posterUID FROM Music;`;
 
 const findMusicByNormalizedFileKeySQL = 
-`SELECT (ID, Name, fileS3Key) FROM Music WHERE fileS3Key = $1;`;
+`SELECT (ID, Name, fileS3Key, posterUID) FROM Music WHERE fileS3Key = $1;`;
 
-const getMusicByIDSQL = "SELECT ID, Name, fileS3Key FROM Music WHERE ID = $1;"
+const getMusicByIDSQL = "SELECT ID, Name, fileS3Key, posterUID FROM Music WHERE ID = $1;"
 const getMusicsByAuthorSQL = `
-SELECT ID, Name, fileS3Key 
+SELECT ID, Name, fileS3Key, posterUID 
 FROM Music as M INNER JOIN MusicAuthor AS MA ON M.ID = MA.Music 
 WHERE MA.Author = $1;
 `;
 
-const addMusicSQL = 'INSERT INTO Music (Name, fileS3Key) VALUES ($1, $2) RETURNING ID';
+const addMusicSQL = 'INSERT INTO Music (Name, fileS3Key, posterUID) VALUES ($1, $2, $3) RETURNING ID';
 const addMusicAuthorSQL = 'INSERT INTO MusicAuthor (Music, Author) VALUES ($1, $2)';
 const addMusicGenreSQL = 'INSERT INTO MusicGenre (Music, Genre) VALUES ($1, $2)';
 

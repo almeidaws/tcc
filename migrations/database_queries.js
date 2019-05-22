@@ -96,10 +96,24 @@ DELETE FROM Genre WHERE ID = 7;
 DELETE FROM Migration WHERE Version = 2;
 `;
 
+const migration3 = `
+ALTER TABLE Music
+ADD posterUID text;
+
+INSERT INTO Migration (Version, Description) VALUES (3, 'Add posterUID at Music table');
+`;
+
+const migration3Rollback = `
+ALTER TABLE Music
+DROP COLUMN posterUID;
+
+DELETE FROM Migration WHERE Version = 3;
+`;
+
 module.exports = { 
     createMigrationTableSQL,
     deleteMigrationTableSQL,
     allMigrationsSQL,
-    migrations: [migration1, migration2],
-    rollback: [migration2Rollback, migration1Rollback]
+    migrations: [migration1, migration2, migration3],
+    rollback: [migration3Rollback, migration2Rollback, migration1Rollback]
 };

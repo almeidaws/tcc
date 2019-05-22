@@ -15,17 +15,21 @@ async function add(request, response, next) {
         if (!request.body.author) throw createError(400, `Authors is missing`);
         if (!request.files) throw createError(400, `There's no file`);
         if (!request.files.music) throw createError(400, `There's no music file`);
+        if (!request.files.poster) throw createError(400, `There's no music poster`);
 
         // Get's music metadata
         const body = request.body;
         const genres = toArrayOfNumbers(body.genre);
         const authors = toArrayOfNumbers(body.author);
         const extension = getExtension(request.files.music.name);
+        const posterExtension = getExtension(request.files.poster.name);
         const music = new musicsDatabase.Music(body.name, 
                                                genres,
                                                authors,
                                                request.files.music.data,
-                                               extension);
+                                               extension,
+                                               request.files.poster.data,
+                                               posterExtension);
 
         const queries = await musicsDatabase.connect();
         await queries.addMusic(music, progress => {
@@ -52,7 +56,8 @@ async function getByID(request, response, next) {
 
         const { id, name } = music;
         const url = music.calculateFileURL();
-        response.status(200).json({ id, name, url }).end();
+        const posterURL = music.posterUID ? music.calculatePosterURL() : null;
+        response.status(200).json({ id, name, url, posterURL }).end();
     } catch (error) {
         next(error);
     }
@@ -69,7 +74,10 @@ async function getAll(request, response, next) {
         if (musics === null)
             return response.status(204).json([]).end();
 
-        const withFileURLs = musics.map(music => ({ id: music.id, name: music.name, url: music.calculateFileURL() }));
+        const withFileURLs = musics.map(music => ({ id: music.id, 
+                                                    name: music.name, 
+                                                    url: music.calculateFileURL(),
+                                                    posterURL: music.posterUID ? music.calculatePosterURL() : null }));
         response.status(200).json(withFileURLs).end();
     } catch (error) {
         next(error);
