@@ -1,6 +1,8 @@
 'use strict';
 
 const musicsDatabase = require('./database.js');
+const authorsDatabase = require('../authors/database.js');
+const genresDatabase = require('../genres/database.js');
 const createError = require('http-errors');
 const fs = require('fs');
 const { Readable } = require('stream');
@@ -52,12 +54,16 @@ async function getByID(request, response, next) {
 
         if (!request.params.id) throw createError(401, `The music's id is missing`);
         const queries = await musicsDatabase.connect();
+        const authorQueries = await authorsDatabase.connect();
+        const genresQueries = await genresDatabase.connect();
         const music = await queries.getMusicByID(request.params.id);
 
         const { id, name } = music;
+        const authors = await authorQueries.getAuthorsByMusic(music.id);
+        const genres = await genresQueries.getAllGenresFromMusic(music.id);
         const url = music.calculateFileURL();
         const posterURL = music.posterUID ? music.calculatePosterURL() : null;
-        response.status(200).json({ id, name, url, posterURL }).end();
+        response.status(200).json({ id, name, url, posterURL, authors, genres }).end();
     } catch (error) {
         next(error);
     }
@@ -70,15 +76,21 @@ async function getAll(request, response, next) {
     try {
 
         const queries = await musicsDatabase.connect();
+        const authorQueries = await authorsDatabase.connect();
+        const genresQueries = await genresDatabase.connect();
         const musics = await queries.getAllMusics();
         if (musics === null)
             return response.status(204).json([]).end();
 
-        const withFileURLs = musics.map(music => ({ id: music.id, 
+        const withFileURLs = musics.map(async music => ({ id: music.id, 
                                                     name: music.name, 
                                                     url: music.calculateFileURL(),
-                                                    posterURL: music.posterUID ? music.calculatePosterURL() : null }));
-        response.status(200).json(withFileURLs).end();
+                                                    posterURL: music.posterUID ? music.calculatePosterURL() : null,
+                                                    authors: await authorQueries.getAuthorsByMusic(music.id),
+                                                    genres: await genresQueries.getAllGenresFromMusic(music.id),
+                                                    }));
+
+        response.status(200).json(await Promise.all(withFileURLs)).end();
     } catch (error) {
         next(error);
     }
