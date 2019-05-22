@@ -8,9 +8,7 @@
       <change beforePath="$PROJECT_DIR$/dev/jsx/BarMusic/MusicControls.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/dev/jsx/BarMusic/MusicControls.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/jsx/BarMusic/MusicProgress.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/dev/jsx/BarMusic/MusicProgress.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/jsx/BarMusic/TypePlayList.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/dev/jsx/BarMusic/TypePlayList.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/jsx/Music.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/dev/jsx/Music.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/jsx/RecentlyPlayed/RecentlyPlayedMusic.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/dev/jsx/RecentlyPlayed/RecentlyPlayedMusic.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/jsx/Button.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/dev/jsx/Button.jsx" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/prod/js/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -20,12 +18,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+    <leaf>
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/App.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
-              <caret line="29" column="41" selection-start-line="29" selection-start-column="41" selection-end-line="29" selection-end-column="41" />
+            <state relative-caret-position="355">
+              <caret line="576" column="39" lean-forward="true" selection-start-line="576" selection-start-column="39" selection-end-line="576" selection-end-column="39" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -36,8 +34,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dev/jsx/RecentlyPlayed/RecentlyPlayedMusic.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="27" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="27" />
+            <state relative-caret-position="36">
+              <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -46,19 +44,22 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dev/jsx/Music.jsx">
+        <entry file="file://$PROJECT_DIR$/dev/jsx/BarMusic/AudioPlayerBar.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="25" column="64" selection-start-line="25" selection-start-column="64" selection-end-line="25" selection-end-column="64" />
+            <state relative-caret-position="300">
+              <caret line="20" column="51" selection-start-line="20" selection-start-column="51" selection-end-line="20" selection-end-column="51" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dev/jsx/BarMusic/AudioPlayerBar.jsx">
+        <entry file="file://$PROJECT_DIR$/dev/jsx/BarMusic/AudioPlay.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
+            <state relative-caret-position="45">
+              <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -69,8 +70,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dev/jsx/BarMusic/TypePlayList.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="47" selection-start-line="17" selection-start-column="47" selection-end-line="17" selection-end-column="47" />
+            <state relative-caret-position="165">
+              <caret line="16" column="31" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dev/jsx/BarMusic/MusicControls.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="59" selection-start-line="6" selection-start-column="48" selection-end-line="6" selection-end-column="59" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -79,10 +89,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dev/jsx/BarMusic/MusicProgress.jsx">
+        <entry file="file://$PROJECT_DIR$/dev/jsx/Button.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="26" selection-start-column="26" selection-end-column="26" />
+            <state relative-caret-position="60">
+              <caret line="4" column="35" lean-forward="true" selection-start-line="4" selection-start-column="35" selection-end-line="4" selection-end-column="35" />
             </state>
           </provider>
         </entry>
@@ -99,7 +109,6 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>play</find>
-      <find>music</find>
       <find>Audipo</find>
       <find>&lt;!--</find>
       <find>fa_icon</find>
@@ -108,10 +117,17 @@
       <find>./prod</find>
       <find>upload</find>
       <find>Rec</find>
-      <find>Audio</find>
       <find>Recently</find>
-      <find>AudioPl</find>
+      <find>a</find>
+      <find>Audio</find>
       <find>Audi</find>
+      <find>Musc</find>
+      <find>AudioPl</find>
+      <find>music</find>
+      <find>currentMusicTime</find>
+      <find>audioplayerbar</find>
+      <find>playmusic</find>
+      <find>console</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -130,23 +146,26 @@
         <option value="$PROJECT_DIR$/dev/jsx/BarMusic/MusicBar.jsx" />
         <option value="$PROJECT_DIR$/prod/index.html" />
         <option value="$PROJECT_DIR$/dev/jsx/index.jsx" />
-        <option value="$PROJECT_DIR$/dev/jsx/BarMusic/MusicControls.jsx" />
-        <option value="$PROJECT_DIR$/dev/jsx/BarMusic/MusicProgress.jsx" />
         <option value="$PROJECT_DIR$/dev/jsx/RecentlyPlayed/RecentlyPlayedMusic.jsx" />
         <option value="$USER_HOME$/Desktop/MusicPlayer.js" />
         <option value="$PROJECT_DIR$/dev/jsx/Music.jsx" />
         <option value="$PROJECT_DIR$/dev/jsx/MusicPlayer.jsx" />
         <option value="$PROJECT_DIR$/dev/js/PlayerMusic.js" />
-        <option value="$PROJECT_DIR$/dev/jsx/BarMusic/AudioPlayerBar.jsx" />
+        <option value="$PROJECT_DIR$/dev/js/Music.js" />
+        <option value="$PROJECT_DIR$/dev/jsx/BarMusic/MusicProgress.jsx" />
+        <option value="$PROJECT_DIR$/dev/jsx/BarMusic/MusicControls.jsx" />
         <option value="$PROJECT_DIR$/dev/jsx/BarMusic/TypePlayList.jsx" />
+        <option value="$PROJECT_DIR$/dev/jsx/BarMusic/AudioPlayerBar.jsx" />
+        <option value="$PROJECT_DIR$/dev/jsx/Button.jsx" />
         <option value="$PROJECT_DIR$/App.jsx" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" fullScreen="true">
-    <option name="y" value="23" />
-    <option name="width" value="1280" />
-    <option name="height" value="739" />
+    <option name="x" value="160" />
+    <option name="y" value="117" />
+    <option name="width" value="960" />
+    <option name="height" value="564" />
   </component>
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
@@ -156,6 +175,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -163,39 +183,10 @@
               <item name="tcc" type="b2602c69:ProjectViewProjectNode" />
               <item name="tcc" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="tcc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tcc" type="462c0819:PsiDirectoryNode" />
-              <item name="dev" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tcc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tcc" type="462c0819:PsiDirectoryNode" />
-              <item name="dev" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tcc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tcc" type="462c0819:PsiDirectoryNode" />
-              <item name="dev" type="462c0819:PsiDirectoryNode" />
-              <item name="jsx" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tcc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tcc" type="462c0819:PsiDirectoryNode" />
-              <item name="prod" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tcc" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tcc" type="462c0819:PsiDirectoryNode" />
-              <item name="prod" type="462c0819:PsiDirectoryNode" />
-              <item name="images" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -239,17 +230,20 @@
       <updated>1551396757305</updated>
       <workItem from="1551396759516" duration="277000" />
       <workItem from="1558280554219" duration="5002000" />
+      <workItem from="1558357750555" duration="21000" />
+      <workItem from="1558391605102" duration="1478000" />
+      <workItem from="1558479632386" duration="5435000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="31230000" />
+    <option name="totallyTimeSpent" value="38245000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2494043" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21683876" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -266,7 +260,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.27260274" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.19589041" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="11" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -363,30 +357,9 @@
     <entry file="file://$PROJECT_DIR$/prod/images/music/r_music2.jpg">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/dev/jsx/Load/Loader.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="16" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dev/jsx/Music/RecentlyPlayedMusic.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="30" selection-start-line="28" selection-start-column="30" selection-end-line="28" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dev/jsx/Music/Music.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="465">
-          <caret line="31" column="50" selection-end-line="37" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/jsx/Load/Loader.jsx" />
+    <entry file="file://$PROJECT_DIR$/dev/jsx/Music/RecentlyPlayedMusic.jsx" />
+    <entry file="file://$PROJECT_DIR$/dev/jsx/Music/Music.jsx" />
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -397,13 +370,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dev/jsx/Load/Load.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/jsx/Load/Load.jsx" />
     <entry file="file://$PROJECT_DIR$/dev/js/Requisition.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="943">
@@ -414,16 +381,7 @@
     <entry file="file://$PROJECT_DIR$/dev/jsx/BarMusic/InfoMusicPlaying.jsx">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/dev/jsx/BarMusic/MusicBar.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="7" selection-start-line="4" selection-start-column="7" selection-end-line="4" selection-end-column="7" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/jsx/BarMusic/MusicBar.jsx" />
     <entry file="file://$PROJECT_DIR$/prod/main.bundle.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -461,23 +419,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dev/jsx/Button.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="13" lean-forward="true" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dev/jsx/BarMusic/MusicControls.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="35" lean-forward="true" selection-start-line="1" selection-start-column="35" selection-end-line="1" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Desktop/MusicPlayer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -485,23 +426,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dev/jsx/MusicPlayer.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="41" lean-forward="true" selection-start-line="7" selection-start-column="41" selection-end-line="7" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dev/jsx/BarMusic/AudioPlay.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="5" column="51" selection-start-line="5" selection-start-column="51" selection-end-line="5" selection-end-column="51" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/jsx/MusicPlayer.jsx" />
     <entry file="file://$PROJECT_DIR$/prod/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="296">
@@ -509,6 +434,7 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/dev/js/PlayerMusic.js" />
     <entry file="file://$PROJECT_DIR$/dev/jsx/Music.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
@@ -516,34 +442,25 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/dev/js/Music.js" />
     <entry file="file://$PROJECT_DIR$/dev/jsx/BarMusic/MusicProgress.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="26" selection-start-column="26" selection-end-column="26" />
+        <state relative-caret-position="139">
+          <caret line="11" column="2" selection-start-line="11" selection-start-column="2" selection-end-line="11" selection-end-column="2" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dev/jsx/RecentlyPlayed/RecentlyPlayedMusic.jsx">
+    <entry file="file://$PROJECT_DIR$/dev/jsx/Button.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="27" selection-start-line="8" selection-start-column="27" selection-end-line="8" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="60">
+          <caret line="4" column="35" lean-forward="true" selection-start-line="4" selection-start-column="35" selection-end-line="4" selection-end-column="35" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dev/js/PlayerMusic.js">
+    <entry file="file://$PROJECT_DIR$/dev/jsx/BarMusic/MusicControls.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dev/jsx/BarMusic/AudioPlayerBar.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
+        <state relative-caret-position="90">
+          <caret line="6" column="59" selection-start-line="6" selection-start-column="48" selection-end-line="6" selection-end-column="59" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
@@ -552,18 +469,45 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dev/jsx/BarMusic/TypePlayList.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="47" selection-start-line="17" selection-start-column="47" selection-end-line="17" selection-end-column="47" />
+        <state relative-caret-position="165">
+          <caret line="16" column="31" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/jsx/BarMusic/AudioPlay.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="6" selection-start-line="3" selection-start-column="6" selection-end-line="3" selection-end-column="6" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/dev/jsx/BarMusic/AudioPlayerBar.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="51" selection-start-line="20" selection-start-column="51" selection-end-line="20" selection-end-column="51" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/jsx/RecentlyPlayed/RecentlyPlayedMusic.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/App.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="29" column="41" selection-start-line="29" selection-start-column="41" selection-end-line="29" selection-end-column="41" />
+        <state relative-caret-position="355">
+          <caret line="576" column="39" lean-forward="true" selection-start-line="576" selection-start-column="39" selection-end-line="576" selection-end-column="39" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>

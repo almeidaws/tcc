@@ -13,23 +13,76 @@ export default class App extends Component {
 
         this.state = {
             musics: [],
-            selectedTreck: '',
-            player: '',
+            currentMusicTime: 0.0,
+            currentMusicDuration: 0.0,
+            currentMusic: null,
         };
 
         R.getAllMusics((musics) => {
             this.setState({musics: musics  === undefined ? [] : musics});
         });
+
+        this.onTimeChange = this.onTimeChange.bind(this);
+        this.onPlay = this.onPlay.bind(this);
+        this.onAudioLoaded = this.onAudioLoaded.bind(this);
+        this.onAudioTimeChange = this.onAudioTimeChange.bind(this);
+        this.onPlayPauseMusic = this.onPlayPauseMusic.bind(this);
+        this.onNextMusic = this.onNextMusic.bind(this);
+        this.onPreviousMusic = this.onPreviousMusic.bind(this);
+    }
+
+    onTimeChange() {
+        const bullet = document.getElementById("progress");
+        const bar = document.getElementById("progress-bar");
+        if (!bullet || !bar) return;
+
+        const currentWidth = bullet.offsetWidth;
+        const totalWidth = bar.offsetWidth;
+        const progress = currentWidth / totalWidth;
+        const currentTime = this.state.currentMusicDuration * progress;
+        if (this.state.currentMusic)
+            this.state.currentMusic.currentTime = currentTime;
+    }
+
+    onAudioLoaded() {
+        const audio = this.state.currentMusic;
+        if (!audio) return;
+        this.setState({ currentMusicDuration: audio.duration });
+    }
+
+    onAudioTimeChange() {
+        const audio = this.state.currentMusic;
+        if (!audio) return;
+        this.setState({ currentMusicTime: audio.currentTime });
+    }
+
+    onPlay(url) {
+        if (this.state.currentMusic) {
+            this.state.currentMusic.pause();
+            this.state.currentMusic.removeEventListener('loadeddata', this.onAudioLoaded);
+            this.state.currentMusic.removeEventListener('timeupdate', this.onAudioTimeChange);
+        }
+
+        const audio = new Audio(url);
+        this.setState({ currentMusic: audio, currentMusicTime: 0.0, currentMusicDuration: 0.0 });
+        audio.addEventListener('loadeddata', this.onAudioLoaded);
+        audio.addEventListener('timeupdate',this.onAudioTimeChange);
+        audio.play();
+    }
+
+    onNextMusic() {
+        console.log("Next");
+    }
+
+    onPreviousMusic() {
+        console.log("Previous");
+    }
+
+    onPlayPauseMusic() {
+        console.log("PlayPause");
     }
 
     render() {
-
-        const playMusic = (url) => {
-            this.setState({ ...this.state, selectedTreck: url });
-
-            const audio = new Audio(url);
-            audio.play();
-        };
 
         return (
             <div>
@@ -99,7 +152,7 @@ export default class App extends Component {
                     </div>
                     <div className="ms_content_wrapper padder_top80">
                         <Header/>
-                        <RecentlyPlayedMusic musics={this.state.musics} play={playMusic}/>
+                        <RecentlyPlayedMusic musics={this.state.musics} play={this.onPlay}/>
                         <div className="ms_weekly_wrapper">
                             <div className="ms_weekly_inner">
                                 <div className="row">
@@ -515,7 +568,14 @@ export default class App extends Component {
                                 </p>
                             </div>
                         </div>
-                        <AudioPlayerBar music={this.state.selectedTreck}/>
+                        <AudioPlayerBar
+                            currentTime={this.state.currentMusicTime}
+                            duration={this.state.currentMusicDuration}
+                            onTimeChange={this.onTimeChange}
+                            onNext={this.onNextMusic}
+                            onPrevious={this.onPreviousMusic}
+                            onPlayPause={this.onPlayPauseMusic}
+                        />
                     </div>
                     <RegisterModal/>
                     <LoginModal/>

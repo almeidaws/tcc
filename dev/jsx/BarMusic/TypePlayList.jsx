@@ -12,9 +12,15 @@ export default class TypePlayList extends Component {
         return (
             <div className={this.props.className}>
                 <div className="jp-gui jp-interface flex-wrap">
-                    <MusicControls className="jp-controls flex-item"/>
-                    <MusicProgress currentTime={`${this.props.currentTime}`}
-                                   duration={`${this.props.duration}`}
+                    <MusicControls
+                        className="jp-controls flex-item"
+                        onPlayPause={this.props.onPlayPause}
+                        onNext={this.props.onNext}
+                        onPrevious={this.props.onPrevious}
+                    />
+                    <MusicProgress currentTime={this.props.currentTime}
+                                   duration={this.props.duration}
+                                   onTimeChange={this.props.onTimeChange}
                                    className="jp-progress-container flex-item"/>
                     <VolumeControl className="jp-volume-controls flex-item"/>
                     <Toogle className="jp-toggles flex-item"/>

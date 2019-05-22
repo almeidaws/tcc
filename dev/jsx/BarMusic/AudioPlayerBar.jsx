@@ -14,7 +14,14 @@ class AudioPlayerBar extends React.Component {
                 </div>
                 <div className="player_mid"></div>
                 <AudioPlay className="audio-player"/>
-                <TypePlayList duration={this.props.duration} currentTime={this.props.currentTime} className="jp-type-playlist"/>
+                <TypePlayList
+                    duration={this.props.duration}
+                    currentTime={this.props.currentTime}
+                    onTimeChange={this.props.onTimeChange}
+                    onPlayPause={this.props.onPlayPause}
+                    onNext={this.props.onNext}
+                    onPrevious={this.props.onPrevious}
+                    className="jp-type-playlist"/>
             </div>
         );
     }
