@@ -4482,7 +4482,7 @@ h2.widget-title:after {
 		padding-left: 35px;
 	}
 	.jp-progress-container.flex-item {
-		max-width: 50%;
+		max-width: calc(50% * 2.3);
 	}
 	.jp-type-playlist {
 		padding-right: 80px;
@@ -4530,7 +4530,7 @@ h2.widget-title:after {
 		width: 80%;
 	}
 	.jp-progress-container.flex-item {
-		max-width: 45%;
+		max-width: calc(45% * 2.3);
 	}
 	.ms_play_song {
 		width: 310px;
@@ -4682,7 +4682,7 @@ h2.widget-title:after {
 		margin-top: 22px;
 	}
 	.jp-progress-container.flex-item {
-		max-width: 31%;
+		max-width: calc(31% * 2.3);
 	}
 	.ms_free_download.ms_purchase_wrapper .album_list_wrapper>ul>li {
 		font-size: 14px;
@@ -4790,7 +4790,7 @@ h2.widget-title:after {
 		width: 50px;
 	}
 	.jp-progress-container.flex-item {
-		max-width: 20%;
+		max-width: calc(20% * 2.3);
 	}
 	.knob-container .knob-wrapper-outer .knob-wrapper .round {
 		top: 13rem;
@@ -5510,7 +5510,7 @@ h2.widget-title:after {
 		max-width: 94%;
 	}
 	.jp-progress-container.flex-item {
-		max-width: 27%;
+		max-width: calc(27% * 2.3);
 	}
 	.ms_main_wrapper.ms_profile .ms_top_search {
 		position: relative;
@@ -5519,7 +5519,7 @@ h2.widget-title:after {
 }
 @media(max-width:900px) {
 	.jp-progress-container.flex-item {
-		max-width: 21%;
+		max-width: calc(21% * 2.3);
 	}
 	.jp_queue_wrapper {
 		padding-right: 10px;
@@ -5564,7 +5564,7 @@ h2.widget-title:after {
 		margin-right: 15px;
 	}
 	.jp-progress-container.flex-item {
-		max-width: 20%;
+		max-width: calc(20% * 2.3);
 	}
 }
 @media(max-width:767px) {
@@ -6211,7 +6211,7 @@ h2.widget-title:after {
 		width: 35px;
 	}
 	.jp-progress-container.flex-item {
-		max-width: 30%;
+		max-width: calc(30% * 2.3);
 	}
 }
 @media(max-width:414px) {
