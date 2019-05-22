@@ -411,12 +411,14 @@ The return from a successful request is something like this:
     {
         "id": 3,
         "name": "Do Seu Lado",
-        "url": "https://s3.amazonaws.com/miraculouswebsite/awsomefile.ogg"
+        "url": "https://s3.amazonaws.com/miraculouswebsite/awsomefile.ogg",
+        "posterURL": null
     }, 
     {
         "id": 4,
         "name": "Earth",
-        "url": "https://s3.amazonaws.com/miraculouswebsite/avangers.mp3"
+        "url": "https://s3.amazonaws.com/miraculouswebsite/avangers.mp3",
+        "posterURL: "https://s3.amazonaws.com/miraculouswebsite/poster.jpg"
     }
 ]
 ```
@@ -446,7 +448,8 @@ The return from a successful request is something like this:
 {
     "id": 3,
     "name": "Do Seu Lado",
-    "url": "https://s3.amazonaws.com/miraculouswebsite/awsomefile.ogg"
+    "url": "https://s3.amazonaws.com/miraculouswebsite/awsomefile.ogg",
+    "posterURL: "https://s3.amazonaws.com/miraculouswebsite/poster.jpg"
 }
 ```
 
@@ -479,8 +482,10 @@ On error:
 [Database modeling v5][7]\
 [Database modeling v6][8]\
 [Database modeling v7][1]\
-[Database modeling v8][2]
+[Database modeling v8][2]\
+[Database modeling v9][9]
 
+[9]: https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=Miraculous%20-%20Database%20Model#R7V1bc9o4GP01zOw%2BtINtzOUxkKQXkmwmJJts3hQsQI1tMbIokF%2B%2FMpYAW%2BJWLGxatZmM9dnW9ehI35HkVJxOMPtCwHh0iz3oV%2ByqN6s4lxXbbrhN9js2zBNDrdVKDEOCvMRkrQw99AG5scqtE%2BTBKPUgxdinaJw29nEYwj5N2QAheJp%2BbID9dKpjMISSodcHvmx9Rh4dJdamW13Zv0I0HImUrSq%2FEwDxMDdEI%2BDh6ZrJuao4HYIxTa6CWQf6cd2Jekneu95wd5kxAkO6zwv3g6uLK6t3C677lmNbqG7dzj7ZSSw%2FgT%2FhBX6KIIl4julcVEM0RYEPQhZqD3BIe%2FxOlYX7I%2BR7N2COJ3E2Igr67yLUHmGCPtjzwGe3LGZgtwnlrWzX49iQ73ewj8kiHQdW4%2F%2BpN3txjDwtAiP27r0os5Ux3YJZ6sEbEFGRS%2Bz7YByht0W%2B4xcDQIYobGNKccAfEqW8TmdqsPjH7gMfDUNm67O0IBF1kZTGqrGw3Ca8mX5CQuFszcTb6AvEAaRkzh7hd%2B0qf4V3GNvhHWa6gp9V55garUOvVuOw55AfLuNeJvfAuggIh6wOlukt4xLpNapSeqrkWOulUgM%2Bq5IQUNjGk9CL1qHILtZKujItAHoAWB0JrN8uK85FjFRIEMOYhNoRGMeXrEEou78qvdOmeMwb3YcDARLCixdfvwlgWGsNnzzbjlsTMY644OYAed4i1nU0h3jRXaIx6KNweJOk4tRWpgeeWmzCLMqBv6CHEYsMhnFuMAUUvC072hijkC5q222zH9Ymnepnt%2BKyknZY2FqF2U%2F8OKEdHEaUALRAI2S9YQrjHtH2CB4%2FMvxDUdr1Tu1mgG0rgb2VTnajfZ5G0S5wO9XN2E7B7FBM1SRM3XePxtHbOqkoMLEvnNLYyQ06u9ARF5MD%2Fxdx4GzAwXKc5nlLDYUpfKwBwjklHlwJD3cggAnLsLJQPRxT3Q2KRWRnTjAnIBR3T0LJDl%2B5AaguAahoOkmQc7Zc4m6AQG5cog0KDQkKVwFAviGTcyGTpl0wmTQNmeRLJo0NECg%2FmbTkiSqIoikmnuGTc%2BETq9osmFCErGYYJS9GaW0AQfkZxbLyx4IhEL0E4tT2IxBLl39syYqxIZCjCMTaJBHnxiB5gOH7%2FcOPYeujezP%2B9u%2FgZfDP1%2FdhpBBLHvE7q1SzelDU6kGtvsfqQUuFEaupCSSyIPL0JHR7fZNWo9orAbW1Gx%2Bl2qtAlYdKq8yxrKwY1f6gkWhrTy21aq%2FMuayTxMvYp1gdNHPbvEhFpdyrSCUPf0iZY1lhKZpSzmdmu7VXlto1VuZcIZNczcaIAIpwyKcuKGD1BILxX%2FW%2FDbWUm1pUOv5JqUWH1PJnc8uyh54huch7TgyBlJtAlMK90o3WNcO1ZK3FMMhxDFLbgIJS6W6ta9Qkd93LXvDa9cBHt%2FOKHMVGSAkLMPQu4u3Pq9Yc0UDoaKxiyPyF1%2Fsi8F8c%2BOyK4OVs%2FeblXIRmiL6IONj12lsstHopDoh35NbglRzhCekL733Lxg8qOvyOaSb0Uju5t7aWq2gtYSPQZ9O8nzCV2S17au9j3K4UOMdNK3COUOBEFEm5%2BVsrIEgR1bIbgZuZiJKKkSL6hd22SpDJo9SdhLKFfpeCFuus%2BB1miGQLtyzF0I1yynSEKOwxTonTnBIwXnDHJPSgtwtiB%2BimdrayXYnwa6pJgq4uLtO99fvWvpNVrU9Y%2Bz9e3KgVsNxbD9%2Bfn1%2Fr07tn95M8Xb%2BdRKgvj7hmYUOFJi0LG%2BljCo191zW2nYo4CiO2hBFzGqGwdY2tvbiU6xrKHMsTO7OucdBMf2tPLfW6hjLnijmYOY1wEt0gH0I55ZqGMsdGNciZS7SLBtqgIO%2FDYI0He04Xzg2hnAuhnHIlQ5ljeeeFIZSjCEX7pos8oEAeB8%2BAdtzL3tNwOnu8hU%2FdkcJJHuOIOYCZ3V0secdaCQWGW%2FLhFgVg9qOb4xc5tCFKdqkNuWwjl71JI42Nzb25PLMVDSffDH1onZoozyboWiNVZtls4Mp5bqJ9A5c2KNjyUPIFhgTKgDAKfuU0Cn6jllbwxTrpLrpo2bowYr4nVHYFf9mNz0fCt80XhbRo%2BGfxSSF11s03hUo1sz2cVAqX8W3zVaG8%2BeQsPiukXiTWsKhjGEQvg%2Byr22tziBzDIDkziKOdQbSBwZW944sJZZ6pDAnjHhfkHlu1PXe4afOPXeMfl90%2Fdg8eiAr3j13jH%2BsYjdzz9Y9d4x%2BXanZ7OKkU7h%2B7ZnabN5%2Bcr3%2FsatijZBhEL4MU7h%2B75lO7eTOI9m%2FtagODOGt0%2FAHbZeCwA7biOrcDtls10PUTttsOUJTkhG3DznjKzQwO9j1h26hmIspOcfM7YauGmSzDFAkzWxfO3JLhx93R7Pvip56NqJGRYnTjRxZofuMj2lJvFeGiDgnXFX7rH1T9olcXVv2yz%2FcbV7%2FENYVXv%2Bxl%2FUnVr498WHD1RyGToWL1lzWdq%2F8B
 [8]: https://bit.ly/2GjlpBL
 [7]: https://bit.ly/2Gcvfph
 [6]: https://bit.ly/2RZCvuS
