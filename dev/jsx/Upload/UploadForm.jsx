@@ -85,11 +85,19 @@ const Upload = props => (
     <div className="ms_upload_box">
         <Title name="Upload & Share Your Music With The World" />
         <ErrorMessages messages={props.errorMessages} />
-        <div className="file-upload w-75">
+        <div className="file-upload w-75 pb-5">
           <div className="file-select">
             <div className="file-select-button" id="fileName">Choose File</div>
             <div className="file-select-name" id="noFile">{props.fileName ? props.fileName : "No file chosen..."}</div> 
             <input onChange={props.onMusicFileChange} type="file" name="music" accept="audio/*" id="chooseFile" />
+          </div>
+        </div>
+
+        <div className="file-upload w-75 pt-5">
+          <div className="file-select">
+            <div className="file-select-button" id="posterName">Choose Poster</div>
+            <div className="file-select-name" id="noPoster">{props.posterName ? props.posterName : "No poster chosen..."}</div> 
+            <input onChange={props.onMusicPosterChange} type="file" name="poster" accept="image/*" id="choosePoster" />
           </div>
         </div>
     </div>
@@ -123,12 +131,14 @@ class UploadForm extends React.Component {
                        primaryGenre: null, 
                        secondaryGenre: null,
                        musicFile: null,
+                       posterFile: null,
                        authors: null,
                        genres: null,
                        errorMessages: [],
                        fileErrorMessages: [],
                        uploadingErrorMessages: [],
                        fileName: null,
+                       posterName: null,
                        uploading: true,
                      };
 
@@ -138,6 +148,7 @@ class UploadForm extends React.Component {
         this.handleSecondaryGenre = this.handleSecondaryGenre.bind(this);
         this.handleUpload = this.handleUpload.bind(this);
         this.handleMusicFile = this.handleMusicFile.bind(this);
+        this.handleMusicPoster = this.handleMusicPoster.bind(this);
 
         this.fetchAuthorsAndGenres();
     }
@@ -148,7 +159,8 @@ class UploadForm extends React.Component {
         const trackNameValid = this.isTrackNameValid();
         const artistNameValid = this.isArtistNameValid();
         const musicFileValid = this.isMusicFileSelected();
-        if (!trackNameValid || !artistNameValid || !musicFileValid) return;
+        const musicPosterValid = this.isMusicPosterSelected();
+        if (!trackNameValid || !artistNameValid || !musicFileValid || !musicPosterValid) return;
 
         // Send data to the requesition
         const trackName = this.state.trackName.trim();
@@ -158,7 +170,7 @@ class UploadForm extends React.Component {
         const genres = [primaryGenre, secondaryGenre].map(genre => genre.id).filter(id => Number.isInteger(id));
 
         this.setState({ uploadStarted: true });
-        R.addMusic(trackName, artist, genres, this.state.musicFile, () => {
+        R.addMusic(trackName, artist, genres, this.state.musicFile, this.state.posterFile, () => {
             this.setState({ uploadFinished: true });
         }, errorStatus => {
             const uploadingErrorMessages = [];
@@ -175,6 +187,17 @@ class UploadForm extends React.Component {
             this.setState(prevState => {
                 const errorMessages = prevState.fileErrorMessages;
                 errorMessages.push(`You must add a music file`);
+                return { fileErrorMessages: errorMessages }
+            });
+            return false;
+         }
+         return true;
+    }
+    isMusicPosterSelected() {
+        if (this.state.posterFile === null) {
+            this.setState(prevState => {
+                const errorMessages = prevState.fileErrorMessages;
+                errorMessages.push(`You must add a music poster`);
                 return { fileErrorMessages: errorMessages }
             });
             return false;
@@ -244,6 +267,10 @@ class UploadForm extends React.Component {
         const file = event.target.files[0];
         this.setState({ fileName: file.name, musicFile: file });
     }
+    handleMusicPoster(event) {
+        const file = event.target.files[0];
+        this.setState({ posterName: file.name, posterFile: file });
+    }
     handleTrackName(event) {
         this.setState({ trackName: event.target.value });
     }
@@ -261,7 +288,9 @@ class UploadForm extends React.Component {
             <div>
                 <Upload errorMessages={this.state.fileErrorMessages} 
                         fileName={this.state.fileName}
-                        onMusicFileChange={this.handleMusicFile} />
+                        posterName={this.state.posterName}
+                        onMusicFileChange={this.handleMusicFile}
+                        onMusicPosterChange={this.handleMusicPoster} />
                 <div className="marger_top60">
                     <div className="ms_upload_box">
                         <Title name="Track Information" />

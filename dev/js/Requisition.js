@@ -215,12 +215,13 @@ class Requisition {
      * authors to the web server.
      * @param {Array<number>} genres an array of integers that contains genre's ids.
      * @param {File} file music's file that will be added to Amazon S3.
+     * @param {File} poster music's poster that will be added to Amazon S3.
      * @param {Function} success callback without arguments.
      * @param {Function} error fallback called when there's a problem.
      * The HTTP status code is passed as argument. The possible values
      * are documented on the RESTful API page.
      */
-    static addMusic(name, author, genres, file, success, error) {
+    static addMusic(name, author, genres, file, poster, success, error) {
         const fetched = () => { success(); }
 
         Requisition.addAuthor(author, author => {
@@ -230,6 +231,7 @@ class Requisition {
             formData.append('author', author.id);
             genres.forEach(genre => formData.append('genre', genre));
             formData.append('music', file);
+            formData.append('poster', poster);
             
             $.ajax('musics/', {
                 method: 'POST',

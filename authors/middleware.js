@@ -47,6 +47,18 @@ async function getByID(request, response, next) {
     }
 }
 
+async function getByMusic(request, response, next) {
+    try {
+        if (!request.params.musicID) throw createError(401, `The musics's id is missing`);
+        const queries = await authorsDatabase.connect();
+        const authors = await queries.getAuthorsByMusic(request.params.musicID);
+
+        response.status(200).json(authors).end();
+    } catch (error) {
+        next(error);
+    }
+}
+
 async function deleteAuthor(request, response, next) {
     try {
         if (!request.params.id) throw createError(401, `The author's id is missing`);
@@ -63,4 +75,4 @@ async function deleteAuthor(request, response, next) {
     }
 }
 
-module.exports = { add, getAll, getByID, deleteAuthor }
+module.exports = { add, getAll, getByID, deleteAuthor, getByMusic }

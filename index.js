@@ -33,8 +33,13 @@ const {
     getAll: handleGetAllAuthors,
     getByID: handleGetAuthor,
     deleteAuthor: handleDeleteAuthor,
+    getByMusic: handleAuthorsByMusic,
 } = require('./authors/middleware.js');
-const { getAll: handleGetAllGenres } = require('./genres/middleware.js');
+
+const { 
+    getAll: handleGetAllGenres,
+    getByMusic: handleGenresByMusic,
+} = require('./genres/middleware.js');
 
 // Run pending migrations
 runMigrations();
@@ -61,10 +66,12 @@ app.delete('/musics/:id', handleDeleteMusic);
 app.post('/authors', handleAddAuthor);
 app.get('/authors', handleGetAllAuthors);
 app.get('/authors/:id', handleGetAuthor);
+app.get('/musics/:musicID/authors', handleAuthorsByMusic);
 app.delete('/authors/:id', handleDeleteAuthor);
 
 // GENRES' ROUTES
 app.get('/genres', handleGetAllGenres);
+app.get('/musics/:musicID/genres', handleGenresByMusic);
 
 //SERVER STARTING
 app.use(express.static(path.join(__dirname, 'prod/')))

@@ -455,3 +455,15 @@ $('#chooseFile').bind('change', function () {
     $("#noFile").text(filename.replace("C:\\fakepath\\", ""));
   }
 });
+
+$('#choosePoster').bind('change', function () {
+  var filename = $("#choosePoster").val();
+  if (/^\s*$/.test(filename)) {
+    $(".file-upload").removeClass('active');
+    $("#noPoster").text("No poster chosen...");
+  }
+  else {
+    $(".file-upload").addClass('active');
+    $("#noPoster").text(filename.replace("C:\\fakepath\\", ""));
+  }
+});

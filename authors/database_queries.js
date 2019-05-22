@@ -20,6 +20,15 @@ const addAuthorSQL = 'INSERT INTO Author (Name) VALUES ($1) RETURNING ID, Name;'
 const getAllAuthorsSQL = 'SELECT ID, Name FROM Author;';
 
 /** 
+ * The SQL query used to get all authors from a particular music.
+ * @constant
+ * @type {string}
+ */
+const getAllAuthorsFromMusicSQL = `
+SELECT ID, Name FROM Author INNER JOIN MusicAuthor ON ID = Author WHERE Music = $1;
+`;
+
+/** 
  * The SQL query used to delete an author from the database.
  * @constant
  * @type {string}
@@ -71,6 +80,7 @@ module.exports = {
     deleteAuthorSQL,
     getAllAuthorsSQL,
     getAuthorByIDSQL,
+    getAllAuthorsFromMusicSQL,
     createAuthorTableSQL,
     deleteAuthorTableSQL,
     cleanUpAuthorTableSQL,

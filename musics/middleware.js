@@ -1,6 +1,8 @@
 'use strict';
 
 const musicsDatabase = require('./database.js');
+const authorsDatabase = require('../authors/database.js');
+const genresDatabase = require('../genres/database.js');
 const createError = require('http-errors');
 const fs = require('fs');
 const { Readable } = require('stream');
@@ -15,17 +17,21 @@ async function add(request, response, next) {
         if (!request.body.author) throw createError(400, `Authors is missing`);
         if (!request.files) throw createError(400, `There's no file`);
         if (!request.files.music) throw createError(400, `There's no music file`);
+        if (!request.files.poster) throw createError(400, `There's no music poster`);
 
         // Get's music metadata
         const body = request.body;
         const genres = toArrayOfNumbers(body.genre);
         const authors = toArrayOfNumbers(body.author);
         const extension = getExtension(request.files.music.name);
+        const posterExtension = getExtension(request.files.poster.name);
         const music = new musicsDatabase.Music(body.name, 
                                                genres,
                                                authors,
                                                request.files.music.data,
-                                               extension);
+                                               extension,
+                                               request.files.poster.data,
+                                               posterExtension);
 
         const queries = await musicsDatabase.connect();
         await queries.addMusic(music, progress => {
@@ -48,11 +54,16 @@ async function getByID(request, response, next) {
 
         if (!request.params.id) throw createError(401, `The music's id is missing`);
         const queries = await musicsDatabase.connect();
+        const authorQueries = await authorsDatabase.connect();
+        const genresQueries = await genresDatabase.connect();
         const music = await queries.getMusicByID(request.params.id);
 
         const { id, name } = music;
+        const authors = await authorQueries.getAuthorsByMusic(music.id);
+        const genres = await genresQueries.getAllGenresFromMusic(music.id);
         const url = music.calculateFileURL();
-        response.status(200).json({ id, name, url }).end();
+        const posterURL = music.posterUID ? music.calculatePosterURL() : null;
+        response.status(200).json({ id, name, url, posterURL, authors, genres }).end();
     } catch (error) {
         next(error);
     }
@@ -65,12 +76,21 @@ async function getAll(request, response, next) {
     try {
 
         const queries = await musicsDatabase.connect();
+        const authorQueries = await authorsDatabase.connect();
+        const genresQueries = await genresDatabase.connect();
         const musics = await queries.getAllMusics();
         if (musics === null)
             return response.status(204).json([]).end();
 
-        const withFileURLs = musics.map(music => ({ id: music.id, name: music.name, url: music.calculateFileURL() }));
-        response.status(200).json(withFileURLs).end();
+        const withFileURLs = musics.map(async music => ({ id: music.id, 
+                                                    name: music.name, 
+                                                    url: music.calculateFileURL(),
+                                                    posterURL: music.posterUID ? music.calculatePosterURL() : null,
+                                                    authors: await authorQueries.getAuthorsByMusic(music.id),
+                                                    genres: await genresQueries.getAllGenresFromMusic(music.id),
+                                                    }));
+
+        response.status(200).json(await Promise.all(withFileURLs)).end();
     } catch (error) {
         next(error);
     }
