@@ -15,11 +15,17 @@ export default class App extends Component {
             musics: [],
             currentMusicTime: 0.0,
             currentMusicDuration: 0.0,
+            currentAudio: null,
             currentMusic: null,
         };
 
         R.getAllMusics((musics) => {
-            this.setState({musics: musics  === undefined ? [] : musics});
+            const indexedMusics = musics.map((music, index) => {
+                music.index = index;
+                return music;
+            });
+
+            this.setState({musics: indexedMusics === undefined ? [] : musics});
         });
 
         this.onTimeChange = this.onTimeChange.bind(this);
@@ -40,51 +46,62 @@ export default class App extends Component {
         const totalWidth = bar.offsetWidth;
         const progress = currentWidth / totalWidth;
         const currentTime = this.state.currentMusicDuration * progress;
-        if (this.state.currentMusic)
-            this.state.currentMusic.currentTime = currentTime;
+        if (this.state.currentAudio)
+            this.state.currentAudio.currentTime = currentTime;
     }
 
     onAudioLoaded() {
-        const audio = this.state.currentMusic;
+        const audio = this.state.currentAudio;
         if (!audio) return;
         this.setState({ currentMusicDuration: audio.duration });
     }
 
     onAudioTimeChange() {
-        const audio = this.state.currentMusic;
+        const audio = this.state.currentAudio;
         if (!audio) return;
         this.setState({ currentMusicTime: audio.currentTime });
     }
 
-    onPlay(url) {
-        if (this.state.currentMusic) {
-            this.state.currentMusic.pause();
-            this.state.currentMusic.removeEventListener('loadeddata', this.onAudioLoaded);
-            this.state.currentMusic.removeEventListener('timeupdate', this.onAudioTimeChange);
+    onPlay(music) {
+        if (this.state.currentAudio) {
+            this.state.currentAudio.pause();
+            this.state.currentAudio.removeEventListener('loadeddata', this.onAudioLoaded);
+            this.state.currentAudio.removeEventListener('timeupdate', this.onAudioTimeChange);
         }
 
-        const audio = new Audio(url);
-        this.setState({ currentMusic: audio, currentMusicTime: 0.0, currentMusicDuration: 0.0 });
+        const audio = new Audio(music.url);
+        this.setState({ currentMusic: music, currentAudio: audio, currentMusicTime: 0.0, currentMusicDuration: 0.0 });
         audio.addEventListener('loadeddata', this.onAudioLoaded);
         audio.addEventListener('timeupdate',this.onAudioTimeChange);
         audio.play();
     }
 
     onNextMusic() {
-        console.log("Next");
+        const music = this.state.currentMusic;
+        if (!music) return;
+        const nextIndex = (music.index + 1) % this.state.musics.length;
+        const nextMusics = this.state.musics.filter(music => music.index === nextIndex);
+        if (nextMusics.length !== 1) return;
+        this.onPlay(nextMusics[0]);
     }
 
     onPreviousMusic() {
-        console.log("Previous");
+        const music = this.state.currentMusic;
+        if (!music) return;
+        let nextIndex = (music.index - 1);
+        if (nextIndex < 0) nextIndex = this.state.musics.length - 1;
+        const nextMusics = this.state.musics.filter(music => music.index === nextIndex);
+        if (nextMusics.length !== 1) return;
+        this.onPlay(nextMusics[0]);
     }
 
     onPlayPauseMusic() {
-        if (!this.state.currentMusic) return;
+        if (!this.state.currentAudio) return;
 
-        if (this.state.currentMusic.paused)
-            this.state.currentMusic.play();
+        if (this.state.currentAudio.paused)
+            this.state.currentAudio.play();
         else
-            this.state.currentMusic.pause();
+            this.state.currentAudio.pause();
     }
 
     render() {
@@ -580,7 +597,7 @@ export default class App extends Component {
                             onNext={this.onNextMusic}
                             onPrevious={this.onPreviousMusic}
                             onPlayPause={this.onPlayPauseMusic}
-                            paused={this.state.currentMusic ? this.state.currentMusic.paused : true }
+                            paused={this.state.currentAudio ? this.state.currentAudio.paused : true }
                         />
                     </div>
                     <RegisterModal/>

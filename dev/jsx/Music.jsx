@@ -23,14 +23,14 @@ export default class Music extends Component {
                                     className="icon icon_playlst"/></span>Add To Playlist</a></li>
                             </ul>
                             <div className="ms_play_icon" onClick={() => {
-                                this.props.play(this.props.url);
+                                this.props.play(this.props.music);
                             }}>
                                 <img src={"./images/svg/play.svg"} alt=""/>
                             </div>
                         </div>
                     </div>
                     <div className="ms_rcnt_box_text">
-                        <h3><a href="#">{this.props.musicName}</a></h3>
+                        <h3><a href="#">{this.props.music.name}</a></h3>
                         <p>{this.props.musicArtist}</p>
                     </div>
                 </div>

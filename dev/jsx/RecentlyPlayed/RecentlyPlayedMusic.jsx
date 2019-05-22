@@ -5,8 +5,8 @@ export default class RecentlyPlayedMusic extends Component {
 
     render() {
         const musics = [];
-        this.props.musics.map((music,index) => {
-            musics.push(<Music play={this.props.play} key={index} id={music.id} url={music.url} musicName={music.name} musicArtist={'Renan Alves'}/>);
+        this.props.musics.map(music => {
+            musics.push(<Music play={this.props.play} key={music.id} music={music} musicArtist={'Renan Alves'}/>);
         });
 
         return(
