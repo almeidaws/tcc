@@ -17,6 +17,7 @@ export default class TypePlayList extends Component {
                         onPlayPause={this.props.onPlayPause}
                         onNext={this.props.onNext}
                         onPrevious={this.props.onPrevious}
+                        paused={this.props.paused}
                     />
                     <MusicProgress currentTime={this.props.currentTime}
                                    duration={this.props.duration}

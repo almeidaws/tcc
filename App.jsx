@@ -79,7 +79,12 @@ export default class App extends Component {
     }
 
     onPlayPauseMusic() {
-        console.log("PlayPause");
+        if (!this.state.currentMusic) return;
+
+        if (this.state.currentMusic.paused)
+            this.state.currentMusic.play();
+        else
+            this.state.currentMusic.pause();
     }
 
     render() {
@@ -575,6 +580,7 @@ export default class App extends Component {
                             onNext={this.onNextMusic}
                             onPrevious={this.onPreviousMusic}
                             onPlayPause={this.onPlayPauseMusic}
+                            paused={this.state.currentMusic ? this.state.currentMusic.paused : true }
                         />
                     </div>
                     <RegisterModal/>

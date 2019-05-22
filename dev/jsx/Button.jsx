@@ -5,7 +5,7 @@ const Button = props => (
         className={props.className}
         tabIndex={props.tabIndex}
         title={props.title}>
-    	<i className="ms_play_control" onClick={props.onClick}></i>
+    	<i className="ms_play_control" onClick={props.onClick} />
     </button>
 );
 export default Button;

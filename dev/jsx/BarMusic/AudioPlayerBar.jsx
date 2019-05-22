@@ -21,6 +21,7 @@ class AudioPlayerBar extends React.Component {
                     onPlayPause={this.props.onPlayPause}
                     onNext={this.props.onNext}
                     onPrevious={this.props.onPrevious}
+                    paused={this.props.paused}
                     className="jp-type-playlist"/>
             </div>
         );

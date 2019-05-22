@@ -2549,6 +2549,17 @@ li.option.selected.focus:after {
 	background-color: transparent;
 	cursor: pointer;
 }
+
+.jp-interface .ms_pause_control {
+	background: url(../images/svg/pause.svg) !important;
+	width: 30px;
+	height: 30px;
+	background-repeat: no-repeat;
+	display: inline-block;
+	background-color: transparent;
+	cursor: pointer;
+}
+
 button.jp-previous .ms_play_control {
 	background-position: 0px 0px !important;
 }
