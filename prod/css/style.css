@@ -2215,13 +2215,13 @@ i.ms_icon.icon_share {
 .jp-time-holder .jp-current-time {
 	position: absolute;
 	left: 0;
-	top: 10px;
+	top: 5px;
 	color: #fff;
 }
 .jp-time-holder .jp-duration {
 	position: absolute;
 	right: 0;
-	top: 10px;
+	top: 5px;
 	color: #fff;
 }
 .jp-track-name {
