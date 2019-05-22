@@ -418,7 +418,7 @@ The return from a successful request is something like this:
         "id": 4,
         "name": "Earth",
         "url": "https://s3.amazonaws.com/miraculouswebsite/avangers.mp3",
-        "posterURL: "https://s3.amazonaws.com/miraculouswebsite/poster.jpg"
+        "posterURL": "https://s3.amazonaws.com/miraculouswebsite/poster.jpg"
     }
 ]
 ```
@@ -449,7 +449,7 @@ The return from a successful request is something like this:
     "id": 3,
     "name": "Do Seu Lado",
     "url": "https://s3.amazonaws.com/miraculouswebsite/awsomefile.ogg",
-    "posterURL: "https://s3.amazonaws.com/miraculouswebsite/poster.jpg"
+    "posterURL": "https://s3.amazonaws.com/miraculouswebsite/poster.jpg"
 }
 ```
 
