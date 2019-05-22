@@ -412,13 +412,37 @@ The return from a successful request is something like this:
         "id": 3,
         "name": "Do Seu Lado",
         "url": "https://s3.amazonaws.com/miraculouswebsite/awsomefile.ogg",
-        "posterURL": null
+        "posterURL": null,
+        "authors": [
+            {
+                "id": 47,
+                "name": "Paula Fernandes"
+            }
+        ],
+        "genres": [
+            {
+                "id": 0,
+                "name": "Classical"
+            }
+        ]
     }, 
     {
         "id": 4,
         "name": "Earth",
         "url": "https://s3.amazonaws.com/miraculouswebsite/avangers.mp3",
-        "posterURL": "https://s3.amazonaws.com/miraculouswebsite/poster.jpg"
+        "posterURL": "https://s3.amazonaws.com/miraculouswebsite/poster.jpg",
+        "authors": [
+            {
+                "id": 49,
+                "name": "Sandy e Junior"
+            }
+        ],
+        "genres": [
+            {
+                "id": 0,
+                "name": "Classical"
+            }
+        ]
     }
 ]
 ```
@@ -449,7 +473,19 @@ The return from a successful request is something like this:
     "id": 3,
     "name": "Do Seu Lado",
     "url": "https://s3.amazonaws.com/miraculouswebsite/awsomefile.ogg",
-    "posterURL": "https://s3.amazonaws.com/miraculouswebsite/poster.jpg"
+    "posterURL": "https://s3.amazonaws.com/miraculouswebsite/poster.jpg",
+    "authors": [
+            {
+                "id": 49,
+                "name": "Sandy e Junior"
+            }
+        ],
+    "genres": [
+        {
+            "id": 0,
+            "name": "Classical"
+        }
+    ]
 }
 ```
 
