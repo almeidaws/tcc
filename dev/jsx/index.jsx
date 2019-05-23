@@ -19,7 +19,7 @@ if (favourites)
 
 const recentlyPlayed = document.getElementById('recentlyPlayed');
 if (recentlyPlayed)
-    ReactDOM.render(<RecentlyPlayedMusic />, recentlyPlayed);
+    ReactDOM.render(<RecentlyPlayedMusic musics={[{id: 1, name: "Do seu lado", authors: [{id:1, name: "Paulo"}]}]}/>, recentlyPlayed);
 
 const header = document.getElementById('header');
 if (header)
