@@ -2,7 +2,6 @@ import React from 'react';
 import AudioPlayerBar from './BarMusic/AudioPlayerBar.jsx';
 
 const Footer = props => {
-    console.log(props);
     return (
             <div className="ms_footer_wrapper">
                 <div className="ms_footer_logo">
