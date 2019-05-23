@@ -46,7 +46,7 @@
   "scripts": {
     "build": "npx webpack",
     "test": "export $(cat .env | xargs); NODE_ENV=test; jest --runInBand",
-    "start": "nodemon --exec 'npx webpack && heroku local'"
+    "start": "export NODE_ENV=development;nodemon --exec 'npx webpack && heroku local'"
   },
   "repository": {
     "type": "git",

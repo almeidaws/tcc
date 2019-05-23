@@ -599,6 +599,7 @@ export default class App extends Component {
                             onPrevious={this.onPreviousMusic}
                             onPlayPause={this.onPlayPauseMusic}
                             paused={this.state.currentAudio ? this.state.currentAudio.paused : true }
+                            currentMusic={this.state.currentMusic !== null ? this.state.currentMusic : { name: '', authors: [{name: ''}] }}
                         />
                     </div>
                     <RegisterModal/>
