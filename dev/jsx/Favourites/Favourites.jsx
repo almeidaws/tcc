@@ -1,3 +1,5 @@
+import React from 'react';
+
 const Header = props => {
     return (
             <ul className="album_list_name">
