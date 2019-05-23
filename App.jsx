@@ -74,6 +74,7 @@ export default class App extends Component {
         this.setState({ currentMusic: music, currentAudio: audio, currentMusicTime: 0.0, currentMusicDuration: 0.0 });
         audio.addEventListener('loadeddata', this.onAudioLoaded);
         audio.addEventListener('timeupdate',this.onAudioTimeChange);
+        audio.preload = 'auto';
         audio.play();
     }
 
@@ -175,7 +176,7 @@ export default class App extends Component {
                     </div>
                     <div className="ms_content_wrapper padder_top80">
                         <Header/>
-                        <RecentlyPlayedMusic musics={this.state.musics} play={this.onPlay}/>
+                        <RecentlyPlayedMusic playPayse={this.onPlayPauseMusic} paused={this.state.currentAudio ? this.state.currentAudio.paused : true } musics={this.state.musics} playPause={this.onPlayPauseMusic} play={this.onPlay}/>
                         <div className="ms_weekly_wrapper">
                             <div className="ms_weekly_inner">
                                 <div className="row">
