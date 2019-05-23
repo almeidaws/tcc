@@ -10,7 +10,7 @@ const PlayPauseButton = props => {
             <i className={props.paused ? "ms_play_control" : "ms_pause_control" } onClick={props.onClick} />
         </button>
     );
-}
+};
 
 const MusicControls = props => (
     <div className={props.className}>

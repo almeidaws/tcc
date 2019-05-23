@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 
 export default class Music extends Component {
-
     render() {
         return (
             <div className="swiper-slide">
@@ -23,9 +22,15 @@ export default class Music extends Component {
                                     className="icon icon_playlst"/></span>Add To Playlist</a></li>
                             </ul>
                             <div className="ms_play_icon" onClick={() => {
-                                this.props.play(this.props.music);
+                                if (this.isStarted === true || this.paused) {
+                                    this.props.playPause();
+                                }else {
+                                    this.props.play(this.props.music);
+                                    this.isStarted = true;
+                                }
+                                this.isPlaying = !this.isPlaying;
                             }}>
-                                <img src={"./images/svg/play.svg"} alt=""/>
+                                <img src={`./images/svg/${this.isPlaying === true ? 'pause.svg' : 'play.svg'}`} alt=""/>
                             </div>
                         </div>
                     </div>
