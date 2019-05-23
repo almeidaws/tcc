@@ -5,9 +5,9 @@ import Favourites from "./Favourites/Favourites.jsx";
 import RecentlyPlayedMusic from "./RecentlyPlayed/RecentlyPlayedMusic.jsx";
 import Header from './Header.jsx';
 
-const app = document.getElementById('app');
-if (app)
-    ReactDOM.render(<App/>, app);
+const index = document.getElementById('index');
+if (index)
+    ReactDOM.render(<App container="index" />, index);
 
 const uploadForm = document.getElementById('uploadForm');
 if ( uploadForm !== null)

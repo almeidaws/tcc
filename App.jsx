@@ -112,12 +112,7 @@ export default class App extends Component {
             <div>
                 <div className="ms_main_wrapper">
                     <LeftMenu />
-                    <Index 
-                        onPlayPauseMusic={this.onPlayPauseMusic}
-                        paused={this.state.currentAudio ? this.state.currentAudio.paused : true}
-                        currentAudio={this.state.currentAudio}
-                        musics={this.state.musics}
-                        onPlay={this.onPlay} />
+                    { container.bind(this)(this.props.container) }
                     <Footer 
                         duration={this.state.currentMusicDuration}
                         currentTime={this.state.currentMusicTime}
@@ -187,3 +182,18 @@ export default class App extends Component {
         );
     };
 }
+
+function container(containerName) {
+    switch (containerName) {
+        case "index":
+            return (
+                <Index 
+                    onPlayPauseMusic={this.onPlayPauseMusic}
+                    paused={this.state.currentAudio ? this.state.currentAudio.paused : true}
+                    currentAudio={this.state.currentAudio}
+                    musics={this.state.musics}
+                    onPlay={this.onPlay} />
+            );
+            break;
+     }
+};
