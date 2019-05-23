@@ -4,6 +4,7 @@ import RegisterModal from "./dev/jsx/RegisterModal.jsx";
 import LoginModal from "./dev/jsx/LoginModal.jsx";
 import Footer from "./dev/jsx/Footer.jsx";
 import Index from "./dev/jsx/Containers/Index.jsx";
+import Favourites from "./dev/jsx/Containers/Favourites.jsx";
 import LeftMenu from "./dev/jsx/LeftMenu.jsx";
 import R from "./dev/js/Requisition";
 
@@ -111,7 +112,7 @@ export default class App extends Component {
         return (
             <div>
                 <div className="ms_main_wrapper">
-                    <LeftMenu />
+                    <LeftMenu selected={this.props.container} />
                     { container.bind(this)(this.props.container) }
                     <Footer 
                         duration={this.state.currentMusicDuration}
@@ -194,6 +195,14 @@ function container(containerName) {
                     musics={this.state.musics}
                     onPlay={this.onPlay} />
             );
-            break;
+        case "favourites":
+            return (
+                <Favourites
+                    onPlayPauseMusic={this.onPlayPauseMusic}
+                    paused={this.state.currentAudio ? this.state.currentAudio.paused : true}
+                    currentAudio={this.state.currentAudio}
+                    musics={this.state.musics}
+                    onPlay={this.onPlay} />
+             )
      }
 };

@@ -1,6 +1,8 @@
 import React from 'react';
+import RecentlyPlayedMusic from '../RecentlyPlayed/RecentlyPlayedMusic.jsx';
+import Header from '../Header.jsx';
 
-const Header = props => {
+const ListHeader = props => {
     return (
             <ul className="album_list_name">
                 <li>#</li>
@@ -25,7 +27,7 @@ const Row = props => {
      );
 };
 
-const Favourites = props => {
+const FavouritesList = props => {
     return (
             <div className="ms_free_download ms_purchase_wrapper">
                 <div className="ms_heading">
@@ -33,7 +35,7 @@ const Favourites = props => {
                 </div>
 				<div className="album_inner_list">
 					<div className="album_list_wrapper">
-						<Header />
+						<ListHeader />
                         <Row active={true} number="01" songTitle="Bloodlust" duration="5:25" />
                         <Row number="01" songTitle="Bloodlust" duration="5:25" />
                         <Row number="02" songTitle="Bloodlust" duration="5:25" />
@@ -44,6 +46,20 @@ const Favourites = props => {
 				</div>
             </div>
         )
+};
+
+const Favourites = props => {
+    return (
+        <div className="ms_content_wrapper padder_top80">
+            <Header />
+            <FavouritesList />
+            <RecentlyPlayedMusic
+                paused={props.paused} 
+                musics={props.musics} 
+                playPause={props.onPlayPauseMusic} 
+                play={props.onPlay} />
+        </div>
+    )
 };
 
 export default Favourites;

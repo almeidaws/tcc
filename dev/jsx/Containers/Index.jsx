@@ -5,7 +5,7 @@ import RecentlyPlayedMusic from '../RecentlyPlayed/RecentlyPlayedMusic.jsx';
 const Index = props => {
     return (
         <div className="ms_content_wrapper padder_top80">
-            <Header/>
+            <Header />
             <RecentlyPlayedMusic 
                 paused={props.paused} 
                 musics={props.musics} 

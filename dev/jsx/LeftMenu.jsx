@@ -20,7 +20,7 @@ const LeftMenu = props => {
                 <div className="ms_nav_wrapper">
                     <ul>
                         <li>
-                            <a href="./index.html" className="active" title="Discover">
+                            <a href="./index.html" className={props.selected === "index" ? "active" : ""} title="Discover">
                                 <span className="nav_icon">
                                     <span className="icon icon_discover"/>
                                 </span>
@@ -30,7 +30,7 @@ const LeftMenu = props => {
                             </a>
                         </li>
                         <li>
-                            <a href="./genres.html" title="Genres">
+                            <a href="./genres.html" className={props.selected === "genres" ? "active" : ""} title="Genres">
                                 <span className="nav_icon">
                                     <span className="icon icon_genres"/>
                                 </span>
@@ -40,7 +40,7 @@ const LeftMenu = props => {
                             </a>
                         </li>
                         <li>
-                            <a href="./favourite.html" title="Favourites">
+                            <a href="./favourite.html" className={props.selected === "favourites" ? "active" : ""} title="Favourites">
                                 <span className="nav_icon">
                                     <span className="icon icon_favourite"/>
                                 </span>
