@@ -4,6 +4,9 @@ import Music from '../Music.jsx';
 export default class RecentlyPlayedMusic extends Component {
 
     render() {
+        if (!this.props.musics) return null;
+        if (this.props.musics.length === 0) return null;
+
         const musics = [];
         this.props.musics.map(music => {
             musics.push(<Music play={this.props.play} key={music.id} music={music} musicArtist={'Renan Alves'}/>);
