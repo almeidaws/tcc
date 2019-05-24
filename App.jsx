@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
-import Header from './dev/jsx/Header.jsx';
-import RecentlyPlayedMusic from './dev/jsx/RecentlyPlayed/RecentlyPlayedMusic.jsx';
 import AudioPlayerBar from "./dev/jsx/BarMusic/AudioPlayerBar.jsx";
 import RegisterModal from "./dev/jsx/RegisterModal.jsx";
 import LoginModal from "./dev/jsx/LoginModal.jsx";
+import Footer from "./dev/jsx/Footer.jsx";
+import Index from "./dev/jsx/Containers/Index.jsx";
+import Favourites from "./dev/jsx/Containers/Favourites.jsx";
+import LeftMenu from "./dev/jsx/LeftMenu.jsx";
 import R from "./dev/js/Requisition";
 
 export default class App extends Component {
@@ -13,6 +15,7 @@ export default class App extends Component {
 
         this.state = {
             musics: [],
+            pausedMusic: { paused: true, music: null },
             currentMusicTime: 0.0,
             currentMusicDuration: 0.0,
             currentAudio: null,
@@ -63,6 +66,11 @@ export default class App extends Component {
     }
 
     onPlay(music) {
+        if (this.state.currentMusic && this.state.currentMusic.id === music.id) {
+            this.onPlayPauseMusic();
+            return;
+        }
+
         if (this.state.currentAudio) {
             this.state.currentAudio.pause();
             this.state.currentAudio.removeEventListener('loadeddata', this.onAudioLoaded);
@@ -75,6 +83,7 @@ export default class App extends Component {
         audio.addEventListener('timeupdate',this.onAudioTimeChange);
         audio.preload = 'auto';
         audio.play();
+        this.setState({ pausedMusic: { paused: false, music }});
     }
 
     onNextMusic() {
@@ -99,10 +108,13 @@ export default class App extends Component {
     onPlayPauseMusic() {
         if (!this.state.currentAudio) return;
 
-        if (this.state.currentAudio.paused)
+        if (this.state.pausedMusic.paused) {
             this.state.currentAudio.play();
-        else
+            this.setState((state) => ({ pausedMusic: { paused: false, music: state.currentMusic }}));
+        } else {
             this.state.currentAudio.pause();
+            this.setState((state) => ({ pausedMusic: { paused: true, music: null }}));
+        }
     }
 
     render() {
@@ -110,498 +122,17 @@ export default class App extends Component {
         return (
             <div>
                 <div className="ms_main_wrapper">
-                    <div className="ms_sidemenu_wrapper">
-                        <div className="ms_nav_close">
-                            <i className="fa fa-angle-right" aria-hidden="true"/>
-                        </div>
-                        <div className="ms_sidemenu_inner">
-                            <div className="ms_logo_inner">
-                                <div className="ms_logo">
-                                    <a href="./index.html"><img src="./images/logo.png" alt=""
-                                                                     className="img-fluid"/></a>
-                                </div>
-                                <div className="ms_logo_open">
-                                    <a href="./index.html"><img src="./images/open_logo.png" alt=""
-                                                                     className="img-fluid"/></a>
-                                </div>
-                            </div>
-                            <div className="ms_nav_wrapper">
-                                <ul>
-                                    <li>
-                                        <a href="./index.html" className="active" title="Discover">
-                                            <span className="nav_icon">
-                                                <span className="icon icon_discover"/>
-                                            </span>
-                                            <span className="nav_text">
-                                                discover
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="./genres.html" title="Genres">
-                                            <span className="nav_icon">
-                                                <span className="icon icon_genres"/>
-                                            </span>
-                                            <span className="nav_text">
-                                                genres
-                                            </span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="./favourite.html" title="Favourites">
-                                            <span className="nav_icon">
-                                                <span className="icon icon_favourite"/>
-                                            </span>
-                                            <span className="nav_text">
-                                                favourites
-                                            </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <ul className="nav_playlist">
-                                    <li>
-                                        <a href="./add_playlist.html" title="Create Playlist">
-                                            <span className="nav_icon">
-                                                <span className="icon icon_c_playlist"/>
-                                            </span>
-                                            <span className="nav_text">
-                                                create playlist
-                                            </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="ms_content_wrapper padder_top80">
-                        <Header/>
-                        <RecentlyPlayedMusic playPayse={this.onPlayPauseMusic} paused={this.state.currentAudio ? this.state.currentAudio.paused : true } musics={this.state.musics} playPause={this.onPlayPauseMusic} play={this.onPlay}/>
-                        <div className="ms_weekly_wrapper">
-                            <div className="ms_weekly_inner">
-                                <div className="row">
-                                    <div className="col-lg-12">
-                                        <div className="ms_heading">
-                                            <h1>weekly top 15</h1>
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-4 col-md-12 padding_right40">
-                                        <div className="ms_weekly_box">
-                                            <div className="weekly_left">
-                                        <span className="w_top_no">
-                                            01
-                                        </span>
-                                                <div className="w_top_song">
-                                                    <div className="w_tp_song_img">
-                                                        <img src="./images/weekly/song1.jpg" alt="" className="img-fluid"/>
-                                                        <div className="ms_song_overlay">
-                                                        </div>
-                                                        <div className="ms_play_icon">
-                                                            <img src="./images/svg/play.svg" alt=""/>
-                                                        </div>
-                                                    </div>
-                                                    <div className="w_tp_song_name">
-                                                        <h3><a href="#">Until I Met You</a></h3>
-                                                        <p>Ava Cornish</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="weekly_right">
-                                                <span className="w_song_time">5:10</span>
-                                                <span className="ms_more_icon" data-other="1">
-                                            <img src="./images/svg/more.svg" alt=""/>
-                                        </span>
-                                            </div>
-                                            <ul className="more_option">
-                                                <li><a href="#"><span className="opt_icon"><span
-                                                    className="icon icon_fav"/></span>Add To Favourites</a></li>
-                                                <li><a href="#"><span className="opt_icon"><span
-                                                    className="icon icon_queue"/></span>Add To Queue</a></li>
-                                                <li><a href="#"><span className="opt_icon"><span
-                                                    className="icon icon_playlst"/></span>Add To Playlist</a></li>
-                                            </ul>
-                                        </div>
-                                        <div className="ms_divider"/>
-                                        <div className="ms_weekly_box">
-                                            <div className="weekly_left">
-                                        <span className="w_top_no">
-                                            02
-                                        </span>
-                                                <div className="w_top_song">
-                                                    <div className="w_tp_song_img">
-                                                        <img src="./images/weekly/song2.jpg" alt="" className="img-fluid"/>
-                                                        <div className="ms_song_overlay">
-                                                        </div>
-                                                        <div className="ms_play_icon">
-                                                            <img src="./images/svg/play.svg" alt=""/>
-                                                        </div>
-                                                    </div>
-                                                    <div className="w_tp_song_name">
-                                                        <h3><a href="#">Walking Promises</a></h3>
-                                                        <p>Ava Cornish</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="weekly_right">
-                                                <span className="w_song_time">5:10</span>
-                                                <span className="ms_more_icon" data-other="1">
-                                            <img src="./images/svg/more.svg" alt=""/>
-                                        </span>
-                                            </div>
-                                            <ul className="more_option">
-                                                <li><a href="#"><span className="opt_icon"><span
-                                                    className="icon icon_fav"/></span>Add To Favourites</a></li>
-                                                <li><a href="#"><span className="opt_icon"><span
-                                                    className="icon icon_queue"/></span>Add To Queue</a></li>
-                                                <li><a href="#"><span className="opt_icon"><span
-                                                    className="icon icon_playlst"/></span>Add To Playlist</a></li>
-                                            </ul>
-                                        </div>
-                                        <div className="ms_divider"/>
-                                        <div className="ms_weekly_box">
-                                            <div className="weekly_left">
-                                        <span className="w_top_no">
-                                            03
-                                        </span>
-                                                <div className="w_top_song">
-                                                    <div className="w_tp_song_img">
-                                                        <img src="./images/weekly/song3.jpg" alt="" className="img-fluid"/>
-                                                        <div className="ms_song_overlay">
-                                                        </div>
-                                                        <div className="ms_play_icon">
-                                                            <img src="./images/svg/play.svg" alt=""/>
-                                                        </div>
-                                                    </div>
-                                                    <div className="w_tp_song_name">
-                                                        <h3><a href="#">Gimme Some Courage</a></h3>
-                                                        <p>Ava Cornish</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="weekly_right">
-                                                <span className="w_song_time">5:10</span>
-                                                <span className="ms_more_icon" data-other="1">
-                                            <img src="./images/svg/more.svg" alt=""/>
-                                        </span>
-                                            </div>
-                                            <ul className="more_option">
-                                                <li><a href="#"><span className="opt_icon"><span
-                                                    className="icon icon_fav"/></span>Add To Favourites</a></li>
-                                                <li><a href="#"><span className="opt_icon"><span
-                                                    className="icon icon_queue"/></span>Add To Queue</a></li>
-                                                <li><a href="#"><span className="opt_icon"><span
-                                                    className="icon icon_playlst"/></span>Add To Playlist</a></li>
-                                            </ul>
-                                        </div>
-                                        <div className="ms_divider"/>
-                                        <div className="ms_weekly_box">
-                                            <div className="weekly_left">
-                                        <span className="w_top_no">
-                                            04
-                                        </span>
-                                                <div className="w_top_song">
-                                                    <div className="w_tp_song_img">
-                                                        <img src="./images/weekly/song4.jpg" alt="" className="img-fluid"/>
-                                                        <div className="ms_song_overlay">
-                                                        </div>
-                                                        <div className="ms_play_icon">
-                                                            <img src="./images/svg/play.svg" alt=""/>
-                                                        </div>
-                                                    </div>
-                                                    <div className="w_tp_song_name">
-                                                        <h3><a href="#">Desired Games</a></h3>
-                                                        <p>Ava Cornish</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="weekly_right">
-                                                <span className="w_song_time">5:10</span>
-                                                <span className="ms_more_icon" data-other="1">
-                                            <img src="./images/svg/more.svg" alt=""/>
-                                        </span>
-                                            </div>
-                                            <ul className="more_option">
-                                                <li><a href="#"><span className="opt_icon"><span
-                                                    className="icon icon_fav"/></span>Add To Favourites</a></li>
-                                                <li><a href="#"><span className="opt_icon"><span
-                                                    className="icon icon_queue"/></span>Add To Queue</a></li>
-                                                <li><a href="#"><span className="opt_icon"><span
-                                                    className="icon icon_playlst"/></span>Add To Playlist</a></li>
-                                            </ul>
-                                        </div>
-                                        <div className="ms_divider"/>
-                                        <div className="ms_weekly_box">
-                                            <div className="weekly_left">
-                                                <span className="w_top_no">
-                                                    05
-                                                </span>
-                                                <div className="w_top_song">
-                                                    <div className="w_tp_song_img">
-                                                        <img src="./images/weekly/song5.jpg" alt="" className="img-fluid"/>
-                                                        <div className="ms_song_overlay">
-                                                        </div>
-                                                        <div className="ms_play_icon">
-                                                            <img src="./images/svg/play.svg" alt=""/>
-                                                        </div>
-                                                    </div>
-                                                    <div className="w_tp_song_name">
-                                                        <h3><a href="#">Dark Alley Acoustic</a></h3>
-                                                        <p>Ava Cornish</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="weekly_right">
-                                                <span className="w_song_time">5:10</span>
-                                                <span className="ms_more_icon" data-other="1">
-                                                    <img src="./images/svg/more.svg" alt=""/>
-                                                </span>
-                                            </div>
-                                            <ul className="more_option">
-                                                <li><a href="#"><span className="opt_icon"><span
-                                                    className="icon icon_fav"/></span>Add To Favourites</a></li>
-                                                <li><a href="#"><span className="opt_icon"><span
-                                                    className="icon icon_queue"/></span>Add To Queue</a></li>
-                                                <li><a href="#"><span className="opt_icon"><span
-                                                    className="icon icon_playlst"/></span>Add To Playlist</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div className="col-lg-4 col-md-12">
-                                        <div className="ms_weekly_box">
-                                            <div className="weekly_left">
-                                                <span className="w_top_no">
-                                                    11
-                                                </span>
-                                                <div className="w_top_song">
-                                                    <div className="w_tp_song_img">
-                                                        <img src="./images/weekly/song2.jpg" alt="" className="img-fluid"/>
-                                                        <div className="ms_song_overlay">
-                                                        </div>
-                                                        <div className="ms_play_icon">
-                                                            <img src="./images/svg/play.svg" alt=""/>
-                                                        </div>
-                                                    </div>
-                                                    <div className="w_tp_song_name">
-                                                        <h3><a href="#">Dark Alley Acoustic</a></h3>
-                                                        <p>Ava Cornish</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="weekly_right">
-                                                <span className="w_song_time">5:10</span>
-                                                <span className="ms_more_icon" data-other="1">
-                                                    <img src="./images/svg/more.svg" alt=""/>
-                                                </span>
-                                            </div>
-                                            <ul className="more_option">
-                                                <li><a href="#"><span className="opt_icon"><span
-                                                    className="icon icon_fav"/></span>Add To Favourites</a></li>
-                                                <li><a href="#"><span className="opt_icon"><span
-                                                    className="icon icon_queue"/></span>Add To Queue</a></li>
-                                                <li><a href="#"><span className="opt_icon"><span
-                                                    className="icon icon_playlst"/></span>Add To Playlist</a></li>
-                                            </ul>
-                                        </div>
-                                        <div className="ms_divider"/>
-                                        <div className="ms_weekly_box">
-                                            <div className="weekly_left">
-                                                <span className="w_top_no">
-                                                    12
-                                                </span>
-                                                <div className="w_top_song">
-                                                    <div className="w_tp_song_img">
-                                                        <img src="./images/weekly/song11.jpg" alt="" className="img-fluid"/>
-                                                        <div className="ms_song_overlay">
-                                                        </div>
-                                                        <div className="ms_play_icon">
-                                                            <img src="./images/svg/play.svg" alt=""/>
-                                                        </div>
-                                                    </div>
-                                                    <div className="w_tp_song_name">
-                                                        <h3><a href="#">The Heartbeat Stops</a></h3>
-                                                        <p>Ava Cornish</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="weekly_right">
-                                                <span className="w_song_time">5:10</span>
-                                                <span className="ms_more_icon" data-other="1">
-                                                    <img src="./images/svg/more.svg" alt=""/>
-                                                </span>
-                                            </div>
-                                            <ul className="more_option">
-                                                <li><a href="#"><span className="opt_icon"><span
-                                                    className="icon icon_fav"/></span>Add To Favourites</a></li>
-                                                <li><a href="#"><span className="opt_icon"><span
-                                                    className="icon icon_queue"/></span>Add To Queue</a></li>
-                                                <li><a href="#"><span className="opt_icon"><span
-                                                    className="icon icon_playlst"/></span>Add To Playlist</a></li>
-                                            </ul>
-                                        </div>
-                                        <div className="ms_divider"/>
-                                        <div className="ms_weekly_box">
-                                            <div className="weekly_left">
-                                                <span className="w_top_no">
-                                                    13
-                                                </span>
-                                                <div className="w_top_song">
-                                                    <div className="w_tp_song_img">
-                                                        <img src="./images/weekly/song12.jpg" alt="" className="img-fluid"/>
-                                                        <div className="ms_song_overlay">
-                                                        </div>
-                                                        <div className="ms_play_icon">
-                                                            <img src="./images/svg/play.svg" alt=""/>
-                                                        </div>
-                                                    </div>
-                                                    <div className="w_tp_song_name">
-                                                        <h3><a href="#">One More Stranger</a></h3>
-                                                        <p>Ava Cornish</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="weekly_right">
-                                                <span className="w_song_time">5:10</span>
-                                                <span className="ms_more_icon" data-other="1">
-                                                    <img src="./images/svg/more.svg" alt=""/>
-                                                </span>
-                                            </div>
-                                            <ul className="more_option">
-                                                <li><a href="#"><span className="opt_icon"><span
-                                                    className="icon icon_fav"/></span>Add To Favourites</a></li>
-                                                <li><a href="#"><span className="opt_icon"><span
-                                                    className="icon icon_queue"/></span>Add To Queue</a></li>
-                                                <li><a href="#"><span className="opt_icon"><span
-                                                    className="icon icon_playlst"/></span>Add To Playlist</a></li>
-                                            </ul>
-                                        </div>
-                                        <div className="ms_divider"/>
-                                        <div className="ms_weekly_box">
-                                            <div className="weekly_left">
-                                                <span className="w_top_no">
-                                                    14
-                                                </span>
-                                                <div className="w_top_song">
-                                                    <div className="w_tp_song_img">
-                                                        <img src="./images/weekly/song13.jpg" alt="" className="img-fluid"/>
-                                                        <div className="ms_song_overlay">
-                                                        </div>
-                                                        <div className="ms_play_icon">
-                                                            <img src="./images/svg/play.svg" alt=""/>
-                                                        </div>
-                                                    </div>
-                                                    <div className="w_tp_song_name">
-                                                        <h3><a href="#">Walking Promises</a></h3>
-                                                        <p>Ava Cornish</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="weekly_right">
-                                                <span className="w_song_time">5:10</span>
-                                                <span className="ms_more_icon" data-other="1">
-                                                    <img src="./images/svg/more.svg" alt=""/>
-                                                </span>
-                                            </div>
-                                            <ul className="more_option">
-                                                <li><a href="#"><span className="opt_icon"><span
-                                                    className="icon icon_fav"/></span>Add To Favourites</a></li>
-                                                <li><a href="#"><span className="opt_icon"><span
-                                                    className="icon icon_queue"/></span>Add To Queue</a></li>
-                                                <li><a href="#"><span className="opt_icon"><span
-                                                    className="icon icon_playlst"/></span>Add To Playlist</a></li>
-                                            </ul>
-                                        </div>
-                                        <div className="ms_divider"/>
-                                        <div className="ms_weekly_box">
-                                            <div className="weekly_left">
-                                                <span className="w_top_no">
-                                                    15
-                                                </span>
-                                                <div className="w_top_song">
-                                                    <div className="w_tp_song_img">
-                                                        <img src="./images/weekly/song14.jpg" alt="" className="img-fluid"/>
-                                                        <div className="ms_song_overlay">
-                                                        </div>
-                                                        <div className="ms_play_icon">
-                                                            <img src="./images/svg/play.svg" alt=""/>
-                                                        </div>
-                                                    </div>
-                                                    <div className="w_tp_song_name">
-                                                        <h3><a href="#">Endless Things</a></h3>
-                                                        <p>Ava Cornish</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="weekly_right">
-                                                <span className="w_song_time">5:10</span>
-                                                <span className="ms_more_icon" data-other="1">
-                                                    <img src="./images/svg/more.svg" alt=""/>
-                                                </span>
-                                            </div>
-                                            <ul className="more_option">
-                                                <li><a href="#"><span className="opt_icon"><span
-                                                    className="icon icon_fav"/></span>Add To Favourites</a></li>
-                                                <li><a href="#"><span className="opt_icon"><span
-                                                    className="icon icon_queue"/></span>Add To Queue</a></li>
-                                                <li><a href="#"><span className="opt_icon"><span
-                                                    className="icon icon_playlst"/></span>Add To Playlist</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="ms_footer_wrapper">
-                        <div className="ms_footer_logo">
-                            <a href="./index.html"><img src="./images/open_logo.png" alt=""/></a>
-                        </div>
-                        <div className="ms_footer_inner">
-                            <div className="row">
-                                <div className="col-lg-3 col-md-6">
-                                    <div className="footer_box">
-                                        <h1 className="footer_title">miraculous music station</h1>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
-                                            duis aute irure dolor.</p>
-                                    </div>
-                                </div>
-                                <div className="col-lg-3 col-md-6">
-                                    <div className="footer_box footer_contacts">
-                                        <h1 className="footer_title">contact us</h1>
-                                        <ul className="foo_con_info">
-                                            <li>
-                                                <div className="foo_con_icon">
-                                                    <img src="./images/svg/message.svg" alt=""/>
-                                                </div>
-                                                <div className="foo_con_data">
-                                                    <span className="con-title">email us :</span>
-                                                    <span><a href="#">demo@mail.com </a>, <a
-                                                        href="#">dummy@mail.com</a></span>
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-lg-12">
-                            <div className="ms_copyright">
-                                <div className="footer_border"/>
-                                <p>Copyright &copy; 2018 <a href="#">The Miraculous Music Template</a>. All Rights Reserved.
-                                </p>
-                            </div>
-                        </div>
-                        <AudioPlayerBar
-                            currentTime={this.state.currentMusicTime}
-                            duration={this.state.currentMusicDuration}
-                            onTimeChange={this.onTimeChange}
-                            onNext={this.onNextMusic}
-                            onPrevious={this.onPreviousMusic}
-                            onPlayPause={this.onPlayPauseMusic}
-                            paused={this.state.currentAudio ? this.state.currentAudio.paused : true }
-                            currentMusic={this.state.currentMusic !== null ? this.state.currentMusic : { name: '', authors: [{name: ''}] }}
-                        />
-                    </div>
+                    <LeftMenu selected={this.props.container} />
+                    { container.bind(this)(this.props.container) }
+                    <Footer
+                        duration={this.state.currentMusicDuration}
+                        currentTime={this.state.currentMusicTime}
+                        onTimeChange={this.onAudioTimeChange}
+                        onPlayPause={this.onPlayPauseMusic}
+                        onNext={this.onNextMusic}
+                        onPrevious={this.onPreviousMusic}
+                        pausedMusic={this.state.pausedMusic}
+                        currentMusic={this.state.currentMusic}/>
                     <RegisterModal/>
                     <LoginModal/>
                 </div>
@@ -663,3 +194,25 @@ export default class App extends Component {
         );
     };
 }
+
+function container(containerName) {
+    switch (containerName) {
+        case "index":
+            return (
+                <Index 
+                    pausedMusic={this.state.pausedMusic}
+                    currentAudio={this.state.currentAudio}
+                    musics={this.state.musics}
+                    onPlayPause={this.onPlay}/>
+            );
+        case "favourites":
+            return (
+                <Favourites
+                    onPlayPauseMusic={this.onPlayPauseMusic}
+                    pausedMusic={this.state.pausedMusic}
+                    currentAudio={this.state.currentAudio}
+                    musics={this.state.musics}
+                    onPlay={this.onPlay} />
+             )
+     }
+};

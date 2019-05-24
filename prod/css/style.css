@@ -3095,7 +3095,7 @@ span.ms_frequency {
 	background: rgba(59, 200, 231, 0.61);
 }
 .ms_free_download.ms_purchase_wrapper .album_list_wrapper>ul>li {
-	width: 12%;
+	width: calc(12% * 1.6);
 }
 /*====History Page Css Start====*/
 .hstry_clear.ms_btn {
@@ -4757,7 +4757,7 @@ h2.widget-title:after {
 		opacity: 0;
 	}
 	.ms_free_download.ms_purchase_wrapper .album_list_wrapper>ul>li {
-		width: 11%;
+		width: cal(11% * 1.6);
 	}
 	.ms_header {
 		padding: 15px 20px 15px 30px;
@@ -5094,7 +5094,7 @@ h2.widget-title:after {
 		width: 100%;
 	}
 	.ms_free_download.ms_purchase_wrapper .album_list_wrapper>ul>li {
-		width: 11%;
+		width: calc(11% * 1.6);
 		font-size: 10px;
 	}
 	.ms_free_download.ms_purchase_wrapper .album_list_wrapper>ul>li>a {
