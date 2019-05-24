@@ -13,7 +13,7 @@ class AudioPlayerBar extends React.Component {
                     <i className="fa fa-angle-up" aria-hidden="true"></i>
                 </div>
                 <div className="player_mid"></div>
-                <AudioPlay className="audio-player" currentMusic={this.props.currentMusic}/>
+                <AudioPlay className="audio-player" music={this.props.currentMusic}/>
                 <TypePlayList
                     duration={this.props.duration}
                     currentTime={this.props.currentTime}

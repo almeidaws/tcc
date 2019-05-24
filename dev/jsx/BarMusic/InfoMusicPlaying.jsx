@@ -7,13 +7,14 @@ const InfoMusicPlaying = props => (
                 <div className="jp-now-playing flex-item">
                     <div className='jp-track-name'>
                         <span className='que_img'>
-                            {/*<img src='"+obj.image+"'/>*/}
+                            <img src={props.music ? (props.music.posterURL ? props.music.posterURL : './images/weekly/song1.jpg')
+                                : './images/weekly/song1.jpg' }/>
                         </span>
                         <div className='que_data'>
-                            {props.musicName}
-                            <div className='jp-artist-name'>{props.artistName}</div>
+                            {props.music ? props.music.name : "No Music"}
+                            <div className='jp-artist-name'>{props.music ? props.music.authors[0].name : "No Artist"}</div>
                         </div>
-                    </div>"
+                    </div>
                 </div>
             </a>
         </div>
