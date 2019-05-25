@@ -52,7 +52,7 @@ class RegisterForm extends React.Component {
     }
     handleSubmit(event) {
         if (this.validateForm()) {
-            R.register(this.state.name,this.state.email,this.state.password,error => {
+            R.register(this.state.name, this.state.email, this.state.password, error => {
                 if(error === 409) {
                     this.setState({ error: "This email already exist."})
                 }else {

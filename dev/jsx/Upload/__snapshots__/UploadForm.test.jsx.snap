@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<UploadForm /> should render static content 1`] = `
+<form>
+  <div
+    className="ms_upload_wrapper marger_top60"
+  >
+    <div>
+      <div
+        className="ms_upload_box"
+      >
+        <div
+          className="ms_heading"
+        >
+          <h1>
+            Upload & Share Your Music With The World
+          </h1>
+        </div>
+        <div
+          className="file-upload w-75"
+        >
+          <div
+            className="file-select"
+          >
+            <div
+              className="file-select-button"
+              id="fileName"
+            >
+              Choose File
+            </div>
+            <div
+              className="file-select-name"
+              id="noFile"
+            >
+              No file chosen...
+            </div>
+            <input
+              accept="audio/*"
+              id="chooseFile"
+              name="music"
+              onChange={[Function]}
+              type="file"
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="marger_top60"
+      >
+        <div
+          className="ms_upload_box"
+        >
+          <div
+            className="ms_heading"
+          >
+            <h1>
+              Track Information
+            </h1>
+          </div>
+          <div
+            className="lds-ellipsis"
+          >
+            <div />
+            <div />
+            <div />
+            <div />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+`;

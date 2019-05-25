@@ -1,8 +1,20 @@
 import ReactDOM from 'react-dom';
-import Header from './Header.jsx';
-import LoginModal from './LoginModal.jsx';
-import RegisterModal from './RegisterModal.jsx';
+import UploadForm from './Upload/UploadForm.jsx';
+import App from "../../App.jsx";
+import Genre_Single from './GenreSingle.jsx';
 
-ReactDOM.render(<Header />, document.getElementById('header'));
-ReactDOM.render(<LoginModal />, document.getElementById('loginModal'));
-ReactDOM.render(<RegisterModal/>, document.getElementById('registerModal'));
+const index = document.getElementById('index');
+if (index)
+    ReactDOM.render(<App container="index" />, index);
+
+const favourites = document.getElementById('favourites');
+if (favourites)
+    ReactDOM.render(<App container="favourites" />, favourites);
+
+const uploadForm = document.getElementById('uploadForm');
+if ( uploadForm !== null)
+    ReactDOM.render(<UploadForm container="uploadForm"/>, uploadForm);
+
+const genre_single = document.getElementById('GenreSingle');
+if ( genre_single !== null)
+    ReactDOM.render(<App container="GenreSingle"/>, genre_single);

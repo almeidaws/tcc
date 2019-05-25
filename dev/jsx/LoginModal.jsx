@@ -53,7 +53,7 @@ class LoginForm extends React.Component {
 };
 
 const RegisterImage = props => <div className="ms_register_img"> <img src="images/register_img.png" alt="" className="img-fluid" /> </div>;
-const CloseButton = props => <button type="button" className="close" data-dismiss="modal"> <i className="fa_icon form_close" /> </button>
+const CloseButton = props => <button type="button" className="close" data-dismiss="modal"> <i className="fa_icon form_close" /> </button>;
     
 class LoginModal extends React.Component {
     render() {

@@ -48,7 +48,9 @@ Assigned to: Theme Forest
             //On Click Profile 
             $(".ms_admin_name").on('click', function() {
                 $(".pro_dropdown_menu").toggleClass("open_dropdown");
+
             });
+            
         },
         // Player Close On Click
         Player_close: function() {
@@ -441,3 +443,27 @@ Assigned to: Theme Forest
         return false
     });
 })(jQuery);
+
+$('#chooseFile').bind('change', function () {
+  var filename = $("#chooseFile").val();
+  if (/^\s*$/.test(filename)) {
+    $(".file-upload").removeClass('active');
+    $("#noFile").text("No file chosen...");
+  }
+  else {
+    $(".file-upload").addClass('active');
+    $("#noFile").text(filename.replace("C:\\fakepath\\", ""));
+  }
+});
+
+$('#choosePoster').bind('change', function () {
+  var filename = $("#choosePoster").val();
+  if (/^\s*$/.test(filename)) {
+    $(".file-upload").removeClass('active');
+    $("#noPoster").text("No poster chosen...");
+  }
+  else {
+    $(".file-upload").addClass('active');
+    $("#noPoster").text(filename.replace("C:\\fakepath\\", ""));
+  }
+});

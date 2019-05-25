@@ -1,55 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Field /> should present an error 1`] = `
-<div
-  className="form-group"
->
-  <input
-    className="form-control"
-    placeholder="example@gmail.com"
-    type="email"
-    value="paulo@gmail.com"
-  />
-  <span
-    className="form_icon"
-  >
-    <i
-      aria-hidden="true"
-      className="fa_icon form-undefined"
-    />
-  </span>
-  <div
-    className="invalid-feedback text-warning"
-  >
-    Invalid email
-  </div>
-</div>
-`;
-
-exports[`<Field /> should render email 1`] = `
-<div
-  className="form-group"
->
-  <input
-    className="form-control"
-    placeholder="example@gmail.com"
-    type="email"
-    value="paulo@gmail.com"
-  />
-  <span
-    className="form_icon"
-  >
-    <i
-      aria-hidden="true"
-      className="fa_icon form-undefined"
-    />
-  </span>
-  <div
-    className="invalid-feedback text-warning"
-  />
-</div>
-`;
-
 exports[`<Field /> should render user name 1`] = `
 <div
   className="form-group"

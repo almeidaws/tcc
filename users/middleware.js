@@ -1,6 +1,7 @@
 'use strict';
 
-const database = require('../database/database.js');
+const sessionsDatabase = require('../sessions/database.js');
+const usersDatabase = require('./database.js');
 const createError = require('http-errors');
 const uuidv4 = require('uuid/v4');
 
@@ -14,9 +15,9 @@ const uuidv4 = require('uuid/v4');
  */
 async function register(request, response, next) {
     try {
-        const queries = await database.connect();
+        const queries = await usersDatabase.connect();
         const body = request.body;
-        const user = new database.User(body.name, body.email, body.password);
+        const user = new usersDatabase.User(body.name, body.email, body.password);
 
         const { id: userID } = await queries.addUser(user);
 
@@ -37,8 +38,9 @@ async function login(request, response, next) {
         const body = request.body;
         const email = body.email;
         const password = body.password;
-        const queries = await database.connect();
-        const { id } = await queries.authUser(email, password);
+        const usersQueries = await usersDatabase.connect();
+        const sessionsQueries = await sessionsDatabase.connect();
+        const { id } = await usersQueries.authUser(email, password);
         
         const oneYearAhead = (() => { 
             const now = new Date(); 
@@ -47,8 +49,8 @@ async function login(request, response, next) {
         })();
 
         const token = uuidv4();
-        const session = new database.Session(token, id, oneYearAhead);
-        await queries.addSession(session);
+        const session = new sessionsDatabase.Session(token, id, oneYearAhead);
+        await sessionsQueries.addSession(session);
         response.status(200).json({ id, token }).end();
     } catch (error) {
         next(error);
@@ -65,8 +67,8 @@ async function logout(request, response, next) {
         if (!token)
             throw createError(401, 'Access Token not provided, please provide one to logout');
 
-    const queries = await database.connect();
-    await queries.deleteSession(token);
+    const sessionsQueries = await sessionsDatabase.connect();
+    await sessionsQueries.deleteSession(token);
     response.status(204).end();
     } catch (error) {
         next(error);
@@ -83,12 +85,13 @@ async function view(request, response, next) {
         if (!token) 
             throw createError(401, 'Access Token not provided, please login to get one');
 
-        const queries = await database.connect();
-        const session = await queries.getSession(token);
+        const sessionsQueries = await sessionsDatabase.connect();
+        const usersQueries = await usersDatabase.connect();
+        const session = await sessionsQueries.getSession(token);
         if (session.userID !== parseInt(request.params.id))
             throw createError(401, 'You aren\'t authorized to access this user');
 
-        const user = await queries.getUser(session.userID);
+        const user = await usersQueries.getUser(session.userID);
         const publicUser = { name: user.name, email: user.email };
         response.status(200).json(publicUser);
         response.end();

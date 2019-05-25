@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Requisition from './../js/Requisition.js';
 const R = Requisition;
 import Utils from './../js/Utils.js';
@@ -16,7 +15,10 @@ const searchButton = (
     </div>
 );
 
-const unloggedMenu = <div className="ms_top_btn">{registerButton}{loginButton}</div>;
+const UnloggedMenu = props => {
+    if (props.rendered === false) return null;
+    return (<div className="ms_top_btn">{registerButton}{loginButton}</div>);
+}
 
 /**
  * Menu presented on website's header when the user is currently logged. It currently only
@@ -24,19 +26,18 @@ const unloggedMenu = <div className="ms_top_btn">{registerButton}{loginButton}</
  *
  * Property name: users'name. Example: 'Carlos'.
  */
-const LoggedMenu = props => (
-    <div className="ms_top_btn">
-        <a href="javascript:;" className="ms_admin_name">Hello {props.name} <span className="ms_pro_name">{props.name.charAt(0)}</span>													
-        </a>
-        <ul className="pro_dropdown_menu">
-            <li><a href="profile.html">Profile</a></li>
-            <li><a href="manage_acc.html" target="_blank">Pricing Plan</a></li>
-            <li><a href="blog.html" target="_blank">Blog</a></li>
-            <li><a href="">Setting</a></li>
-            <li><a href="">Logout</a></li>
-        </ul>
-    </div>
-);
+const LoggedMenu = props => {
+    if (props.rendered === false) return null;
+    return (
+        <div className="ms_top_btn">
+            <a href="javascript:;" className="ms_admin_name">Hello {props.name} <span className="ms_pro_name">{props.name.charAt(0)}</span>													
+            </a>
+            <ul className="pro_dropdown_menu">
+                <li><a href="index.html" onClick={props.handleLogout}>Logout</a></li>
+            </ul>
+        </div>
+    )
+};
 
 /**
  * Renders the website's header presented on top of each page.
@@ -50,6 +51,20 @@ class Header extends React.Component {
     constructor(props) {
         super(props);
         this.state = { name: U.getCookie('name') };
+        this.handleLogout = this.handleLogout.bind(this);
+    }
+    handleLogout(event) {
+        R.logout(U.getCookie('token'), error => {
+            if (error === 401) {
+                this.setState({error: 'ID is from another user or when the access token is inexistent.'});
+                console.log('deu erro 1');
+            }else {
+                this.setState({error: 'Unknow erro code'+error});
+                console.log('deu erro 2');
+            }
+            console.log('nao deletei');
+        });
+        console.log('toke = '+ U.getCookie('token'));
     }
     render() {
         return (
@@ -60,7 +75,10 @@ class Header extends React.Component {
                     </div>
                 </div>
                 <div className="ms_top_right">
-                    {this.state.name ? LoggedMenu({ name: this.state.name }) : unloggedMenu}
+                    <LoggedMenu rendered={U.getCookie('name') !== ""} 
+                                name={U.getCookie('name')}
+                                handleLogout={this.handleLogout} />
+                    <UnloggedMenu rendered={U.getCookie('name') === ""} />
                 </div>
             </div>
        );

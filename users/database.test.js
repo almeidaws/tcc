@@ -2,19 +2,16 @@
 
 const { 
     User, 
-    Session, 
     connect, 
+    disconnect,
     DDL: { 
         createUserTable, 
         deleteUserTable, 
-        createSessionTable,
-        deleteSessionTable, 
     }
 } = require('./database.js');
 const uuidv4 = require('uuid/v4');
 
 const createExampleUser = id => new User(id, 'Gustavo', 'gustavo@gmail.com', '12345');
-const createExampleSession = user => new Session(uuidv4(), user.id, new Date());
 
 describe('Testing User type', () => {
     it("Checks if pseudo overriding of User's constructor is working", () => {
@@ -142,48 +139,11 @@ describe('Testing Users table', async () => {
     });
 
     afterEach(async () => {
-        await deleteSessionTable();
         await deleteUserTable();
     });
 
 });
 
-describe('Testing user\'s sessions', async () => {
-    beforeEach(async () => {
-        await createUserTable();
-        await createSessionTable();
-    });
-
-    it('Tests if a session is created when a user is registered', async () => {
-       expect.assertions(1);
-
-       const user = createExampleUser();
-       const queries = await connect();
-       const addedUser = await queries.addUser(user);
-       const session = createExampleSession(addedUser);
-       await queries.addSession(session);
-       const retrievedSession = await queries.getSession(session.uuid);
-
-       expect(retrievedSession).toEqual(session);
-    });
-
-    it('Tests if a session is deleted from the database', async () => {
-       expect.assertions(1);
-
-       const user = createExampleUser();
-       const queries = await connect();
-       const addedUser = await queries.addUser(user);
-       const session = createExampleSession(addedUser);
-       await queries.addSession(session);
-       await queries.deleteSession(session.uuid);
-       const promise = queries.getSession(session.uuid);
-
-       return expect(promise).rejects.toThrow();
-    });
-
-    afterEach(async () => {
-        await deleteSessionTable();
-        await deleteUserTable();
-    });
-
+afterAll(async () => {
+    await disconnect();
 });

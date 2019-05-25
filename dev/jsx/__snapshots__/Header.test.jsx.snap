@@ -139,7 +139,8 @@ exports[`<Header /> should render user's profile menus and name 1`] = `
         </li>
         <li>
           <a
-            href=""
+            href="index.html"
+            onClick={[Function]}
           >
             Logout
           </a>
