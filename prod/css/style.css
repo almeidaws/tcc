@@ -697,7 +697,7 @@ span.nav_text {
 	right: 0;
 	left: 80px;
 	top: 0;
-	z-index: 1000;
+	z-index: 1;
 	backface-visibility: hidden;
 }
 .ms_top_search {

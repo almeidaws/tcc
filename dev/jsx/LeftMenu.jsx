@@ -39,6 +39,8 @@ const LeftMenu = props => {
                                 </span>
                             </a>
                         </li>
+                    </ul>
+                    <ul className="nav_playlist">
                         <li>
                             <a href="./favourite.html" className={props.selected === "favourites" ? "active" : ""} title="Favourites">
                                 <span className="nav_icon">
@@ -46,18 +48,6 @@ const LeftMenu = props => {
                                 </span>
                                 <span className="nav_text">
                                     favourites
-                                </span>
-                            </a>
-                        </li>
-                    </ul>
-                    <ul className="nav_playlist">
-                        <li>
-                            <a href="./add_playlist.html" title="Create Playlist">
-                                <span className="nav_icon">
-                                    <span className="icon icon_c_playlist"/>
-                                </span>
-                                <span className="nav_text">
-                                    create playlist
                                 </span>
                             </a>
                         </li>
