@@ -413,6 +413,7 @@ The return from a successful request is something like this:
         "name": "Do Seu Lado",
         "url": "https://s3.amazonaws.com/miraculouswebsite/awsomefile.ogg",
         "posterURL": null,
+        "duration": 1.128,
         "authors": [
             {
                 "id": 47,
@@ -431,6 +432,7 @@ The return from a successful request is something like this:
         "name": "Earth",
         "url": "https://s3.amazonaws.com/miraculouswebsite/avangers.mp3",
         "posterURL": "https://s3.amazonaws.com/miraculouswebsite/poster.jpg",
+        "duration": null,
         "authors": [
             {
                 "id": 49,
@@ -474,6 +476,7 @@ The return from a successful request is something like this:
     "name": "Do Seu Lado",
     "url": "https://s3.amazonaws.com/miraculouswebsite/awsomefile.ogg",
     "posterURL": "https://s3.amazonaws.com/miraculouswebsite/poster.jpg",
+    "duration": 1.128,
     "authors": [
             {
                 "id": 49,
