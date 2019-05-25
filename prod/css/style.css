@@ -2777,8 +2777,7 @@ a.ms_btn.play_btn.btn_pause span.play_all {
 	padding-top: 52px;
 }
 .album_list_wrapper>ul {
-	padding: 0px;
-	margin: 0px;
+	margin: 15px 0px;
 	list-style: none;
 }
 .album_list_wrapper>ul>li {

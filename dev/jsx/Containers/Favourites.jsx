@@ -16,12 +16,13 @@ const ListHeader = props => {
 
 const Row = props => {
     return (
-            <ul className={props.active ? "play_active_song" : ""}>
-                <li><a href="#"><span className="play_no">{props.number}</span><span className="play_hover"></span></a></li>
-                <li><a href="#">{props.songTitle}</a></li>
-                <li className="text-center"><a href="#">{props.duration}</a></li>
-                <li className="text-center"><a href="#"><span className="ms_icon1 ms_fav_icon"></span></a></li>
-                <li className="text-center"><a href="#"><span className="ms_close">
+            <ul className={props.paused === false ? "play_active_song" : ""}
+                onClick={() => props.onPlayPause(props.music)} >
+                <li><a href="javascript:;"><span className="play_no">{props.number}</span><span className="play_hover"></span></a></li>
+                <li><a href="javascript:;">{props.music.name}</a></li>
+                <li className="text-center"><a href="javascript:;">{props.music.authors[0].name}</a></li>
+                <li className="text-center"><a href="javascript:;">{props.duration ? props.duration : "0:00"}</a></li>
+                <li className="text-center"><a href="javascript:;"><span className="ms_close">
                         <img src="images/svg/close.svg" alt="" /></span></a></li>
             </ul>
      );
@@ -36,12 +37,14 @@ const FavouritesList = props => {
 				<div className="album_inner_list">
 					<div className="album_list_wrapper">
 						<ListHeader />
-                        <Row active={true} number="01" songTitle="Bloodlust" duration="5:25" />
-                        <Row number="01" songTitle="Bloodlust" duration="5:25" />
-                        <Row number="02" songTitle="Bloodlust" duration="5:25" />
-                        <Row number="03" songTitle="Bloodlust" duration="5:25" />
-                        <Row number="04" songTitle="Bloodlust" duration="5:25" />
-                        <Row number="05" songTitle="Bloodlust" duration="5:25" />
+                        { props.musics.map((music, index) => {
+                            const number = index < 9 ? "0" + (index + 1) : "" + (index + 1);
+                            return <Row number={number} 
+                                        key={music.id}
+                                        onPlayPause={props.onPlayPause}
+                                        music={music} 
+                                        paused={props.pausedMusic.music ? music.id !== props.pausedMusic.music.id : true}/>
+                        })}
 					</div>
 				</div>
             </div>
@@ -52,12 +55,14 @@ const Favourites = props => {
     return (
         <div className="ms_content_wrapper padder_top80">
             <Header />
-            <FavouritesList />
+            <FavouritesList 
+                musics={props.musics}
+                onPlayPause={props.onPlayPause}
+                pausedMusic={props.pausedMusic} />
             <RecentlyPlayedMusic
-                paused={props.paused} 
+                pausedMusic={props.pausedMusic}
                 musics={props.musics} 
-                playPause={props.onPlayPauseMusic} 
-                play={props.onPlay} />
+                onPlayPause={props.onPlayPause}/>
         </div>
     )
 };

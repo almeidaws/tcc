@@ -208,11 +208,10 @@ function container(containerName) {
         case "favourites":
             return (
                 <Favourites
-                    onPlayPauseMusic={this.onPlayPauseMusic}
                     pausedMusic={this.state.pausedMusic}
                     currentAudio={this.state.currentAudio}
                     musics={this.state.musics}
-                    onPlay={this.onPlay} />
+                    onPlayPause={this.onPlay} />
              )
      }
 };
