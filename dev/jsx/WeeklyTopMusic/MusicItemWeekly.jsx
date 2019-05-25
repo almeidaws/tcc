@@ -1,5 +1,11 @@
 import React from 'react';
 
+const parseToTime = time => {
+    const minutes = Math.floor(time % 3600 / 60);
+    const seconds = Math.floor(time % 3600 % 60);
+    return `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`
+};
+
 const MusicItemWeekly = props => {
 
     return(
@@ -26,7 +32,7 @@ const MusicItemWeekly = props => {
                     </div>
                 </div>
                 <div className="weekly_right">
-                    <span className="w_song_time">{props.music.duration}</span>
+                    <span className="w_song_time">{parseToTime(props.music.duration)}</span>
                     <span className="ms_more_icon" data-other="1">
                         <img src="./images/svg/more.svg" alt=""/>
                     </span>
