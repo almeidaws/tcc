@@ -19,7 +19,7 @@ const RecentlyPlayedMusic = props => {
         <div className="ms_weekly_wrapper">
             <div className="ms_rcnt_slider">
                 <div className="ms_heading">
-                    <h1>Recently Played</h1>
+                    <h1>{props.title}</h1>
                 </div>
                 <div className="swiper-container">
                     <div className="swiper-wrapper">

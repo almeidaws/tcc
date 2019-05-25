@@ -9,6 +9,7 @@ const Index = props => {
         <div className="ms_content_wrapper padder_top80">
             <Header />
             <RecentlyPlayedMusic
+                title={'Recently Player'}
                 pausedMusic={props.pausedMusic}
                 musics={props.musics} 
                 onPlayPause={props.onPlayPause}/>

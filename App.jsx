@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import AudioPlayerBar from "./dev/jsx/BarMusic/AudioPlayerBar.jsx";
 import RegisterModal from "./dev/jsx/RegisterModal.jsx";
 import LoginModal from "./dev/jsx/LoginModal.jsx";
 import Footer from "./dev/jsx/Footer.jsx";

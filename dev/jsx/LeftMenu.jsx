@@ -30,7 +30,7 @@ const LeftMenu = props => {
                             </a>
                         </li>
                         <li>
-                            <a href="./genres.html" className={props.selected === "genres" ? "active" : ""} title="Genres">
+                            <a href="./genres_single.html" className={props.selected === "genres_single" ? "active" : ""} title="genres_single">
                                 <span className="nav_icon">
                                     <span className="icon icon_genres"/>
                                 </span>
