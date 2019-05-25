@@ -7,6 +7,7 @@ import Favourites from "./dev/jsx/Containers/Favourites.jsx";
 import LeftMenu from "./dev/jsx/LeftMenu.jsx";
 import GenreSingle from './dev/jsx/GenreSingle.jsx';
 import AudioPlayerBar from './dev/jsx/BarMusic/AudioPlayerBar.jsx';
+import UploadForm from "./dev/jsx/Upload/UploadForm.jsx";
 import R from "./dev/js/Requisition";
 
 export default class App extends Component {
@@ -215,6 +216,7 @@ function container(containerName) {
                     musics={this.state.musics}
                     onPlayPause={this.onPlay} />
              )
+<<<<<<< HEAD
         case "GenreSingle":
             return (
                 <GenreSingle
@@ -222,5 +224,9 @@ function container(containerName) {
                     musics={this.state.musics}
                     onPlayPause={this.onPlay} />
              )
+=======
+        case "uploadForm":
+            return <UploadForm />
+>>>>>>> ec3362978b6afd9d50d2023ecb23755c556449f4
      }
 };

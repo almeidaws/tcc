@@ -13,8 +13,12 @@ if (favourites)
 
 const uploadForm = document.getElementById('uploadForm');
 if ( uploadForm !== null)
+<<<<<<< HEAD
     ReactDOM.render(<UploadForm/>, uploadForm);
 
 const genre_single = document.getElementById('GenreSingle');
 if ( genre_single !== null)
     ReactDOM.render(<App container="GenreSingle"/>, genre_single);
+=======
+    ReactDOM.render(<App container="uploadForm" />, uploadForm);
+>>>>>>> ec3362978b6afd9d50d2023ecb23755c556449f4
