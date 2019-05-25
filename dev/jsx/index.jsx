@@ -12,4 +12,4 @@ if (favourites)
 
 const uploadForm = document.getElementById('uploadForm');
 if ( uploadForm !== null)
-    ReactDOM.render(<UploadForm/>, uploadForm);
+    ReactDOM.render(<App container="uploadForm" />, uploadForm);

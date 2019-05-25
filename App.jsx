@@ -6,6 +6,7 @@ import Footer from "./dev/jsx/Footer.jsx";
 import Index from "./dev/jsx/Containers/Index.jsx";
 import Favourites from "./dev/jsx/Containers/Favourites.jsx";
 import LeftMenu from "./dev/jsx/LeftMenu.jsx";
+import UploadForm from "./dev/jsx/Upload/UploadForm.jsx";
 import R from "./dev/js/Requisition";
 
 export default class App extends Component {
@@ -214,5 +215,7 @@ function container(containerName) {
                     musics={this.state.musics}
                     onPlayPause={this.onPlay} />
              )
+        case "uploadForm":
+            return <UploadForm />
      }
 };
