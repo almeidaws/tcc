@@ -6,6 +6,7 @@ const genresDatabase = require('../genres/database.js');
 const createError = require('http-errors');
 const fs = require('fs');
 const { Readable } = require('stream');
+const mm = require('music-metadata');
 
 /**
  * Adds a new music to the database. This endpoint receive some music's metadata
@@ -25,13 +26,18 @@ async function add(request, response, next) {
         const authors = toArrayOfNumbers(body.author);
         const extension = getExtension(request.files.music.name);
         const posterExtension = getExtension(request.files.poster.name);
+        const metadata = await mm.parseBuffer(request.files.music.data, 
+                                              request.files.music.mimetype,
+                                              { duration: true });
+        const duration = metadata.format.duration;
         const music = new musicsDatabase.Music(body.name, 
                                                genres,
                                                authors,
                                                request.files.music.data,
                                                extension,
                                                request.files.poster.data,
-                                               posterExtension);
+                                               posterExtension,
+                                               duration);
 
         const queries = await musicsDatabase.connect();
         await queries.addMusic(music, progress => {
@@ -58,12 +64,12 @@ async function getByID(request, response, next) {
         const genresQueries = await genresDatabase.connect();
         const music = await queries.getMusicByID(request.params.id);
 
-        const { id, name } = music;
+        const { id, name, duration } = music;
         const authors = await authorQueries.getAuthorsByMusic(music.id);
         const genres = await genresQueries.getAllGenresFromMusic(music.id);
         const url = music.calculateFileURL();
         const posterURL = music.posterUID ? music.calculatePosterURL() : null;
-        response.status(200).json({ id, name, url, posterURL, authors, genres }).end();
+        response.status(200).json({ id, name, url, posterURL, authors, genres, duration }).end();
     } catch (error) {
         next(error);
     }
@@ -86,6 +92,7 @@ async function getAll(request, response, next) {
                                                     name: music.name, 
                                                     url: music.calculateFileURL(),
                                                     posterURL: music.posterUID ? music.calculatePosterURL() : null,
+                                                    duration: music.duration,
                                                     authors: await authorQueries.getAuthorsByMusic(music.id),
                                                     genres: await genresQueries.getAllGenresFromMusic(music.id),
                                                     }));

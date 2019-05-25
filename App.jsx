@@ -5,6 +5,8 @@ import Footer from "./dev/jsx/Footer.jsx";
 import Index from "./dev/jsx/Containers/Index.jsx";
 import Favourites from "./dev/jsx/Containers/Favourites.jsx";
 import LeftMenu from "./dev/jsx/LeftMenu.jsx";
+import GenreSingle from './dev/jsx/GenreSingle.jsx';
+import AudioPlayerBar from './dev/jsx/BarMusic/AudioPlayerBar.jsx';
 import R from "./dev/js/Requisition";
 
 export default class App extends Component {
@@ -123,7 +125,8 @@ export default class App extends Component {
                 <div className="ms_main_wrapper">
                     <LeftMenu selected={this.props.container} />
                     { container.bind(this)(this.props.container) }
-                    <Footer
+                    <Footer />
+                    <AudioPlayerBar
                         duration={this.state.currentMusicDuration}
                         currentTime={this.state.currentMusicTime}
                         onTimeChange={this.onAudioTimeChange}
@@ -131,7 +134,7 @@ export default class App extends Component {
                         onNext={this.onNextMusic}
                         onPrevious={this.onPreviousMusic}
                         pausedMusic={this.state.pausedMusic}
-                        currentMusic={this.state.currentMusic}/>
+                        currentMusic={this.state.currentMusic} />
                     <RegisterModal/>
                     <LoginModal/>
                 </div>
@@ -207,11 +210,17 @@ function container(containerName) {
         case "favourites":
             return (
                 <Favourites
-                    onPlayPauseMusic={this.onPlayPauseMusic}
                     pausedMusic={this.state.pausedMusic}
                     currentAudio={this.state.currentAudio}
                     musics={this.state.musics}
-                    onPlay={this.onPlay} />
+                    onPlayPause={this.onPlay} />
+             )
+        case "GenreSingle":
+            return (
+                <GenreSingle
+                    pausedMusic={this.state.pausedMusic}
+                    musics={this.state.musics}
+                    onPlayPause={this.onPlay} />
              )
      }
 };

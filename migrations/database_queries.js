@@ -110,10 +110,22 @@ DROP COLUMN posterUID;
 DELETE FROM Migration WHERE Version = 3;
 `;
 
+const migration4 = `
+ALTER TABLE Music ADD duration real;
+INSERT INTO Migration (Version, Description) VALUES (4, 'Add duration column to Music');
+`;
+
+const migration4Rollback = `
+ALTER TABLE Music
+DROP COLUMN duration;
+
+DELETE FROM Migration WHERE Version = 4;
+`;
+
 module.exports = { 
     createMigrationTableSQL,
     deleteMigrationTableSQL,
     allMigrationsSQL,
-    migrations: [migration1, migration2, migration3],
-    rollback: [migration3Rollback, migration2Rollback, migration1Rollback]
+    migrations: [migration1, migration2, migration3, migration4],
+    rollback: [migration4Rollback, migration3Rollback, migration2Rollback, migration1Rollback]
 };

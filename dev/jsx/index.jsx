@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom';
 import UploadForm from './Upload/UploadForm.jsx';
 import App from "../../App.jsx";
-import Genre_Single from './Genre_Single.jsx';
+import Genre_Single from './GenreSingle.jsx';
 
 const index = document.getElementById('index');
 if (index)
@@ -15,6 +15,6 @@ const uploadForm = document.getElementById('uploadForm');
 if ( uploadForm !== null)
     ReactDOM.render(<UploadForm/>, uploadForm);
 
-const genre_single = document.getElementById('Genre_Single');
+const genre_single = document.getElementById('GenreSingle');
 if ( genre_single !== null)
-    ReactDOM.render(<Genre_Single/>, genre_single);
+    ReactDOM.render(<App container="GenreSingle"/>, genre_single);

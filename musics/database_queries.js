@@ -13,6 +13,7 @@ const createMusicTableSQL =
     Name text NOT NULL,
     fileS3Key text NOT NULL,
     posterUID text,
+    duration real,
     UNIQUE (fileS3Key)
 )`;
 
@@ -33,19 +34,19 @@ const createMusicAuthorTableSQL =
 )`;
 
 const getAllMusicsSQL = 
-`SELECT ID, Name, fileS3Key, posterUID FROM Music;`;
+`SELECT ID, Name, fileS3Key, posterUID, duration FROM Music;`;
 
 const findMusicByNormalizedFileKeySQL = 
-`SELECT (ID, Name, fileS3Key, posterUID) FROM Music WHERE fileS3Key = $1;`;
+`SELECT (ID, Name, fileS3Key, posterUID, duration) FROM Music WHERE fileS3Key = $1;`;
 
-const getMusicByIDSQL = "SELECT ID, Name, fileS3Key, posterUID FROM Music WHERE ID = $1;"
+const getMusicByIDSQL = "SELECT ID, Name, fileS3Key, posterUID, duration FROM Music WHERE ID = $1;"
 const getMusicsByAuthorSQL = `
-SELECT ID, Name, fileS3Key, posterUID 
+SELECT ID, Name, fileS3Key, posterUID, duration 
 FROM Music as M INNER JOIN MusicAuthor AS MA ON M.ID = MA.Music 
 WHERE MA.Author = $1;
 `;
 
-const addMusicSQL = 'INSERT INTO Music (Name, fileS3Key, posterUID) VALUES ($1, $2, $3) RETURNING ID';
+const addMusicSQL = 'INSERT INTO Music (Name, fileS3Key, posterUID, duration) VALUES ($1, $2, $3, $4) RETURNING ID';
 const addMusicAuthorSQL = 'INSERT INTO MusicAuthor (Music, Author) VALUES ($1, $2)';
 const addMusicGenreSQL = 'INSERT INTO MusicGenre (Music, Genre) VALUES ($1, $2)';
 
