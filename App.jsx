@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import AudioPlayerBar from "./dev/jsx/BarMusic/AudioPlayerBar.jsx";
 import RegisterModal from "./dev/jsx/RegisterModal.jsx";
 import LoginModal from "./dev/jsx/LoginModal.jsx";
 import Footer from "./dev/jsx/Footer.jsx";
 import Index from "./dev/jsx/Containers/Index.jsx";
 import Favourites from "./dev/jsx/Containers/Favourites.jsx";
 import LeftMenu from "./dev/jsx/LeftMenu.jsx";
+import GenreSingle from './dev/jsx/GenreSingle.jsx';
+import AudioPlayerBar from './dev/jsx/BarMusic/AudioPlayerBar.jsx';
 import UploadForm from "./dev/jsx/Upload/UploadForm.jsx";
 import R from "./dev/js/Requisition";
 
@@ -212,6 +213,13 @@ function container(containerName) {
                 <Favourites
                     pausedMusic={this.state.pausedMusic}
                     currentAudio={this.state.currentAudio}
+                    musics={this.state.musics}
+                    onPlayPause={this.onPlay} />
+             )
+        case "GenreSingle":
+            return (
+                <GenreSingle
+                    pausedMusic={this.state.pausedMusic}
                     musics={this.state.musics}
                     onPlayPause={this.onPlay} />
              )
