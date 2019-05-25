@@ -33,7 +33,7 @@ const LoggedMenu = props => {
             <a href="javascript:;" className="ms_admin_name">Hello {props.name} <span className="ms_pro_name">{props.name.charAt(0)}</span>													
             </a>
             <ul className="pro_dropdown_menu">
-                <li><a href="index.html" onClick={props.handleLogout}>Logout</a></li>
+                <li><a href="javascript:;" onClick={props.handleLogout}>Logout</a></li>
             </ul>
         </div>
     )
@@ -54,7 +54,11 @@ class Header extends React.Component {
         this.handleLogout = this.handleLogout.bind(this);
     }
     handleLogout(event) {
-        R.logout(U.getCookie('token'), error => {
+        R.logout(U.getCookie('token'), () => {
+            this.setState({ name: "" });
+            location.reload();
+        }, error => {
+            console.log('p2');
             if (error === 401) {
                 this.setState({error: 'ID is from another user or when the access token is inexistent.'});
                 console.log('deu erro 1');

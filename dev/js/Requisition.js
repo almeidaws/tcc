@@ -110,8 +110,11 @@ class Requisition {
      * The HTTP status code is passed as argument. The possible values
      * are documented on the RESTful API page.
      */
-    static logout(token,error) {
-        const logout = (data,error) => { Requisition.logout(token,error); U.deleteAllCookies();}
+    static logout(token, success, error) {
+        const logout = (data) => { 
+            U.deleteAllCookies();
+            success();
+        }
 
         $.ajax('users/tokens/' + token, {
             method: 'DELETE',
