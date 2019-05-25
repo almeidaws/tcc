@@ -925,12 +925,12 @@ ul.ms_lang_box:after {
 	position: relative;
 	overflow: hidden;
 	border-radius: 10px;
+	width: 240px;
+	height: 240px;
 }
 .ms_rcnt_box_img img {
 	width: 100%;
 	border-radius: 10px;
-	height: 240px;
-	width: 240px;
 }
 .ms_rcnt_box_text {
 	text-align: left;
