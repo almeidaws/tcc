@@ -929,6 +929,8 @@ ul.ms_lang_box:after {
 .ms_rcnt_box_img img {
 	width: 100%;
 	border-radius: 10px;
+	height: 240px;
+	width: 240px;
 }
 .ms_rcnt_box_text {
 	text-align: left;
@@ -1885,6 +1887,8 @@ h1.footer_title:after {
 }
 .play_song_name span.que_img img {
 	border-radius: 5px;
+	width: 50px;
+	height: 50px;
 }
 .play_song_name .que_data {
 	width: calc(100% - 50px);
