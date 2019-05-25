@@ -134,7 +134,7 @@ export default class App extends Component {
                         onPlayPause={this.onPlayPauseMusic}
                         onNext={this.onNextMusic}
                         onPrevious={this.onPreviousMusic}
-                        pausedMusic={this.state.pausedMusic}
+                        pausedMusic={this.state.pausedMusic.paused}
                         currentMusic={this.state.currentMusic} />
                     <RegisterModal/>
                     <LoginModal/>
