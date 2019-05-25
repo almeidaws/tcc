@@ -1,7 +1,6 @@
 import ReactDOM from 'react-dom';
 import UploadForm from './Upload/UploadForm.jsx';
 import App from "../../App.jsx";
-import Genre_Single from './GenreSingle.jsx';
 
 const index = document.getElementById('index');
 if (index)
@@ -18,3 +17,4 @@ if ( uploadForm !== null)
 const genre_single = document.getElementById('GenreSingle');
 if ( genre_single !== null)
     ReactDOM.render(<App container="GenreSingle"/>, genre_single);
+
