@@ -93,7 +93,6 @@ class RegisterModal extends React.Component {
         return (
             <div id="myModal" className="modal  centered-modal" role="dialog">
                 <div className="modal-dialog register_dialog">
-                  //Modal Content
                   <div className="modal-content">
                         <CloseButton/>
                         <div className="modal-body">                                    

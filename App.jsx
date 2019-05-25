@@ -134,11 +134,11 @@ export default class App extends Component {
                         onPlayPause={this.onPlayPauseMusic}
                         onNext={this.onNextMusic}
                         onPrevious={this.onPreviousMusic}
-                        pausedMusic={this.state.pausedMusic}
+                        pausedMusic={this.state.pausedMusic.paused}
                         currentMusic={this.state.currentMusic} />
-                    <RegisterModal/>
-                    <LoginModal/>
                 </div>
+                <RegisterModal/>
+                <LoginModal/>
                 <div className="ms_clear_modal">
                     <div id="clear_modal" className="modal  centered-modal" role="dialog">
                         <div className="modal-dialog">
