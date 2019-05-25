@@ -1,4 +1,5 @@
 
+
 # Miraculous
 
 Miraculous is a website project created to study music recommendations algorithms. It's created using NodeJS technology on the server side and ReactJS on the client side. 
@@ -17,8 +18,22 @@ In this repo, you'll find both Web API and the frontend. So you must be aware th
 1. [Project Setup](#project-setup)
 2. [Project Structure](#project-structure)
 3. [ReactJS](#reactjs)
-4. [RESTFul API](#restful-api)
-5. [Database Modeling](#database-modeling)
+4. [Database Modeling](#database-modeling)
+5. [RESTFul API](#restful-api)
+    1. [Login a user](#login-a-user)
+    2. [View informations from a user](#view-informations-from-a-user)
+    3. [Logout a user](#logout-a-user)
+    4. [Add an author](#add-an-author)
+    5. [Get all authors](#get-all-authors)
+    6. [Get an author by its ID](#get-an-author-by-its-id)
+    7. [Get all authors from a music](#get-all-authors-from-a-music)
+    8. [Get all genres](#get-all-genres)
+    9. [Get all genres from a music](#get-all-genres-from-a-music)
+    10. [Add a music](#add-a-music)
+    11. [Get all musics](#get-all-musics)
+    12. [Get a music by ID](#get-a-music-by-id)
+    13. [Delete a music](#delete-a-music)
+
 
 # Project setup
 
@@ -30,7 +45,7 @@ It contains the *development*, *test* and *production* environment. The *develop
 
 After cloning the repository, you must run `npm install` to download and install all the dependencies used on the project.
 
-## Database
+## PostgreSQL
 
 This project use environment variables to be configured and let private data outside the source code. To connect with some PostgreSQL database, you should use the `DATABASE_URL` environment variable. If you use Heroku Client to deploy, this variable is automatically defined.
 
@@ -62,6 +77,12 @@ Both backend and frontend of this project are all contained inside this repo. Be
 
 There's a folder named `dev` where you can create ReactJS Components and some other this that go on the frontend. This components are transpiled into `prod` folder. In the `prod` folder there's also some static html files that will be moved someday to out of that folder. In other words, the `prod` folder is an alias for the `build`/`public` folder.
 
+# Database Modeling
+
+![Miraculous Database Model](https://github.com/almeidaws/tcc/blob/master/Miraculous%20Database%20Model.png)
+
+The database data model is available here forn consulting: [Database Data Model][1]
+
 # RESTful API
 
 All the API used in this project are RESTful. Since it's an academic project, REST was used because it's recognized well defined standard for creating APIs. The status codes are the same from the HTTP protocol. You can learn more about they [here](https://www.restapitutorial.com/httpstatuscodes.html)
@@ -70,7 +91,7 @@ All the API used in this project are RESTful. Since it's an academic project, RE
 
 This section contains an explanation of each endpoint used to handle users. 
 
-### Register
+### Register a user
 
 ```
 Route: /users
@@ -93,7 +114,7 @@ On error:
 #### Error codes
 - `409`: used when the email is being used by another user.
 
-### Login
+### Login a user
 
 ```
 Route: /users/tokens
@@ -118,7 +139,7 @@ It returns the user's id and the token that is used as an authorization on other
 #### Error codes
 - `401`: used when the user's email or password is invalid or when there's no user with that email. 
 
-### View informations
+### View informations from a user
 
 ```
 Route: /users/<id>
@@ -142,7 +163,7 @@ When accessing the endpoint, you must provide the user's id retrieved when loggi
 #### Error codes
 - `401`: used when the ID is from another user or when the access token is inexistent.
 
-### Logout
+### Logout a user
 
 ```
 Route: /users/tokens/<token>
@@ -167,9 +188,9 @@ When logging out you are actually deleting your the Access Token. This Access To
 
 ## Authors
 
-This section contains an explanation of each endpoint used to handle users. 
+This section contains an explanation of each endpoint used to handle authors. 
 
-### Adding
+### Add an author
 
 ```
 Route: /authors
@@ -191,7 +212,7 @@ The return is something like this:
 
 **Note**: if you add the same author twice, the first is returned.
 
-### Getting all
+### Get all authors
 
 ```
 Route: /authors
@@ -221,7 +242,7 @@ The return is something like this:
 ```
 
 
-### Getting by ID
+### Get an author by its ID
 
 ```
 Route: /authors/:id
@@ -256,7 +277,7 @@ The return is something like this:
 ]
 ```
 
-### Getting from music
+### Get all authors from a music
 
 ```
 Route: musics/:musicID/authors
@@ -294,7 +315,7 @@ The return is something like this:
 
 This section contains an explanation of each endpoint used to handle genres. 
 
-### Getting all
+### Get all genres
 
 ```
 Route: /genres
@@ -323,7 +344,7 @@ The return is something like this:
 ]
 ```
 
-### Getting from music
+### Get all genres from a music
 
 ```
 Route: musics/:musicID/genres
@@ -361,7 +382,7 @@ The return is something like this:
 
 This section contains an explanation of each endpoint used to handle users. 
 
-### Adding
+### Add a music
 
 ```
 Route: /musics
@@ -386,7 +407,7 @@ On error:
     Status: 409 // If already there's a music with this name, authors and file extension.
     Status: 400 // If some field is missing. The error message contains the missing field.
 ```
-### Getting all musics
+### Get all musics
 
 ```
 Route: /musics
@@ -449,7 +470,7 @@ The return from a successful request is something like this:
 ]
 ```
 
-### Getting by ID
+### Get a music by ID
 
 ```
 Route: /musics/:id
@@ -492,7 +513,7 @@ The return from a successful request is something like this:
 }
 ```
 
-### Deleting by ID
+### Delete a music
 
 ```
 Route: /musics/:id
@@ -512,26 +533,4 @@ On error:
 
 **:id**: you must replace this by music's id.
 
-# Database Modeling
-
-[Database modeling v1][3]\
-[Database modeling v2][4]\
-[Database modeling v3][5]\
-[Database modeling v4][6]\
-[Database modeling v5][7]\
-[Database modeling v6][8]\
-[Database modeling v7][1]\
-[Database modeling v8][2]\
-[Database modeling v9][9]
-
-[9]: https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=Miraculous%20-%20Database%20Model#R7V1bc9o4GP01zOw%2BtINtzOUxkKQXkmwmJJts3hQsQI1tMbIokF%2B%2FMpYAW%2BJWLGxatZmM9dnW9ehI35HkVJxOMPtCwHh0iz3oV%2ByqN6s4lxXbbrhN9js2zBNDrdVKDEOCvMRkrQw99AG5scqtE%2BTBKPUgxdinaJw29nEYwj5N2QAheJp%2BbID9dKpjMISSodcHvmx9Rh4dJdamW13Zv0I0HImUrSq%2FEwDxMDdEI%2BDh6ZrJuao4HYIxTa6CWQf6cd2Jekneu95wd5kxAkO6zwv3g6uLK6t3C677lmNbqG7dzj7ZSSw%2FgT%2FhBX6KIIl4julcVEM0RYEPQhZqD3BIe%2FxOlYX7I%2BR7N2COJ3E2Igr67yLUHmGCPtjzwGe3LGZgtwnlrWzX49iQ73ewj8kiHQdW4%2F%2BpN3txjDwtAiP27r0os5Ux3YJZ6sEbEFGRS%2Bz7YByht0W%2B4xcDQIYobGNKccAfEqW8TmdqsPjH7gMfDUNm67O0IBF1kZTGqrGw3Ca8mX5CQuFszcTb6AvEAaRkzh7hd%2B0qf4V3GNvhHWa6gp9V55garUOvVuOw55AfLuNeJvfAuggIh6wOlukt4xLpNapSeqrkWOulUgM%2Bq5IQUNjGk9CL1qHILtZKujItAHoAWB0JrN8uK85FjFRIEMOYhNoRGMeXrEEou78qvdOmeMwb3YcDARLCixdfvwlgWGsNnzzbjlsTMY644OYAed4i1nU0h3jRXaIx6KNweJOk4tRWpgeeWmzCLMqBv6CHEYsMhnFuMAUUvC072hijkC5q222zH9Ymnepnt%2BKyknZY2FqF2U%2F8OKEdHEaUALRAI2S9YQrjHtH2CB4%2FMvxDUdr1Tu1mgG0rgb2VTnajfZ5G0S5wO9XN2E7B7FBM1SRM3XePxtHbOqkoMLEvnNLYyQ06u9ARF5MD%2Fxdx4GzAwXKc5nlLDYUpfKwBwjklHlwJD3cggAnLsLJQPRxT3Q2KRWRnTjAnIBR3T0LJDl%2B5AaguAahoOkmQc7Zc4m6AQG5cog0KDQkKVwFAviGTcyGTpl0wmTQNmeRLJo0NECg%2FmbTkiSqIoikmnuGTc%2BETq9osmFCErGYYJS9GaW0AQfkZxbLyx4IhEL0E4tT2IxBLl39syYqxIZCjCMTaJBHnxiB5gOH7%2FcOPYeujezP%2B9u%2FgZfDP1%2FdhpBBLHvE7q1SzelDU6kGtvsfqQUuFEaupCSSyIPL0JHR7fZNWo9orAbW1Gx%2Bl2qtAlYdKq8yxrKwY1f6gkWhrTy21aq%2FMuayTxMvYp1gdNHPbvEhFpdyrSCUPf0iZY1lhKZpSzmdmu7VXlto1VuZcIZNczcaIAIpwyKcuKGD1BILxX%2FW%2FDbWUm1pUOv5JqUWH1PJnc8uyh54huch7TgyBlJtAlMK90o3WNcO1ZK3FMMhxDFLbgIJS6W6ta9Qkd93LXvDa9cBHt%2FOKHMVGSAkLMPQu4u3Pq9Yc0UDoaKxiyPyF1%2Fsi8F8c%2BOyK4OVs%2FeblXIRmiL6IONj12lsstHopDoh35NbglRzhCekL733Lxg8qOvyOaSb0Uju5t7aWq2gtYSPQZ9O8nzCV2S17au9j3K4UOMdNK3COUOBEFEm5%2BVsrIEgR1bIbgZuZiJKKkSL6hd22SpDJo9SdhLKFfpeCFuus%2BB1miGQLtyzF0I1yynSEKOwxTonTnBIwXnDHJPSgtwtiB%2BimdrayXYnwa6pJgq4uLtO99fvWvpNVrU9Y%2Bz9e3KgVsNxbD9%2Bfn1%2Fr07tn95M8Xb%2BdRKgvj7hmYUOFJi0LG%2BljCo191zW2nYo4CiO2hBFzGqGwdY2tvbiU6xrKHMsTO7OucdBMf2tPLfW6hjLnijmYOY1wEt0gH0I55ZqGMsdGNciZS7SLBtqgIO%2FDYI0He04Xzg2hnAuhnHIlQ5ljeeeFIZSjCEX7pos8oEAeB8%2BAdtzL3tNwOnu8hU%2FdkcJJHuOIOYCZ3V0secdaCQWGW%2FLhFgVg9qOb4xc5tCFKdqkNuWwjl71JI42Nzb25PLMVDSffDH1onZoozyboWiNVZtls4Mp5bqJ9A5c2KNjyUPIFhgTKgDAKfuU0Cn6jllbwxTrpLrpo2bowYr4nVHYFf9mNz0fCt80XhbRo%2BGfxSSF11s03hUo1sz2cVAqX8W3zVaG8%2BeQsPiukXiTWsKhjGEQvg%2Byr22tziBzDIDkziKOdQbSBwZW944sJZZ6pDAnjHhfkHlu1PXe4afOPXeMfl90%2Fdg8eiAr3j13jH%2BsYjdzz9Y9d4x%2BXanZ7OKkU7h%2B7ZnabN5%2Bcr3%2FsatijZBhEL4MU7h%2B75lO7eTOI9m%2FtagODOGt0%2FAHbZeCwA7biOrcDtls10PUTttsOUJTkhG3DznjKzQwO9j1h26hmIspOcfM7YauGmSzDFAkzWxfO3JLhx93R7Pvip56NqJGRYnTjRxZofuMj2lJvFeGiDgnXFX7rH1T9olcXVv2yz%2FcbV7%2FENYVXv%2Bxl%2FUnVr498WHD1RyGToWL1lzWdq%2F8B
-[8]: https://bit.ly/2GjlpBL
-[7]: https://bit.ly/2Gcvfph
-[6]: https://bit.ly/2RZCvuS
-[5]: https://bit.ly/2DNjxip
-[4]: https://bit.ly/2Wvl3wR
-[3]: https://bit.ly/2Tk0xNM
-
-[2]: https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=Miraculous#R7V1bc5s4GP01ntl9aMeA8eUxdpJectlM3GyyfVOMbKsB5BFybefXrzCSDUi%2BNcjgRG0mgz7Q%2Feig70giNacXzL8QMBnfYA%2F6NbvuzWvOec22W26b%2FY4Ni8TgNrhhRJCXmKy1oY9eITfWuXWKPBhlHqQY%2BxRNssYBDkM4oBkbIATPso8NsZ%2FNdQJGUDL0B8CXrY%2FIo%2BPE2nbra%2FtXiEZjkbNV53cCIB7mhmgMPDxLmZyLmtMjGNPkKpj3oB%2B3nWiXJN7lhrurghEY0n0i3A0vzi6s%2Fg24HFiObaGmdTP%2FZCep%2FAb%2BlFf4IYIk4iWmC9EM0QwFPghZqDvEIe3zO3UWHoyR712DBZ7GxYgoGLyIUHeMCXplzwOf3bKYgd0mlPey3YxTQ77fwz4my3wcWI%2F%2FZ2L24xR5XgRGLO6dqLOVM92AeebBaxBRUUrs%2B2ASoedlueOIASAjFHYxpTjgD4laXmYLNVz%2BY%2FeBj0Yhsw1YXpCItkhqYzVYWO4T3k2%2FIaFwnjLxPvoCcQApWbBH%2BF27zqPwAWM7nSQ8W8PPanJMjdPQazQ47DnkR6u0V9ndsyECwhFrg1V%2Bq7REfq26lJ8qO9Z7mdyAz5okBBR28TT0ojQU2UWqpmvTEqAHgNWRwPrtvOacxUiFBDGMSagdg0l8yTqEsvvr2jtdiie80304FCAhvHrx9bMAhpXq%2BOTZbtybiHHEGTcHyPOWqabRHOLlcIkmYIDC0XWSi9NYm%2B55brEJsySH%2FpIexiwxGMalwRRQ8LwaaBOMQrpsbbfLflif9Oqf3ZrLatpjYWsdZj%2Fx44T2cBhRAtASjZCNhhmMR0TXI3jyg%2BEfitqmB7WbA7atBPZWOtmN9kUWRbvA7dQ3YzsDs0Mx1ZAwdXf1Zhw9p0lFgYl94ZTFTmHQ2YWOuJoc%2BH%2BIA2cDDlbvaV62zKswg48UIJxj4sGV8HALApiwDKsL1cMx9d2gWCZ24gRzBEJx9ySU%2FOurMAA1JQCVTScJck6WS9wNECiMS7RBoSVB4SIAyDdkcipk0rZLJpO2IZNiyaS1AQLVJ5OOPFEFUTTDxDN8cip8YtXbJROKkNUMoxTFKJ0NIKg%2Bo1hW8VgwBKKXQJzGfgRi6fKPLVkxNgTyJgKxNknEhTFIEWD4fnf%2Fa9R5vbqefPt3%2BDT85%2BvLKFKIJT%2FwC2tUs3pQ1upBo7nH6kFHhRGrrQkksiDy8CB0e32TVqPaKwG1dRi%2FSbVXgaoIlVZZYllZMar9QW%2BirSO10qq9suSyThIvYx9jddDMbYsiFZVyryKVIvwhZYllhaVsSjmdme3WUVlp11hZcoVMcjGfIAIowiGfuqCAtRMIJn81%2FzbUUm1qUen4R6UWHVLLx%2BaW1Qg9QXKR95wYAqk2gSiFe6UbrWuGa8lai2GQtzFIYwMKKqW7dS5Rm9xenfeDn1ceeL3q%2FUSOYiOkhAUYemfx9ud1b45pIHQ01jBk8cTbfRn4Lw58dkXwfJ6%2Beb4QoTmiTyINdp2KxULrSHFAxJF7gzdyhKdkILz3LRs%2FqBjwO6aZ0Mvs5N7aW66it4SNQJ9N837DTGG37Km9i3G7VuAcN6vAOUKBE0kk9eax1kCQEmrkNwK3cwklDSMl9Ae7bZUgk99StxLKlvpdBlpssOIXmCOSLdyyEkM3yimzMaKwzzglznNGwGTJHdPQg94uiB2gm9r5xnYlwm%2BoJgm6hrhM99b7bX0nr1ofsfV%2FPblRJ2Clt%2B6%2FPz7%2BbM5uH91P8nT9ZhqhgfzGNQsbKjRpWdjIHlNoHXNdQ4kRW8KIOY1Q2rrG1lFcyXUNZYnliZ1Z1zhopr91pFZ6XUNZcsUczJxGOIpuUAyhHHNNQ1lioxoUzCXaRQNtUJD3YbDOg33nCi4MoZwKoRxzJUNZYnnnhSGUNxGK9k0X2qCg4XCKYQ%2Bt7HHUZQxlkc0ei4LpQ%2FseC21QEF2fwsIXGBIoA8KIbLXjiGytRlZkE0sZu%2BiiY%2BvCiPnkR9VFttUwPh2VzTYf%2FdAis53EVz%2FURTef%2FajUzPZwUildabPNhz%2BK5pOT%2BPKHeh1Hg%2B5qGEQvg%2BwrrWlziBzDIAUziKOdQbSBwZW947MpZZ6pDAnjHpfkHluNPTehaPOPXeMfV90%2Fdg9%2BEZXuH7vGP9bxNnJP1z92jX9cqdnt4aRSun%2Fsmtlt0Xxyuv6xq2EbgWEQvQxSun%2Fsmq9hFs0g2j%2BHqQ0M4jjA28%2FArQKHnYET14WdgduqgaYPwW3b41yRQ3AtO%2Bcpt3M42PcQXKueSyg%2FxS3uEJwaZrIMUybMbF04cyuGH3dHt%2B%2BLn2Y%2BoVZOitGNH1mgecenKKXRKsJlneNrKvzWD9T8YlSX1vyyz%2FeOm1%2FimtKbX%2FayPlLz6yMfFlz%2F3bbkVbH%2B43fOxf8%3D
-
-[1]: https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=Miraculous#R7V1bc9o4GP01zOw%2BtINtzOUxkKSXXDYTmk22bwoWoMa2GFkUyK9fGUtgI3ErFrZbtZmM9dnW9ehI35Hk1JxeMP9EwGR8hz3o1%2By6N685lzXbbrlt9js2LBKD2%2BCGEUFeYrLWhj56h9xY59Yp8mCUeZBi7FM0yRoHOAzhgGZsgBA8yz42xH421QkYQcnQHwBftj4jj44Ta9utr%2B2fIRqNRcpWnd8JgHiYG6Ix8PAsZXKuak6PYEyTq2Deg35cd6Jekveut9xdZYzAkB7ywsPw6uLK6t%2BB64Hl2BZqWnfzD3YSy0%2FgT3mBnyJIIp5juhDVEM1Q4IOQhbpDHNI%2Bv1Nn4cEY%2Bd4tWOBpnI2IgsGbCHXHmKB39jzw2S2LGdhtQnkr2804NuT7PexjskzHgfX4f%2BbNfhwjT4vAiL37IMpsbZjuwDzz4C2IqMgl9n0widDrMt%2FxiwEgIxR2MaU44A%2BJUl5nMzVc%2FmP3gY9GIbMNWFqQiLpISmM1WFhuE95MPyGhcJ4y8Tb6BHEAKVmwR%2Fhdu85f4R3GdjpJeLaGn9XkmBqnoddocNhzyI9Wca%2BSe2RdBIQjVger9FZxifRadSk9VXKs9TKpAZ9VSQgo7OJp6EVpKLKLVEnXpiVAjwCrI4H1y2XNuYiRCgliGJNQOwaT%2BJI1CGX316V3uhRPeKP7cChAQnjx4utXAQwr1fDJs924NRHjiAtuDpDnLWNNoznEy%2B4STcAAhaPbJBWnsTY98tRiE2ZRDv0lPYxZZDCMc4MpoOB11dEmGIV0Wdtul%2F2wNunVP7o1l5W0x8LWOsx%2B4scJ7eEwogSgJRoh6w0zGPeIrkfw5BvDPxSlTXdqdwPYthLYO%2BlkP9oXWRTtA7dT347tDMyOxVRDwtTDzck4ek2TigITh8Ipi53coLMPHXExOfB%2FEQfOFhysxmmet8xQmMFHChDOOfHgSni4BwFMWIaVherhmPp%2BUCwjqzjBnIFQ3AMJZXP4yg1ATQlARdNJgpzKcom7BQK5cYk2KLQkKFwFAPmGTKpCJm27YDJpGzLJl0xaWyBQfjLpyBNVEEUzTDzDJ1XhE6veLphQhKxmGCUvRulsAUH5GcWy8seCIRC9BOI0DiMQS5d%2FbMmKsSGQkwjE2iYR58YgeYDh68Pjj1Hn%2FeZ28uXf4cvwn89vo0ghlnzDb6xSzepBUasHjeYBqwcdFUastiaQyILI05PQ7fVNWo1qrwTUzm58kmqvAlUeKq0yx7KyYlT7o0ainT211Kq9MueyThIvY59jddDMbfMiFZVyryKVPPwhZY5lhaVoSqnOzHZnryy1a6zMuUImuZpPEAEU4ZBPXVDA6gkEk7%2BafxtqKTe1qHT8s1KLDqnlz%2BaWVQ%2BtILnIe04MgZSbQJTCvdKN1jXDtWStxTDIaQzS2IKCUulunWvUJvc3l%2F3g%2B40H3m9635Gj2AgpYQGG3kW8%2FXndmmMaCB2NVQxZvPB6Xwb%2BiwMfXRG8nKdvXi5EaI7oi4iDXafeYqH1S3FAvCO3Bq%2FkCE%2FJQHjvOzZ%2BUNHh90wzoZfZyb2ztVxFawkbgT6b5v2Emczu2FP7EON2rcA5blaBc4QCJ6JIys3fWgNBiqixuRG4vRFRUjFSRL%2Bw21YJMnmUupdQttTvMtBinRW%2FwQ0i2cEtKzF0q5wyGyMK%2B4xT4jRnBEyW3DENPejtg9gRuqm9WdmuRPgN1SRBVxeX6d76fWvf2VStz1j7P17cqBOw3FuPX5%2Bfvzdn98%2FuB3m6fjeN0EAecc3ChgpNWhY2sscUBMvunZDtOhVxEkZsCSPmNEJh6xo7e3Ep1zWUOZYndmZd46iZ%2Fs6eWup1DWXOFXMwcxrhLLpBPoRyzjUNZY6NapAzl2gXDbRBQd6HwRoP9p0buDCEUhVCOedKhjLH8s4LQygnEYr2TRfaoGDJjDLBEfMADadUilMOXtzQhyTDKjmzilVdWtFw5s0QiF4CUZ1K0LU6qsyy2bqVM39o37qlDQqi6VNY%2BARDAmVAGO2%2Bdh7tvtX4Ne2%2BY%2BvCiPmSUNm1%2B1U3ro54b5tvCWlR7yvxMSF11s3XhEo1sz2eVAoX8G3zPaG8%2BaQSHxRSLw9rWM4xDKKXQQ5V7LU5RI5hkJwZxNHOINrA4Mre8cWUMs9UhoRxjwtyj63GgWf2tfnHrvGPy%2B4fu0cPRIX7x67xj3WMRm51%2FWPX%2BMelmt0eTyqF%2B8eumd3mzSfV9Y9dDfsIDIPoZZDC%2FWPXfGQ3bwbR%2FpVdbWAQp4xOP1q7Chx3tFZc53a0dqcGmj5bu2u7c0nO1rbsDU%2B5vYGDQ8%2FWtuobEW1OcfM7W6uGmSzDFAkzWxfOxHCwF2div1pZgObuwcehQGs2CwaarOT8xqe4pW4twkWdI24qHNw%2FqPpF9y%2Bs%2BmXn8Deu%2FuYmaRVe%2FbI79idVvz7yYcH1341Mhor1H990rv4H
+[1]: https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=Miraculous%20Database%20Model#R7V1tc9o4EP41zNx9aMcvmJiPgaRpm6SXCUnT3jcFC3BjLEYWAfLrT8aSsZFMzMXCJlGbyaD1i6TdR492V0Jp2f3p8gKD2eQaeTBoWYa3bNlnLcs6cVz6OxasEoHTZoIx9r1EZG4EA%2F8FMqHBpHPfg1HuRoJQQPxZXjhEYQiHJCcDGKNF%2FrYRCvK1zsAYCoLBEASi9MH3yCSRuo6xkX%2BF%2FnjCazYNdmUK%2BM1MEE2AhxYZkX3esvsYIZJ8mi77MIh1x%2FWSPPel4GraMAxDUuaBm9H56bk5uAZfhqZtmX7HvF5%2BspK3PINgzjp8H0EcsRaTFVdDtPCnAQhpqTdCIRmwKwYtDyd%2B4F2BFZrHzYgIGD7xUm%2BCsP9C7wcBvWRSAb2MCbOy1Ynf5gdBHwUIr%2BuxoRH%2Fzz05iN%2FI6sIwos%2Fe8D6bW6JrsMzdeAUiwluJggDMIv9x3e74wSnAYz%2FsIULQlN3Ee%2Fkl36jR%2Bh%2B9DgJ%2FHFLZkNYFMddF0huzTcuiTZiZniEmcJkRMRtdQDSFBK%2FoLeyqZbBH2ICx7G5SXmzgZ3YYpiZZ6LXbDPYM8uP03Wl1t3SIgHBMdZDWl76L13diCPXJqqPWy9UGAqqSEBDYQ%2FPQi7JQpB8yPd2I1gDdA6y2ANZvZy37NEYqxD7FmIDaCZjFH6lBCL2%2B6b3dI2jGjB7AEQcJZt2LPz9yYJgZwyf39mJr%2BpQjTpl46nve%2Bq1ZNIdoPVyiGRj64fgqqcVub0S3rLZYhOgrR8GaHib0ZTCMW4MIIOAxHWgz5IdkrW2nR3%2BoTfrGZ6fl0J72adnclOlPfDsmfRRGBAN%2FjUZIR8MCxiOi52E0u6P4h7y32UHtbAHbkgJ7J528jvZVHkWvgds2irGdg9m%2BmGoLmLq5fDOOHrOkIsFEWTjlsVMZdF5DR9xNBvz%2FiQO7AAfpPM3alpsKc%2FjIAMI%2BJB4cAQ8%2FwBQmLEP7QtRwjPE6KNYvO3KCOQChOCUJZXv6qgxAHQFAddNJgpyj5RKnAAKVcYkyKJwIUDifAj%2FQZHIsZOJaNZOJq8mkWjI5KYBA88mkKzqqIIoWCHuaT46FT0zDrZlQeFpNM0pVjNItAEHzGcU0q8eCJhC1BGK3yxGIqSo%2BNsWMsSaQNxGIWZQiroxBqgDD95vbP%2BPuy%2BXV7NvP0a%2FRP1%2BfxpEkWXKHnqhS9epBXasHTpsNx12rB10ZRkxXEUjEhMj9Pc%2Fbq3NaddZeCqidw%2FhNWXsZqKrI0kpbLGZWdNZ%2Br5lo50htdNZe2nIxTxIvYx9idVD7tlWRiixzLyOVKuIhaYvFDEvdlHI8nu3OUdno0Fjackma5Hw58zEgPgqZ6%2BJPqZ7AdPZX529NLc2mFlke%2F6DUoiLV8rG5JR2hR0gu4p4TTSDNJhBp4l4aRqvycE0x16IZ5G0M0i5AQaPybn9%2BOVF3Svti3n5%2FePi3s%2Fjx4HwSZ5PreeQPRUDovFvrMHm3die%2Fa9cu6XGYJ6owIubp9WbZ2tJuO0dxI9Nu0haLG7B12m2viWjnSG102k3actGR1ZtlD%2BPWVkMoh0y5SVusndqKuUS5T6sMCuIyIfXn4MC%2BhCtNKMdCKIdMtElbLC4MakJ5E6EoXxOsAgr4bvQASN85G9yPF8u7a3h%2FOZEEyTcoogHg1uYDWr1tGqlCNLc0lVtK5%2BCUIUoMqTW5lCWXnUO00eTybXH%2FYlm9Z%2FPMnV%2F9ePnpXK76ksjnbJ5bHdTcoo5bJHgpRzf77atVxS1SQOlIaD9uKc0ZeWwUD%2BbmREIKvvSl6UOta8K34B9ieVDaZL13qeK4R%2FneJWVQ4KbPYOEChhiKgNCrg63DrA66DnMvUnejZCjTtVSBRJ%2Bl0%2FTlwXQcH8%2F6oKVP01GyQHgUx%2BnIm67P02mUa7s%2FqdS%2BRmjpE3Wq5pOjOFJHvgNFQZ5EM4haBim7KKgsIrI1g1TMILZyBlEGBkcMj0%2FnhIamIiR0fFxTfFwyGa8sOnZ0dNz06NjZexqqPTp2dHSsYi5yjjc6dnR03Cjfdn9SqT06drRvWzWfHG907CjY%2FqgZRC2D1B4dO%2FqQ2aoZRPkps1WAQboVpiOYHnpjyP11qrUJGqMQBOcbKVX3PPSgx5S9uecKraERK%2FIPJGTFNAnmBMXBLpnyAJlqE69%2BZQu%2F45d9dnjxjIe4SWnFSklb4wbmdCwJRSM0x0O4o9%2F8TwtxCii6r2CrEIYBIP5zvh2VG6dbq3GMJhlnxzpZXdYR95v341yOH4p%2FTQlP0PRxThvQW0x8AgeU1uIrCwxmeeUX8oigxsLcygnninTvgXgioCuhGFcVxfCzUD4cjN2SME4c0NpgLM7%2BhzDP0iepdejnjHFoaWObuLDKGqreaaOsSa06LSr6d40kJtuumZfEpO8PQUHrpExOE9SHRE9wy7%2Fd4fKmefTCTJxM9fkBVoH23e1pgYe9GfW3ZbGrMvVLvkz%2BftXf4epujPolqciPo%2F523doXs3jvWPuuYTVK%2B5KEh3Z5CpUlicaK%2F25XXT4P3zL54YIMmXmKD2etzTxisPwVPItfUTikP9rmgWm6Xixu0j%2BoQyrZTS2Gzu9mUrA7%2BSnZcuueFT6UR%2BRszcn1q9%2Btl8E3pP07x9nqGbxTcoKtNalgfdRktMw8xSen1GYeyXFK4BlhyiT1Zn3oNJvjGfek3kmWr659DJZvW3ntm4aYdDsoy9uiI%2FiO1W%2B5Wy6mKW4fqkj9tIgRIplrF7RTk2vkwfiO%2FwA%3D
