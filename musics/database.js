@@ -52,7 +52,7 @@ const { addMusicSQL,
  * when handling the database. 
  *
  * This entity has two possible constructor. The first was created to 
- * receive data from database. It receives the musics's id, name, fileS3Key and posterUID.
+ * receive data from database. It receives the musics's id, name, fileS3Key, posterUID and duration in seconds.
  * The fileS3Key the the value used to retrieve music's file from Amazon S3. It's
  * global. The posterUID is also used to retrieve the music's poster from Amazon S3 and
  * it's also global.
@@ -64,16 +64,17 @@ const { addMusicSQL,
  * The second was created to be used when receiving a music from the client.
  * The parameters are music's name, genres that is an array if integers,
  * the authors of the same type as genres, the buffer with the music in it, 
- * the file's extension, the poster buffer and the poster's extension.
+ * the file's extension, the poster buffer, the poster's extension and music's duration in seconds.
  */
 class Music {
-    constructor(name, genres, authors, fileBuffer, fileExtension, posterBuffer, posterExtension) {
+    constructor(name, genres, authors, fileBuffer, fileExtension, posterBuffer, posterExtension, duration) {
         // This is a hard implementation of constructor overloading...
-        if (arguments.length === 4) {
+        if (arguments.length === 5) {
             this.id = name;
             this.name = genres;
             this.fileS3Key = authors;
             this.posterUID = fileBuffer;
+            this.duration = fileExtension;
         } else {
             this.id = null;
             this.name = name ? name.trim() : name;
@@ -82,6 +83,7 @@ class Music {
             this.fileBuffer = fileBuffer;
             this.extension = fileExtension.trim();
             this.posterBuffer = posterBuffer;
+            this.duration = duration;
             this.posterUID = uuidv4() + posterExtension;
             this.calculateFileS3Key();
         }
@@ -122,6 +124,7 @@ class Music {
             posterBuffer: Joi.object().optional(),
             fileS3Key: Joi.string().min(1).max(100).required(),
             posterUID: Joi.string().min(1).max(100).required(),
+            duration: Joi.number().precision(6).min(1).max(1200).required(),
         };
         return Joi.validate(this, scheme);
     }
@@ -164,7 +167,7 @@ const addMusic = async (music, progressCallback) => {
     // Add music in database
     const addMusicConfig = {
         text: addMusicSQL,
-        values: [music.name, music.fileS3Key, music.posterUID],
+        values: [music.name, music.fileS3Key, music.posterUID, music.duration],
     };
     const result = await pool.query(addMusicConfig);
     const musicID = result.rows[0].id;
@@ -187,7 +190,7 @@ const addMusic = async (music, progressCallback) => {
         await pool.query(addMusicGenreConfig);
     });
 
-    return new Music(musicID, music.name, music.fileS3Key, music.posterUID);
+    return new Music(musicID, music.name, music.fileS3Key, music.posterUID, music.duration);
 };
 
 /**
@@ -204,8 +207,8 @@ const getMusicByID = async (id) => {
     if (result.rows.length === 0)
         throw new createError(404, `There's no author with ID ${id}`);
 
-    const { id: musicID, name, files3key: fileS3Key, posteruid: posterUID } = result.rows[0];
-    return new Music(musicID, name, fileS3Key, posterUID);
+    const { id: musicID, name, files3key: fileS3Key, posteruid: posterUID, duration } = result.rows[0];
+    return new Music(musicID, name, fileS3Key, posterUID, duration);
 };
 
 /**
@@ -221,7 +224,7 @@ const getMusicsByAuthor = async (authorID) => {
     };
 
     const result = await pool.query(getMusicsByAuthorConfig);
-    return result.rows.map(row => new Music(row.id, row.name, row.files3key, row.posteruid));
+    return result.rows.map(row => new Music(row.id, row.name, row.files3key, row.posteruid, row.duration));
 };
 
 /**
@@ -235,7 +238,11 @@ const getAllMusics = async () => {
 
     const result = await pool.query(query);
     if (result.rows.length === 1) return null;
-    const musics = result.rows.map(music => new Music(music.id, music.name, music.files3key, music.posteruid));
+    const musics = result.rows.map(music => new Music(music.id, 
+                                                      music.name, 
+                                                      music.files3key, 
+                                                      music.posteruid, 
+                                                      music.duration));
     return musics;
  }
 
@@ -289,8 +296,8 @@ const findMusicByFileKey = async (name, authors, extension) => {
     if (result.rows.length != 1) return null;
 
     // Parses and return it
-    const { id, name: musicName, files3key: fileS3Key, posteruid: posterUID } = result.rows[0];
-    return new Music(id, musicName, fileS3Key, posterIUD);
+    const { id, name: musicName, files3key: fileS3Key, posteruid: posterUID, duration } = result.rows[0];
+    return new Music(id, musicName, fileS3Key, posterIUD, duration);
 }
 
 /**

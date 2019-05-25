@@ -17,6 +17,7 @@
     "http-errors": "^1.7.1",
     "joi": "^14.3.1",
     "jquery": "^3.4.1",
+    "music-metadata": "^4.0.1",
     "normalize-for-search": "^2.1.0",
     "pg": "^7.8.0",
     "react-sound": "^1.2.0",

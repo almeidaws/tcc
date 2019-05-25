@@ -2,6 +2,12 @@ import React from 'react';
 import RecentlyPlayedMusic from '../RecentlyPlayed/RecentlyPlayedMusic.jsx';
 import Header from '../Header.jsx';
 
+const parseToTime = time => {
+    const minutes = Math.floor(time % 3600 / 60);
+    const seconds = Math.floor(time % 3600 % 60);
+    return `${minutes}:${seconds < 10 ? "0" + seconds : seconds}`
+};
+
 const ListHeader = props => {
     return (
             <ul className="album_list_name">
@@ -21,7 +27,7 @@ const Row = props => {
                 <li><a href="javascript:;"><span className="play_no">{props.number}</span><span className="play_hover"></span></a></li>
                 <li><a href="javascript:;">{props.music.name}</a></li>
                 <li className="text-center"><a href="javascript:;">{props.music.authors[0].name}</a></li>
-                <li className="text-center"><a href="javascript:;">{props.duration ? props.duration : "0:00"}</a></li>
+                <li className="text-center"><a href="javascript:;">{props.music.duration ? parseToTime(props.music.duration) : "0:00"}</a></li>
                 <li className="text-center"><a href="javascript:;"><span className="ms_close">
                         <img src="images/svg/close.svg" alt="" /></span></a></li>
             </ul>
