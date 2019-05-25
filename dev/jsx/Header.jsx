@@ -33,10 +33,6 @@ const LoggedMenu = props => {
             <a href="javascript:;" className="ms_admin_name">Hello {props.name} <span className="ms_pro_name">{props.name.charAt(0)}</span>													
             </a>
             <ul className="pro_dropdown_menu">
-                <li><a href="profile.html">Profile</a></li>
-                <li><a href="manage_acc.html" target="_blank">Pricing Plan</a></li>
-                <li><a href="blog.html" target="_blank">Blog</a></li>
-                <li><a href="">Setting</a></li>
                 <li><a href="index.html" onClick={props.handleLogout}>Logout</a></li>
             </ul>
         </div>

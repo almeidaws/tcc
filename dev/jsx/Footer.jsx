@@ -14,16 +14,6 @@ const Footer = props => {
                         </p>
                     </div>
                 </div>
-                <AudioPlayerBar
-                    currentTime={props.currentTime}
-                    duration={props.duration}
-                    onTimeChange={props.onTimeChange}
-                    onNext={props.onNext}
-                    onPrevious={props.onPrevious}
-                    onPlayPause={props.onPlayPause}
-                    paused={props.pausedMusic.paused}
-                    currentMusic={props.currentMusic}
-                />
             </div>
         )
 };

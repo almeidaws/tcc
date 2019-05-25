@@ -378,6 +378,7 @@ body.loaded .ms_loader {
 	top: 0;
 	bottom: 0;
 	box-shadow: 0px 0px 24px 6px rgba(4, 4, 4, 0.2);
+    z-index: 2;
 }
 .ms_logo {
 	width: 100%;
@@ -1805,6 +1806,7 @@ h1.footer_title:after {
 	z-index: 10000;
 	box-shadow: 0px 0px 24px 6px rgba(4, 4, 4, 0.2);
 	transition: all 0.4s ease-in-out;
+    height: 16%;
 	-webkit-transition: all 0.4s ease-in-out;
 	-moz-transition: all 0.4s ease-in-out;
 	-ms-transition: all 0.4s ease-in-out;
@@ -1872,6 +1874,7 @@ h1.footer_title:after {
 	box-shadow: 0px 0px 24px 6px rgba(4, 4, 4, 0.2);
 	float: left;
 	z-index: 10;
+    bottom: -5px;
 }
 .play_song_img {
 	width: 50px;

@@ -124,7 +124,8 @@ export default class App extends Component {
                 <div className="ms_main_wrapper">
                     <LeftMenu selected={this.props.container} />
                     { container.bind(this)(this.props.container) }
-                    <Footer
+                    <Footer />
+                    <AudioPlayerBar
                         duration={this.state.currentMusicDuration}
                         currentTime={this.state.currentMusicTime}
                         onTimeChange={this.onAudioTimeChange}
@@ -132,7 +133,7 @@ export default class App extends Component {
                         onNext={this.onNextMusic}
                         onPrevious={this.onPreviousMusic}
                         pausedMusic={this.state.pausedMusic}
-                        currentMusic={this.state.currentMusic}/>
+                        currentMusic={this.state.currentMusic} />
                     <RegisterModal/>
                     <LoginModal/>
                 </div>
