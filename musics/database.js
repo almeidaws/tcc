@@ -237,7 +237,7 @@ const getAllMusics = async () => {
     const query = { text: getAllMusicsSQL };
 
     const result = await pool.query(query);
-    if (result.rows.length === 1) return null;
+    if (result.rows.length === 0) return null;
     const musics = result.rows.map(music => new Music(music.id, 
                                                       music.name, 
                                                       music.files3key, 
