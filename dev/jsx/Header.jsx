@@ -4,8 +4,10 @@ const R = Requisition;
 import Utils from './../js/Utils.js';
 const U = Utils;
 
-const registerButton = <a href="javascript:;" className="ms_btn login_btn" data-toggle="modal" data-target="#myModal"><span>Register</span></a>;
-const loginButton = <a href="javascript:;" className="ms_btn login_btn" data-toggle="modal" data-target="#myModal1"><span>login</span></a>;
+const registerButton = <a href="javascript:;" className="ms_btn login_btn align-bottom" data-toggle="modal" data-target="#myModal"><span>Register</span></a>;
+const loginButton = <a href="javascript:;" className="ms_btn login_btn align-bottom" data-toggle="modal" data-target="#myModal1"><span>login</span></a>;
+const uploadButton = <a href="upload.html" className="ms_btn login_btn align-bottom"><span>Upload</span></a>;
+
 const searchButton = (
     <div>
         <input type="text" className="form-control" placeholder="Search Music Here.." />
@@ -17,7 +19,7 @@ const searchButton = (
 
 const UnloggedMenu = props => {
     if (props.rendered === false) return null;
-    return (<div className="ms_top_btn">{registerButton}{loginButton}</div>);
+    return (<div className="ms_top_btn">{uploadButton}{registerButton}{loginButton}</div>);
 }
 
 /**
@@ -30,7 +32,9 @@ const LoggedMenu = props => {
     if (props.rendered === false) return null;
     return (
         <div className="ms_top_btn">
-            <a href="javascript:;" className="ms_admin_name">Hello {props.name} <span className="ms_pro_name">{props.name.charAt(0)}</span>													
+            {uploadButton}
+            <a href="javascript:;" className="ms_admin_name">Hello {props.name}
+                <span className="ms_pro_name">{props.name.charAt(0)}</span>
             </a>
             <ul className="pro_dropdown_menu">
                 <li><a href="javascript:;" onClick={props.handleLogout}>Logout</a></li>
