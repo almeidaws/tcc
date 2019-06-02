@@ -20,7 +20,7 @@ const addFavoriteSQL = 'INSERT INTO Favorite (UserID, MusicID) VALUES ($1, $2) R
  */
 const getAllFavoriteFromUserSQL = `
 SELECT M.ID, M.Name, M.fileS3Key, M.posterUID, M.duration
-FROM Favorite F INNER JOIN Music M ON F.Music = M.ID WHERE F.UserID = $1;
+FROM Favorite F INNER JOIN Music M ON F.MusicID = M.ID WHERE F.UserID = $1;
 `;
 
 /** 

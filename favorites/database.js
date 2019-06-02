@@ -11,6 +11,7 @@ const { addFavoriteSQL,
         getAllFavoriteFromUserSQL,
         deleteFavoriteSQL,
       } = require('./database_queries.js');
+const { Music } = require('../musics/database.js');
 
 /**
  * Entity used to hold Favorite's data and do the validation of that data
@@ -61,54 +62,19 @@ const addFavorite = async (favorite) => {
 };
 
 /**
- * Retrieves all authors from database base with id and name of each one.
+ * Gets all musics favorited by a user.
  *
- * @returns {Array<Author>} the return is an array of objects with 'id' and 'name' properties.
- */
-const getAllAuthors = async () => {
-    const getAllAuthorsConfig = {
-        text: getAllAuthorsSQL,
-    };
-
-    const result = await pool.query(getAllAuthorsConfig);
-    const authors = result.rows.map(result => new Author(result.id, result.name));
-    return authors;
-};
-
-/**
- * Gets an author from database given its ID.
- *
+ * @param {Number} userID user's id used to find the music.
  * @returns {Author} the return is an array of objects with 'id' and 'name' properties
  */
-const getAuthorByID = async (id) => {
-    const getAuthorByIDConfig = {
-        text: getAuthorByIDSQL,
-        values: [id],
+const getFavoritesByUserID = async (userID) => {
+    const getFavoritesByUserIDConfig = {
+        text: getAllFavoriteFromUserSQL,
+        values: [userID],
     };
 
-    const result = await pool.query(getAuthorByIDConfig);
-    if (result.rows.length == 0)
-        throw new createError(404, `There's no author with ID ${id}`);
-
-    const tuple = result.rows[0];
-    return new Author(tuple.id, tuple.name);
-};
-
-/**
- * Gets all authors from form a music from the database.
- *
- * @returns {Author} the return is an array of objects with 'id' and 'name' properties
- */
-const getAuthorsByMusic = async (musicID) => {
-    const getAuthorsByMusicConfig = {
-        text: getAllAuthorsFromMusicSQL,
-        values: [musicID],
-    };
-
-    const result = await pool.query(getAuthorsByMusicConfig);
-
-    const authors = result.rows.map(row => new Author(row.id, row.name));
-    return authors;
+    const result = await pool.query(getFavoritesByUserIDConfig);
+    return result.rows.map(row => new Music(row.id, row.name, row.files3key, row.posteruid, row.duration));
 };
 
 /** 
@@ -128,14 +94,11 @@ const deleteFavorite = async (favorite) => {
     return result.rowCount >= 1;
 };
 
-const createAuthorTable = async () => pool.query(createAuthorTableSQL);
-const deleteAuthorTable = async () => pool.query(deleteAuthorTableSQL);
-const cleanUpAuthorTable = async () => pool.query(cleanUpAuthorTableSQL);
-
 const connect = async () => {
     const queries = { 
         addFavorite, 
         deleteFavorite,
+        getFavoritesByUserID,
     };
     return queries;
 };

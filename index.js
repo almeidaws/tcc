@@ -44,6 +44,7 @@ const {
 const { 
     add: handleAddFavorite,
     deleteFavorite: handleDeleteFavorite,
+    getByUserID: handleGetByUserID,
 } = require('./favorites/middleware.js');
 
 // Run pending migrations
@@ -81,6 +82,8 @@ app.get('/musics/:musicID/genres', handleGenresByMusic);
 // FAVORITES' ROUTES
 app.post('/favorites', handleAddFavorite);
 app.delete('/favorites/:userID/:musicID', handleDeleteFavorite);
+app.get('/favorites/:userID', handleGetByUserID);
+
 
 //SERVER STARTING
 app.use(express.static(path.join(__dirname, 'prod/')))

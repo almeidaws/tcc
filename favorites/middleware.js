@@ -1,6 +1,8 @@
 'use strict';
 
 const database = require('./database.js');
+const authorsDatabase = require('../authors/database.js');
+const genresDatabase = require('../genres/database.js');
 const createError = require('http-errors');
 const fs = require('fs');
 
@@ -25,36 +27,24 @@ async function add(request, response, next) {
     }
 }
 
-async function getAll(request, response, next) {
+async function getByUserID(request, response, next) {
     try {
-        const queries = await authorsDatabase.connect();
-        const authors = await queries.getAllAuthors();
+        if (!request.params.userID) throw createError(401, `The user's id is missing`);
+        const queries = await database.connect();
+        const authorQueries = await authorsDatabase.connect();
+        const genresQueries = await genresDatabase.connect();
+        const musics = await queries.getFavoritesByUserID(request.params.userID);
 
-        response.status(200).json(authors).end();
-    } catch (error) {
-        next(error);
-    }
-}
+        const withFileURLs = musics.map(async music => ({ id: music.id, 
+                                                    name: music.name, 
+                                                    url: music.calculateFileURL(),
+                                                    posterURL: music.posterUID ? music.calculatePosterURL() : null,
+                                                    duration: music.duration,
+                                                    authors: await authorQueries.getAuthorsByMusic(music.id),
+                                                    genres: await genresQueries.getAllGenresFromMusic(music.id),
+                                                    }));
 
-async function getByID(request, response, next) {
-    try {
-        if (!request.params.id) throw createError(401, `The author's id is missing`);
-        const queries = await authorsDatabase.connect();
-        const author = await queries.getAuthorByID(request.params.id);
-
-        response.status(200).json(author).end();
-    } catch (error) {
-        next(error);
-    }
-}
-
-async function getByMusic(request, response, next) {
-    try {
-        if (!request.params.musicID) throw createError(401, `The musics's id is missing`);
-        const queries = await authorsDatabase.connect();
-        const authors = await queries.getAuthorsByMusic(request.params.musicID);
-
-        response.status(200).json(authors).end();
+        response.status(200).json(await Promise.all(withFileURLs)).end();
     } catch (error) {
         next(error);
     }
@@ -76,4 +66,4 @@ async function deleteFavorite(request, response, next) {
     }
 }
 
-module.exports = { add, getAll, getByID, deleteFavorite, getByMusic }
+module.exports = { add, getByUserID, deleteFavorite }
