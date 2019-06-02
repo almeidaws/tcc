@@ -122,10 +122,27 @@ DROP COLUMN duration;
 DELETE FROM Migration WHERE Version = 4;
 `;
 
+const migration5 = `
+CREATE TABLE Favorite (
+    UserID integer NOT NULL,
+    MusicID integer NOT NULL,
+    FOREIGN KEY (UserID) REFERENCES Users(ID),
+    FOREIGN KEY (MusicID) REFERENCES Music(ID)
+);
+
+INSERT INTO Migration (Version, Description) VALUES (5, 'Add Favorite table');
+`;
+
+const migration5Rollback = `
+DROP TABLE Favorite;
+
+DELETE FROM Migration WHERE Version = 5;
+`;
+
 module.exports = { 
     createMigrationTableSQL,
     deleteMigrationTableSQL,
     allMigrationsSQL,
-    migrations: [migration1, migration2, migration3, migration4],
-    rollback: [migration4Rollback, migration3Rollback, migration2Rollback, migration1Rollback]
+    migrations: [migration1, migration2, migration3, migration4, migration5],
+    rollback: [migration5Rollback, migration4Rollback, migration3Rollback, migration2Rollback, migration1Rollback]
 };

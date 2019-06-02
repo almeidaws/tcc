@@ -9,5 +9,8 @@
     "crash": "osascript -e 'display notification \"app crashed - waiting for file changes before starting...\" with title \"Nodemon\"'"
   },
   "verbose": true,
-  "ext": "js json html jsx babelrc"
+  "ext": "js json html jsx babelrc",
+  "env": {
+    "NODE_ENV": "development"
+  }
 }
