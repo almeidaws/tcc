@@ -28,10 +28,10 @@ FROM Favorite F INNER JOIN Music M ON F.Music = M.ID WHERE F.UserID = $1;
  * @constant
  * @type {string}
  */
-const deleteFavoriteQL = "DELETE FROM Favorite WHERE Music = $1 AND User = $2;";
+const deleteFavoriteSQL = "DELETE FROM Favorite WHERE UserID = $1 AND MusicID = $2 ;";
 
 module.exports = { 
     addFavoriteSQL,
     getAllFavoriteFromUserSQL,
-    deleteFavoriteQL,
+    deleteFavoriteSQL,
 };

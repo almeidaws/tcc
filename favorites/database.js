@@ -9,7 +9,7 @@ const Joi = require('joi');
 const pool = Database.pool();
 const { addFavoriteSQL,
         getAllFavoriteFromUserSQL,
-        deleteFavoriteQL,
+        deleteFavoriteSQL,
       } = require('./database_queries.js');
 
 /**
@@ -112,28 +112,20 @@ const getAuthorsByMusic = async (musicID) => {
 };
 
 /** 
- * Removes a author from the database by ID. This function checks if 
- * the author hasn't a music associated with it. If that is the case,
- * the author isn't removed.
+ * Removes a favorite from the database.
  *
- * @param {number} author's id.
- * @returns {Array} musics that has relation with this author in the database.
+ * @param {Favorite} favorite entity with data that will be used to find the favorite row
+ * on database..
  */
-const deleteAuthor = async (id) => {
+const deleteFavorite = async (favorite) => {
     
-    const { getMusicsByAuthor } = await connectMusics();
-    const obstacles = await getMusicsByAuthor(id);
-
-    if (obstacles.length > 0)
-        return obstacles;
-
-    const deleteAuthorConfig = {
-        text: deleteAuthorSQL,
-        values: [id],
+    const deleteFavoriteConfig = {
+        text: deleteFavoriteSQL,
+        values: [favorite.userID, favorite.musicID],
     };
 
-    await pool.query(deleteAuthorConfig);
-    return [];
+    const result = await pool.query(deleteFavoriteConfig);
+    return result.rowCount >= 1;
 };
 
 const createAuthorTable = async () => pool.query(createAuthorTableSQL);
@@ -143,10 +135,7 @@ const cleanUpAuthorTable = async () => pool.query(cleanUpAuthorTableSQL);
 const connect = async () => {
     const queries = { 
         addFavorite, 
-        getAllAuthors,
-        getAuthorByID,
-        getAuthorsByMusic,
-        deleteAuthor,
+        deleteFavorite,
     };
     return queries;
 };
@@ -165,9 +154,4 @@ module.exports = {
     Favorite, 
     connect, 
     disconnect,
-    DDL: {
-        createAuthorTable,
-        deleteAuthorTable,
-        cleanUpAuthorTable,
-    },
 };

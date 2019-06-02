@@ -12,6 +12,9 @@ async function add(request, response, next) {
     try {
         const body = request.body;
         
+        if (!body.userID) throw createError(401, `The userID is missing`);
+        if (!body.musicID) throw createError(401, `The musicID is missing`);
+
         const favorite = new database.Favorite(body.userID, body.musicID);
         const queries = await database.connect();
         const addedFavorite = await queries.addFavorite(favorite);
@@ -57,20 +60,20 @@ async function getByMusic(request, response, next) {
     }
 }
 
-async function deleteAuthor(request, response, next) {
+async function deleteFavorite(request, response, next) {
     try {
-        if (!request.params.id) throw createError(401, `The author's id is missing`);
-        const queries = await authorsDatabase.connect();
-        const relatedMusics = await queries.deleteAuthor(request.params.id);
+        if (!request.params.userID) throw createError(401, `The userID's id is missing`);
+        if (!request.params.musicID) throw createError(401, `The musicID's id is missing`);
+        const favorite = new database.Favorite(request.params.userID, request.params.musicID);
 
-        if (relatedMusics.length > 0) {
-            const obstacles = relatedMusics.map(music => ({ id: music.id, name: music.name, url: music.calculateFileURL() }));
-            response.status(403).json(obstacles).end();
-        }
-        response.status(200).end();
+        const queries = await database.connect();
+        const deleted = await queries.deleteFavorite(favorite);
+
+        if (deleted) response.status(200).end();
+        else response.status(404).end();
     } catch (error) {
         next(error);
     }
 }
 
-module.exports = { add, getAll, getByID, deleteAuthor, getByMusic }
+module.exports = { add, getAll, getByID, deleteFavorite, getByMusic }

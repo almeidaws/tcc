@@ -126,6 +126,8 @@ const migration5 = `
 CREATE TABLE Favorite (
     UserID integer NOT NULL,
     MusicID integer NOT NULL,
+    PRIMARY KEY UserID,
+    PRIMARY KEY MusicID,
     FOREIGN KEY (UserID) REFERENCES Users(ID),
     FOREIGN KEY (MusicID) REFERENCES Music(ID)
 );

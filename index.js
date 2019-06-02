@@ -43,6 +43,7 @@ const {
 
 const { 
     add: handleAddFavorite,
+    deleteFavorite: handleDeleteFavorite,
 } = require('./favorites/middleware.js');
 
 // Run pending migrations
@@ -79,6 +80,7 @@ app.get('/musics/:musicID/genres', handleGenresByMusic);
 
 // FAVORITES' ROUTES
 app.post('/favorites', handleAddFavorite);
+app.delete('/favorites/:userID/:musicID', handleDeleteFavorite);
 
 //SERVER STARTING
 app.use(express.static(path.join(__dirname, 'prod/')))
