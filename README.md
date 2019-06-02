@@ -550,20 +550,18 @@ Route: /favorites
 Method: POST
 Headers: 
     Content-Type: application/json
-```
-
-Body example:
-```json
-{ "userID": 2, "musicID": 20 }
-```
 
 On success:
     Status: 201
     
 On error:
     Status: 401 // If some field is missing. The error message contains the missing field.
+```
 
-
+The returned body is something like this:
+```json
+{ "userID": 2, "musicID": 20 }
+```
 
 
 ### Get all favorited musics from a user
@@ -573,12 +571,16 @@ Route: /favorites/:userID/
 Method: GET
 Headers: 
     Content-Type: application/json
-```
+
     
 On success:
     Status: 200
     
-Body example
+On error:
+    Status: 401 // If some field is missing. The error message contains the missing field.
+```
+    
+The returned body on success is something like this:
 ```json
 [
     {
@@ -621,9 +623,6 @@ Body example
     }
 ]
 ```
-    
-On error:
-    Status: 401 // If some field is missing. The error message contains the missing field.
 
 ### Delete a favorite
 
@@ -632,7 +631,6 @@ Route: /favorites/:userID/:musicID
 Method: DELETE
 Headers: 
     Content-Type: application/json
-```
     
 On success:
     Status: 200
@@ -640,6 +638,7 @@ On success:
 On error:
     Status: 404 // if there's no favorite do delete with that user and music id.
     Status: 401 // If some field is missing. The error message contains the missing field.
+```
 
 
 [1]: https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=Miraculous%20Database%20Model#R7V1tc9o4EP41zNx9aMcvmJiPgaRpm6SXCUnT3jcFC3BjLEYWAfLrT8aSsZFMzMXCJlGbyaD1i6TdR492V0Jp2f3p8gKD2eQaeTBoWYa3bNlnLcs6cVz6OxasEoHTZoIx9r1EZG4EA%2F8FMqHBpHPfg1HuRoJQQPxZXjhEYQiHJCcDGKNF%2FrYRCvK1zsAYCoLBEASi9MH3yCSRuo6xkX%2BF%2FnjCazYNdmUK%2BM1MEE2AhxYZkX3esvsYIZJ8mi77MIh1x%2FWSPPel4GraMAxDUuaBm9H56bk5uAZfhqZtmX7HvF5%2BspK3PINgzjp8H0EcsRaTFVdDtPCnAQhpqTdCIRmwKwYtDyd%2B4F2BFZrHzYgIGD7xUm%2BCsP9C7wcBvWRSAb2MCbOy1Ynf5gdBHwUIr%2BuxoRH%2Fzz05iN%2FI6sIwos%2Fe8D6bW6JrsMzdeAUiwluJggDMIv9x3e74wSnAYz%2FsIULQlN3Ee%2Fkl36jR%2Bh%2B9DgJ%2FHFLZkNYFMddF0huzTcuiTZiZniEmcJkRMRtdQDSFBK%2FoLeyqZbBH2ICx7G5SXmzgZ3YYpiZZ6LXbDPYM8uP03Wl1t3SIgHBMdZDWl76L13diCPXJqqPWy9UGAqqSEBDYQ%2FPQi7JQpB8yPd2I1gDdA6y2ANZvZy37NEYqxD7FmIDaCZjFH6lBCL2%2B6b3dI2jGjB7AEQcJZt2LPz9yYJgZwyf39mJr%2BpQjTpl46nve%2Bq1ZNIdoPVyiGRj64fgqqcVub0S3rLZYhOgrR8GaHib0ZTCMW4MIIOAxHWgz5IdkrW2nR3%2BoTfrGZ6fl0J72adnclOlPfDsmfRRGBAN%2FjUZIR8MCxiOi52E0u6P4h7y32UHtbAHbkgJ7J528jvZVHkWvgds2irGdg9m%2BmGoLmLq5fDOOHrOkIsFEWTjlsVMZdF5DR9xNBvz%2FiQO7AAfpPM3alpsKc%2FjIAMI%2BJB4cAQ8%2FwBQmLEP7QtRwjPE6KNYvO3KCOQChOCUJZXv6qgxAHQFAddNJgpyj5RKnAAKVcYkyKJwIUDifAj%2FQZHIsZOJaNZOJq8mkWjI5KYBA88mkKzqqIIoWCHuaT46FT0zDrZlQeFpNM0pVjNItAEHzGcU0q8eCJhC1BGK3yxGIqSo%2BNsWMsSaQNxGIWZQiroxBqgDD95vbP%2BPuy%2BXV7NvP0a%2FRP1%2BfxpEkWXKHnqhS9epBXasHTpsNx12rB10ZRkxXEUjEhMj9Pc%2Fbq3NaddZeCqidw%2FhNWXsZqKrI0kpbLGZWdNZ%2Br5lo50htdNZe2nIxTxIvYx9idVD7tlWRiixzLyOVKuIhaYvFDEvdlHI8nu3OUdno0Fjackma5Hw58zEgPgqZ6%2BJPqZ7AdPZX529NLc2mFlke%2F6DUoiLV8rG5JR2hR0gu4p4TTSDNJhBp4l4aRqvycE0x16IZ5G0M0i5AQaPybn9%2BOVF3Svti3n5%2FePi3s%2Fjx4HwSZ5PreeQPRUDovFvrMHm3die%2Fa9cu6XGYJ6owIubp9WbZ2tJuO0dxI9Nu0haLG7B12m2viWjnSG102k3actGR1ZtlD%2BPWVkMoh0y5SVusndqKuUS5T6sMCuIyIfXn4MC%2BhCtNKMdCKIdMtElbLC4MakJ5E6EoXxOsAgr4bvQASN85G9yPF8u7a3h%2FOZEEyTcoogHg1uYDWr1tGqlCNLc0lVtK5%2BCUIUoMqTW5lCWXnUO00eTybXH%2FYlm9Z%2FPMnV%2F9ePnpXK76ksjnbJ5bHdTcoo5bJHgpRzf77atVxS1SQOlIaD9uKc0ZeWwUD%2BbmREIKvvSl6UOta8K34B9ieVDaZL13qeK4R%2FneJWVQ4KbPYOEChhiKgNCrg63DrA66DnMvUnejZCjTtVSBRJ%2Bl0%2FTlwXQcH8%2F6oKVP01GyQHgUx%2BnIm67P02mUa7s%2FqdS%2BRmjpE3Wq5pOjOFJHvgNFQZ5EM4haBim7KKgsIrI1g1TMILZyBlEGBkcMj0%2FnhIamIiR0fFxTfFwyGa8sOnZ0dNz06NjZexqqPTp2dHSsYi5yjjc6dnR03Cjfdn9SqT06drRvWzWfHG907CjY%2FqgZRC2D1B4dO%2FqQ2aoZRPkps1WAQboVpiOYHnpjyP11qrUJGqMQBOcbKVX3PPSgx5S9uecKraERK%2FIPJGTFNAnmBMXBLpnyAJlqE69%2BZQu%2F45d9dnjxjIe4SWnFSklb4wbmdCwJRSM0x0O4o9%2F8TwtxCii6r2CrEIYBIP5zvh2VG6dbq3GMJhlnxzpZXdYR95v341yOH4p%2FTQlP0PRxThvQW0x8AgeU1uIrCwxmeeUX8oigxsLcygnninTvgXgioCuhGFcVxfCzUD4cjN2SME4c0NpgLM7%2BhzDP0iepdejnjHFoaWObuLDKGqreaaOsSa06LSr6d40kJtuumZfEpO8PQUHrpExOE9SHRE9wy7%2Fd4fKmefTCTJxM9fkBVoH23e1pgYe9GfW3ZbGrMvVLvkz%2BftXf4epujPolqciPo%2F523doXs3jvWPuuYTVK%2B5KEh3Z5CpUlicaK%2F25XXT4P3zL54YIMmXmKD2etzTxisPwVPItfUTikP9rmgWm6Xixu0j%2BoQyrZTS2Gzu9mUrA7%2BSnZcuueFT6UR%2BRszcn1q9%2Btl8E3pP07x9nqGbxTcoKtNalgfdRktMw8xSen1GYeyXFK4BlhyiT1Zn3oNJvjGfek3kmWr659DJZvW3ntm4aYdDsoy9uiI%2FiO1W%2B5Wy6mKW4fqkj9tIgRIplrF7RTk2vkwfiO%2FwA%3D
