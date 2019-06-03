@@ -12,7 +12,8 @@ const Index = props => {
                 title={'Recently Player'}
                 pausedMusic={props.pausedMusic}
                 musics={props.musics} 
-                onPlayPause={props.onPlayPause}/>
+                onPlayPause={props.onPlayPause}
+                changeFavorite={props.changeFavorite}/>
             <div className="ms_weekly_wrapper">
                 <div className="ms_weekly_inner">
                     <div className="row">
@@ -26,7 +27,8 @@ const Index = props => {
                                                     music={music}
                                                     key={index}
                                                     count={index+1}
-                                                    onPlayPause={props.onPlayPause}/>
+                                                    onPlayPause={props.onPlayPause}
+                                                    changeFavorite={props.changeFavorite}/>
                             })
                         }
                     </div>

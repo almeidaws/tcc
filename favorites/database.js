@@ -10,6 +10,7 @@ const pool = Database.pool();
 const { addFavoriteSQL,
         getAllFavoriteFromUserSQL,
         deleteFavoriteSQL,
+        getFavorite,
       } = require('./database_queries.js');
 const { Music } = require('../musics/database.js');
 
@@ -39,6 +40,20 @@ class Favorite {
 }
 
 /** 
+ * Check a favorite exists in the database.
+ *
+ * @param {Favorite} favorite the favorite to be checked.
+ * @returns {Bool} true if the favorite exist or false otherwise.
+ */
+const checkFavorite = async (favorite) => {
+    const checkFavoriteConfig = {
+        text: getFavorite,
+        values: [favorite.userID, favorite.musicID],
+    };
+    const result = await pool.query(checkFavoriteConfig);
+    return result.rows.length > 0;
+};
+/** 
  * Adds a Favorite of type {@link Favorite}.
  *
  * The data is validate before adding to the database.
@@ -56,6 +71,10 @@ const addFavorite = async (favorite) => {
         text: addFavoriteSQL,
         values: [favorite.userID, favorite.musicID],
     };
+
+    // If this favorite already exists.
+    if (await checkFavorite(favorite)) return null;
+
     const result = await pool.query(addFavoriteConfig);
     const tuple = result.rows[0];
     return new Favorite(tuple.userid, tuple.musicid);
@@ -99,6 +118,7 @@ const connect = async () => {
         addFavorite, 
         deleteFavorite,
         getFavoritesByUserID,
+        checkFavorite,
     };
     return queries;
 };

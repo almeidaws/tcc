@@ -154,7 +154,7 @@ class Requisition {
             success(data);
         };
 
-        $.ajax('musics/', {
+        $.ajax('musics/' + (U.getCookie('id') ? ('?userID=' + U.getCookie('id')) : ''), {
             method: 'GET',
             success: music,
             error: (res) => { if (error) error(res.status) },
@@ -248,6 +248,76 @@ class Requisition {
             }) 
         }, error);
     }
+
+    /**
+     * Add a music in the list of favorited musics for that user.
+     *
+     * @param {Number} musicID the music to be favorited.
+     * @param {Function} success callback called when the music is favorited
+     * successfully.
+     * @param {Function} error fallback called when there's a problem.
+     * The HTTP status code is passed as argument. The possible values
+     * are documented on the RESTful API page.
+     */
+    static addFavorite(musicID, success, error) {
+        const fetched = () => {
+            success();
+        };
+
+        const userID = U.getCookie('id');            
+        $.ajax('favorites/', {
+            method: 'POST',
+            success: fetched,
+            error: (res) => { if (error) error(res.status) },
+            data: { userID, musicID },
+        }) 
+     }
+
+    /**
+     * Removed a music in the list of favorited musics for that user.
+     *
+     * @param {Number} musicID the music to be unfavorited.
+     * @param {Function} success callback called when the music is unfavorited
+     * successfully.
+     * @param {Function} error fallback called when there's a problem.
+     * The HTTP status code is passed as argument. The possible values
+     * are documented on the RESTful API page.
+     */
+    static removeFavorite(musicID, success, error) {
+        const fetched = () => {
+            success();
+        };
+
+        const userID = U.getCookie('id');            
+        $.ajax('favorites/' + userID + '/' + musicID + '/', {
+            method: 'DELETE',
+            success: fetched,
+            error: (res) => { if (error) error(res.status) },
+        }) 
+     }
+
+    /**
+     * Get all favorited musics by the current user.
+     *
+     * @param {Number} musicID the music to be unfavorited.
+     * @param {Function} success callback called when the music is unfavorited
+     * successfully.
+     * @param {Function} error fallback called when there's a problem.
+     * The HTTP status code is passed as argument. The possible values
+     * are documented on the RESTful API page.
+     */
+    static favoritedMusics(success, error) {
+        const fetched = (musics) => {
+            success(musics);
+        };
+
+        const userID = U.getCookie('id');            
+        $.ajax('favorites/' + userID + '/', {
+            method: 'GET',
+            success: fetched,
+            error: (res) => { if (error) error(res.status) },
+        }) 
+     }
 }
 
 export default Requisition;

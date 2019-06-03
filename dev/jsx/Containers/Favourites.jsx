@@ -1,6 +1,7 @@
 import React from 'react';
 import RecentlyPlayedMusic from '../RecentlyPlayed/RecentlyPlayedMusic.jsx';
 import Header from '../Header.jsx';
+import R from '../../js/Requisition.js';
 
 const parseToTime = time => {
     const minutes = Math.floor(time % 3600 / 60);
@@ -22,13 +23,12 @@ const ListHeader = props => {
 
 const Row = props => {
     return (
-            <ul className={props.paused === false ? "play_active_song" : ""}
-                onClick={() => props.onPlayPause(props.music)} >
-                <li><a href="javascript:;"><span className="play_no">{props.number}</span><span className="play_hover"></span></a></li>
+            <ul className={props.paused === false ? "play_active_song" : ""}>
+                <li onClick={() => props.onPlayPause(props.music)}><a href="javascript:;"><span className="play_no">{props.number}</span><span className="play_hover"></span></a></li>
                 <li><a href="javascript:;">{props.music.name}</a></li>
                 <li className="text-center"><a href="javascript:;">{props.music.authors[0].name}</a></li>
                 <li className="text-center"><a href="javascript:;">{props.music.duration ? parseToTime(props.music.duration) : "0:00"}</a></li>
-                <li className="text-center"><a href="javascript:;"><span className="ms_close">
+                <li className="text-center"><a href="javascript:;" onClick={() => props.removeFavorite(props.music)}><span className="ms_close">
                         <img src="images/svg/close.svg" alt="" /></span></a></li>
             </ul>
      );
@@ -49,7 +49,8 @@ const FavouritesList = props => {
                                         key={music.id}
                                         onPlayPause={props.onPlayPause}
                                         music={music} 
-                                        paused={props.pausedMusic.music ? music.id !== props.pausedMusic.music.id : true}/>
+                                        paused={props.pausedMusic.music ? music.id !== props.pausedMusic.music.id : true}
+                                        removeFavorite={props.removeFavorite} />
                         })}
 					</div>
 				</div>
@@ -57,20 +58,62 @@ const FavouritesList = props => {
         )
 };
 
-const Favourites = props => {
-    return (
-        <div className="ms_content_wrapper padder_top80">
-            <Header />
-            <FavouritesList 
-                musics={props.musics}
-                onPlayPause={props.onPlayPause}
-                pausedMusic={props.pausedMusic} />
-            <RecentlyPlayedMusic
-                pausedMusic={props.pausedMusic}
-                musics={props.musics} 
-                onPlayPause={props.onPlayPause}/>
-        </div>
-    )
+class Favourites extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = { favoritedMusics: [] };
+        this.removeFavorite = this.removeFavorite.bind(this);
+        this.changeFavorite = this.changeFavorite.bind(this);
+        this.requestFavoritedMusics();
+    }
+
+    requestFavoritedMusics() {
+        R.favoritedMusics(musics => {
+            this.setState({ favoritedMusics: musics });
+        }, errorCode => {
+            console.log(errorCode);
+        });
+    }
+
+    removeFavorite(music) {
+        R.removeFavorite(music.id, () => {
+            this.setState(state => {
+                return { favoritedMusics: state.favoritedMusics.filter(m => m.id !== music.id) };
+            });
+        }, errorCode => {
+            console.log(errorCode);
+        });
+    }
+
+    changeFavorite(music, favorited) {
+        if (favorited) {
+            const favoriteds = this.state.favoritedMusics;
+            favoriteds.push(music);
+            this.setState({ favoritedMusics: favoriteds });
+        } else {
+            const favoriteds = this.state.favoritedMusics.filter(m => m.id !== music.id);
+            this.setState({ favoritedMusics: favoriteds });
+        }
+        this.props.changeFavorite(music, favorited);
+    }
+
+    render() {
+        return (
+            <div className="ms_content_wrapper padder_top80">
+                <Header />
+                <FavouritesList 
+                    musics={this.state.favoritedMusics}
+                    onPlayPause={this.props.onPlayPause}
+                    pausedMusic={this.props.pausedMusic}
+                    removeFavorite={this.removeFavorite} />
+                <RecentlyPlayedMusic
+                    pausedMusic={this.props.pausedMusic}
+                    musics={this.props.musics} 
+                    onPlayPause={this.props.onPlayPause}
+                    changeFavorite={this.changeFavorite} />
+            </div>
+        )
+    }
 };
 
 export default Favourites;

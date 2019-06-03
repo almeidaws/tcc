@@ -3,6 +3,7 @@
 const musicsDatabase = require('./database.js');
 const authorsDatabase = require('../authors/database.js');
 const genresDatabase = require('../genres/database.js');
+const favoritesDatabase = require('../favorites/database.js');
 const createError = require('http-errors');
 const fs = require('fs');
 const { Readable } = require('stream');
@@ -80,13 +81,20 @@ async function getByID(request, response, next) {
  */
 async function getAll(request, response, next) {
     try {
-
+    
         const queries = await musicsDatabase.connect();
         const authorQueries = await authorsDatabase.connect();
         const genresQueries = await genresDatabase.connect();
+        const favoritesQueries = await favoritesDatabase.connect();
         const musics = await queries.getAllMusics();
         if (musics === null)
             return response.status(204).json([]).end();
+
+        const favorited = async (userID, musicID) => {
+            if (!userID) return undefined;
+            const favorite = new favoritesDatabase.Favorite(parseInt(userID), musicID);
+            return await favoritesQueries.checkFavorite(favorite);
+        };
 
         const withFileURLs = musics.map(async music => ({ id: music.id, 
                                                     name: music.name, 
@@ -95,6 +103,7 @@ async function getAll(request, response, next) {
                                                     duration: music.duration,
                                                     authors: await authorQueries.getAuthorsByMusic(music.id),
                                                     genres: await genresQueries.getAllGenresFromMusic(music.id),
+                                                    favorited: await favorited(request.query.userID, music.id),
                                                     }));
 
         response.status(200).json(await Promise.all(withFileURLs)).end();

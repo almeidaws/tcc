@@ -11,7 +11,8 @@ const RecentlyPlayedMusic = props => {
         musics.push(<Music key={music.id}
                            paused={props.pausedMusic.music ? music.id !== props.pausedMusic.music.id : true}
                            music={music}
-                           onPlayPause={props.onPlayPause}/>
+                           onPlayPause={props.onPlayPause}
+                           changeFavorite={props.changeFavorite} />
        );
     });
 
