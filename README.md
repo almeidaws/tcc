@@ -418,7 +418,7 @@ On error:
 ### Get all musics
 
 ```
-Route: /musics
+Route: /musics[?userID=2]
 Method: GET
 Headers: 
     Content-Type: application/x-www-form-urlencoded
@@ -432,7 +432,8 @@ On error:
 
 ```
 
-**:id**: you must replace this by music's id.
+**:userID**: if you optionally pass the user's id as a query parameter, the result will have a boolean property
+name `favorited` that will tell you if the use has favorited that music or not.
 
 The return from a successful request is something like this:
 ```json
