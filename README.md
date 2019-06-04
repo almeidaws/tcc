@@ -41,6 +41,9 @@ In this repo, you'll find both Web API and the frontend. So you must be aware th
         1. [Add a favorite](#add-a-favorite)
         2. [Get all favorited musics from a user](#get-all-favorited-musics-from-a-user)
         3. [Delete a favorite](#delete-a-favorite)
+    6. [Listenings](#listenings)
+        1. [Add a favorite](#add-a-favorite)
+        2. [Get last listened musics](#get-last-listened-musics)
 
 
 # Project setup
@@ -639,6 +642,89 @@ On success:
 On error:
     Status: 404 // if there's no favorite do delete with that user and music id.
     Status: 401 // If some field is missing. The error message contains the missing field.
+```
+
+## Listening
+
+This section contains an explanation of each endpoint used to handle listenings.
+A listening occurs when someone (user or not) listen a music. This information is used
+after to present last listened musics on the website.
+
+### Add a listening
+
+```
+Route: /listenings
+Method: POST
+Headers: 
+    Content-Type: application/json
+    
+Body example:
+{ "musicID": 5 }
+
+On success:
+    Status: 201
+    
+On error:
+    Status: 401 // If some field is missing. The error message contains the missing field.
+```
+
+### Get last listened musics
+
+```
+Route: /listenings[?userID=2]
+Method: GET
+Headers: 
+    Content-Type: application/json
+
+On success:
+    Status: 201
+    
+On error:
+    Status: 401 // If some field is missing. The error message contains the missing field.
+```
+
+The returned body on success is something like this:
+```json
+[
+    {
+        "id": 18,
+        "name": "Ana",
+        "url": "https://storage.com/miraculous/46.ogg",
+        "posterURL": null,
+        "duration": null,
+        "authors": [
+            {
+                "id": 46,
+                "name": "Ana"
+            }
+        ],
+        "genres": [
+            {
+                "id": 0,
+                "name": "Classical"
+            }
+        ]
+    },
+    {
+        "id": 19,
+        "name": "Fogo",
+        "url": "https://s3.amazonaws.com/miraculouswebsite/fire.ogg",
+        "posterURL": null,
+        "duration": null,
+        "authors": [
+            {
+                "id": 47,
+                "name": "Paula Fernandes"
+            }
+        ],
+        "genres": [
+            {
+                "id": 5,
+                "name": "Pop"
+            }
+        ]
+    }
+]
 ```
 
 
