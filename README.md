@@ -677,10 +677,7 @@ Headers:
     Content-Type: application/json
 
 On success:
-    Status: 201
-    
-On error:
-    Status: 401 // If some field is missing. The error message contains the missing field.
+    Status: 200
 ```
 
 The returned body on success is something like this:
