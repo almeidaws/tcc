@@ -47,6 +47,11 @@ const {
     getByUserID: handleGetByUserID,
 } = require('./favorites/middleware.js');
 
+const { 
+    add: handleAddListening,
+    getLastListenedMusics: handleLastListened,
+} = require('./listenings/middleware.js');
+
 // Run pending migrations
 runMigrations();
 
@@ -83,6 +88,10 @@ app.get('/musics/:musicID/genres', handleGenresByMusic);
 app.post('/favorites', handleAddFavorite);
 app.delete('/favorites/:userID/:musicID', handleDeleteFavorite);
 app.get('/favorites/:userID', handleGetByUserID);
+
+// LISTENING' ROUTES
+app.post('/listenings', handleAddListening);
+app.get('/listenings', handleLastListened);
 
 
 //SERVER STARTING
