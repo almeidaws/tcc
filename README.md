@@ -42,7 +42,7 @@ In this repo, you'll find both Web API and the frontend. So you must be aware th
         2. [Get all favorited musics from a user](#get-all-favorited-musics-from-a-user)
         3. [Delete a favorite](#delete-a-favorite)
     6. [Listenings](#listenings)
-        1. [Add a favorite](#add-a-favorite)
+        1. [Add a listening](#add-a-listening)
         2. [Get last listened musics](#get-last-listened-musics)
 
 
