@@ -98,6 +98,14 @@ export default class App extends Component {
         audio.preload = 'auto';
         audio.play();
         this.setState({ pausedMusic: { paused: false, music }});
+
+        // Add to the listened musics to create the recently played musics component
+        R.addListenings(music.id, () => {
+            console.log("Successfully added to the recently played musics");
+            // DOES NOTHING
+        }, errorCode => {
+            // DOES NOTHING
+        });
     }
 
     onNextMusic() {
