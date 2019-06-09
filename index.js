@@ -41,6 +41,12 @@ const {
     getByMusic: handleGenresByMusic,
 } = require('./genres/middleware.js');
 
+const { 
+    add: handleAddFavorite,
+    deleteFavorite: handleDeleteFavorite,
+    getByUserID: handleGetByUserID,
+} = require('./favorites/middleware.js');
+
 // Run pending migrations
 runMigrations();
 
@@ -72,6 +78,12 @@ app.delete('/authors/:id', handleDeleteAuthor);
 // GENRES' ROUTES
 app.get('/genres', handleGetAllGenres);
 app.get('/musics/:musicID/genres', handleGenresByMusic);
+
+// FAVORITES' ROUTES
+app.post('/favorites', handleAddFavorite);
+app.delete('/favorites/:userID/:musicID', handleDeleteFavorite);
+app.get('/favorites/:userID', handleGetByUserID);
+
 
 //SERVER STARTING
 app.use(express.static(path.join(__dirname, 'prod/')))

@@ -6,26 +6,30 @@
 'use strict';
 
 /** 
- * The SQL query used to add an author to the database.
+ * The SQL query used to add a favorite entry with user and music ID.
  * @constant
  * @type {string}
  */
-const addAuthorSQL = 'INSERT INTO Author (Name) VALUES ($1) RETURNING ID, Name;';
+const addFavoriteSQL = 'INSERT INTO Favorite (UserID, MusicID) VALUES ($1, $2) RETURNING UserID, MusicID;';
 
 /** 
- * The SQL query used to get all authors from the database.
+ * The SQL query used to get all favorited musics from a user.
  * @constant
  * @type {string}
  */
-const getAllAuthorsSQL = 'SELECT ID, Name FROM Author;';
+const getAllFavoriteFromUserSQL = `
+SELECT M.ID, M.Name, M.fileS3Key, M.posterUID, M.duration
+FROM Favorite F INNER JOIN Music M ON F.MusicID = M.ID WHERE F.UserID = $1;
+`;
 
 /** 
- * The SQL query used to get all authors from a particular music.
+ * The SQL query used to check if a favorite exists on the database.
  * @constant
  * @type {string}
  */
-const getAllAuthorsFromMusicSQL = `
-SELECT ID, Name FROM Author INNER JOIN MusicAuthor ON ID = Author WHERE Music = $1;
+const getFavorite = `
+SELECT UserID, MusicID 
+FROM Favorite WHERE UserID = $1 AND MusicID = $2;
 `;
 
 /** 
@@ -33,55 +37,11 @@ SELECT ID, Name FROM Author INNER JOIN MusicAuthor ON ID = Author WHERE Music = 
  * @constant
  * @type {string}
  */
-const deleteAuthorSQL = "DELETE FROM Author WHERE ID = $1";
+const deleteFavoriteSQL = "DELETE FROM Favorite WHERE UserID = $1 AND MusicID = $2 ;";
 
-/** 
- * The SQL query used to create the Author table. It was created to be used
- * in automatic tests.
- * @constant
- * @type {string}
- */
-const createAuthorTableSQL = `
-CREATE TABLE IF NOT EXISTS Author (
-    ID serial NOT NULL PRIMARY KEY,
-    Name text NOT NULL
-);
-`;
-
-/** The SQL query used to delete the Author table. It was created to be used
- * in automatic tests.
- * @constant
- * @type {string}
- */
-const deleteAuthorTableSQL = "DROP TABLE Author";
-
-/** 
- * The SQL query used to delete all rows from Author table. It was
- * created to be used in automatic tests.
- * @constant
- * @type {string}
- */
-const cleanUpAuthorTableSQL = "DELETE FROM Author";
-
-/** 
- * The SQL query used to get an author by ID. It was created to be used
- * in automatic tests.
- * @constant
- * @type {string}
- */
-const getAuthorByIDSQL = "SELECT ID, Name FROM Author WHERE ID = $1;"; 
-
-/**
- * Exports several object that contains several SQL queries used on the project.
- * @module DatabaseQueries
- */
 module.exports = { 
-    addAuthorSQL,
-    deleteAuthorSQL,
-    getAllAuthorsSQL,
-    getAuthorByIDSQL,
-    getAllAuthorsFromMusicSQL,
-    createAuthorTableSQL,
-    deleteAuthorTableSQL,
-    cleanUpAuthorTableSQL,
+    addFavoriteSQL,
+    getAllFavoriteFromUserSQL,
+    deleteFavoriteSQL,
+    getFavorite,
 };

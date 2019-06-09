@@ -37,29 +37,22 @@ export default class GenreSingle extends Component {
             musicsByGenre.push({ genre: this.state.genres[i].name, musics: musics });
         }
         this.setState({ musicsByGenre });
-        this.setState({ tempMusics: this.state.musicsByGenre[2].musics })
-        console.log(musicsByGenre);
     }
 
     render() {
-        if(!this.state.tempMusics) {
-            return null;
-        }
         return(
-            // <div className="ms_content_wrapper padder_top80">
-            //     <Header/>
-                // {
-                    // this.state.musicsByGenre.map((musicByGenre) => {
-                        // return 
-
-                        <RecentlyPlayedMusic key={'teste'} 
+            <div className="ms_content_wrapper padder_top80">
+                <Header/>
+                {
+                    this.state.musicsByGenre.map((musicByGenre) => {
+                        return <RecentlyPlayedMusic key={'teste'} 
                                                     onPlayPause={this.props.onPlayPause}
                                                     pausedMusic={this.props.pausedMusic}
-                                                    musics={this.state.tempMusics}
-                                                    title={'tersteereasda'} />
-                    // })
-            //     }
-            // </div>
+                                                    musics={musicByGenre.musics}
+                                                    title={musicByGenre.genre} />
+                    })
+                }
+            </div>
         );
     }
 };

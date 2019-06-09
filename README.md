@@ -37,6 +37,13 @@ In this repo, you'll find both Web API and the frontend. So you must be aware th
         2. [Get all musics](#get-all-musics)
         3. [Get a music by ID](#get-a-music-by-id)
         4. [Delete a music](#delete-a-music)
+    5. [Favorites](#favorites)
+        1. [Add a favorite](#add-a-favorite)
+        2. [Get all favorited musics from a user](#get-all-favorited-musics-from-a-user)
+        3. [Delete a favorite](#delete-a-favorite)
+    6. [Listenings](#listenings)
+        1. [Add a listening](#add-a-listening)
+        2. [Get last listened musics](#get-last-listened-musics)
 
 
 # Project setup
@@ -414,7 +421,7 @@ On error:
 ### Get all musics
 
 ```
-Route: /musics
+Route: /musics[?userID=2]
 Method: GET
 Headers: 
     Content-Type: application/x-www-form-urlencoded
@@ -428,7 +435,8 @@ On error:
 
 ```
 
-**:id**: you must replace this by music's id.
+**:userID**: if you optionally pass the user's id as a query parameter, the result will have a boolean property
+name `favorited` that will tell you if the use has favorited that music or not.
 
 The return from a successful request is something like this:
 ```json
@@ -535,6 +543,186 @@ On error:
     Status: 404 // If there's no music with that ID to be deleted.
 ```
 
-**:id**: you must replace this by music's id.
+## Favorites
 
-[1]: https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=Miraculous%20Database%20Model#R7V1tc9o4EP41zNx9aMcvmJiPgaRpm6SXCUnT3jcFC3BjLEYWAfLrT8aSsZFMzMXCJlGbyaD1i6TdR492V0Jp2f3p8gKD2eQaeTBoWYa3bNlnLcs6cVz6OxasEoHTZoIx9r1EZG4EA%2F8FMqHBpHPfg1HuRoJQQPxZXjhEYQiHJCcDGKNF%2FrYRCvK1zsAYCoLBEASi9MH3yCSRuo6xkX%2BF%2FnjCazYNdmUK%2BM1MEE2AhxYZkX3esvsYIZJ8mi77MIh1x%2FWSPPel4GraMAxDUuaBm9H56bk5uAZfhqZtmX7HvF5%2BspK3PINgzjp8H0EcsRaTFVdDtPCnAQhpqTdCIRmwKwYtDyd%2B4F2BFZrHzYgIGD7xUm%2BCsP9C7wcBvWRSAb2MCbOy1Ynf5gdBHwUIr%2BuxoRH%2Fzz05iN%2FI6sIwos%2Fe8D6bW6JrsMzdeAUiwluJggDMIv9x3e74wSnAYz%2FsIULQlN3Ee%2Fkl36jR%2Bh%2B9DgJ%2FHFLZkNYFMddF0huzTcuiTZiZniEmcJkRMRtdQDSFBK%2FoLeyqZbBH2ICx7G5SXmzgZ3YYpiZZ6LXbDPYM8uP03Wl1t3SIgHBMdZDWl76L13diCPXJqqPWy9UGAqqSEBDYQ%2FPQi7JQpB8yPd2I1gDdA6y2ANZvZy37NEYqxD7FmIDaCZjFH6lBCL2%2B6b3dI2jGjB7AEQcJZt2LPz9yYJgZwyf39mJr%2BpQjTpl46nve%2Bq1ZNIdoPVyiGRj64fgqqcVub0S3rLZYhOgrR8GaHib0ZTCMW4MIIOAxHWgz5IdkrW2nR3%2BoTfrGZ6fl0J72adnclOlPfDsmfRRGBAN%2FjUZIR8MCxiOi52E0u6P4h7y32UHtbAHbkgJ7J528jvZVHkWvgds2irGdg9m%2BmGoLmLq5fDOOHrOkIsFEWTjlsVMZdF5DR9xNBvz%2FiQO7AAfpPM3alpsKc%2FjIAMI%2BJB4cAQ8%2FwBQmLEP7QtRwjPE6KNYvO3KCOQChOCUJZXv6qgxAHQFAddNJgpyj5RKnAAKVcYkyKJwIUDifAj%2FQZHIsZOJaNZOJq8mkWjI5KYBA88mkKzqqIIoWCHuaT46FT0zDrZlQeFpNM0pVjNItAEHzGcU0q8eCJhC1BGK3yxGIqSo%2BNsWMsSaQNxGIWZQiroxBqgDD95vbP%2BPuy%2BXV7NvP0a%2FRP1%2BfxpEkWXKHnqhS9epBXasHTpsNx12rB10ZRkxXEUjEhMj9Pc%2Fbq3NaddZeCqidw%2FhNWXsZqKrI0kpbLGZWdNZ%2Br5lo50htdNZe2nIxTxIvYx9idVD7tlWRiixzLyOVKuIhaYvFDEvdlHI8nu3OUdno0Fjackma5Hw58zEgPgqZ6%2BJPqZ7AdPZX529NLc2mFlke%2F6DUoiLV8rG5JR2hR0gu4p4TTSDNJhBp4l4aRqvycE0x16IZ5G0M0i5AQaPybn9%2BOVF3Svti3n5%2FePi3s%2Fjx4HwSZ5PreeQPRUDovFvrMHm3die%2Fa9cu6XGYJ6owIubp9WbZ2tJuO0dxI9Nu0haLG7B12m2viWjnSG102k3actGR1ZtlD%2BPWVkMoh0y5SVusndqKuUS5T6sMCuIyIfXn4MC%2BhCtNKMdCKIdMtElbLC4MakJ5E6EoXxOsAgr4bvQASN85G9yPF8u7a3h%2FOZEEyTcoogHg1uYDWr1tGqlCNLc0lVtK5%2BCUIUoMqTW5lCWXnUO00eTybXH%2FYlm9Z%2FPMnV%2F9ePnpXK76ksjnbJ5bHdTcoo5bJHgpRzf77atVxS1SQOlIaD9uKc0ZeWwUD%2BbmREIKvvSl6UOta8K34B9ieVDaZL13qeK4R%2FneJWVQ4KbPYOEChhiKgNCrg63DrA66DnMvUnejZCjTtVSBRJ%2Bl0%2FTlwXQcH8%2F6oKVP01GyQHgUx%2BnIm67P02mUa7s%2FqdS%2BRmjpE3Wq5pOjOFJHvgNFQZ5EM4haBim7KKgsIrI1g1TMILZyBlEGBkcMj0%2FnhIamIiR0fFxTfFwyGa8sOnZ0dNz06NjZexqqPTp2dHSsYi5yjjc6dnR03Cjfdn9SqT06drRvWzWfHG907CjY%2FqgZRC2D1B4dO%2FqQ2aoZRPkps1WAQboVpiOYHnpjyP11qrUJGqMQBOcbKVX3PPSgx5S9uecKraERK%2FIPJGTFNAnmBMXBLpnyAJlqE69%2BZQu%2F45d9dnjxjIe4SWnFSklb4wbmdCwJRSM0x0O4o9%2F8TwtxCii6r2CrEIYBIP5zvh2VG6dbq3GMJhlnxzpZXdYR95v341yOH4p%2FTQlP0PRxThvQW0x8AgeU1uIrCwxmeeUX8oigxsLcygnninTvgXgioCuhGFcVxfCzUD4cjN2SME4c0NpgLM7%2BhzDP0iepdejnjHFoaWObuLDKGqreaaOsSa06LSr6d40kJtuumZfEpO8PQUHrpExOE9SHRE9wy7%2Fd4fKmefTCTJxM9fkBVoH23e1pgYe9GfW3ZbGrMvVLvkz%2BftXf4epujPolqciPo%2F523doXs3jvWPuuYTVK%2B5KEh3Z5CpUlicaK%2F25XXT4P3zL54YIMmXmKD2etzTxisPwVPItfUTikP9rmgWm6Xixu0j%2BoQyrZTS2Gzu9mUrA7%2BSnZcuueFT6UR%2BRszcn1q9%2Btl8E3pP07x9nqGbxTcoKtNalgfdRktMw8xSen1GYeyXFK4BlhyiT1Zn3oNJvjGfek3kmWr659DJZvW3ntm4aYdDsoy9uiI%2FiO1W%2B5Wy6mKW4fqkj9tIgRIplrF7RTk2vkwfiO%2FwA%3D
+This section contains an explanation of each endpoint used to handle favorites. 
+
+### Add a favorite
+
+```
+Route: /favorites
+Method: POST
+Headers: 
+    Content-Type: application/json
+
+On success:
+    Status: 201
+    
+On error:
+    Status: 401 // If some field is missing. The error message contains the missing field.
+```
+
+The returned body is something like this:
+```json
+{ "userID": 2, "musicID": 20 }
+```
+
+
+### Get all favorited musics from a user
+
+```
+Route: /favorites/:userID/
+Method: GET
+Headers: 
+    Content-Type: application/json
+
+    
+On success:
+    Status: 200
+    
+On error:
+    Status: 401 // If some field is missing. The error message contains the missing field.
+```
+    
+The returned body on success is something like this:
+```json
+[
+    {
+        "id": 18,
+        "name": "Ana",
+        "url": "https://storage.com/miraculous/46.ogg",
+        "posterURL": null,
+        "duration": null,
+        "authors": [
+            {
+                "id": 46,
+                "name": "Ana"
+            }
+        ],
+        "genres": [
+            {
+                "id": 0,
+                "name": "Classical"
+            }
+        ]
+    },
+    {
+        "id": 19,
+        "name": "Fogo",
+        "url": "https://s3.amazonaws.com/miraculouswebsite/fire.ogg",
+        "posterURL": null,
+        "duration": null,
+        "authors": [
+            {
+                "id": 47,
+                "name": "Paula Fernandes"
+            }
+        ],
+        "genres": [
+            {
+                "id": 5,
+                "name": "Pop"
+            }
+        ]
+    }
+]
+```
+
+### Delete a favorite
+
+```
+Route: /favorites/:userID/:musicID
+Method: DELETE
+Headers: 
+    Content-Type: application/json
+    
+On success:
+    Status: 200
+    
+On error:
+    Status: 404 // if there's no favorite do delete with that user and music id.
+    Status: 401 // If some field is missing. The error message contains the missing field.
+```
+
+## Listening
+
+This section contains an explanation of each endpoint used to handle listenings.
+A listening occurs when someone (user or not) listen a music. This information is used
+after to present last listened musics on the website.
+
+### Add a listening
+
+```
+Route: /listenings
+Method: POST
+Headers: 
+    Content-Type: application/json
+    
+Body example:
+{ "musicID": 5 }
+
+On success:
+    Status: 201
+    
+On error:
+    Status: 401 // If some field is missing. The error message contains the missing field.
+```
+
+### Get last listened musics
+
+```
+Route: /listenings[?userID=2]
+Method: GET
+Headers: 
+    Content-Type: application/json
+
+On success:
+    Status: 200
+```
+
+The returned body on success is something like this:
+```json
+[
+    {
+        "id": 18,
+        "name": "Ana",
+        "url": "https://storage.com/miraculous/46.ogg",
+        "posterURL": null,
+        "duration": null,
+        "authors": [
+            {
+                "id": 46,
+                "name": "Ana"
+            }
+        ],
+        "genres": [
+            {
+                "id": 0,
+                "name": "Classical"
+            }
+        ]
+    },
+    {
+        "id": 19,
+        "name": "Fogo",
+        "url": "https://s3.amazonaws.com/miraculouswebsite/fire.ogg",
+        "posterURL": null,
+        "duration": null,
+        "authors": [
+            {
+                "id": 47,
+                "name": "Paula Fernandes"
+            }
+        ],
+        "genres": [
+            {
+                "id": 5,
+                "name": "Pop"
+            }
+        ]
+    }
+]
+```
+
+
+[1]: https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=Miraculous%20Database%20Model#R7V1tU%2BI6FP41zNz7wZ2%2BUCwfBV3dVXcd0dW93yINtFoapg0C%2FvqbQgItCbVI0xbN7s4OTUubnPPkyTlPjrVhdkez8xCM3WvkQL9haM6sYZ42DOPYssn%2FccN82aC3mrRlGHoObVs39Lw3SBs12jrxHBilLsQI%2Bdgbpxv7KAhgH6faQBiiafqyAfLTTx2DIeQaen3g860PnoPdZattaev2C%2BgNXfZkXaNnRoBdTBsiFzhommgyzxpmN0QILz%2BNZl3ox8Zjdll%2B7%2FuWs6uOhTDAeb5wMzg7OdN71%2BB7XzcN3Wvp17MjY3mXV%2BBP6IDvIxhGtMd4zswQTb2RDwJy1BmgAPfoGY0c913Pd67AHE3ibkQY9F%2FYUcdFofdGrgc%2BOaWTBnI6xNTLRiu%2Bm%2Bf7XeSjcPEcE2rx39Q3e%2FEd6bNCGJHv3rAx6xtN12CWuvAKRJj1Evk%2BGEfe06Lf8RdHIBx6QQdhjEb0IjbK7%2BlODRZ%2FyHnge8OAtPXJs2DIbLEcjd4kx7xPqJteYYjhLNFEfXQO0QjicE4uoWcNjX6FzhjDbC%2BPp2v46S2KKTcJvWaTwp5Cfri69%2Bpxt2SKgGBIbLB63upe7HnHGvc80eOI91JPAz4xSQAw7KBJ4ERJKJIPiZGumxYA3QGsJgfWH6cN8yRGKgw9gjEOtS4Yxx%2BJQzA5vx692cFoTJ3uwwEDSUiHF39%2BYsDQE45fXtuJvekRjjihzSPPcRZ3TaI5QIvpEo1B3wuGV8unmM110y19WtyEyC0H%2FoIeXHIzGMS9QRhg8LSaaGPkBXhhbatD%2FhGfdLVvVsMiI%2B2SY319TP7Fl4e4i4IIh8BboBGS2TCF8YzoOCEa3xH8Qzba5KS2NoBtCIGdSSfvo32eRtF74Da17dhOwWxXTDU5TN1c7o2jpySpCDCRF05p7BQGnffQEQ%2BTAv%2BDODC34GC1TtO%2BpZbCFD4SgDDLxIPF4eEXGMEly5CxYDkco70PisXNDpxgSiAUKyehbC5fhQGoxQGoajpZIudgucTaAoHCuEQaFI45KJyNgOcrMjkUMrGNisnEVmRSLJkcb4FA%2FcmkzQeqIIqmKHQUnxwKn%2BiaXTGhMFlNMUpRjNLeAoL6M4quF48FRSByCcRs5iMQXVZ%2BrPOKsSKQvQhE3yYRF8YgRYDh583t87D9dnk1%2FvFn8Dj4ffEyjARiyR16IUZVuwdV7R5YTTods3YP2iKM6LYkkPCCyP090%2B3lBa1KtRcCKnMa76Xai0BVhEor7DGvrCjVfqeVKHOm1lq1F%2Fac10nibewydgdVbFsUqYiUexGpFJEPCXvMKyxVU8rhRLaZs7LWqbGw5wKZ5Gw29kKAPRTQ0MUbETuB0fif1r%2BKWupNLSIdv1RqkSG1fG1uWc3QAyQXvuZEEUi9CUQo3AvTaFkRrs5rLYpB9mOQ5hYU1Ep3e360ovaIjEW%2F%2Ffnw8F9r%2BuvBOuJXk%2BtJ5PV5QCjdrVGO7tZspat2zZwRh34sCyO8Tq%2BKZSuT3TJncS1lN2GP%2BQJsJbvttBBlztRay27CnvOBrCqWLSesLYZQypTchD1WQW3BXCI9ppUGBX6bkMRzsGdewrkilEMhlDKFNmGP%2BY1BRSh7EYr0PcEioBDeDR4A7lqnvfvhdHZ3De8vXUGSfIMikgBuFB%2BQx5u6tjKI4pa6cktuDU4aoviUWpFLXnLJnKK1Jpcf0%2Fs3w%2Bi86qf25OrX2x%2Frct4VZD6nk9TuoOKWg%2BIWUV2tLG4RAkplQh%2FnlswZWmtuEaJXwg99KfqQSx%2BsBL%2BM7UFhl1XtUsF5j%2FTaJWlQYK5PYOEcBiHkAaF2Bxvl7A7aFl2NVuFGzlSmbcgCiXqXTt23B1fz%2BHD2Bw31Nh0pG4QH8TodcdfV%2B3RqFdruTiqV7xEa6o06RfPJQbxSR1yBIkEnUQwil0HybgpKy4hMxSAFM4gpnUGkgcHi0%2BOTCSapKQ8JlR9XlB%2FnFOOlZceWyo7rnh1bOy9DlWfHlsqOZaxF1uFmx5bKjmsV2%2B5OKpVnx5aKbYvmk8PNji0J5Y%2BKQeQySOXZsaVeMls0g0h%2Fy2wRYBBWzbQ410NnCFm8TqzmoiEKgH%2B2biXmngQOdKix19dcoQU0YkM%2BQ4zn1JJgglGc7OIRS5CJNcP5Y%2FLgb3yzbxY7PGUp7vJoTo94d1ArR2gS9mHGMNlvEmIzftt1NGKPbZA5l0PoA%2By9wlQvCndOu1LnaBU6J3NbrCbe4evNu7GW4wX8b1MKXTR6mpAOdKauh2GP0Fp8ZhqCcdr4W42YX1s5Zlyxqj3g3whoCyjGlkUx7F0onx3Gdk4Ys3izLjDmV%2F8y3DPz8Mo75HPCOeRo7Zv4YJ50VKnLRl6XGrXyKB%2Ff1ZKYTLNiXuJF31%2BcgRaiTMoSJIZEL3Ajvs0IeVc6%2BlYlTmT69AQrwPr25rLAaChh%2FqYod5VmfsEPk39e87eYuWtjfoEU%2BXXM36za%2BryK94mtb2tGrawvEDxUyMNsI8jGsn5NV01iHpYbfvYkQ%2BSerHex1sU9fLJ8AV75H1EoMx5tssR0tV%2FMF%2BmXGpAKqqn51PnTLApmK70kG3bVq8KXioisjTW5evPb1TL4mrT%2Fpji7cAZv5Vxg6yUqGF9EjBa5J%2BtFKXVxj%2BB1SuAVhYRJqlV9yDKb4hn7uNpFlu2ufQ2Wbxpp6%2BsaL7qVyvImHwh%2BYvMb9kaIqfPlQ7LMbxrnF%2FPHcb%2FZ%2B3l%2B9Nt97lxO7kSa55UXYRh4wZBzg6qH3qEeWrD3z0FnuzzVbqVwcqQbfDQmrBJpGbKQwi8oDy7c%2FF0Y%2BI1Hjao3%2Bni90TsoypjTe5dBF1GkJu6fekffbvVGucuI8oCjJQZHCRWLwv4YfPilGKTmDMJqHMuoWBSDRv02neoYpMKKRXF%2FKlb6P6ITbYgE7yoT4oFT0L%2BrTJQlRIh7aVXrno%2FoRNLcs9OSXJJ%2FDI5Lb3wwJ8bfUyXaKwGydC4B4sNWWTqR2E6HtkO%2FXwJq6Rv21%2Fiq0VKVCoPPGuq9GbYn%2Fs2U%2FfmdyIKMTw5DhHDi3DkZknuNHBhf8T8%3D

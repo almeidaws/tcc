@@ -1,4 +1,34 @@
 import React from 'react';
+import R from '../js/Requisition.js';
+
+const favorite = musicID => {
+    R.addFavorite(musicID, () => {
+        console.log('Successfully added');
+        //DOES NOTHING
+    }, statusCode => {
+        //DOES NOTHING
+    });
+};
+
+const unfavorite = musicID => {
+    R.removeFavorite(musicID, () => {
+        console.log('Successfully removed');
+        //DOES NOTHING
+    }, statusCode => {
+        //DOES NOTHING
+    });
+};
+
+const handleFavorite = props => {
+    if (props.music.favorited === false) {
+        favorite(props.music.id);
+        props.changeFavorite(props.music, true);
+    } else if (props.music.favorited === true) {
+        unfavorite(props.music.id);
+        props.changeFavorite(props.music, false);
+    } else 
+        $('#myModal').modal('show');
+};
 
 const Music = props => {
     return (
@@ -12,12 +42,8 @@ const Music = props => {
                             <img src={"./images/svg/more.svg"} alt=""/>
                         </div>
                         <ul className="more_option">
-                            <li><a href="#"><span className="opt_icon"><span
-                                className="icon icon_fav"/></span>Add To Favourites</a></li>
-                            <li><a href="#"><span className="opt_icon"><span className="icon icon_queue"/></span>Add
-                                To Queue</a></li>
-                            <li><a href="#"><span className="opt_icon"><span
-                                className="icon icon_playlst"/></span>Add To Playlist</a></li>
+                            <li><a href="javascript:;" onClick={() => handleFavorite(props)}><span className="opt_icon"><span
+                                className="icon icon_fav"/></span>{props.music.favorited ? 'Remove Favourite' : 'Add To Favourites'}</a></li>
                         </ul>
                         <div className="ms_play_icon" onClick={() => props.onPlayPause(props.music)}>
                             <img src={`./images/svg/${props.paused ? 'play.svg' : 'pause.svg'}`} alt=""/>

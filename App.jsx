@@ -40,6 +40,18 @@ export default class App extends Component {
         this.onPlayPauseMusic = this.onPlayPauseMusic.bind(this);
         this.onNextMusic = this.onNextMusic.bind(this);
         this.onPreviousMusic = this.onPreviousMusic.bind(this);
+        this.changeFavorite = this.changeFavorite.bind(this);
+    }
+
+    changeFavorite(music, favorited) {
+        const musics = this.state.musics; 
+        for (let i = 0; i < musics.length; i++) {
+            if (music.id === musics[i].id) {
+                music.favorited = favorited;
+                this.setState({ musics });
+                break;
+            }
+         }
     }
 
     onTimeChange() {
@@ -206,7 +218,8 @@ function container(containerName) {
                     pausedMusic={this.state.pausedMusic}
                     currentAudio={this.state.currentAudio}
                     musics={this.state.musics}
-                    onPlayPause={this.onPlay}/>
+                    onPlayPause={this.onPlay}
+                    changeFavorite={this.changeFavorite} />
             );
         case "favourites":
             return (
@@ -214,7 +227,8 @@ function container(containerName) {
                     pausedMusic={this.state.pausedMusic}
                     currentAudio={this.state.currentAudio}
                     musics={this.state.musics}
-                    onPlayPause={this.onPlay} />
+                    onPlayPause={this.onPlay}
+                    changeFavorite={this.changeFavorite} />
              )
         case "GenreSingle":
             return (

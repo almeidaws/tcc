@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Music from '../Music.jsx';
 
 const RecentlyPlayedMusic = props => {
@@ -11,7 +11,8 @@ const RecentlyPlayedMusic = props => {
         musics.push(<Music key={music.id}
                            paused={props.pausedMusic.music ? music.id !== props.pausedMusic.music.id : true}
                            music={music}
-                           onPlayPause={props.onPlayPause}/>
+                           onPlayPause={props.onPlayPause}
+                           changeFavorite={props.changeFavorite} />
        );
     });
 
