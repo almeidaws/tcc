@@ -13,13 +13,55 @@ class RecentlyPlayedMusic extends React.Component {
         R.lastListenedMusics(musics => {
             const ids = musics.map(music => music.id);
             const uniqueMusics = musics.filter((music, i) => {
-                console.log(ids.indexOf(music.id) + ", " + i);
                 return ids.indexOf(music.id) >= i;
             });
-            this.setState({ lastListenedMusics: uniqueMusics });
+            this.setState({ lastListenedMusics: uniqueMusics }, () => {
+                this.installSlider();
+            });
         }, errorCode => {
+            // DOES NOTHING
             console.log(errorCode);
         });
+    }
+
+    installSlider() {
+        var swiper = new Swiper('.swiper-container', {
+                slidesPerView: 6,
+                spaceBetween: 30,
+                loop: true,
+                speed: 1500,
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                breakpoints: {
+                    1800: {
+                        slidesPerView: 4,
+                    },
+                    1400: {
+                        slidesPerView: 4,
+                    },
+                    992: {
+                        slidesPerView: 2,
+                        spaceBetween: 10,
+                    },
+                    768: {
+                        slidesPerView: 2,
+                        spaceBetween: 10,
+                    },
+                    640: {
+                        slidesPerView: 1,
+                        spaceBetween: 15,
+                    },
+                    480: {
+                        slidesPerView: 1,
+                    },
+                    375: {
+                        slidesPerView: 1,
+                        spaceBetween: 0,
+                    }
+                },
+            });
     }
 
     render() {
@@ -36,8 +78,8 @@ class RecentlyPlayedMusic extends React.Component {
            );
         });
 
-        return(
-            <div className="ms_weekly_wrapper">
+       return (
+             <div className="ms_weekly_wrapper">
                 <div className="ms_rcnt_slider">
                     <div className="ms_heading">
                         <h1>{this.props.title}</h1>

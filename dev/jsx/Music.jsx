@@ -51,7 +51,7 @@ const Music = props => {
                     </div>
                 </div>
                 <div className="ms_rcnt_box_text">
-                    <h3><a href="#">{props.music.name}</a></h3>
+                    <h3><a href="javascript:;">{props.music.name}</a></h3>
                     <p>{props.music.authors[0].name}</p>
                 </div>
             </div>

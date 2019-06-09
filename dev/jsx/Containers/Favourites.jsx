@@ -107,6 +107,7 @@ class Favourites extends React.Component {
                     pausedMusic={this.props.pausedMusic}
                     removeFavorite={this.removeFavorite} />
                 <RecentlyPlayedMusic
+                    title="Recently Played Music"
                     pausedMusic={this.props.pausedMusic}
                     musics={this.props.musics} 
                     onPlayPause={this.props.onPlayPause}
