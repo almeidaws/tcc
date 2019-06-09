@@ -16,8 +16,6 @@ class RecentlyPlayedMusic extends React.Component {
                 console.log(ids.indexOf(music.id) + ", " + i);
                 return ids.indexOf(music.id) >= i;
             });
-
-            console.log(uniqueMusics);
             this.setState({ lastListenedMusics: uniqueMusics });
         }, errorCode => {
             console.log(errorCode);

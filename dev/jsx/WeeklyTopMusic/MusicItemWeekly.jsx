@@ -48,7 +48,9 @@ const MusicItemWeekly = props => {
                         </div>
                         <div className="w_tp_song_name">
                             <h3><a href="#">{props.music.name}</a></h3>
-                            <p>{props.music.authors[0].name}</p>
+                            <p>{
+                                props.music.authors ? props.music.authors[0].name : 'No authors'}
+                            </p>
                         </div>
                     </div>
                 </div>

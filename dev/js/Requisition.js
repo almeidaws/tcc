@@ -365,6 +365,28 @@ class Requisition {
             error: (res) => { if (error) error(res.status) },
         }) 
      }
+
+     /**
+     * Get musics recommendations. 
+     *
+     * @param {Function} success callback called when the musics is loaded
+     * successfully.
+     * @param {Function} error fallback called when there's a problem.
+     * The HTTP status code is passed as argument. The possible values
+     * are documented on the RESTful API page.
+     */
+    static getRecommendedMusics(success, error) {
+        const fetched = (musics) => {
+            success(musics);
+        };
+
+        const userID = U.getCookie('id');            
+        $.ajax('recommendations/'+userID, {
+            method: 'GET',
+            success: fetched,
+            error: (res) => { if (error) error(res.status) },
+        }) 
+     }
 }
 
 export default Requisition;
