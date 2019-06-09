@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
-import RegisterModal from "./dev/jsx/RegisterModal.jsx";
-import LoginModal from "./dev/jsx/LoginModal.jsx";
-import Footer from "./dev/jsx/Footer.jsx";
-import Index from "./dev/jsx/Containers/Index.jsx";
-import Favourites from "./dev/jsx/Containers/Favourites.jsx";
-import LeftMenu from "./dev/jsx/LeftMenu.jsx";
-import GenreSingle from './dev/jsx/GenreSingle.jsx';
-import AudioPlayerBar from './dev/jsx/BarMusic/AudioPlayerBar.jsx';
-import UploadForm from "./dev/jsx/Upload/UploadForm.jsx";
-import R from "./dev/js/Requisition";
+import RegisterModal from "../RegisterModal.jsx";
+import LoginModal from "../LoginModal.jsx";
+import Footer from "../Footer.jsx";
+import Index from "./Index.jsx";
+import Favourites from "./Favourites.jsx";
+import LeftMenu from "../LeftMenu.jsx";
+import GenreSingle from '../GenreSingle.jsx';
+import AudioPlayerBar from '../BarMusic/AudioPlayerBar.jsx';
+import UploadForm from "../Upload/UploadForm.jsx";
+import R from "../../js/Requisition";
 
 export default class App extends Component {
 
