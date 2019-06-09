@@ -44,6 +44,8 @@ In this repo, you'll find both Web API and the frontend. So you must be aware th
     6. [Listenings](#listenings)
         1. [Add a listening](#add-a-listening)
         2. [Get last listened musics](#get-last-listened-musics)
+    7.  [Recommendations](#recommendations)
+        1. [Get musics recommendations](#get-musics-recommendations)
 
 
 # Project setup
@@ -723,6 +725,63 @@ The returned body on success is something like this:
     }
 ]
 ```
+## Recommendations
 
+### Get musics recommendations
 
+```
+Route: /recommendations/:userID
+Method: GET
+
+On success:
+    Status: 200
+```
+
+The returned body on success is something like this:
+```json
+[
+    {
+        "id": 18,
+        "name": "Ana",
+        "url": "https://storage.com/miraculous/46.ogg",
+        "posterURL": null,
+        "duration": null,
+        "authors": [
+            {
+                "id": 46,
+                "name": "Ana"
+            }
+        ],
+        "genres": [
+            {
+                "id": 0,
+                "name": "Classical"
+            }
+        ]
+    },
+    {
+        "id": 19,
+        "name": "Fogo",
+        "url": "https://s3.amazonaws.com/miraculouswebsite/fire.ogg",
+        "posterURL": null,
+        "duration": null,
+        "authors": [
+            {
+                "id": 47,
+                "name": "Paula Fernandes"
+            }
+        ],
+        "genres": [
+            {
+                "id": 5,
+                "name": "Pop"
+            }
+        ]
+    }
+]
+```
+```
+On error:
+    Status: 400 // If some field is missing. The error message contains the missing field.
+```
 [1]: https://www.draw.io/?lightbox=1&highlight=0000ff&edit=_blank&layers=1&nav=1&title=Miraculous%20Database%20Model#R7V1tU%2BI6FP41zNz7wZ2%2BUCwfBV3dVXcd0dW93yINtFoapg0C%2FvqbQgItCbVI0xbN7s4OTUubnPPkyTlPjrVhdkez8xCM3WvkQL9haM6sYZ42DOPYssn%2FccN82aC3mrRlGHoObVs39Lw3SBs12jrxHBilLsQI%2Bdgbpxv7KAhgH6faQBiiafqyAfLTTx2DIeQaen3g860PnoPdZattaev2C%2BgNXfZkXaNnRoBdTBsiFzhommgyzxpmN0QILz%2BNZl3ox8Zjdll%2B7%2FuWs6uOhTDAeb5wMzg7OdN71%2BB7XzcN3Wvp17MjY3mXV%2BBP6IDvIxhGtMd4zswQTb2RDwJy1BmgAPfoGY0c913Pd67AHE3ibkQY9F%2FYUcdFofdGrgc%2BOaWTBnI6xNTLRiu%2Bm%2Bf7XeSjcPEcE2rx39Q3e%2FEd6bNCGJHv3rAx6xtN12CWuvAKRJj1Evk%2BGEfe06Lf8RdHIBx6QQdhjEb0IjbK7%2BlODRZ%2FyHnge8OAtPXJs2DIbLEcjd4kx7xPqJteYYjhLNFEfXQO0QjicE4uoWcNjX6FzhjDbC%2BPp2v46S2KKTcJvWaTwp5Cfri69%2Bpxt2SKgGBIbLB63upe7HnHGvc80eOI91JPAz4xSQAw7KBJ4ERJKJIPiZGumxYA3QGsJgfWH6cN8yRGKgw9gjEOtS4Yxx%2BJQzA5vx692cFoTJ3uwwEDSUiHF39%2BYsDQE45fXtuJvekRjjihzSPPcRZ3TaI5QIvpEo1B3wuGV8unmM110y19WtyEyC0H%2FoIeXHIzGMS9QRhg8LSaaGPkBXhhbatD%2FhGfdLVvVsMiI%2B2SY319TP7Fl4e4i4IIh8BboBGS2TCF8YzoOCEa3xH8Qzba5KS2NoBtCIGdSSfvo32eRtF74Da17dhOwWxXTDU5TN1c7o2jpySpCDCRF05p7BQGnffQEQ%2BTAv%2BDODC34GC1TtO%2BpZbCFD4SgDDLxIPF4eEXGMEly5CxYDkco70PisXNDpxgSiAUKyehbC5fhQGoxQGoajpZIudgucTaAoHCuEQaFI45KJyNgOcrMjkUMrGNisnEVmRSLJkcb4FA%2FcmkzQeqIIqmKHQUnxwKn%2BiaXTGhMFlNMUpRjNLeAoL6M4quF48FRSByCcRs5iMQXVZ%2BrPOKsSKQvQhE3yYRF8YgRYDh583t87D9dnk1%2FvFn8Dj4ffEyjARiyR16IUZVuwdV7R5YTTods3YP2iKM6LYkkPCCyP090%2B3lBa1KtRcCKnMa76Xai0BVhEor7DGvrCjVfqeVKHOm1lq1F%2Fac10nibewydgdVbFsUqYiUexGpFJEPCXvMKyxVU8rhRLaZs7LWqbGw5wKZ5Gw29kKAPRTQ0MUbETuB0fif1r%2BKWupNLSIdv1RqkSG1fG1uWc3QAyQXvuZEEUi9CUQo3AvTaFkRrs5rLYpB9mOQ5hYU1Ep3e360ovaIjEW%2F%2Ffnw8F9r%2BuvBOuJXk%2BtJ5PV5QCjdrVGO7tZspat2zZwRh34sCyO8Tq%2BKZSuT3TJncS1lN2GP%2BQJsJbvttBBlztRay27CnvOBrCqWLSesLYZQypTchD1WQW3BXCI9ppUGBX6bkMRzsGdewrkilEMhlDKFNmGP%2BY1BRSh7EYr0PcEioBDeDR4A7lqnvfvhdHZ3De8vXUGSfIMikgBuFB%2BQx5u6tjKI4pa6cktuDU4aoviUWpFLXnLJnKK1Jpcf0%2Fs3w%2Bi86qf25OrX2x%2Frct4VZD6nk9TuoOKWg%2BIWUV2tLG4RAkplQh%2FnlswZWmtuEaJXwg99KfqQSx%2BsBL%2BM7UFhl1XtUsF5j%2FTaJWlQYK5PYOEcBiHkAaF2Bxvl7A7aFl2NVuFGzlSmbcgCiXqXTt23B1fz%2BHD2Bw31Nh0pG4QH8TodcdfV%2B3RqFdruTiqV7xEa6o06RfPJQbxSR1yBIkEnUQwil0HybgpKy4hMxSAFM4gpnUGkgcHi0%2BOTCSapKQ8JlR9XlB%2FnFOOlZceWyo7rnh1bOy9DlWfHlsqOZaxF1uFmx5bKjmsV2%2B5OKpVnx5aKbYvmk8PNji0J5Y%2BKQeQySOXZsaVeMls0g0h%2Fy2wRYBBWzbQ410NnCFm8TqzmoiEKgH%2B2biXmngQOdKix19dcoQU0YkM%2BQ4zn1JJgglGc7OIRS5CJNcP5Y%2FLgb3yzbxY7PGUp7vJoTo94d1ArR2gS9mHGMNlvEmIzftt1NGKPbZA5l0PoA%2By9wlQvCndOu1LnaBU6J3NbrCbe4evNu7GW4wX8b1MKXTR6mpAOdKauh2GP0Fp8ZhqCcdr4W42YX1s5Zlyxqj3g3whoCyjGlkUx7F0onx3Gdk4Ys3izLjDmV%2F8y3DPz8Mo75HPCOeRo7Zv4YJ50VKnLRl6XGrXyKB%2Ff1ZKYTLNiXuJF31%2BcgRaiTMoSJIZEL3Ajvs0IeVc6%2BlYlTmT69AQrwPr25rLAaChh%2FqYod5VmfsEPk39e87eYuWtjfoEU%2BXXM36za%2BryK94mtb2tGrawvEDxUyMNsI8jGsn5NV01iHpYbfvYkQ%2BSerHex1sU9fLJ8AV75H1EoMx5tssR0tV%2FMF%2BmXGpAKqqn51PnTLApmK70kG3bVq8KXioisjTW5evPb1TL4mrT%2Fpji7cAZv5Vxg6yUqGF9EjBa5J%2BtFKXVxj%2BB1SuAVhYRJqlV9yDKb4hn7uNpFlu2ufQ2Wbxpp6%2BsaL7qVyvImHwh%2BYvMb9kaIqfPlQ7LMbxrnF%2FPHcb%2FZ%2B3l%2B9Nt97lxO7kSa55UXYRh4wZBzg6qH3qEeWrD3z0FnuzzVbqVwcqQbfDQmrBJpGbKQwi8oDy7c%2FF0Y%2BI1Hjao3%2Bni90TsoypjTe5dBF1GkJu6fekffbvVGucuI8oCjJQZHCRWLwv4YfPilGKTmDMJqHMuoWBSDRv02neoYpMKKRXF%2FKlb6P6ITbYgE7yoT4oFT0L%2BrTJQlRIh7aVXrno%2FoRNLcs9OSXJJ%2FDI5Lb3wwJ8bfUyXaKwGydC4B4sNWWTqR2E6HtkO%2FXwJq6Rv21%2Fiq0VKVCoPPGuq9GbYn%2Fs2U%2FfmdyIKMTw5DhHDi3DkZknuNHBhf8T8%3D
