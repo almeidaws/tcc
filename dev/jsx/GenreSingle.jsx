@@ -45,7 +45,7 @@ export default class GenreSingle extends Component {
                 <Header/>
                 {
                     this.state.musicsByGenre.map((musicByGenre) => {
-                        return <RecentlyPlayedMusic key={'teste'} 
+                        return <RecentlyPlayedMusic key={musicByGenre.genre} 
                                                     onPlayPause={this.props.onPlayPause}
                                                     pausedMusic={this.props.pausedMusic}
                                                     musics={musicByGenre.musics}

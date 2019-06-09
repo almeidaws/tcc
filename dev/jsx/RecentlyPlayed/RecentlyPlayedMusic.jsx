@@ -6,7 +6,12 @@ class RecentlyPlayedMusic extends React.Component {
     constructor(props) {
         super(props);
         this.state = { lastListenedMusics: [] };
-        this.requestLastListenedMusics();
+        if (props.musics && props.musics.length > 1) {
+            this.state = { lastListenedMusics: props.musics };
+            this.installSlider();
+        } else {
+            this.requestLastListenedMusics();
+        }
     }
     
     requestLastListenedMusics() {
