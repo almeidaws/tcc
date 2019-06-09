@@ -77,11 +77,11 @@ class Header extends React.Component {
     render() {
         return (
             <div className="ms_header">
-                <div className="ms_top_left">
+                {/* <div className="ms_top_left">
                     <div className="ms_top_search">
                         {searchButton}
                     </div>
-                </div>
+                </div> */}
                 <div className="ms_top_right">
                     <LoggedMenu rendered={U.getCookie('name') !== ""} 
                                 name={U.getCookie('name')}
