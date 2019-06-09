@@ -44,7 +44,7 @@ In this repo, you'll find both Web API and the frontend. So you must be aware th
     6. [Listenings](#listenings)
         1. [Add a listening](#add-a-listening)
         2. [Get last listened musics](#get-last-listened-musics)
-    7.  [Recommendationa](#recommendations)
+    7.  [Recommendations](#recommendations)
         1. [Get musics recommendations](#get-musics-recommendations)
 
 
