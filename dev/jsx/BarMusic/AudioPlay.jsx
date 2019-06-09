@@ -7,7 +7,7 @@ const favorite = musicID => {
         console.log('Successfully added');
         //DOES NOTHING
     }, statusCode => {
-        
+        //DOES NOTHING
     });
 };
 

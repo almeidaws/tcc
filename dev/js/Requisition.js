@@ -318,6 +318,53 @@ class Requisition {
             error: (res) => { if (error) error(res.status) },
         }) 
      }
+
+    /**
+     * Add a music in the list of listened musics.
+     * This music are used later to generate the list of listened musics.
+     *
+     * @param {Number} musicID the music to be marked as listened.
+     * @param {Function} success callback called when the music is added to
+     * the listened storage successfully.
+     * @param {Function} error fallback called when there's a problem.
+     * The HTTP status code is passed as argument. The possible values
+     * are documented on the RESTful API page.
+     */
+    static addListenings(musicID, success, error) {
+        const fetched = () => {
+            success();
+        };
+
+        $.ajax('listenings/', {
+            method: 'POST',
+            success: fetched,
+            error: (res) => { if (error) error(res.status) },
+            data: { musicID },
+        }) 
+     }
+
+    /**
+     * Get last listened musics. 
+     *
+     * @param {Number} musicID the music to be unfavorited.
+     * @param {Function} success callback called when the music is unfavorited
+     * successfully.
+     * @param {Function} error fallback called when there's a problem.
+     * The HTTP status code is passed as argument. The possible values
+     * are documented on the RESTful API page.
+     */
+    static lastListenedMusics(success, error) {
+        const fetched = (musics) => {
+            success(musics);
+        };
+
+        const userID = U.getCookie('id');            
+        $.ajax('listenings/?userID=' + userID, {
+            method: 'GET',
+            success: fetched,
+            error: (res) => { if (error) error(res.status) },
+        }) 
+     }
 }
 
 export default Requisition;

@@ -32,8 +32,8 @@ class Favorite {
      */
     validate() {
         const scheme = {
-            userID: Joi.number().integer().min(1).allow(null).required(),
-            musicID: Joi.number().integer().min(1).allow(null).required(),
+            userID: Joi.number().integer().min(1).required(),
+            musicID: Joi.number().integer().min(1).required(),
         };
         return Joi.validate(this, scheme);
     }
