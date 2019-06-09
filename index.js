@@ -52,6 +52,10 @@ const {
     getLastListenedMusics: handleLastListened,
 } = require('./listenings/middleware.js');
 
+const {
+    get: handleGetRecommendations,
+} = require('./recommendations/middleware.js');
+
 // Run pending migrations
 runMigrations();
 
@@ -93,8 +97,9 @@ app.get('/favorites/:userID', handleGetByUserID);
 app.post('/listenings', handleAddListening);
 app.get('/listenings', handleLastListened);
 
+//RECOMMENDATIONS ROUTES
+app.get('/recommendations/:userID',handleGetRecommendations);
 
 //SERVER STARTING
 app.use(express.static(path.join(__dirname, 'prod/')))
 app.listen(Server.port, () => console.log(`Listening on ${ Server.port }`))
-

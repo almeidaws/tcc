@@ -71,7 +71,11 @@ const calculateWeights = (musicalPreferenceByUser, latentFactorsByMusic) => {
 const recommendations = async userID => {
     const latentFactors = await latentFactorsByMusic();
     const preferences = await musicalPreferenceByUser(userID);
-    return calculateWeights(preferences, latentFactors);
+    const weights = calculateWeights(preferences, latentFactors);
+    weights.sort((e1, e2) => {
+        return e2.weight - e1.weight
+    });
+    return weights;
 };
 
 

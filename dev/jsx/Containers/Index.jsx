@@ -19,7 +19,7 @@ const Index = props => {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="ms_heading">
-                                <h1>weekly top 15</h1>
+                                <h1>Recomendation for you</h1>
                             </div>
                         </div>
                         {props.musics.map((music,index) => {
