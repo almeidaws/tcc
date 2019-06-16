@@ -189,7 +189,7 @@ const addMusic = async (music, progressCallback) => {
         };
         await pool.query(addMusicGenreConfig);
     });
-
+    pool.end();
     return new Music(musicID, music.name, music.fileS3Key, music.posterUID, music.duration);
 };
 
@@ -208,6 +208,7 @@ const getMusicByID = async (id) => {
         throw new createError(404, `There's no author with ID ${id}`);
 
     const { id: musicID, name, files3key: fileS3Key, posteruid: posterUID, duration } = result.rows[0];
+    pool.end();
     return new Music(musicID, name, fileS3Key, posterUID, duration);
 };
 
@@ -224,6 +225,7 @@ const getMusicsByAuthor = async (authorID) => {
     };
 
     const result = await pool.query(getMusicsByAuthorConfig);
+    pool.end();
     return result.rows.map(row => new Music(row.id, row.name, row.files3key, row.posteruid, row.duration));
 };
 
@@ -243,6 +245,7 @@ const getAllMusics = async () => {
                                                       music.files3key, 
                                                       music.posteruid, 
                                                       music.duration));
+                                                      pool.end();
     return musics;
  }
 
@@ -269,7 +272,7 @@ const deleteMusic = async (id) => {
     await pool.query({ text: deleteMusicGenreSQL, values: [music.id] });
     await pool.query({ text: deleteMusicAuthorSQL, values: [music.id] });
     await pool.query({ text: deleteMusicSQL, values: [music.id] });
-    
+    pool.end();
     return true;
 };
 
@@ -297,6 +300,7 @@ const findMusicByFileKey = async (name, authors, extension) => {
 
     // Parses and return it
     const { id, name: musicName, files3key: fileS3Key, posteruid: posterUID, duration } = result.rows[0];
+    pool.end();
     return new Music(id, musicName, fileS3Key, posterIUD, duration);
 }
 
