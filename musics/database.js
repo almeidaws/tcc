@@ -141,6 +141,7 @@ class Music {
  * @returns {Music} copy of added music with the id property setted.
  */
 const addMusic = async (music, progressCallback) => {
+    pool.connect();
     // Validate the music
     const { error, validatedMusic } = music.validate();
     if (error) return Promise.reject(error);
@@ -189,7 +190,6 @@ const addMusic = async (music, progressCallback) => {
         };
         await pool.query(addMusicGenreConfig);
     });
-    pool.end();
     return new Music(musicID, music.name, music.fileS3Key, music.posterUID, music.duration);
 };
 
@@ -198,6 +198,7 @@ const addMusic = async (music, progressCallback) => {
  * @returns {id} the return is an array of objects with 'id' and 'name' properties
  */
 const getMusicByID = async (id) => {
+    pool.connect();
     const getMusicByIDConfig = {
         text: getMusicByIDSQL,
         values: [id],
@@ -208,7 +209,6 @@ const getMusicByID = async (id) => {
         throw new createError(404, `There's no author with ID ${id}`);
 
     const { id: musicID, name, files3key: fileS3Key, posteruid: posterUID, duration } = result.rows[0];
-    pool.end();
     return new Music(musicID, name, fileS3Key, posterUID, duration);
 };
 
@@ -219,13 +219,13 @@ const getMusicByID = async (id) => {
  * @returns {Array<Music>} musics with that author ID or an empty array if there's no one.
  */
 const getMusicsByAuthor = async (authorID) => {
+    pool.connect();
     const getMusicsByAuthorConfig = {
         text: getMusicsByAuthorSQL,
         values: [authorID],
     };
 
     const result = await pool.query(getMusicsByAuthorConfig);
-    pool.end();
     return result.rows.map(row => new Music(row.id, row.name, row.files3key, row.posteruid, row.duration));
 };
 
@@ -236,6 +236,7 @@ const getMusicsByAuthor = async (authorID) => {
  * syntax.
  */
 const getAllMusics = async () => {
+    pool.connect();
     const query = { text: getAllMusicsSQL };
 
     const result = await pool.query(query);
@@ -245,7 +246,6 @@ const getAllMusics = async () => {
                                                       music.files3key, 
                                                       music.posteruid, 
                                                       music.duration));
-                                                      pool.end();
     return musics;
  }
 
@@ -259,7 +259,7 @@ const getAllMusics = async () => {
  * @returns {boolean} true if the music has been deleted or false otherwise.
  */
 const deleteMusic = async (id) => {
-    
+    pool.connect();
     let music;
     try {
         music = await getMusicByID(id);
@@ -272,7 +272,7 @@ const deleteMusic = async (id) => {
     await pool.query({ text: deleteMusicGenreSQL, values: [music.id] });
     await pool.query({ text: deleteMusicAuthorSQL, values: [music.id] });
     await pool.query({ text: deleteMusicSQL, values: [music.id] });
-    pool.end();
+
     return true;
 };
 
@@ -288,6 +288,7 @@ const deleteMusic = async (id) => {
  * @param {Promise} found music.
  */
 const findMusicByFileKey = async (name, authors, extension) => {
+    pool.connect();
     // Configures query
     const query = {
         text: findMusicByNormalizedFileKeySQL,
@@ -300,7 +301,6 @@ const findMusicByFileKey = async (name, authors, extension) => {
 
     // Parses and return it
     const { id, name: musicName, files3key: fileS3Key, posteruid: posterUID, duration } = result.rows[0];
-    pool.end();
     return new Music(id, musicName, fileS3Key, posterIUD, duration);
 }
 

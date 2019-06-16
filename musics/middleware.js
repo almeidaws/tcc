@@ -44,8 +44,8 @@ async function add(request, response, next) {
         await queries.addMusic(music, progress => {
             console.log(`${progress}% uploaded`);
         });
-
         response.status(201);
+        musicsDatabase.disconnect();
         response.end();
     } catch (error) {
         next(error);
@@ -70,6 +70,10 @@ async function getByID(request, response, next) {
         const genres = await genresQueries.getAllGenresFromMusic(music.id);
         const url = music.calculateFileURL();
         const posterURL = music.posterUID ? music.calculatePosterURL() : null;
+        musicsDatabase.disconnect();
+        authorsDatabase.disconnect();
+        genresDatabase.disconnect();
+
         response.status(200).json({ id, name, url, posterURL, authors, genres, duration }).end();
     } catch (error) {
         next(error);
@@ -105,7 +109,10 @@ async function getAll(request, response, next) {
                                                     genres: await genresQueries.getAllGenresFromMusic(music.id),
                                                     favorited: await favorited(request.query.userID, music.id),
                                                     }));
-
+        musicsDatabase.disconnect();
+        authorsDatabase.disconnect();
+        genresDatabase.disconnect();
+        
         response.status(200).json(await Promise.all(withFileURLs)).end();
     } catch (error) {
         next(error);
@@ -124,6 +131,7 @@ async function deleteMusic(request, response, next) {
 
         const queries = await musicsDatabase.connect();
         const deleted = await queries.deleteMusic(id);
+        musicsDatabase.disconnect();
         if (deleted)
             return response.status(200).end();
         return response.status(404).end();
