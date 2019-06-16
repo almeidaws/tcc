@@ -42,11 +42,11 @@ async function getByUserID(request, response, next) {
                                                     duration: music.duration,
                                                     authors: await authorQueries.getAuthorsByMusic(music.id),
                                                     genres: await genresQueries.getAllGenresFromMusic(music.id),
-                                                    }));
+                                                    }));                                    
+        response.status(200).json(await Promise.all(withFileURLs)).end();
         await database.disconnect();
         await authorsDatabase.disconnect();
-        await genresDatabase.disconnect();                                    
-        response.status(200).json(await Promise.all(withFileURLs)).end();
+        await genresDatabase.disconnect();
     } catch (error) {
         next(error);
     }
@@ -60,10 +60,9 @@ async function deleteFavorite(request, response, next) {
 
         const queries = await database.connect();
         const deleted = await queries.deleteFavorite(favorite);
-
-        await database.disconnect();
         if (deleted) response.status(200).end();
         else response.status(404).end();
+        await database.disconnect();
     } catch (error) {
         next(error);
     }
