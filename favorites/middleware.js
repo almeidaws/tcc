@@ -20,7 +20,7 @@ async function add(request, response, next) {
         const favorite = new database.Favorite(body.userID, body.musicID);
         const queries = await database.connect();
         const addedFavorite = await queries.addFavorite(favorite);
-
+        database.disconnect();
         response.status(201).end();
     } catch (error) {
         next(error);
@@ -43,7 +43,9 @@ async function getByUserID(request, response, next) {
                                                     authors: await authorQueries.getAuthorsByMusic(music.id),
                                                     genres: await genresQueries.getAllGenresFromMusic(music.id),
                                                     }));
-
+        database.disconnect();
+        authorsDatabase.disconnect();
+        genresDatabase.disconnect();                                    
         response.status(200).json(await Promise.all(withFileURLs)).end();
     } catch (error) {
         next(error);
@@ -59,6 +61,7 @@ async function deleteFavorite(request, response, next) {
         const queries = await database.connect();
         const deleted = await queries.deleteFavorite(favorite);
 
+        database.disconnect();
         if (deleted) response.status(200).end();
         else response.status(404).end();
     } catch (error) {
