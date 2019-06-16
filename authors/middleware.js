@@ -17,7 +17,7 @@ async function add(request, response, next) {
 
         const queries = await authorsDatabase.connect();
         const addedAuthor = await queries.addAuthor(author);
-        authorsDatabase.disconnect();
+        await authorsDatabase.disconnect();
         response.status(200).json({ id: addedAuthor.id, name: addedAuthor.name }).end();
     } catch (error) {
         next(error);
@@ -28,7 +28,7 @@ async function getAll(request, response, next) {
     try {
         const queries = await authorsDatabase.connect();
         const authors = await queries.getAllAuthors();
-        authorsDatabase.disconnect();
+        await authorsDatabase.disconnect();
         response.status(200).json(authors).end();
     } catch (error) {
         next(error);
@@ -40,7 +40,7 @@ async function getByID(request, response, next) {
         if (!request.params.id) throw createError(401, `The author's id is missing`);
         const queries = await authorsDatabase.connect();
         const author = await queries.getAuthorByID(request.params.id);
-        authorsDatabase.disconnect();
+        await authorsDatabase.disconnect();
         response.status(200).json(author).end();
     } catch (error) {
         next(error);
@@ -52,7 +52,7 @@ async function getByMusic(request, response, next) {
         if (!request.params.musicID) throw createError(401, `The musics's id is missing`);
         const queries = await authorsDatabase.connect();
         const authors = await queries.getAuthorsByMusic(request.params.musicID);
-        authorsDatabase.disconnect();
+        await authorsDatabase.disconnect();
         response.status(200).json(authors).end();
     } catch (error) {
         next(error);
@@ -69,7 +69,7 @@ async function deleteAuthor(request, response, next) {
             const obstacles = relatedMusics.map(music => ({ id: music.id, name: music.name, url: music.calculateFileURL() }));
             response.status(403).json(obstacles).end();
         }
-        authorsDatabase.disconnect();
+        await authorsDatabase.disconnect();
         response.status(200).end();
     } catch (error) {
         next(error);

@@ -21,7 +21,7 @@ async function add(request, response, next) {
         const addedListening = await queries.addListening(listening);
 
         console.log(addedListening);
-        database.disconnect();
+        await database.disconnect();
         response.status(201).end();
     } catch (error) {
         next(error);
@@ -52,10 +52,10 @@ async function getLastListenedMusics(request, response, next) {
                                                     genres: await genresQueries.getAllGenresFromMusic(music.id),
                                                     favorited: await favorited(request.query.userID, music.id),
                                                     }));
-        database.disconnect();
-        authorsDatabase.disconnect();
-        genresDatabase.disconnect();
-        favoritesDatabase.disconnect();                                            
+        await database.disconnect();
+        await authorsDatabase.disconnect();
+        await genresDatabase.disconnect();
+        await favoritesDatabase.disconnect();                                            
         response.status(200).json(await Promise.all(withFileURLs)).end();
     } catch (error) {
         next(error);
