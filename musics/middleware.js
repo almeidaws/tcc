@@ -109,11 +109,11 @@ async function getAll(request, response, next) {
                                                     genres: await genresQueries.getAllGenresFromMusic(music.id),
                                                     favorited: await favorited(request.query.userID, music.id),
                                                     }));
+        
+        response.status(200).json(await Promise.all(withFileURLs)).end();
         musicsDatabase.disconnect();
         authorsDatabase.disconnect();
         genresDatabase.disconnect();
-        
-        response.status(200).json(await Promise.all(withFileURLs)).end();
     } catch (error) {
         next(error);
     }
