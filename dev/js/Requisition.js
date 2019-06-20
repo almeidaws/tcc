@@ -151,7 +151,7 @@ class Requisition {
     static getAllMusics(success, error) {
 
         const music = (data) => {
-            success(data);
+            success(data || []);
         };
 
         $.ajax('musics/' + (U.getCookie('id') ? ('?userID=' + U.getCookie('id')) : ''), {
