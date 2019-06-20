@@ -8,7 +8,7 @@ class RecentlyPlayedMusic extends React.Component {
         super(props);
         this.state = { lastListenedMusics: [] };
         if (props.musics && props.musics.length > 0) {
-            this.state = { lastListenedMusics: this.props.musics, idNext: uuidv4(), idPrev: uuidv4() };
+            this.state = { lastListenedMusics: this.props.musics, uuid: uuidv4() };
             this.installSlider();
         } else {
             this.requestLastListenedMusics();
@@ -37,8 +37,8 @@ class RecentlyPlayedMusic extends React.Component {
                 loop: true,
                 speed: 1500,
                 navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
+                    nextEl: `.swiper-button-next ${this.state.uuid}`,
+                    prevEl: `.swiper-button-prev ${this.state.uuid}`,
                 },
                 breakpoints: {
                     1800: {
@@ -95,8 +95,8 @@ class RecentlyPlayedMusic extends React.Component {
                             {musics}
                         </div>
                     </div>
-                    <div itemID={this.state.idNext} className="swiper-button-next slider_nav_next"></div>
-                    <div itemID={this.state.idPrev} className="swiper-button-prev slider_nav_prev"></div>
+                    <div className={"swiper-button-next slider_nav_next " + this.state.uuid}></div>
+                    <div className={"swiper-button-prev slider_nav_prev " + this.state.uuid}></div>
                 </div>
             </div>
         );
