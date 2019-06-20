@@ -6,7 +6,7 @@ import R from '../js/Requisition.js';
 export default class GenreSingle extends Component {
     constructor(props) {
         super(props);
-        this.state = { musics:  null, musicsByGenre: [], genres: null };
+        this.state = { musics:  [], musicsByGenre: [], genres: [] };
 
         R.getAllMusics((musics) => {
             const indexedMusics = musics.map((music, index) => {
@@ -14,7 +14,7 @@ export default class GenreSingle extends Component {
                 return music;
             });
 
-            this.setState({ musics: indexedMusics === undefined ? [] : musics});
+            this.setState({ musics: indexedMusics === undefined ? [] : indexedMusics});
             R.allGenres((genres) => {
                 this.setState({ genres });
                 this.separatorMusics();
@@ -23,7 +23,7 @@ export default class GenreSingle extends Component {
     }
 
     separatorMusics() {
-        if(this.state.musics === null || this.state.genres === null) return;
+        if(this.state.musics.length === 0 || this.state.genres.length === 0) return;
         const musicsByGenre = [];
         for(let i=0;i<this.state.genres.length;i++) {
             const musics = [];
