@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ffc4286f-65a7-4073-a6fb-959177ec08e5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/listenings/middleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/listenings/middleware.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/musics/middleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/musics/middleware.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/prod/js/" />
@@ -35,8 +34,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/musics/middleware.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="407">
-              <caret line="116" column="8" selection-start-line="116" selection-start-column="8" selection-end-line="116" selection-end-column="8" />
+            <state relative-caret-position="366">
+              <caret line="77" column="43" selection-start-line="77" selection-start-column="43" selection-end-line="79" selection-end-column="45" />
             </state>
           </provider>
         </entry>
@@ -310,18 +309,18 @@
       <workItem from="1558614198203" duration="19000" />
       <workItem from="1558651444683" duration="7430000" />
       <workItem from="1558699739936" duration="6000" />
-      <workItem from="1561028092823" duration="1299000" />
+      <workItem from="1561028092823" duration="1403000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="60088000" />
+    <option name="totallyTimeSpent" value="60192000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21683876" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21683876" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -338,7 +337,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
-      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.29178083" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.29178083" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="11" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -659,8 +658,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/musics/middleware.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="116" column="8" selection-start-line="116" selection-start-column="8" selection-end-line="116" selection-end-column="8" />
+        <state relative-caret-position="366">
+          <caret line="77" column="43" selection-start-line="77" selection-start-column="43" selection-end-line="79" selection-end-column="45" />
         </state>
       </provider>
     </entry>

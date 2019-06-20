@@ -75,9 +75,9 @@ async function getByID(request, response, next) {
         await genresDatabase.disconnect();
 
         response.status(200).json({ id, name, url, posterURL, authors, genres, duration }).end();
-        await musicsDatabase.disconnect();
-        await authorsDatabase.disconnect();
-        await genresDatabase.disconnect();
+        // await musicsDatabase.disconnect();
+        // await authorsDatabase.disconnect();
+        // await genresDatabase.disconnect();
     } catch (error) {
         next(error);
     }
