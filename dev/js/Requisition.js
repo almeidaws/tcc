@@ -359,11 +359,11 @@ class Requisition {
         };
 
         const userID = U.getCookie('id');            
-        $.ajax('listenings/?userID=' + userID, {
+        $.ajax('listenings/? ' + (userID ? ('?userID=' + userID) : ''), {
             method: 'GET',
             success: fetched,
             error: (res) => { if (error) error(res.status) },
-        }) 
+        });
      }
 
      /**
