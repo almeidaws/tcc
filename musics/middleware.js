@@ -114,9 +114,6 @@ async function getAll(request, response, next) {
                                                     }));
         
         response.status(200).json(await Promise.all(withFileURLs)).end();
-        // await musicsDatabase.disconnect();
-        // await authorsDatabase.disconnect();
-        // await genresDatabase.disconnect();
     } catch (error) {
         next(error);
     }

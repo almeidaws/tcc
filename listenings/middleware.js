@@ -53,10 +53,6 @@ async function getLastListenedMusics(request, response, next) {
                                                     favorited: await favorited(request.query.userID, music.id),
                                                     }));                                        
         response.status(200).json(await Promise.all(withFileURLs)).end();
-        await database.disconnect();
-        await authorsDatabase.disconnect();
-        await genresDatabase.disconnect();
-        await favoritesDatabase.disconnect();    
     } catch (error) {
         next(error);
     }
