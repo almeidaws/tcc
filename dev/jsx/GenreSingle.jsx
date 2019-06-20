@@ -40,6 +40,7 @@ export default class GenreSingle extends Component {
     }
 
     render() {
+        console.log('apos o separator, minha matriz é: ',this.state.musicsByGenre);
         return(
             <div className="ms_content_wrapper padder_top80">
                 <Header/>

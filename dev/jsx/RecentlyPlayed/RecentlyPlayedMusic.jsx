@@ -86,7 +86,7 @@ class RecentlyPlayedMusic extends React.Component {
                                changeFavorite={this.props.changeFavorite} />
            );
         });
-
+        console.log('no componente, renderizei as musicas',musics);
        return (
              <div className="ms_weekly_wrapper">
                 <div className="ms_rcnt_slider">
