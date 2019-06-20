@@ -31,9 +31,9 @@ class RecentlyPlayedMusic extends React.Component {
     }
 
     installSlider() {
-        const btnNext = document.getElementById(this.state.btnNextuuid);
+        const btnNext = document.getElementById(`${this.state.btnNextuuid}`);
         console.log('next ===',btnNext);
-        const btnPrev = document.getElementById(this.state.btnPrev);
+        const btnPrev = document.getElementById(`${this.state.btnPrev}`);
         console.log('prev ===',btnPrev);
         var swiper = new Swiper('.swiper-container', {
                 slidesPerView: 6,
