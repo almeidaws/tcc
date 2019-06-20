@@ -96,15 +96,14 @@ async function getAll(request, response, next) {
         const musics = await queries.getAllMusics();
         if (musics === null)
             response.status(204).json([]).end();
-
         const favorited = async (userID, musicID) => {
             if (!userID) return undefined;
             const favorite = new favoritesDatabase.Favorite(parseInt(userID), musicID);
             return await favoritesQueries.checkFavorite(favorite);
         };
 
-        const withFileURLs = musics.map(async music => ({ id: music.id, 
-                                                    name: music.name, 
+        const withFileURLs = musics.map(async music => ({ id: music.id,
+                                                    name: music.name,
                                                     url: music.calculateFileURL(),
                                                     posterURL: music.posterUID ? music.calculatePosterURL() : null,
                                                     duration: music.duration,

@@ -12,7 +12,7 @@ if (!process.env.NODE_ENV) throw new Error('You must set the NODE_ENV environmen
 'use strict';
 
 const uuidv4 = require('uuid/v4');
-const { Pool } = require('pg');
+const { Pool, Client } = require('pg');
 
 /** This namespace is used to wrapps configuratinos relatated to user's session, like
  * its instantiation and middlewares from ExpressJS.
@@ -42,6 +42,11 @@ const Database = {
             return new Pool({ connectionString: `postgres://${process.env.USER}:@localhost:5432/miraculous` });
         else 
             throw new Error('Unknown environment. Access the line of this error to see more.');
+    },
+    createClient: () => {
+        return new Client({
+            connectionString: process.env.DATABASE_URL,
+        })
     },
 };
 

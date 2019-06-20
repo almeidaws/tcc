@@ -26,6 +26,7 @@ const normalizeForSearch = require('normalize-for-search');
 const { Database } = require('../configs.js');
 const Joi = require('joi');
 const pool = Database.pool();
+const createClient = Database.createClient;
 const { addMusicSQL,
         addMusicAuthorSQL,
         addMusicGenreSQL,
@@ -141,7 +142,8 @@ class Music {
  * @returns {Music} copy of added music with the id property setted.
  */
 const addMusic = async (music, progressCallback) => {
-    pool.connect();
+    const client = createClient();
+    await client.connect();
     // Validate the music
     const { error, validatedMusic } = music.validate();
     if (error) return Promise.reject(error);
@@ -170,7 +172,7 @@ const addMusic = async (music, progressCallback) => {
         text: addMusicSQL,
         values: [music.name, music.fileS3Key, music.posterUID, music.duration],
     };
-    const result = await pool.query(addMusicConfig);
+    const result = await client.query(addMusicConfig);
     const musicID = result.rows[0].id;
 
     // Add relation of music with authors in database
@@ -179,7 +181,7 @@ const addMusic = async (music, progressCallback) => {
             text: addMusicAuthorSQL,
             values: [musicID, author],
         };
-        await pool.query(addMusicAuthorConfig);
+        await client.query(addMusicAuthorConfig);
     });
 
     // Add relation of music with genres in database
@@ -188,8 +190,9 @@ const addMusic = async (music, progressCallback) => {
             text: addMusicGenreSQL,
             values: [musicID, genre],
         };
-        await pool.query(addMusicGenreConfig);
+        await client.query(addMusicGenreConfig);
     });
+    await client.end();
     return new Music(musicID, music.name, music.fileS3Key, music.posterUID, music.duration);
 };
 
@@ -203,12 +206,14 @@ const getMusicByID = async (id) => {
         text: getMusicByIDSQL,
         values: [id],
     };
-
-    const result = await pool.query(getMusicByIDConfig);
+    const client = createClient();
+    await client.connect();
+    const result = await client.query(getMusicByIDConfig);
     if (result.rows.length === 0)
         throw new createError(404, `There's no author with ID ${id}`);
 
     const { id: musicID, name, files3key: fileS3Key, posteruid: posterUID, duration } = result.rows[0];
+    await client.end();
     return new Music(musicID, name, fileS3Key, posterUID, duration);
 };
 
@@ -224,8 +229,10 @@ const getMusicsByAuthor = async (authorID) => {
         text: getMusicsByAuthorSQL,
         values: [authorID],
     };
-
-    const result = await pool.query(getMusicsByAuthorConfig);
+    const client = createClient();
+    await client.connect();
+    const result = await client.query(getMusicsByAuthorConfig);
+    await client.end();
     return result.rows.map(row => new Music(row.id, row.name, row.files3key, row.posteruid, row.duration));
 };
 
@@ -238,16 +245,18 @@ const getMusicsByAuthor = async (authorID) => {
 const getAllMusics = async () => {
     pool.connect();
     const query = { text: getAllMusicsSQL };
-
-    const result = await pool.query(query);
+    const client = createClient();
+    await client.connect();
+    const result = await client.query(query);
+    await client.end();
     if (result.rows.length === 0) return null;
-    const musics = result.rows.map(music => new Music(music.id, 
+    const musics = result.rows.map(music => new Music(music.id,
                                                       music.name, 
                                                       music.files3key, 
                                                       music.posteruid, 
                                                       music.duration));
     return musics;
- }
+ };
 
 /** 
  * Removes a music metadata from the database and its file from Amazon S3.
@@ -266,13 +275,14 @@ const deleteMusic = async (id) => {
     } catch (error) {
         return false;
     }
-
+    const client = createClient();
+    await client.connect();
     await deleteFromS3(music.fileS3Key);
     await deleteFromS3(music.posterUID);
-    await pool.query({ text: deleteMusicGenreSQL, values: [music.id] });
-    await pool.query({ text: deleteMusicAuthorSQL, values: [music.id] });
-    await pool.query({ text: deleteMusicSQL, values: [music.id] });
-
+    await client.query({ text: deleteMusicGenreSQL, values: [music.id] });
+    await client.query({ text: deleteMusicAuthorSQL, values: [music.id] });
+    await client.query({ text: deleteMusicSQL, values: [music.id] });
+    await client.end();
     return true;
 };
 
@@ -294,15 +304,16 @@ const findMusicByFileKey = async (name, authors, extension) => {
         text: findMusicByNormalizedFileKeySQL,
         values: [calculateMusicFileS3Key(name, authors, extension)],
     };
-
+    const client = createClient();
+    await client.connect();
     // Gets the music
-    const result = await pool.query(query);
+    const result = await client.query(query);
     if (result.rows.length != 1) return null;
-
+    await client.end();
     // Parses and return it
     const { id, name: musicName, files3key: fileS3Key, posteruid: posterUID, duration } = result.rows[0];
     return new Music(id, musicName, fileS3Key, posterIUD, duration);
-}
+};
 
 /**
  * Generate a string value that will be used to add a music to the database
@@ -354,13 +365,13 @@ const deleteMusicTable = async () => {
     await pool.query(deleteMusicGenreTableSQL);
     await pool.query(deleteMusicAuthorTableSQL);
     await pool.query(deleteMusicTableSQL);
-}
+};
 
 const cleanUpMusicTable = async () => {
     await pool.query(cleanUpMusicGenreTableSQL);
     await pool.query(cleanUpMusicAuthorTableSQL);
     await pool.query(cleanUpMusicTableSQL);
-}
+};
 
 /**
  * Exports an object that currently can be used to constructs users and establishes
