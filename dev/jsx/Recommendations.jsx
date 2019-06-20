@@ -19,14 +19,15 @@ export default class Recommendations extends Component {
     }
 
     render() {
-        if(this.state.musics.length === 0) return null;
         return (
             <div className="ms_weekly_wrapper">
                 <div className="ms_weekly_inner">
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="ms_heading">
-                                <h1>Recommendations for you</h1>
+                                {this.state.musics.length === 0 ?
+                                    <h1>Please login and favorite some musics to view recommendations for you</h1> :
+                                    <h1>Recommendations for you</h1>}
                             </div>
                         </div>
                         {this.state.musics.map((music,index) => {

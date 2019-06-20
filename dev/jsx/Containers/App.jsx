@@ -237,14 +237,14 @@ function container(containerName) {
                     musics={this.state.musics}
                     onPlayPause={this.onPlay}
                     changeFavorite={this.changeFavorite} />
-             )
+             );
         case "GenreSingle":
             return (
                 <GenreSingle
                     pausedMusic={this.state.pausedMusic}
                     musics={this.state.musics}
                     onPlayPause={this.onPlay} />
-             )
+             );
         case "uploadForm":
             return <UploadForm />
      }
