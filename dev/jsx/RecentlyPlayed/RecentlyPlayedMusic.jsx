@@ -7,9 +7,9 @@ import $ from 'jquery';
 class RecentlyPlayedMusic extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { lastListenedMusics: [] };
+        this.state = { lastListenedMusics: [], swiperContainerUID: uuidv4(), btnNext: uuidv4(), btnPrev: uuidv4() };
         if (props.musics && props.musics.length > 0) {
-            this.state = { lastListenedMusics: this.props.musics, btnPrev: uuidv4(),btnNextuuid: uuidv4() };
+            this.state.lastListenedMusics = this.props.musics;
             this.installSlider();
         } else {
             this.requestLastListenedMusics();
@@ -32,15 +32,14 @@ class RecentlyPlayedMusic extends React.Component {
     }
 
     installSlider() {
-        $( `#${this.state.btnNextuuid}` ).load(function() {
+        $( `#${this.state.btnNext}` ).ready(() => {
             // Handler for .load() called.
-            $( `#${this.state.btnPrev}` ).load(function() {
+            $( `#${this.state.btnPrev}` ).ready(() => {
                 // Handler for .load() called.
-                const btnNext = document.getElementById(this.state.btnNextuuid);
-                console.log('next ===',btnNext);
+                const btnNext = document.getElementById(this.state.btnNext);
                 const btnPrev = document.getElementById(this.state.btnPrev);
-                console.log('prev ===',btnPrev);
-                var swiper = new Swiper('.swiper-container', {
+                const swiperContainer = document.getElementById(this.state.swiperContainerUID);
+                var swiper = new Swiper(swiperContainer, {
                     slidesPerView: 6,
                     spaceBetween: 30,
                     loop: true,
@@ -101,12 +100,12 @@ class RecentlyPlayedMusic extends React.Component {
                     <div className="ms_heading">
                         <h1>{this.props.title}</h1>
                     </div>
-                    <div className="swiper-container">
+                    <div id={this.state.swiperContainerUID} className="swiper-container">
                         <div className="swiper-wrapper">
                             {musics}
                         </div>
                     </div>
-                    <div id={this.state.btnNextuuid} className="swiper-button-next slider_nav_next"></div>
+                    <div id={this.state.btnNext} className="swiper-button-next slider_nav_next"></div>
                     <div id={this.state.btnPrev} className="swiper-button-prev slider_nav_prev"></div>
                 </div>
             </div>
