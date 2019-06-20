@@ -7,6 +7,7 @@ const createError = require('http-errors');
 const { Database } = require('../configs.js');
 const Joi = require('joi');
 const pool = Database.pool();
+const creatClient = Database.createClient;
 const { addAuthorSQL, 
         deleteAuthorSQL,
         cleanUpAuthorTableSQL,
@@ -78,7 +79,12 @@ const addAuthor = async (author) => {
         text: addAuthorSQL,
         values: [author.name],
     };
-    const result = await pool.query(addAuthorConfig);
+
+    const client = createClient();
+    await client.connect();
+
+    const result = await client.query(addAuthorConfig);
+    await client.end();
     const tuple = result.rows[0];
     return new Author(tuple.id, tuple.name);
 };
@@ -93,7 +99,10 @@ const getAllAuthors = async () => {
         text: getAllAuthorsSQL,
     };
 
-    const result = await pool.query(getAllAuthorsConfig);
+    const client = createClient();
+    await client.connect();
+    const result = await client.query(getAllAuthorsConfig);
+    await client.end();
     const authors = result.rows.map(result => new Author(result.id, result.name));
     return authors;
 };
@@ -109,7 +118,10 @@ const getAuthorByID = async (id) => {
         values: [id],
     };
 
-    const result = await pool.query(getAuthorByIDConfig);
+    const client = createClient();
+    await client.connect();
+    const result = await client.query(getAuthorByIDConfig);
+    await client.end();
     if (result.rows.length == 0)
         throw new createError(404, `There's no author with ID ${id}`);
 
@@ -128,8 +140,10 @@ const getAuthorsByMusic = async (musicID) => {
         values: [musicID],
     };
 
-    const result = await pool.query(getAuthorsByMusicConfig);
-
+    const client = createClient();
+    await client.connect();
+    const result = await client.query(getAuthorsByMusicConfig);
+    await client.end();
     const authors = result.rows.map(row => new Author(row.id, row.name));
     return authors;
 };
@@ -155,7 +169,11 @@ const deleteAuthor = async (id) => {
         values: [id],
     };
 
-    await pool.query(deleteAuthorConfig);
+    const client = createClient();
+    await client.connect();
+
+    await client.query(deleteAuthorConfig);
+    await client.end();
     return [];
 };
 

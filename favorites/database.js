@@ -7,6 +7,7 @@ const createError = require('http-errors');
 const { Database } = require('../configs.js');
 const Joi = require('joi');
 const pool = Database.pool();
+const createClient = Database.createClient;
 const { addFavoriteSQL,
         getAllFavoriteFromUserSQL,
         deleteFavoriteSQL,
@@ -50,7 +51,10 @@ const checkFavorite = async (favorite) => {
         text: getFavorite,
         values: [favorite.userID, favorite.musicID],
     };
-    const result = await pool.query(checkFavoriteConfig);
+    const client = createClient();
+    await client.connect();
+    const result = await client.query(checkFavoriteConfig);
+    await client.end();
     return result.rows.length > 0;
 };
 /** 
@@ -72,10 +76,14 @@ const addFavorite = async (favorite) => {
         values: [favorite.userID, favorite.musicID],
     };
 
+    const client = createClient();
+    await client.connect();
+
     // If this favorite already exists.
     if (await checkFavorite(favorite)) return null;
 
-    const result = await pool.query(addFavoriteConfig);
+    const result = await client.query(addFavoriteConfig);
+    await client.end();
     const tuple = result.rows[0];
     return new Favorite(tuple.userid, tuple.musicid);
 };
@@ -91,8 +99,10 @@ const getFavoritesByUserID = async (userID) => {
         text: getAllFavoriteFromUserSQL,
         values: [userID],
     };
-
-    const result = await pool.query(getFavoritesByUserIDConfig);
+    const client = createClient();
+    await client.connect();
+    const result = await client.query(getFavoritesByUserIDConfig);
+    await client.end();
     return result.rows.map(row => new Music(row.id, row.name, row.files3key, row.posteruid, row.duration));
 };
 
@@ -109,7 +119,10 @@ const deleteFavorite = async (favorite) => {
         values: [favorite.userID, favorite.musicID],
     };
 
-    const result = await pool.query(deleteFavoriteConfig);
+    const client = createClient();
+    await client.connect();
+    const result = await client.query(deleteFavoriteConfig);
+    await client.end();
     return result.rowCount >= 1;
 };
 

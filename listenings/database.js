@@ -7,6 +7,7 @@ const createError = require('http-errors');
 const { Database } = require('../configs.js');
 const Joi = require('joi');
 const pool = Database.pool();
+const createClient = Database.createClient;
 const { addListeningSQL,
         getLastListenedMusicsSQL,
       } = require('./database_queries.js');
@@ -54,7 +55,10 @@ const addListening = async (listening) => {
         values: [listening.musicID],
     };
 
-    const result = await pool.query(addListeningConfig);
+    const client = createClient();
+    await client.connect();
+    const result = await client.query(addListeningConfig);
+    await client.end();
     const tuple = result.rows[0];
     return new Listening(tuple.musicid);
 };
@@ -65,9 +69,12 @@ const addListening = async (listening) => {
  * @returns {Array<Music>} the return is an array of musics.
  */
 const getLastListenedMusics = async (userID) => {
-    const getLastListenedMusicsConfig = { text: getLastListenedMusicsSQL, }; 
+    const getLastListenedMusicsConfig = { text: getLastListenedMusicsSQL, };
 
-    const result = await pool.query(getLastListenedMusicsConfig);
+    const client = createClient();
+    await client.connect();
+    const result = await client.query(getLastListenedMusicsConfig);
+    await client.end();
     return result.rows.map(row => new Music(row.id, row.name, row.files3key, row.posteruid, row.duration));
 };
 

@@ -7,6 +7,7 @@ const createError = require('http-errors');
 const { Database } = require('../configs.js');
 const Joi = require('joi');
 const pool = Database.pool();
+const createClient = Database.createClient;
 const { 
     getAllGenresSQL,
     getAllGenresFromMusicSQL
@@ -32,8 +33,10 @@ const getAllGenres = async () => {
     const getAllGenresConfig = {
         text: getAllGenresSQL,
     };
-
-    const result = await pool.query(getAllGenresConfig);
+    const client = createClient();
+    await client.connect();
+    const result = await client.query(getAllGenresConfig);
+    await client.end();
     const genres = result.rows.map(result => new Genre(result.id, result.name));
     return genres;
 };
@@ -49,8 +52,10 @@ const getAllGenresFromMusic = async (musicID) => {
         text: getAllGenresFromMusicSQL,
         values: [musicID]
     };
-
-    const result = await pool.query(getAllGenresFromMusicConfig);
+    const client = createClient();
+    await client.connect();
+    const result = await client.query(getAllGenresFromMusicConfig);
+    await client.end();
     const genres = result.rows.map(result => new Genre(result.id, result.name));
     return genres;
 };

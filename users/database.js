@@ -19,6 +19,7 @@ const { Database } = require('../configs.js');
 const Joi = require('joi');
 const uuidv4 = require('uuid/v4');
 const pool = Database.pool();
+const createClient = Database.createClient;
 const { createUserTableSQL, 
         deleteUserTableSQL, 
         addUserSQL,
@@ -134,14 +135,16 @@ const addUser = async (user) => {
         values: [user.name, user.email, encryptedPassword],
     };
 
-    const promise = pool.query(addUserConfig)
+    const client = createClient();
+    await client.connect();
+    const promise = client.query(addUserConfig)
         .then(result => {
             const copy = _.clone(user);
             copy.id = result.rows[0].id;
             copy.password = encryptedPassword;
             return copy;
         });
-
+    await client.end();
     return promise;
 };
 
@@ -152,13 +155,15 @@ const addUser = async (user) => {
  * @returns {Promise} the promise's result is the retrieved result. If there's
  * no user, the promise is rejected.
  */
-const getUser = id => {
+const getUser = async id => {
     const query = {
         text: getUserSQL,
         values: [id],
     };
 
-    const promise = pool.query(query)
+    const client = createClient();
+    await client.connect();
+    const promise = client.query(query)
         .then(result => {
             if (result.rows.length != 1) {
                 const message = "There's no User with ID '" + id + "'.";
@@ -169,7 +174,7 @@ const getUser = id => {
             
             return new User(id, user.name, user.email, user.password);
         });
-
+    await client.end();
     return promise;
 };
 
@@ -205,7 +210,10 @@ const findUser = async email => {
         values: [email.toLowerCase()],
     };
 
-    const result = await pool.query(query);
+    const client = createClient();
+    await client.connect();
+    const result = await client.query(query);
+    await client.end();
     if (result.rows.length != 1) return null;
 
     const { id, name, password } = result.rows[0];
