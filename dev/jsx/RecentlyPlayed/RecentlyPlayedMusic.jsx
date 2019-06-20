@@ -31,14 +31,15 @@ class RecentlyPlayedMusic extends React.Component {
     }
 
     installSlider() {
-        var swiper = new Swiper('.swiper-container', {
+        const swiperContainer = document.getElementById(this.state.uuid);
+        var swiper = new Swiper( swiperContainer, {
                 slidesPerView: 6,
                 spaceBetween: 30,
                 loop: true,
                 speed: 1500,
                 navigation: {
-                    nextEl: `.${this.state.uuid}`,
-                    prevEl: `.${this.state.uuid}`,
+                    nextEl: '.swiper-button-next ',
+                    prevEl: '.swiper-button-prev ',
                 },
                 breakpoints: {
                     1800: {
@@ -90,13 +91,13 @@ class RecentlyPlayedMusic extends React.Component {
                     <div className="ms_heading">
                         <h1>{this.props.title}</h1>
                     </div>
-                    <div className="swiper-container">
+                    <div id={this.state.uuid} className="swiper-container">
                         <div className="swiper-wrapper">
                             {musics}
                         </div>
                     </div>
-                    <div className={"swiper-button-next slider_nav_next " + this.state.uuid}></div>
-                    <div className={"swiper-button-prev slider_nav_prev " + this.state.uuid}></div>
+                    <div className="swiper-button-next slider_nav_next"></div>
+                    <div className="swiper-button-prev slider_nav_prev"></div>
                 </div>
             </div>
         );
