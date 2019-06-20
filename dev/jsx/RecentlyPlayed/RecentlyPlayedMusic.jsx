@@ -37,8 +37,8 @@ class RecentlyPlayedMusic extends React.Component {
                 loop: true,
                 speed: 1500,
                 navigation: {
-                    nextEl: `.swiper-button-next ${this.state.uuid}`,
-                    prevEl: `.swiper-button-prev ${this.state.uuid}`,
+                    nextEl: `.${this.state.uuid}`,
+                    prevEl: `.${this.state.uuid}`,
                 },
                 breakpoints: {
                     1800: {
