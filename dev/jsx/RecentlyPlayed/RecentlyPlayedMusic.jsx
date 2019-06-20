@@ -31,47 +31,53 @@ class RecentlyPlayedMusic extends React.Component {
     }
 
     installSlider() {
-        const btnNext = document.getElementById(`${this.state.btnNextuuid}`);
-        console.log('next ===',btnNext);
-        const btnPrev = document.getElementById(`${this.state.btnPrev}`);
-        console.log('prev ===',btnPrev);
-        var swiper = new Swiper('.swiper-container', {
-                slidesPerView: 6,
-                spaceBetween: 30,
-                loop: true,
-                speed: 1500,
-                navigation: {
-                    nextEl: btnNext,
-                    prevEl: btnPrev,
-                },
-                breakpoints: {
-                    1800: {
-                        slidesPerView: 4,
+        $( `#${this.state.btnNextuuid}` ).load(function() {
+            // Handler for .load() called.
+            $( `#${this.state.btnPrev}` ).load(function() {
+                // Handler for .load() called.
+                const btnNext = document.getElementById(this.state.btnNextuuid);
+                console.log('next ===',btnNext);
+                const btnPrev = document.getElementById(this.state.btnPrev);
+                console.log('prev ===',btnPrev);
+                var swiper = new Swiper('.swiper-container', {
+                    slidesPerView: 6,
+                    spaceBetween: 30,
+                    loop: true,
+                    speed: 1500,
+                    navigation: {
+                        nextEl: btnNext,
+                        prevEl: btnPrev,
                     },
-                    1400: {
-                        slidesPerView: 4,
+                    breakpoints: {
+                        1800: {
+                            slidesPerView: 4,
+                        },
+                        1400: {
+                            slidesPerView: 4,
+                        },
+                        992: {
+                            slidesPerView: 2,
+                            spaceBetween: 10,
+                        },
+                        768: {
+                            slidesPerView: 2,
+                            spaceBetween: 10,
+                        },
+                        640: {
+                            slidesPerView: 1,
+                            spaceBetween: 15,
+                        },
+                        480: {
+                            slidesPerView: 1,
+                        },
+                        375: {
+                            slidesPerView: 1,
+                            spaceBetween: 0,
+                        }
                     },
-                    992: {
-                        slidesPerView: 2,
-                        spaceBetween: 10,
-                    },
-                    768: {
-                        slidesPerView: 2,
-                        spaceBetween: 10,
-                    },
-                    640: {
-                        slidesPerView: 1,
-                        spaceBetween: 15,
-                    },
-                    480: {
-                        slidesPerView: 1,
-                    },
-                    375: {
-                        slidesPerView: 1,
-                        spaceBetween: 0,
-                    }
-                },
+                });
             });
+        });
     }
 
     render() {
