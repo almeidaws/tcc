@@ -69,7 +69,9 @@ const addAuthor = async (author) => {
     // Validate the author
     const { error, validatedUser } = author.validate();
     if (error) return Promise.reject(error);
-    
+
+    const client = createClient();
+    await client.connect();
     const allAuthors = await getAllAuthors();
     const matches = allAuthors.filter(a => a.name.toLowerCase() === author.name.toLowerCase());
     if (matches.length > 0) return matches[0];
@@ -79,9 +81,6 @@ const addAuthor = async (author) => {
         text: addAuthorSQL,
         values: [author.name],
     };
-
-    const client = createClient();
-    await client.connect();
 
     const result = await client.query(addAuthorConfig);
     await client.end();

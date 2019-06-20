@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ffc4286f-65a7-4073-a6fb-959177ec08e5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/dev/jsx/Containers/Favourites.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/dev/jsx/Containers/Favourites.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authors/database.js" beforeDir="false" afterPath="$PROJECT_DIR$/authors/database.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sessions/database.js" beforeDir="false" afterPath="$PROJECT_DIR$/sessions/database.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/database.js" beforeDir="false" afterPath="$PROJECT_DIR$/users/database.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/prod/js/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -13,30 +15,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dev/jsx/Containers/App.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="91">
-              <caret line="224" column="20" lean-forward="true" selection-start-line="224" selection-start-column="20" selection-end-line="224" selection-end-column="20" />
-              <folding>
-                <element signature="e#0#39#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dev/jsx/Containers/Index.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dev/jsx/Recommendations.jsx">
           <provider selected="true" editor-type-id="text-editor">
@@ -49,11 +27,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dev/jsx/Containers/Favourites.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="206">
-              <caret line="41" column="66" selection-start-line="41" selection-start-column="66" selection-end-line="41" selection-end-column="66" />
+            <state relative-caret-position="141">
+              <caret line="40" column="48" lean-forward="true" selection-start-line="40" selection-start-column="48" selection-end-line="40" selection-end-column="48" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -62,10 +40,80 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/dev/jsx/Header.jsx">
+        <entry file="file://$PROJECT_DIR$/users/database.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-141">
-              <caret line="53" column="6" selection-start-line="53" selection-start-column="6" selection-end-line="53" selection-end-column="6" />
+            <state relative-caret-position="362">
+              <caret line="141" column="26" selection-start-line="141" selection-start-column="26" selection-end-line="141" selection-end-column="26" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dev/js/Requisition.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="294">
+              <caret line="79" column="7" lean-forward="true" selection-start-line="79" selection-start-column="7" selection-end-line="79" selection-end-column="7" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/users/middleware.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="220">
+              <caret line="87" column="47" selection-start-line="87" selection-start-column="47" selection-end-line="87" selection-end-column="47" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/sessions/database.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="91">
+              <caret line="80" column="10" selection-start-line="80" selection-start-column="10" selection-end-line="80" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dev/jsx/LoginModal.test.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dev/jsx/LoginModal.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-250">
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/musics/database.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-137">
+              <caret line="357" column="22" selection-start-line="357" selection-start-column="6" selection-end-line="357" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/musics/middleware.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="220">
+              <caret line="97" column="12" selection-start-line="97" selection-start-column="12" selection-end-line="97" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -81,7 +129,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>jp-progress-container.flex-item</find>
       <find>,</find>
       <find>pause</find>
       <find>ms_play_icon</find>
@@ -111,6 +158,7 @@
       <find>cliente</find>
       <find>map</find>
       <find>getArs</find>
+      <find>users/</find>
     </findStrings>
     <replaceStrings>
       <replace>1.8</replace>
@@ -155,18 +203,19 @@
         <option value="$PROJECT_DIR$/dev/jsx/WeeklyTopMusic/MusicItemWeekly.jsx" />
         <option value="$PROJECT_DIR$/.env" />
         <option value="$PROJECT_DIR$/configs.js" />
-        <option value="$PROJECT_DIR$/dev/js/Requisition.js" />
         <option value="$PROJECT_DIR$/musics/database.js" />
         <option value="$PROJECT_DIR$/musics/middleware.js" />
         <option value="$PROJECT_DIR$/genres/database.js" />
         <option value="$PROJECT_DIR$/favorites/database.js" />
         <option value="$PROJECT_DIR$/listenings/database.js" />
-        <option value="$PROJECT_DIR$/users/database.js" />
-        <option value="$PROJECT_DIR$/authors/database.js" />
         <option value="$PROJECT_DIR$/dev/jsx/Containers/App.jsx" />
         <option value="$PROJECT_DIR$/dev/jsx/Containers/Index.jsx" />
         <option value="$PROJECT_DIR$/dev/jsx/Recommendations.jsx" />
         <option value="$PROJECT_DIR$/dev/jsx/Containers/Favourites.jsx" />
+        <option value="$PROJECT_DIR$/authors/database.js" />
+        <option value="$PROJECT_DIR$/dev/js/Requisition.js" />
+        <option value="$PROJECT_DIR$/users/database.js" />
+        <option value="$PROJECT_DIR$/sessions/database.js" />
       </list>
     </option>
   </component>
@@ -204,14 +253,23 @@
               <item name="tcc" type="b2602c69:ProjectViewProjectNode" />
               <item name="tcc" type="462c0819:PsiDirectoryNode" />
               <item name="dev" type="462c0819:PsiDirectoryNode" />
-              <item name="jsx" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="tcc" type="b2602c69:ProjectViewProjectNode" />
               <item name="tcc" type="462c0819:PsiDirectoryNode" />
               <item name="dev" type="462c0819:PsiDirectoryNode" />
               <item name="jsx" type="462c0819:PsiDirectoryNode" />
-              <item name="Containers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tcc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tcc" type="462c0819:PsiDirectoryNode" />
+              <item name="musics" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tcc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tcc" type="462c0819:PsiDirectoryNode" />
+              <item name="users" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -280,7 +338,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65972000" />
+    <option name="totallyTimeSpent" value="68075000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="6" />
@@ -356,16 +414,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/dev/jsx/MusicPlayer.jsx" />
-    <entry file="file://$PROJECT_DIR$/dev/js/PlayerMusic.js" />
-    <entry file="file://$PROJECT_DIR$/dev/js/Music.js" />
-    <entry file="file://$PROJECT_DIR$/dev/jsx/BarMusic/MusicProgress.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="11" column="2" selection-start-line="11" selection-start-column="2" selection-end-line="11" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/platform-impl.jar!/resources/html5-schema/html5/web-forms.rnc" />
     <entry file="file://$PROJECT_DIR$/dev/jsx/Button.jsx">
       <provider selected="true" editor-type-id="text-editor">
@@ -544,16 +592,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dev/js/Requisition.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="181" column="26" lean-forward="true" selection-start-line="181" selection-start-column="26" selection-end-line="181" selection-end-column="26" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/favorites/database.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="828">
@@ -568,38 +606,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/users/database.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-96">
-          <caret line="215" column="23" selection-start-line="215" selection-start-column="23" selection-end-line="215" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/genres/database.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="126">
           <caret line="9" column="37" lean-forward="true" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/authors/database.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="18" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/musics/database.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-237">
-          <caret line="28" column="18" selection-start-line="28" selection-start-column="6" selection-end-line="28" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/musics/middleware.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1434">
-          <caret line="97" column="12" selection-start-line="97" selection-start-column="12" selection-end-line="97" selection-end-column="12" />
         </state>
       </provider>
     </entry>
@@ -640,13 +650,83 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/dev/jsx/Containers/Favourites.jsx">
+    <entry file="file://$PROJECT_DIR$/dev/jsx/LoginModal.test.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="41" column="66" selection-start-line="41" selection-start-column="66" selection-end-line="41" selection-end-column="66" />
+        <state>
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/jsx/LoginModal.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-250">
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/authors/database.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-837">
+          <caret line="74" column="23" selection-start-line="74" selection-start-column="23" selection-end-line="74" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/jsx/Containers/Favourites.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="40" column="48" lean-forward="true" selection-start-line="40" selection-start-column="48" selection-end-line="40" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/musics/database.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-137">
+          <caret line="357" column="22" selection-start-line="357" selection-start-column="6" selection-end-line="357" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/musics/middleware.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="97" column="12" selection-start-line="97" selection-start-column="12" selection-end-line="97" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/js/Requisition.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="294">
+          <caret line="79" column="7" lean-forward="true" selection-start-line="79" selection-start-column="7" selection-end-line="79" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/users/middleware.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="87" column="47" selection-start-line="87" selection-start-column="47" selection-end-line="87" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/users/database.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="362">
+          <caret line="141" column="26" selection-start-line="141" selection-start-column="26" selection-end-line="141" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sessions/database.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="91">
+          <caret line="80" column="10" selection-start-line="80" selection-start-column="10" selection-end-line="80" selection-end-column="10" />
         </state>
       </provider>
     </entry>

@@ -122,7 +122,10 @@ class User {
 const addUser = async (user) => {
     const { error, validatedUser } = user.validate();
     if (error) return Promise.reject(error);
-    
+
+    const client = createClient();
+    await client.connect();
+
     const repeatedUser = await findUser(user.email);
     if (repeatedUser) {
         const error = createError(409, 'An user with this email already exists');
@@ -135,9 +138,8 @@ const addUser = async (user) => {
         values: [user.name, user.email, encryptedPassword],
     };
 
-    const client = createClient();
-    await client.connect();
-    const promise = client.query(addUserConfig)
+
+    const promise = await client.query(addUserConfig)
         .then(result => {
             const copy = _.clone(user);
             copy.id = result.rows[0].id;
@@ -163,7 +165,7 @@ const getUser = async id => {
 
     const client = createClient();
     await client.connect();
-    const promise = client.query(query)
+    const promise = await client.query(query)
         .then(result => {
             if (result.rows.length != 1) {
                 const message = "There's no User with ID '" + id + "'.";
@@ -190,12 +192,14 @@ const getUser = async id => {
  * @returns a primise whose result is a boolean value.
  */
 const authUser = async (email, password) => {
-    const user = await findUser(email);
+    const client = createClient();
+    await client.connect();
+        const user = await findUser(email);
 
-    if (user === null || !(await User.comparePasswords(password, user.password))) {
-        throw createError(401, 'Incorrect email or password');
-    }
-
+        if (user === null || !(await User.comparePasswords(password, user.password))) {
+            throw createError(401, 'Incorrect email or password');
+        }
+    await client.end();
     return user;
 }
 

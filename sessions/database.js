@@ -18,6 +18,7 @@ const createError = require('http-errors');
 const { Database } = require('../configs.js');
 const Joi = require('joi');
 const pool = Database.pool();
+const createClient = Database.createClient;
 const { createSessionTableSQL, 
         deleteSessionTableSQL,
         addSessionSQL,
@@ -67,13 +68,18 @@ class Session {
 const addSession = async (session) => {
     const { error, value: validatedSession } = Session.validate(session);
     if (error) return Promise.reject(error);
-    
+
+    const client = createClient();
+    await client.connect();
+
     const addSessionConfig = {
         text: addSessionSQL,
         values: [validatedSession.uuid, validatedSession.userID, validatedSession.expiration],
     };
 
-    return await pool.query(addSessionConfig)
+    const result = await client.query(addSessionConfig);
+    await client.end();
+    return result;
 };
 
 /**
@@ -90,9 +96,13 @@ const getSession = async token => {
         text: getSessionSQL,
         values: [token],
     };
+    const client = createClient();
+    await client.connect();
 
-    const result = await pool.query(query);
-    if (result.rows.length == 0) 
+
+    const result = await client.query(query);
+    await client.end();
+    if (result.rows.length == 0)
         throw createError(401, 'Session is invalid, please login again.');
 
     const { userid: userID, expiration } = result.rows[0];
@@ -111,8 +121,11 @@ const deleteSession = async token => {
         values: [token],
     };
 
-    await pool.query(query);
-}
+    const client = createClient();
+    await client.connect();
+    await client.query(query);
+    await client.end();
+};
 
 /**
  * @typedef {Object} Connection
