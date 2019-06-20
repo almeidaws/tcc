@@ -2,6 +2,7 @@ import React from 'react';
 import Music from '../Music.jsx';
 import R from '../../js/Requisition.js';
 const uuidv4 = require('uuid/v4');
+import $ from 'jquery';
 
 class RecentlyPlayedMusic extends React.Component {
     constructor(props) {
