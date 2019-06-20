@@ -1,13 +1,14 @@
 import React from 'react';
 import Music from '../Music.jsx';
 import R from '../../js/Requisition.js';
+const uuidv4 = require('uuid/v4');
 
 class RecentlyPlayedMusic extends React.Component {
     constructor(props) {
         super(props);
         this.state = { lastListenedMusics: [] };
         if (props.musics && props.musics.length > 0) {
-            this.state = { lastListenedMusics: this.props.musics };
+            this.state = { lastListenedMusics: this.props.musics, idNext: uuidv4(), idPrev: uuidv4() };
             this.installSlider();
         } else {
             this.requestLastListenedMusics();
@@ -94,8 +95,8 @@ class RecentlyPlayedMusic extends React.Component {
                             {musics}
                         </div>
                     </div>
-                    <div className="swiper-button-next slider_nav_next"></div>
-                    <div className="swiper-button-prev slider_nav_prev"></div>
+                    <div itemID={this.state.idNext} className="swiper-button-next slider_nav_next"></div>
+                    <div itemID={this.state.idPrev} className="swiper-button-prev slider_nav_prev"></div>
                 </div>
             </div>
         );
