@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ffc4286f-65a7-4073-a6fb-959177ec08e5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dev/jsx/RecentlyPlayed/RecentlyPlayedMusic.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/dev/jsx/RecentlyPlayed/RecentlyPlayedMusic.jsx" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/prod/js/" />
@@ -53,11 +52,32 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/dev/jsx/RecentlyPlayed/RecentlyPlayedMusic.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="157">
-              <caret line="34" column="33" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
+            <state relative-caret-position="168">
+              <caret line="43" column="44" selection-start-line="43" selection-start-column="44" selection-end-line="43" selection-end-column="44" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Downloads/Main Files/HTML/version1/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="223">
+              <caret line="2616" column="67" lean-forward="true" selection-start-line="2616" selection-start-column="67" selection-end-line="2616" selection-end-column="67" />
+              <folding>
+                <element signature="n#div#1;n#div#2;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Downloads/Main Files/HTML/version1/js/plugins/swiper/js/swiper.min.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-30">
+              <caret line="3" column="3" selection-start-line="3" selection-start-column="3" selection-end-line="3" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -76,7 +96,6 @@
       <find>,</find>
       <find>pause</find>
       <find>ms_play_icon</find>
-      <find>Recen</find>
       <find>P</find>
       <find>AudioPl</find>
       <find>AudioPla</find>
@@ -103,6 +122,7 @@
       <find>map</find>
       <find>getArs</find>
       <find>users/</find>
+      <find>Recen</find>
     </findStrings>
     <replaceStrings>
       <replace>1.8</replace>
@@ -283,7 +303,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="72067000" />
+    <option name="totallyTimeSpent" value="72588000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="6" />
@@ -672,22 +692,25 @@
     </entry>
     <entry file="file://$USER_HOME$/Downloads/Main Files/HTML/version1/js/plugins/swiper/js/swiper.min.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
+        <state relative-caret-position="-30">
           <caret line="3" column="3" selection-start-line="3" selection-start-column="3" selection-end-line="3" selection-end-column="33" />
         </state>
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/Downloads/Main Files/HTML/version1/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="2600" column="48" selection-start-line="2600" selection-start-column="48" selection-end-line="2600" selection-end-column="48" />
+        <state relative-caret-position="223">
+          <caret line="2616" column="67" lean-forward="true" selection-start-line="2616" selection-start-column="67" selection-end-line="2616" selection-end-column="67" />
+          <folding>
+            <element signature="n#div#1;n#div#2;n#div#1;n#div#1;n#body#0;n#html#0;n#!!top" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/dev/jsx/RecentlyPlayed/RecentlyPlayedMusic.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="157">
-          <caret line="34" column="33" selection-start-line="34" selection-start-column="33" selection-end-line="34" selection-end-column="33" />
+        <state relative-caret-position="168">
+          <caret line="43" column="44" selection-start-line="43" selection-start-column="44" selection-end-line="43" selection-end-column="44" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
