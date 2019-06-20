@@ -3,10 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ffc4286f-65a7-4073-a6fb-959177ec08e5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/authors/database.js" beforeDir="false" afterPath="$PROJECT_DIR$/authors/database.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/favorites/database.js" beforeDir="false" afterPath="$PROJECT_DIR$/favorites/database.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/genres/database.js" beforeDir="false" afterPath="$PROJECT_DIR$/genres/database.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/listenings/database.js" beforeDir="false" afterPath="$PROJECT_DIR$/listenings/database.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/users/database.js" beforeDir="false" afterPath="$PROJECT_DIR$/users/database.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/prod/js/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,29 +13,38 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/authors/database.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="130">
-              <caret line="175" column="23" selection-start-line="175" selection-start-column="23" selection-end-line="175" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/musics/middleware.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1246">
+            <state relative-caret-position="1434">
               <caret line="97" column="12" selection-start-line="97" selection-start-column="12" selection-end-line="97" selection-end-column="12" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/users/database.js">
+        <entry file="file://$PROJECT_DIR$/musics/database.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-96">
-              <caret line="215" column="23" selection-start-line="215" selection-start-column="23" selection-end-line="215" selection-end-column="23" />
+            <state relative-caret-position="-237">
+              <caret line="28" column="18" selection-start-line="28" selection-start-column="6" selection-end-line="28" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/authors/database.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="9" column="18" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/genres/database.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="126">
+              <caret line="9" column="37" lean-forward="true" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -171,6 +176,16 @@
               <item name="tcc" type="462c0819:PsiDirectoryNode" />
               <item name="authors" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="tcc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tcc" type="462c0819:PsiDirectoryNode" />
+              <item name="genres" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tcc" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tcc" type="462c0819:PsiDirectoryNode" />
+              <item name="musics" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -238,7 +253,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="64432000" />
+    <option name="totallyTimeSpent" value="64754000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="6" />
@@ -560,31 +575,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/genres/database.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="620">
-          <caret line="57" column="23" selection-start-line="57" selection-start-column="23" selection-end-line="57" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/listenings/database.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="237">
           <caret line="76" column="23" selection-start-line="76" selection-start-column="23" selection-end-line="76" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/musics/database.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="211">
-          <caret line="153" column="36" lean-forward="true" selection-start-line="153" selection-start-column="36" selection-end-line="153" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/musics/middleware.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1246">
-          <caret line="97" column="12" selection-start-line="97" selection-start-column="12" selection-end-line="97" selection-end-column="12" />
         </state>
       </provider>
     </entry>
@@ -595,10 +589,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/musics/middleware.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1434">
+          <caret line="97" column="12" selection-start-line="97" selection-start-column="12" selection-end-line="97" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/genres/database.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="9" column="37" lean-forward="true" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/musics/database.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-237">
+          <caret line="28" column="18" selection-start-line="28" selection-start-column="6" selection-end-line="28" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/authors/database.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="175" column="23" selection-start-line="175" selection-start-column="23" selection-end-line="175" selection-end-column="23" />
+        <state relative-caret-position="135">
+          <caret line="9" column="18" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
         </state>
       </provider>
     </entry>

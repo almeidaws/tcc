@@ -7,7 +7,7 @@ const createError = require('http-errors');
 const { Database } = require('../configs.js');
 const Joi = require('joi');
 const pool = Database.pool();
-const creatClient = Database.createClient;
+const createClient = Database.createClient;
 const { addAuthorSQL, 
         deleteAuthorSQL,
         cleanUpAuthorTableSQL,
