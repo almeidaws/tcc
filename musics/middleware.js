@@ -95,7 +95,7 @@ async function getAll(request, response, next) {
         const favoritesQueries = await favoritesDatabase.connect();
         const musics = await queries.getAllMusics();
         if (musics === null)
-            return response.status(204).json([]).end();
+            response.status(204).json([]).end();
 
         const favorited = async (userID, musicID) => {
             if (!userID) return undefined;
@@ -132,9 +132,8 @@ async function deleteMusic(request, response, next) {
         const queries = await musicsDatabase.connect();
         const deleted = await queries.deleteMusic(id);
         if (deleted)
-            return response.status(200).end();
+            response.status(200).end();
         response.status(404).end();
-        await musicsDatabase.disconnect();
     } catch (error) {
         next(error);
     }
