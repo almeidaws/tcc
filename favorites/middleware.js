@@ -20,8 +20,8 @@ async function add(request, response, next) {
         const favorite = new database.Favorite(body.userID, body.musicID);
         const queries = await database.connect();
         const addedFavorite = await queries.addFavorite(favorite);
-        await database.disconnect();
         response.status(201).end();
+        await database.disconnect();
     } catch (error) {
         next(error);
     }

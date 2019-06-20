@@ -36,10 +36,10 @@ async function get(request, response, next) {
         const unfavoritedMusics = (await Promise.all(withFileURLs)).filter((music) => {
             return music.favorited === false
         });
+        response.status(200).json(unfavoritedMusics).end();
         authorsDatabase.disconnect();
         genresDatabase.disconnect();
         favoritesDatabase.disconnect();
-        response.status(200).json(unfavoritedMusics).end();
     } catch (error) {
         next(error);
     }

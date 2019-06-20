@@ -45,8 +45,8 @@ async function add(request, response, next) {
             console.log(`${progress}% uploaded`);
         });
         response.status(201);
-        await musicsDatabase.disconnect();
         response.end();
+        await musicsDatabase.disconnect();
     } catch (error) {
         next(error);
     }
@@ -75,6 +75,9 @@ async function getByID(request, response, next) {
         await genresDatabase.disconnect();
 
         response.status(200).json({ id, name, url, posterURL, authors, genres, duration }).end();
+        await musicsDatabase.disconnect();
+        await authorsDatabase.disconnect();
+        await genresDatabase.disconnect();
     } catch (error) {
         next(error);
     }
@@ -131,10 +134,10 @@ async function deleteMusic(request, response, next) {
 
         const queries = await musicsDatabase.connect();
         const deleted = await queries.deleteMusic(id);
-        await musicsDatabase.disconnect();
         if (deleted)
             return response.status(200).end();
-        return response.status(404).end();
+        response.status(404).end();
+        await musicsDatabase.disconnect();
     } catch (error) {
         next(error);
     }
@@ -145,7 +148,7 @@ const getExtension = fileName => {
     const groups = fileName.match(/.*(\..+)/);
     if (groups.length >= 1) return groups[groups.length - 1];
     return ""
-}
+};
 
 /**
  * Transform an array of strings of a singleton string to an array of numbers.
@@ -167,4 +170,4 @@ const toArrayIfNeeded = value => Array.isArray(value) ? value : [value];
  */
 const elementsToIntegers = array => array.map(element => parseInt(element));
 
-module.exports = { add, getByID, getAll, deleteMusic }
+module.exports = { add, getByID, getAll, deleteMusic };

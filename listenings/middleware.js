@@ -21,8 +21,8 @@ async function add(request, response, next) {
         const addedListening = await queries.addListening(listening);
 
         console.log(addedListening);
-        await database.disconnect();
         response.status(201).end();
+        await database.disconnect();
     } catch (error) {
         next(error);
     }
@@ -62,4 +62,4 @@ async function getLastListenedMusics(request, response, next) {
     }
 }
 
-module.exports = { add, getLastListenedMusics }
+module.exports = { add, getLastListenedMusics };
