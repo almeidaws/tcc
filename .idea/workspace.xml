@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ffc4286f-65a7-4073-a6fb-959177ec08e5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/favorites/middleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/favorites/middleware.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/genres/middleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/genres/middleware.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/listenings/middleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/listenings/middleware.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/js/Requisition.js" beforeDir="false" afterPath="$PROJECT_DIR$/dev/js/Requisition.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/musics/middleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/musics/middleware.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/recommendations/middleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/recommendations/middleware.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/prod/js/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -49,6 +45,27 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/musics/middleware.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="407">
+              <caret line="116" column="35" selection-start-line="116" selection-start-column="35" selection-end-line="118" selection-end-column="45" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/dev/js/Requisition.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-291">
+              <caret line="116" column="10" selection-start-line="116" selection-start-column="10" selection-end-line="116" selection-end-column="10" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/favorites/middleware.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="275">
@@ -154,7 +171,6 @@
         <option value="$PROJECT_DIR$/dev/jsx/Music/Music.jsx" />
         <option value="$PROJECT_DIR$/dev/jsx/Music/RecentlyPlayedMusic.jsx" />
         <option value="$PROJECT_DIR$/dev/jsx/Load/Load.jsx" />
-        <option value="$PROJECT_DIR$/dev/js/Requisition.js" />
         <option value="$PROJECT_DIR$/dev/jsx/BarMusic/MusicBar.jsx" />
         <option value="$PROJECT_DIR$/prod/index.html" />
         <option value="$PROJECT_DIR$/dev/jsx/index.jsx" />
@@ -182,11 +198,12 @@
         <option value="$PROJECT_DIR$/dev/jsx/WeeklyTopMusic/MusicItemWeekly" />
         <option value="$PROJECT_DIR$/dev/jsx/WeeklyTopMusic/MusicItemWeekly.jsx" />
         <option value="$PROJECT_DIR$/dev/jsx/Containers/Index.jsx" />
-        <option value="$PROJECT_DIR$/musics/middleware.js" />
         <option value="$PROJECT_DIR$/recommendations/middleware.js" />
         <option value="$PROJECT_DIR$/listenings/middleware.js" />
         <option value="$PROJECT_DIR$/genres/middleware.js" />
         <option value="$PROJECT_DIR$/favorites/middleware.js" />
+        <option value="$PROJECT_DIR$/dev/js/Requisition.js" />
+        <option value="$PROJECT_DIR$/musics/middleware.js" />
       </list>
     </option>
   </component>
@@ -226,12 +243,12 @@
             <path>
               <item name="tcc" type="b2602c69:ProjectViewProjectNode" />
               <item name="tcc" type="462c0819:PsiDirectoryNode" />
-              <item name="dev" type="462c0819:PsiDirectoryNode" />
+              <item name="genres" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="tcc" type="b2602c69:ProjectViewProjectNode" />
               <item name="tcc" type="462c0819:PsiDirectoryNode" />
-              <item name="favorites" type="462c0819:PsiDirectoryNode" />
+              <item name="musics" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -296,12 +313,12 @@
       <workItem from="1558614198203" duration="19000" />
       <workItem from="1558651444683" duration="7430000" />
       <workItem from="1558699739936" duration="6000" />
-      <workItem from="1561028092823" duration="518000" />
+      <workItem from="1561028092823" duration="1162000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="59307000" />
+    <option name="totallyTimeSpent" value="59951000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="6" />
@@ -380,14 +397,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/dev/js/Requisition.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="943">
-          <caret line="148" column="24" selection-start-line="148" selection-start-column="24" selection-end-line="148" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dev/jsx/BarMusic/MusicBar.jsx" />
     <entry file="file://$PROJECT_DIR$/prod/main.bundle.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -599,13 +608,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/musics/middleware.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="150" column="2" selection-start-line="150" selection-start-column="2" selection-end-line="150" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/recommendations/middleware.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="615">
@@ -627,6 +629,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/favorites/middleware.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="275">
+          <caret line="64" column="36" lean-forward="true" selection-start-line="64" selection-start-column="36" selection-end-line="64" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/js/Requisition.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-291">
+          <caret line="116" column="10" selection-start-line="116" selection-start-column="10" selection-end-line="116" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/genres/database.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="59" column="21" lean-forward="true" selection-start-line="59" selection-start-column="21" selection-end-line="59" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/genres/middleware.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="165">
@@ -634,10 +660,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/favorites/middleware.js">
+    <entry file="file://$PROJECT_DIR$/musics/middleware.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="64" column="36" lean-forward="true" selection-start-line="64" selection-start-column="36" selection-end-line="64" selection-end-column="36" />
+        <state relative-caret-position="407">
+          <caret line="116" column="35" selection-start-line="116" selection-start-column="35" selection-end-line="118" selection-end-column="45" />
         </state>
       </provider>
     </entry>

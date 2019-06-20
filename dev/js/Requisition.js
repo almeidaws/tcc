@@ -90,7 +90,7 @@ class Requisition {
     static register(name, email, password, error, success) {
         const registered = (data, status) => {
             Requisition.login(email, password, error, success)
-        }
+        };
 
         $.ajax('users/', {
             method: 'POST',
@@ -114,7 +114,7 @@ class Requisition {
         const logout = (data) => { 
             U.deleteAllCookies();
             success();
-        }
+        };
 
         $.ajax('users/tokens/' + token, {
             method: 'DELETE',
