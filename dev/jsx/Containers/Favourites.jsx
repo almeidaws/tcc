@@ -38,7 +38,9 @@ const FavouritesList = props => {
     return (
             <div className="ms_free_download ms_purchase_wrapper">
                 <div className="ms_heading">
-                    <h1>Your Favourites</h1>
+                    {props.musics.length === 0 ?
+                        <h1>Your favorited musics will appear here</h1>:
+                        <h1>Your Favourites</h1>}
                 </div>
 				<div className="album_inner_list">
 					<div className="album_list_wrapper">

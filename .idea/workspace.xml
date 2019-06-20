@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ffc4286f-65a7-4073-a6fb-959177ec08e5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/dev/jsx/Containers/App.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/dev/jsx/Containers/App.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/jsx/Containers/Index.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/dev/jsx/Containers/Index.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/jsx/Recommendations.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/dev/jsx/Recommendations.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/jsx/Containers/Favourites.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/dev/jsx/Containers/Favourites.jsx" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/prod/js/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -39,13 +37,25 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/dev/jsx/Recommendations.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="73">
+            <state relative-caret-position="163">
               <caret line="23" column="31" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="31" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/dev/jsx/Containers/Favourites.jsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="206">
+              <caret line="41" column="66" selection-start-line="41" selection-start-column="66" selection-end-line="41" selection-end-column="66" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -156,6 +166,7 @@
         <option value="$PROJECT_DIR$/dev/jsx/Containers/App.jsx" />
         <option value="$PROJECT_DIR$/dev/jsx/Containers/Index.jsx" />
         <option value="$PROJECT_DIR$/dev/jsx/Recommendations.jsx" />
+        <option value="$PROJECT_DIR$/dev/jsx/Containers/Favourites.jsx" />
       </list>
     </option>
   </component>
@@ -269,13 +280,13 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65767000" />
+    <option name="totallyTimeSpent" value="65972000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1280" height="800" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21683876" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21683876" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -292,7 +303,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Database Changes" order="8" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.30136988" />
+      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.30136988" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="11" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -345,13 +356,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/Desktop/MusicPlayer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="24" lean-forward="true" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dev/jsx/MusicPlayer.jsx" />
     <entry file="file://$PROJECT_DIR$/dev/js/PlayerMusic.js" />
     <entry file="file://$PROJECT_DIR$/dev/js/Music.js" />
@@ -628,10 +632,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/dev/jsx/Recommendations.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="73">
+        <state relative-caret-position="163">
           <caret line="23" column="31" selection-start-line="23" selection-start-column="31" selection-end-line="23" selection-end-column="31" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dev/jsx/Containers/Favourites.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="41" column="66" selection-start-line="41" selection-start-column="66" selection-end-line="41" selection-end-column="66" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
