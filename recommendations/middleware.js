@@ -37,9 +37,6 @@ async function get(request, response, next) {
             return music.favorited === false
         });
         response.status(200).json(unfavoritedMusics).end();
-        authorsDatabase.disconnect();
-        genresDatabase.disconnect();
-        favoritesDatabase.disconnect();
     } catch (error) {
         next(error);
     }
