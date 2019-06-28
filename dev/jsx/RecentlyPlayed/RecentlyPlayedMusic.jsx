@@ -23,7 +23,7 @@ class RecentlyPlayedMusic extends React.Component {
                 return ids.indexOf(music.id) >= i;
             });
             this.setState({ lastListenedMusics: uniqueMusics }, () => {
-                this.installSlider();
+                setTimeout(() => { this.installSlider() }, 4000);
             });
         }, errorCode => {
             // DOES NOTHING
